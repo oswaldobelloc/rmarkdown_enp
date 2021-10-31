@@ -1,0 +1,9 @@
+bookdown::render_book(
+  input = "index.Rmd", 
+  output_format = "bookdown::html_document2", 
+  clean = FALSE, envir = parent.frame(), 
+  clean_envir = !interactive(),
+  output_dir = "docs", new_session = NA, 
+  preview = TRUE, config_file = "_bookdown.yml"
+)
+
