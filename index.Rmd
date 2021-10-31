@@ -14,10 +14,11 @@ output:
     number_sections: yes
     anchor_sections: yes
     theme: journal
-    highlight: tango
+    highlight: pygments
     df_print: paged
     code_folding: hide
     code_download: no
+    self_contained: yes
 # bibliography: "packages.bib"
 # biblio-style: "apalike"
 # link-citations: true
@@ -133,11 +134,11 @@ El siguiente bloque de código permite instalar y cargar los paquetes usados par
 
 ```{r cargar-paquetes, class.source = "watch-out"}
 packages <- c(
-  "bookdown", "bookdownplus", "magrittr", "kableExtra",
-  "BSDA", "DT", "devtools", "tidyverse", "htmltools",
-  "htmlwidgets", "utf8", "stringr", "MASS", "Hmisc",
-  "kolmim", "hrbrthemes", "plotly", "NSM3", "reshape2",
-  "randtests", "snpar", "knitcitations"
+   "rmarkdown", "bookdown", "bookdownplus", "magrittr",
+   "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
+   "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
+   "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
+   "reshape2", "randtests", "snpar", "knitcitations"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -2650,3 +2651,15 @@ cleanbib()
 options("citation_format" = "pandoc")
 read.bibtex(file = "packages.bib")
 ```
+
+```{r render, include=FALSE}
+bookdown::render_book(
+  input = "index.Rmd", 
+  output_format = "bookdown::html_document2", 
+  clean = FALSE, envir = parent.frame(), 
+  clean_envir = !interactive(),
+  output_dir = "docs", new_session = NA, 
+  preview = TRUE, config_file = "_bookdown.yml"
+)
+```
+
