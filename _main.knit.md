@@ -3,8 +3,8 @@ title: "Pruebas que Usan Datos de Una Muestra Aleatoria Simple"
 author:
   name: "Prof: Oswaldo Bello (oswaldobelloc@gmail.com)"
   affiliation: "Universidade de Oriente, Venezuela"
-date: "Domingo, 31 de octubre de 2021 (01:27:25 a.m.)"
-logo: "C:\\Users\\Oswaldo\\Documents\\logo.png"
+date: "Sábado, 06 de noviembre de 2021 (12:23:12 a.m.)"
+logo: "logo.png"
 output:  
   bookdown::html_document2:
     toc: yes
@@ -107,11 +107,11 @@ El siguiente bloque de código permite instalar y cargar los paquetes usados par
 
 ```{.r .watch-out}
 packages <- c(
-   "rmarkdown", "bookdown", "bookdownplus", "magrittr",
-   "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
-   "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
-   "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
-   "reshape2", "randtests", "snpar", "knitcitations"
+  "rmarkdown", "bookdown", "bookdownplus", "magrittr",
+  "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
+  "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
+  "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
+  "reshape2", "randtests", "snpar", "knitcitations"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -246,10 +246,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -317,10 +317,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -457,8 +457,8 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   kable_classic_2()
@@ -528,10 +528,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -586,7 +586,7 @@ x <- 16
 n <- 18
 p0 <- 0.5
 p.valor <- 1 - pbinom(q = x - 1, size = n, prob = p0)
-paste("El p.valor = ", p.valor) 
+paste("El p.valor = ", p.valor)
 ```
 
 ```{.bg-warning}
@@ -600,9 +600,13 @@ El resultado anterior, también se puede obtener a través de la función `binom
 
 
 ```{.r .watch-out}
-x <- 16; n <- 18; p0 <- 0.5
-(ejemplo1 <- binom.test(x = x, n = n, p = p0, alternative = "greater", 
-                        conf.level = 0.95))
+x <- 16
+n <- 18
+p0 <- 0.5
+(ejemplo1 <- binom.test(
+  x = x, n = n, p = p0, alternative = "greater",
+  conf.level = 0.95
+))
 ```
 
 ```{.bg-warning}
@@ -610,8 +614,8 @@ x <- 16; n <- 18; p0 <- 0.5
 #> 	Exact binomial test
 #> 
 #> data:  x and n
-#> number of successes = 16, number of trials = 18, p-value
-#> = 0.0006561
+#> number of successes = 16, number of trials = 18, p-value =
+#> 0.0006561
 #> alternative hypothesis: true probability of success is greater than 0.5
 #> 95 percent confidence interval:
 #>  0.6897373 1.0000000
@@ -630,7 +634,7 @@ Por otro lado, la aproximación asintótica del $p_{valor}$ indicado por la ecua
 x <- 16
 n <- 18
 p0 <- 0.5
-z <- (x - 0.5 - n*p0)/sqrt(n*p0*(1 - p0))
+z <- (x - 0.5 - n * p0) / sqrt(n * p0 * (1 - p0))
 (p.valor.aprox <- 1 - pnorm(q = z))
 ```
 
@@ -645,8 +649,10 @@ También, la aproximación del $p_{valor}$ se puede obtener con la función `pro
 
 
 ```{.r .watch-out}
-prop.test(x = 16, n = 18, p = 0.5, alternative = "greater",
-          conf.level = 0.95, correct = TRUE)
+prop.test(
+  x = 16, n = 18, p = 0.5, alternative = "greater",
+  conf.level = 0.95, correct = TRUE
+)
 ```
 
 ```{.bg-warning}
@@ -790,10 +796,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -923,22 +929,22 @@ datos2 <- tibble(
         co < mediana ~ "\\-"
       )
     )
-  ) %>% 
+  ) %>%
   arrange(co)
-  kableExtra::kbl(
-    datos2,
-    col.names = c("Observación", "Clasificación de octano", "Signo"),
-    format.args = list(decimal.mark = ",", big.mark = "."),
-    booktabs = TRUE,
-    caption = "\\label{tab2:datos2}Clasificación de octano de cierto tipo de gasolina",
-    escape = FALSE
-    ) %>%
+kableExtra::kbl(
+  datos2,
+  col.names = c("Observación", "Clasificación de octano", "Signo"),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:datos2}Clasificación de octano de cierto tipo de gasolina",
+  escape = FALSE
+) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
-  row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>% 
+  ) %>%
+  row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
@@ -1048,10 +1054,10 @@ kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -1084,13 +1090,13 @@ La hipótesis alternativa que se pretende contrastar es unilateral superior $H_{
 
 
 ```{.r .watch-out}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo))
-n <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% 
-                  sum())
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo))
+n <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>%
+  sum())
 p.valor <- 1 - pbinom(q = s - 1, size = n, prob = 0.5)
 paste("El estadístico de prueba  s =", s, "y el p.valor =", p.valor)
 ```
@@ -1135,14 +1141,16 @@ Dado que la prueba del signo se puede considerar como un caso particular de la p
 
 
 ```{.r .watch-out}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo)) # se ha colocado dplyr::select para 
-n <- as.numeric(conteo_signo %>%         # evitar conflicto con MASS::select
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% sum())
-binom.test(x = s, n = n, p = 0.5, alternative =  "greater", 
-           conf.level = 0.99)
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo)) # se ha colocado dplyr::select para
+n <- as.numeric(conteo_signo %>% # evitar conflicto con MASS::select
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>% sum())
+binom.test(
+  x = s, n = n, p = 0.5, alternative = "greater",
+  conf.level = 0.99
+)
 ```
 
 ```{.bg-warning}
@@ -1150,8 +1158,8 @@ binom.test(x = s, n = n, p = 0.5, alternative =  "greater",
 #> 	Exact binomial test
 #> 
 #> data:  s and n
-#> number of successes = 12, number of trials = 14, p-value
-#> = 0.00647
+#> number of successes = 12, number of trials = 14, p-value =
+#> 0.00647
 #> alternative hypothesis: true probability of success is greater than 0.5
 #> 99 percent confidence interval:
 #>  0.5217357 1.0000000
@@ -1165,13 +1173,13 @@ Como se dijo anteriormente, el $p_{valor}$ para la prueba del signo, cuando $n$ 
 
 
 ```{.r .watch-out}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo))
-n <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% 
-                  sum())
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo))
+n <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>%
+  sum())
 p.valor.aprox <- 1 - pnorm(q = (2 * s - 1 - n) / sqrt(n))
 paste(
   "El p.valor.aprox = ",
@@ -1191,15 +1199,17 @@ Otra manera de calcular el $p_{valor \ aprox.}$ es usando la función `prop.test
 
 
 ```{.r .watch-out}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo))
-n <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% 
-                  sum())
-prop.test(x = s, n = n, p = 0.5, alternative = "greater", 
-          conf.level = 0.99, correct = TRUE)
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo))
+n <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>%
+  sum())
+prop.test(
+  x = s, n = n, p = 0.5, alternative = "greater",
+  conf.level = 0.99, correct = TRUE
+)
 ```
 
 ```{.bg-warning}
@@ -1372,10 +1382,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -1448,10 +1458,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -1590,10 +1600,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -1634,23 +1644,25 @@ knitr::kable(
 ```{.r .watch-out}
 datos3 <- data.frame(
   stringsAsFactors = FALSE,
-  Tipo.de.Guisante = c("Amarillo Liso","Amarillo Arrugado",
-                       "Verde Liso","Verde Arrugado"),
+  Tipo.de.Guisante = c(
+    "Amarillo Liso", "Amarillo Arrugado",
+    "Verde Liso", "Verde Arrugado"
+  ),
   Frecuencia.Observada = c(315L, 101L, 108L, 32L),
   Frecuencia.Esperada = c(313L, 104L, 104L, 35L)
-  )
+)
 knitr::kable(
   datos3,
   booktabs = TRUE,
   col.names = c("Tipo de Guisante", "Frecuencia Observada", "Frecuencia Esperada"),
   caption = "\\label{tab2:datos-mendel}Distribución de los guisantes",
   escape = FALSE
-  ) %>%
+) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -1701,8 +1713,8 @@ Según la ecuación \@ref(eq:criterio-ba-jicuadrado), el valor del estadístico 
 
 ```{.r .watch-out}
 alfa <- 0.01
-Ji_cuadrado <- sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada)^2 / 
-             datos3$Frecuencia.Esperada)
+Ji_cuadrado <- sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada)^2 /
+  datos3$Frecuencia.Esperada)
 est_tab <- qchisq(p = 1 - alfa, df = nrow(datos3) - 1)
 p_valor <- 1 - pchisq(q = Ji_cuadrado, df = nrow(datos3) - 1)
 paste("El estadísitico Ji-cuadrado =", round(Ji_cuadrado, digits = 4))
@@ -1721,8 +1733,11 @@ El estadístico de prueba $\chi^2$ y el $p_{valor \, aprox.}$ se pueden obtener 
 
 
 ```{.r .watch-out}
-chisq.test(x = datos3$Frecuencia.Observada, 
-           p = datos3$Frecuencia.Esperada/sum(datos3$Frecuencia.Esperada))
+chisq.test(
+  x = datos3$Frecuencia.Observada,
+  p = datos3$Frecuencia.Esperada /
+    sum(datos3$Frecuencia.Esperada)
+)
 ```
 
 ```{.bg-warning}
@@ -1776,11 +1791,11 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
-  row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>% 
+  ) %>%
+  row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>%
   kable_classic_2()
 ```
 
@@ -1860,8 +1875,7 @@ Como se nota en la tabla generada por el script anterior, las clases 7 y 8 tiene
 
 
 ```{.r .watch-out}
-datos4 <- bind_rows(datos4[1:5, ], colSums(datos4[6:8, ])
-) %>% 
+datos4 <- bind_rows(datos4[1:5, ], colSums(datos4[6:8, ])) %>%
   mutate(accidentes = as.character(accidentes))
 datos4[6, 1] <- "$\\geq5$"
 knitr::kable(
@@ -1876,10 +1890,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -1956,8 +1970,10 @@ De los resultados anteriores, se concluye que no se puede rechazar la hipótesis
 
 
 ```{.r .watch-out}
-chisq.test(x = datos4$dias, p = datos4$Ei, 
-           rescale.p = TRUE)
+chisq.test(
+  x = datos4$dias, p = datos4$Ei,
+  rescale.p = TRUE
+)
 ```
 
 ```{.bg-warning}
@@ -2005,8 +2021,8 @@ datos5 <- as.data.frame(table(cut(
       ),
       mean = 10.5, sd = 0.15
     )
-  )))
-datos5 <- datos5 %>% 
+)))
+datos5 <- datos5 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -2019,8 +2035,8 @@ datos5 <- datos5 %>%
       )
     ),
     Oi = Freq,
-    p0i =  rep(x = 1 / 8, times = 8),
-    Ei =  p0i * sum(Oi)
+    p0i = rep(x = 1 / 8, times = 8),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos5,
@@ -2033,8 +2049,8 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   kable_classic_2()
@@ -2143,8 +2159,8 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
   ) +
   geom_line(stat = "density", color = "blue") +
   expand_limits(y = 0) +
-  xlab("Longitud de la pieza") + 
-  ylab("Densidad") + 
+  xlab("Longitud de la pieza") +
+  ylab("Densidad") +
   theme_minimal()
 ```
 
@@ -2191,11 +2207,12 @@ El siguiente código permite construir la tabla de distribución de frecuencia o
 
 
 ```{.r .watch-out}
-lim_int <- c(-Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, Inf)
+lim_int <- c(-Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 
+             10.8, 10.9, Inf)
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks = lim_int
 )))
-datos6 <- datos6 %>% 
+datos6 <- datos6 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -2208,8 +2225,8 @@ datos6 <- datos6 %>%
       )
     ),
     Oi = Freq,
-    p0i =  diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
-    Ei =  p0i * sum(Oi)
+    p0i = diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos6,
@@ -2223,11 +2240,11 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
-  row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>% 
+  row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>%
   kable_classic_2()
 ```
 
@@ -2317,7 +2334,7 @@ lim_int <- c(-Inf, 10.3, 10.4, 10.5, 10.6, 10.7, Inf)
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks = lim_int
 )))
-datos6 <- datos6 %>% 
+datos6 <- datos6 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -2330,8 +2347,8 @@ datos6 <- datos6 %>%
       )
     ),
     Oi = Freq,
-    p0i =  diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
-    Ei =  p0i * sum(Oi)
+    p0i = diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos6,
@@ -2345,10 +2362,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -2413,8 +2430,8 @@ Fíjese que la prueba de hipótesis que se plantea en este ejemplo es compuesta,
 
 
 ```{.r .watch-out}
-X2 <- sum((datos6$Oi - datos6$Ei) ^ 2 / datos6$Ei)
-p.valor <-  pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
+X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
+p.valor <- pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
 paste("El estadístic Ji-Cuadrado =", X2)
 paste("el p.valor =", p.valor)
 ```
@@ -2441,7 +2458,7 @@ datos6 <- as.data.frame(table(cut(
       mean = 10.502, sd = 0.2026
     )
 )))
-datos6 <- datos6 %>% 
+datos6 <- datos6 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -2454,8 +2471,8 @@ datos6 <- datos6 %>%
       )
     ),
     Oi = Freq,
-    p0i =  rep(x = 1 / 8, times = 8),
-    Ei =  p0i * sum(Oi)
+    p0i = rep(x = 1 / 8, times = 8),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos6,
@@ -2468,10 +2485,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -2550,8 +2567,8 @@ Como se puede ver en la tabla anterior, todas las frecuencias esperadas son mayo
 
 
 ```{.r .watch-out}
-X2 <- sum((datos6$Oi - datos6$Ei) ^ 2 / datos6$Ei)
-p.valor <-  pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
+X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
+p.valor <- pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
 paste("El estadístic Ji-Cuadrado =", X2)
 paste("el p.valor =", p.valor)
 ```
@@ -2751,18 +2768,18 @@ knitr::kable(
     stringsAsFactors = FALSE,
     H0 = c("", "$F\\left(x \\right)=F_0\\left(x \\right)$", ""),
     H1 = c(
-      "$F\\left(x \\right)\\neq F_0\\left(x \\right)$", 
-      "$F\\left(x \\right)>F_0\\left(x \\right)$", 
+      "$F\\left(x \\right)\\neq F_0\\left(x \\right)$",
+      "$F\\left(x \\right)>F_0\\left(x \\right)$",
       "$F\\left(x \\right)<F_0\\left(x \\right)$"
     ),
     region_critica = c(
-      "$D_{n}> d_{n,\\alpha }$", 
-      "$D_{n}^{+}> d_{n,\\alpha}^{+}$", 
+      "$D_{n}> d_{n,\\alpha }$",
+      "$D_{n}^{+}> d_{n,\\alpha}^{+}$",
       "$D_{n}^{-}> d_{n,\\alpha }^{-}$"
     ),
     p_valor = c(
-      "$P \\left( D_{n} > d_{n} \\right)$", 
-      "$P \\left(D_{n}^{+ }> d_{n}^{+} \\right)$", 
+      "$P \\left( D_{n} > d_{n} \\right)$",
+      "$P \\left(D_{n}^{+ }> d_{n}^{+} \\right)$",
       "$P \\left(D_{n}^{-}> d_{n}^{-} \\right)$"
     )
   ),
@@ -2774,8 +2791,8 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   kable_classic_2()
@@ -2836,10 +2853,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -2893,8 +2910,10 @@ Para aplicar la prueba de bondad de ajuste Kolmogorov-Smirnov se debe construir 
 
 
 ```{.r .watch-out}
-reflectancia <- c(0.608, 0.533, 0.912, 0.498, 0.885, 0.291, 0.805, 
-                  0.436, 0.868, 0.712)
+reflectancia <- c(
+  0.608, 0.533, 0.912, 0.498, 0.885, 0.291, 0.805,
+  0.436, 0.868, 0.712
+)
 Xi <- sort(unique(reflectancia))
 i <- numeric(length(Xi))
 for (j in 1:length(Xi)) {
@@ -2903,12 +2922,12 @@ for (j in 1:length(Xi)) {
 datos7 <- data.frame(
   i = i,
   Xi = Xi
-) %>% 
+) %>%
   mutate(
-    Fn = i/length(reflectancia),
+    Fn = i / length(reflectancia),
     F0 = punif(q = Xi),
     D_mas = Fn - F0,
-    D_menos = F0 - (i - 1)/length(reflectancia)  
+    D_menos = F0 - (i - 1) / length(reflectancia)
   )
 kableExtra::kbl(
   datos7,
@@ -2921,7 +2940,7 @@ kableExtra::kbl(
     "$F_{n}^{*}\\left( x_{\\left( i \\right)} \\right)$",
     "$F_{0}\\left( x_{\\left( i \\right)} \\right)$",
     "$D_{n}^{+}$",
-    "$D_{n}^{-}$" 
+    "$D_{n}^{-}$"
   ),
   align = c("c", "c", "c", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -2929,20 +2948,20 @@ kableExtra::kbl(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   column_spec(
-    5, 
-    color = if_else(datos7$D_mas == max(datos7$D_mas), "red", "black"), 
+    5,
+    color = if_else(datos7$D_mas == max(datos7$D_mas), "red", "black"),
     bold = if_else(datos7$D_mas == max(datos7$D_mas), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   column_spec(
-    6, 
-    color = if_else(datos7$D_menos == max(datos7$D_menos), "red", "black"), 
+    6,
+    color = if_else(datos7$D_menos == max(datos7$D_menos), "red", "black"),
     bold = if_else(datos7$D_menos == max(datos7$D_menos), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 
@@ -3109,7 +3128,7 @@ ggplot(as.data.frame(reflectancia), aes(x = reflectancia)) +
     axis.text.y = element_text(size = 9),
     plot.title = element_text(size = 12),
     plot.background = element_rect(fill = "antiquewhite1")
-  ) 
+  )
 ```
 
 <div class="figure">
@@ -3124,8 +3143,10 @@ Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste
 
 
 ```{.r .watch-out}
-ks.test(reflectancia, "punif", min = 0, max = 1, 
-        alternative = "two.sided")
+ks.test(reflectancia, "punif",
+  min = 0, max = 1,
+  alternative = "two.sided"
+)
 ```
 
 ```{.bg-warning}
@@ -3146,11 +3167,13 @@ La tabla \@ref(tab:datos8) muestra la función de distribución acumulada empír
 
 
 ```{.r .watch-out}
-lp <- c(10.39, 10.66, 10.12, 10.32, 10.25, 10.91, 10.52, 10.83,
-        10.72, 10.28, 10.35, 10.46, 10.54, 10.72, 10.23, 10.18,
-        10.62, 10.49, 10.32, 10.61, 10.64, 10.23, 10.29, 10.78,
-        10.81, 10.39, 10.34, 10.62, 10.75, 10.34, 10.41, 10.81,
-        10.64, 10.53, 10.31, 10.46, 10.47, 10.43, 10.57, 10.74)
+lp <- c(
+  10.39, 10.66, 10.12, 10.32, 10.25, 10.91, 10.52, 10.83,
+  10.72, 10.28, 10.35, 10.46, 10.54, 10.72, 10.23, 10.18,
+  10.62, 10.49, 10.32, 10.61, 10.64, 10.23, 10.29, 10.78,
+  10.81, 10.39, 10.34, 10.62, 10.75, 10.34, 10.41, 10.81,
+  10.64, 10.53, 10.31, 10.46, 10.47, 10.43, 10.57, 10.74
+)
 Xi <- sort(unique(lp))
 i <- numeric(length(Xi))
 for (j in 1:length(Xi)) {
@@ -3159,12 +3182,12 @@ for (j in 1:length(Xi)) {
 datos8 <- data.frame(
   i = i,
   Xi = Xi
-) %>% 
+) %>%
   mutate(
-    Fn = i/length(lp),
+    Fn = i / length(lp),
     F0 = pnorm(q = Xi, mean = 10.5, sd = 0.15),
     D_mas = Fn - F0,
-    D_menos = F0 - (i - 1)/length(lp)  
+    D_menos = F0 - (i - 1) / length(lp)
   )
 kableExtra::kbl(
   datos8,
@@ -3177,7 +3200,7 @@ kableExtra::kbl(
     "$F_{n}^{*}\\left( x_{\\left( i \\right)} \\right)$",
     "$F_{0}\\left( x_{\\left( i \\right)} \\right)$",
     "$D_{n}^{+}$",
-    "$D_{n}^{-}$" 
+    "$D_{n}^{-}$"
   ),
   align = c("c", "c", "c", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -3185,20 +3208,20 @@ kableExtra::kbl(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   column_spec(
-    5, 
-    color = if_else(datos8$D_mas == max(datos8$D_mas), "red", "black"), 
+    5,
+    color = if_else(datos8$D_mas == max(datos8$D_mas), "red", "black"),
     bold = if_else(datos8$D_mas == max(datos8$D_mas), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   column_spec(
-    6, 
-    color = if_else(datos8$D_menos == max(datos8$D_menos), "red", "black"), 
+    6,
+    color = if_else(datos8$D_menos == max(datos8$D_menos), "red", "black"),
     bold = if_else(datos8$D_menos == max(datos8$D_menos), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
@@ -3533,7 +3556,7 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
     axis.text.y = element_text(size = 9),
     plot.title = element_text(size = 12),
     plot.background = element_rect(fill = "antiquewhite1")
-  ) 
+  )
 ```
 
 <div class="figure">
@@ -3545,8 +3568,10 @@ Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste
 
 
 ```{.r .watch-out}
-ks.test(lp, "pnorm", mean = 10.5, sd = 0.15, 
-        alternative = "two.sided", exact = TRUE)
+ks.test(lp, "pnorm",
+  mean = 10.5, sd = 0.15,
+  alternative = "two.sided", exact = TRUE
+)
 ```
 
 ```{.bg-warning}
@@ -3820,7 +3845,7 @@ kableExtra::kbl(
   col.names = c(
     "Niños",
     "Puntuación",
-    "Posición de la puntuación con respecto a la mediana " 
+    "Posición de la puntuación con respecto a la mediana "
   ),
   align = c("c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -3829,10 +3854,10 @@ orden de ocurrencia",
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
+    bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
@@ -3976,32 +4001,36 @@ El siguiente trozo de código permite determinar el valor del estadístico $R$, 
 
 
 ```{.r .watch-out}
-mediana <- datos9 %>% pull(puntuacion) %>% median(., na.rm = TRUE)
-n1 <- datos9 %>% 
-  dplyr::filter(signo == "\\+") %>% 
-  pull(signo) %>% 
-  as.character(.) %>% 
+mediana <- datos9 %>%
+  pull(puntuacion) %>%
+  median(., na.rm = TRUE)
+n1 <- datos9 %>%
+  dplyr::filter(signo == "\\+") %>%
+  pull(signo) %>%
+  as.character(.) %>%
   length(.)
-n2 <- datos9 %>% 
-  dplyr::filter(signo == "\\-") %>% 
-  pull(signo) %>% 
-  as.character(.) %>% 
+n2 <- datos9 %>%
+  dplyr::filter(signo == "\\-") %>%
+  pull(signo) %>%
+  as.character(.) %>%
   length(.)
 n <- n1 + n2
 rachas <- rle(sign(na.omit(puntuacion) - mediana))
-rachas9 <- as.data.frame.list(rachas) %>% 
+rachas9 <- as.data.frame.list(rachas) %>%
   dplyr::rename(
     lonjitud = lengths,
     signo = values
   )
-r1 <- rachas9 %>% 
+r1 <- rachas9 %>%
   dplyr::filter(
     signo == 1
-  ) %>% nrow(.)
-r2 <- rachas9 %>% 
+  ) %>%
+  nrow(.)
+r2 <- rachas9 %>%
   dplyr::filter(
     signo == -1
-  ) %>% nrow(.)
+  ) %>%
+  nrow(.)
 r <- r1 + r2
 mu_R <- 2 * n1 * n2 / n + 1
 var_R <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
@@ -4049,7 +4078,7 @@ ggplot(datos9, aes(x = niños, y = puntuacion)) +
     y = "Puntuación"
   ) +
   theme_minimal() +
-   scale_colour_brewer(palette = "Set1") +
+  scale_colour_brewer(palette = "Set1") +
   theme(
     panel.grid.major = element_line(
       colour = "lightsteelblue1",
@@ -4106,7 +4135,7 @@ La función `runs.test` del paquete `snpar` también ejecuta la prueba, como se 
 
 ```{.r .watch-out}
 snpar::runs.test(
-  x = puntuacion, exact = T, 
+  x = puntuacion, exact = T,
   alternative = "two.sided"
 )
 ```
@@ -4137,36 +4166,42 @@ Los datos fueron tomados de Siegel (2012, pág. 86)
 
 
 ```{.r .watch-out}
-cola <- c("M", "F", "M", "F", "M", "M", "M", "F", "F", "M", "F", 
-          "M", "F", "M", "F", "M", "M", "M", "M", "F", "M", "F",
-          "M", "F", "M", "M", "F", "F", "F", "M", "F", "M", "F", 
-          "M", "F", "M", "M", "F", "M", "M", "F", "M", "M", "M",
-          "M", "F", "M", "F", "M", "M")
+cola <- c(
+  "M", "F", "M", "F", "M", "M", "M", "F", "F", "M", "F",
+  "M", "F", "M", "F", "M", "M", "M", "M", "F", "M", "F",
+  "M", "F", "M", "M", "F", "F", "F", "M", "F", "M", "F",
+  "M", "F", "M", "M", "F", "M", "M", "F", "M", "M", "M",
+  "M", "F", "M", "F", "M", "M"
+)
 n1 <- min(table(cola))
 n2 <- max(table(cola))
 n <- n1 + n2
-ind <- fct_infreq(cola)  %>% fct_rev() %>% levels(.)
+ind <- fct_infreq(cola) %>%
+  fct_rev() %>%
+  levels(.)
 n1 <- length(cola[cola == ind[1]])
 n2 <- length(cola[cola == ind[2]])
 rachas <- rle(cola)
-rachas10 <- as.data.frame.list(rachas) %>% 
+rachas10 <- as.data.frame.list(rachas) %>%
   dplyr::rename(
     lonjitud = lengths,
     signo = values
   )
-r1 <- rachas10 %>% 
+r1 <- rachas10 %>%
   dplyr::filter(
     signo == ind[1]
-  ) %>% nrow(.)
-r2 <- rachas10 %>% 
+  ) %>%
+  nrow(.)
+r2 <- rachas10 %>%
   dplyr::filter(
     signo == ind[2]
-  ) %>% nrow(.)
+  ) %>%
+  nrow(.)
 r <- r1 + r2
 mu_R <- 2 * n1 * n2 / n + 1
 var_R <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
 z <- (r - mu_R) / sqrt(var_R)
-z.corr <- (r - mu_R - 0.5) / sqrt(var_R) 
+z.corr <- (r - mu_R - 0.5) / sqrt(var_R)
 p.valor <- 2 * pruns(q = r - 1, n1 = n1, n2 = n2, lower.tail = FALSE)
 p.valor.aprox <- 2 * pnorm(z, lower.tail = FALSE)
 p.valor.aprox.cor <- 2 * pnorm(z.corr, lower.tail = FALSE)
@@ -4194,9 +4229,9 @@ paste("El p.valor.aprox con corrección =", round(x = p.valor.aprox.cor, digits 
 ```
 <br/>
 
-Como se observa en la salida anterior el  $p_{valor} = 0.0037481$, lo que indica que disposición de hombres y mujeres en una fila enfrente de la taquilla del teatro no es aleatorio. Note que $R = 35 > \mu_R = 25$, por lo que el $p_{valor}=2P\left(R \geq r \right)$.
+Como se observa en la salida anterior el  $p_{valor} = 0.0037481$, lo que indica que la disposición de hombres y mujeres en una fila enfrente de la taquilla del teatro no es aleatorio. Note que $R = 35 > \mu_R = 25$, por lo que el $p_{valor}=2P\left(R \geq r \right)$.
 
-La figura \@ref(fig:datos10) muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio,  lo cual contrasta con la conclusión anterior.  
+La figura \@ref(fig:datos10) muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta muestra que las longitudes de las rachas tienen un comportamiento aleatorio,  lo cual contrasta con la conclusión anterior.  
 
 
 ```{.r .watch-out}
@@ -4228,7 +4263,7 @@ ggplot(datos10, aes(x = personas, y = codigo)) +
     y = "Puntuación"
   ) +
   theme_minimal() +
-   scale_colour_brewer(palette = "Set1") +
+  scale_colour_brewer(palette = "Set1") +
   theme(
     panel.grid.major = element_line(
       colour = "lightsteelblue1",
@@ -4283,7 +4318,7 @@ Con el siguiente trozo de código se ha ejecutado la prueba con la función `run
 
 ```{.r .watch-out}
 snpar::runs.test(
-  x = datos10$codigo, exact = FALSE, 
+  x = datos10$codigo, exact = FALSE,
   alternative = "two.sided"
 )
 ```
@@ -4297,8 +4332,6 @@ snpar::runs.test(
 #> alternative hypothesis: two.sided
 ```
 <br/>
-
-
 
 
 ## Información de Sesión {#sesion}
@@ -4323,8 +4356,8 @@ as_tibble(devtools::session_info()$packages) %>%
 ```
 
 ```{=html}
-<div id="htmlwidget-c4be5d72bdd653986147" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c4be5d72bdd653986147">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4d858f1b256aa74e4d48" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4d858f1b256aa74e4d48">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -4333,226 +4366,224 @@ as_tibble(devtools::session_info()$packages) %>%
 
 # Bibliografía {-}
 
-[1] J. Allaire, Y. Xie, J. McPherson, et al. _rmarkdown:
+[1] G. Aden-Buie. _cleanrmd: Clean Class-Less R Markdown
+HTML Documents_. R package version 0.0.7. 2021. <URL:
+https://github.com/gadenbuie/cleanrmd>.
+
+[2] J. Allaire, Y. Xie, J. McPherson, et al. _rmarkdown:
 Dynamic Documents for R_. R package version 2.11. 2021.
 <URL: https://CRAN.R-project.org/package=rmarkdown>.
 
-[2] A. T. Arnholt and B. Evans. _BSDA: Basic Statistics
+[3] A. T. Arnholt and B. Evans. _BSDA: Basic Statistics
 and Data Analysis_. R package version 1.2.0. 2017. <URL:
 https://CRAN.R-project.org/package=BSDA>.
 
-[3] S. M. Bache and H. Wickham. _magrittr: A Forward-Pipe
+[4] S. M. Bache and H. Wickham. _magrittr: A Forward-Pipe
 Operator for R_. R package version 2.0.1. 2020. <URL:
 https://CRAN.R-project.org/package=magrittr>.
 
-[4] C. Boettiger. _knitcitations: Citations for Knitr
+[5] C. Boettiger. _knitcitations: Citations for Knitr
 Markdown Files_. R package version 1.0.12. 2021. <URL:
 https://github.com/cboettig/knitcitations>.
 
-[5] F. Caeiro and A. Mateus. _randtests: Testing
+[6] F. Caeiro and A. Mateus. _randtests: Testing
 randomness in R_. R package version 1.0. 2014. <URL:
 https://CRAN.R-project.org/package=randtests>.
 
-[6] L. Carvalho. "An Improved Evaluation of Kolmogorov's
+[7] L. Carvalho. "An Improved Evaluation of Kolmogorov's
 Distribution". In: _Journal of Statistical Software_ 65.3
-(2015), pp. 1-7. <URL:
-http://www.jstatsoft.org/v65/c03/>.
+(2015), pp. 1-7. <URL: http://www.jstatsoft.org/v65/c03/>.
 
-[7] L. Carvalho. _kolmim: An Improved Evaluation of
+[8] L. Carvalho. _kolmim: An Improved Evaluation of
 Kolmogorov's Distribution_. R package version 1.0. 2015.
 <URL: https://CRAN.R-project.org/package=kolmim>.
 
-[8] S. Chasalow. _combinat: combinatorics utilities_. R
+[9] S. Chasalow. _combinat: combinatorics utilities_. R
 package version 0.0-8. 2012. <URL:
 https://CRAN.R-project.org/package=combinat>.
 
-[9] J. Cheng, C. Sievert, B. Schloerke, et al.
+[10] J. Cheng, C. Sievert, B. Schloerke, et al.
 _htmltools: Tools for HTML_. R package version 0.5.2.
 2021. <URL: https://github.com/rstudio/htmltools>.
 
-[10] R. K. S. Hankin. "Additive integer partitions in R".
-In: _Journal of Statistical Software, Code Snippets_ 16
-(1 may. 2006).
+[11] R. K. S. Hankin. "Additive integer partitions in R".
+In: _Journal of Statistical Software, Code Snippets_ 16 (1
+may. 2006).
 
-[11] R. K. S. Hankin. _partitions: Additive Partitions of
+[12] R. K. S. Hankin. _partitions: Additive Partitions of
 Integers_. R package version 1.10-2. 2021. <URL:
 https://github.com/RobinHankin/partitions>.
 
-[12] F. E. Harrell Jr. _Hmisc: Harrell Miscellaneous_. R
+[13] F. E. Harrell Jr. _Hmisc: Harrell Miscellaneous_. R
 package version 4.5-0. 2021. <URL:
 https://CRAN.R-project.org/package=Hmisc>.
 
-[13] L. Henry and H. Wickham. _purrr: Functional
+[14] L. Henry and H. Wickham. _purrr: Functional
 Programming Tools_. R package version 0.3.4. 2020. <URL:
 https://CRAN.R-project.org/package=purrr>.
 
-[14] K. MÃ¼ller and H. Wickham. _tibble: Simple Data
+[15] K. MÃ¼ller and H. Wickham. _tibble: Simple Data
 Frames_. R package version 3.1.5. 2021. <URL:
 https://CRAN.R-project.org/package=tibble>.
 
-[15] P. O. Perry. _utf8: Unicode Text Processing_. R
+[16] P. O. Perry. _utf8: Unicode Text Processing_. R
 package version 1.2.1. 2021. <URL:
 https://CRAN.R-project.org/package=utf8>.
 
-[16] D. Qiu. _snpar: Supplementary Non-parametric
+[17] D. Qiu. _snpar: Supplementary Non-parametric
 Statistics Methods_. R package version 1.0. 2014. <URL:
 https://CRAN.R-project.org/package=snpar>.
 
-[17] R Core Team. _R: A Language and Environment for
+[18] R Core Team. _R: A Language and Environment for
 Statistical Computing_. R Foundation for Statistical
 Computing. Vienna, Austria, 2020. <URL:
 https://www.R-project.org/>.
 
-[18] B. Ripley. _MASS: Support Functions and Datasets for
+[19] B. Ripley. _MASS: Support Functions and Datasets for
 Venables and Ripley's MASS_. R package version 7.3-54.
 2021. <URL: http://www.stats.ox.ac.uk/pub/MASS4/>.
 
-[19] B. Rudis. _hrbrthemes: Additional Themes, Theme
+[20] B. Rudis. _hrbrthemes: Additional Themes, Theme
 Components and Utilities for ggplot2_. R package version
-0.8.0. 2020. <URL:
-http://github.com/hrbrmstr/hrbrthemes>.
+0.8.0. 2020. <URL: http://github.com/hrbrmstr/hrbrthemes>.
 
-[20] D. Sarkar. _Lattice: Multivariate Data Visualization
-with R_. ISBN 978-0-387-75968-5. New York: Springer,
-2008. <URL: http://lmdvr.r-forge.r-project.org>.
+[21] D. Sarkar. _Lattice: Multivariate Data Visualization
+with R_. ISBN 978-0-387-75968-5. New York: Springer, 2008.
+<URL: http://lmdvr.r-forge.r-project.org>.
 
-[21] D. Sarkar. _lattice: Trellis Graphics for R_. R
+[22] D. Sarkar. _lattice: Trellis Graphics for R_. R
 package version 0.20-44. 2021. <URL:
 http://lattice.r-forge.r-project.org/>.
 
-[22] G. Schneider, E. Chicken, and R. Becvarik. _NSM3:
+[23] G. Schneider, E. Chicken, and R. Becvarik. _NSM3:
 Functions and Datasets to Accompany Hollander, Wolfe, and
 Chicken - Nonparametric Statistical Methods, Third
 Edition_. R package version 1.16. 2021. <URL:
 https://CRAN.R-project.org/package=NSM3>.
 
-[23] C. Sievert. _Interactive Web-Based Data
-Visualization with R, plotly, and shiny_. Chapman and
-Hall/CRC, 2020. ISBN: 9781138331457. <URL:
-https://plotly-r.com>.
+[24] C. Sievert. _Interactive Web-Based Data Visualization
+with R, plotly, and shiny_. Chapman and Hall/CRC, 2020.
+ISBN: 9781138331457. <URL: https://plotly-r.com>.
 
-[24] C. Sievert, C. Parmer, T. Hocking, et al. _plotly:
+[25] C. Sievert, C. Parmer, T. Hocking, et al. _plotly:
 Create Interactive Web Graphics via plotly.js_. R package
 version 4.10.0. 2021. <URL:
 https://CRAN.R-project.org/package=plotly>.
 
-[25] Terry M. Therneau and Patricia M. Grambsch.
-_Modeling Survival Data: Extending the Cox Model_. New
-York: Springer, 2000. ISBN: 0-387-98784-3.
+[26] Terry M. Therneau and Patricia M. Grambsch. _Modeling
+Survival Data: Extending the Cox Model_. New York:
+Springer, 2000. ISBN: 0-387-98784-3.
 
-[26] T. M. Therneau. _survival: Survival Analysis_. R
+[27] T. M. Therneau. _survival: Survival Analysis_. R
 package version 3.2-11. 2021. <URL:
 https://github.com/therneau/survival>.
 
-[27] R. Vaidyanathan, Y. Xie, J. Allaire, et al.
+[28] R. Vaidyanathan, Y. Xie, J. Allaire, et al.
 _htmlwidgets: HTML Widgets for R_. R package version
 1.5.4. 2021. <URL:
 https://github.com/ramnathv/htmlwidgets>.
 
-[28] W. N. Venables and B. D. Ripley. _Modern Applied
+[29] W. N. Venables and B. D. Ripley. _Modern Applied
 Statistics with S_. Fourth. ISBN 0-387-95457-0. New York:
 Springer, 2002. <URL:
 https://www.stats.ox.ac.uk/pub/MASS4/>.
 
-[29] H. Wickham. _forcats: Tools for Working with
-Categorical Variables (Factors)_. R package version
-0.5.1. 2021. <URL:
-https://CRAN.R-project.org/package=forcats>.
+[30] H. Wickham. _forcats: Tools for Working with
+Categorical Variables (Factors)_. R package version 0.5.1.
+2021. <URL: https://CRAN.R-project.org/package=forcats>.
 
-[30] H. Wickham. _ggplot2: Elegant Graphics for Data
+[31] H. Wickham. _ggplot2: Elegant Graphics for Data
 Analysis_. Springer-Verlag New York, 2016. ISBN:
 978-3-319-24277-4. <URL: https://ggplot2.tidyverse.org>.
 
-[31] H. Wickham. _reshape2: Flexibly Reshape Data: A
+[32] H. Wickham. _reshape2: Flexibly Reshape Data: A
 Reboot of the Reshape Package_. R package version 1.4.4.
 2020. <URL: https://github.com/hadley/reshape>.
 
-[32] H. Wickham. "Reshaping Data with the reshape
+[33] H. Wickham. "Reshaping Data with the reshape
 Package". In: _Journal of Statistical Software_ 21.12
 (2007), pp. 1-20. <URL:
 http://www.jstatsoft.org/v21/i12/>.
 
-[33] H. Wickham. _stringr: Simple, Consistent Wrappers
-for Common String Operations_. R package version 1.4.0.
-2019. <URL: https://CRAN.R-project.org/package=stringr>.
+[34] H. Wickham. _stringr: Simple, Consistent Wrappers for
+Common String Operations_. R package version 1.4.0. 2019.
+<URL: https://CRAN.R-project.org/package=stringr>.
 
-[34] H. Wickham. _tidyr: Tidy Messy Data_. R package
+[35] H. Wickham. _tidyr: Tidy Messy Data_. R package
 version 1.1.4. 2021. <URL:
 https://CRAN.R-project.org/package=tidyr>.
 
-[35] H. Wickham. _tidyverse: Easily Install and Load the
+[36] H. Wickham. _tidyverse: Easily Install and Load the
 Tidyverse_. R package version 1.3.1. 2021. <URL:
 https://CRAN.R-project.org/package=tidyverse>.
 
-[36] H. Wickham, M. Averick, J. Bryan, et al. "Welcome to
-the tidyverse". In: _Journal of Open Source Software_
-4.43 (2019), p. 1686. DOI: 10.21105/joss.01686.
+[37] H. Wickham, M. Averick, J. Bryan, et al. "Welcome to
+the tidyverse". In: _Journal of Open Source Software_ 4.43
+(2019), p. 1686. DOI: 10.21105/joss.01686.
 
-[37] H. Wickham, J. Bryan, and M. Barrett. _usethis:
+[38] H. Wickham, J. Bryan, and M. Barrett. _usethis:
 Automate Package and Project Setup_. R package version
 2.1.3. 2021. <URL:
 https://CRAN.R-project.org/package=usethis>.
 
-[38] H. Wickham, W. Chang, L. Henry, et al. _ggplot2:
+[39] H. Wickham, W. Chang, L. Henry, et al. _ggplot2:
 Create Elegant Data Visualisations Using the Grammar of
 Graphics_. R package version 3.3.5. 2021. <URL:
 https://CRAN.R-project.org/package=ggplot2>.
 
-[39] H. Wickham, R. FranÃ§ois, L. Henry, et al. _dplyr: A
+[40] H. Wickham, R. FranÃ§ois, L. Henry, et al. _dplyr: A
 Grammar of Data Manipulation_. R package version 1.0.6.
 2021. <URL: https://CRAN.R-project.org/package=dplyr>.
 
-[40] H. Wickham and J. Hester. _readr: Read Rectangular
+[41] H. Wickham and J. Hester. _readr: Read Rectangular
 Text Data_. R package version 1.4.0. 2020. <URL:
 https://CRAN.R-project.org/package=readr>.
 
-[41] H. Wickham, J. Hester, and W. Chang. _devtools:
-Tools to Make Developing R Packages Easier_. R package
-version 2.4.2. 2021. <URL:
+[42] H. Wickham, J. Hester, and W. Chang. _devtools: Tools
+to Make Developing R Packages Easier_. R package version
+2.4.2. 2021. <URL:
 https://CRAN.R-project.org/package=devtools>.
 
-[42] Y. Xie. _bookdown: Authoring Books and Technical
+[43] Y. Xie. _bookdown: Authoring Books and Technical
 Documents with R Markdown_. ISBN 978-1138700109. Boca
 Raton, Florida: Chapman and Hall/CRC, 2016. <URL:
 https://bookdown.org/yihui/bookdown>.
 
-[43] Y. Xie. _bookdown: Authoring Books and Technical
+[44] Y. Xie. _bookdown: Authoring Books and Technical
 Documents with R Markdown_. R package version 0.24. 2021.
 <URL: https://CRAN.R-project.org/package=bookdown>.
 
-[44] Y. Xie, J. Allaire, and G. Grolemund. _R Markdown:
+[45] Y. Xie, J. Allaire, and G. Grolemund. _R Markdown:
 The Definitive Guide_. ISBN 9781138359338. Boca Raton,
 Florida: Chapman and Hall/CRC, 2018. <URL:
 https://bookdown.org/yihui/rmarkdown>.
 
-[45] Y. Xie, J. Cheng, and X. Tan. _DT: A Wrapper of the
+[46] Y. Xie, J. Cheng, and X. Tan. _DT: A Wrapper of the
 JavaScript Library DataTables_. R package version 0.19.
 2021. <URL: https://github.com/rstudio/DT>.
 
-[46] Y. Xie, C. Dervieux, and E. Riederer. _R Markdown
+[47] Y. Xie, C. Dervieux, and E. Riederer. _R Markdown
 Cookbook_. ISBN 9780367563837. Boca Raton, Florida:
 Chapman and Hall/CRC, 2020. <URL:
 https://bookdown.org/yihui/rmarkdown-cookbook>.
 
-[47] A. Zeileis and Y. Croissant. "Extended Model
-Formulas in R: Multiple Parts and Multiple Responses".
-In: _Journal of Statistical Software_ 34.1 (2010), pp.
-1-13. DOI: 10.18637/jss.v034.i01.
+[48] A. Zeileis and Y. Croissant. "Extended Model Formulas
+in R: Multiple Parts and Multiple Responses". In: _Journal
+of Statistical Software_ 34.1 (2010), pp. 1-13. DOI:
+10.18637/jss.v034.i01.
 
-[48] A. Zeileis and Y. Croissant. _Formula: Extended
-Model Formulas_. R package version 1.2-4. 2020. <URL:
+[49] A. Zeileis and Y. Croissant. _Formula: Extended Model
+Formulas_. R package version 1.2-4. 2020. <URL:
 https://CRAN.R-project.org/package=Formula>.
 
-[49] P. Zhao. _bookdownplus: Generate Assorted Books and
+[50] P. Zhao. _bookdownplus: Generate Assorted Books and
 Documents with R bookdown Package_. R package version
 1.5.8. 2020. <URL:
 https://github.com/pzhaonet/bookdownplus>.
 
-[50] H. Zhu. _kableExtra: Construct Complex Table with
+[51] H. Zhu. _kableExtra: Construct Complex Table with
 kable and Pipe Syntax_. R package version 1.3.4. 2021.
 <URL: https://CRAN.R-project.org/package=kableExtra>.
-
-
 
 <!--chapter:end:index.Rmd-->
 

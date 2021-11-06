@@ -363,7 +363,7 @@ div.tocify {
 <h1 class="title toc-ignore">Pruebas que Usan Datos de Una Muestra Aleatoria Simple</h1>
 <h4 class="author">Prof: Oswaldo Bello (<a href="mailto:oswaldobelloc@gmail.com" class="email">oswaldobelloc@gmail.com</a>)</h4>
 <address class="author_afil">
-Universidade de Oriente, Venezuela<br><h4 class="date">Sábado, 06 de noviembre de 2021 (01:12:39 a.m.)</h4>
+Universidade de Oriente, Venezuela<br><h4 class="date">Sábado, 06 de noviembre de 2021 (12:23:12 a.m.)</h4>
 
 </div>
 
@@ -953,7 +953,8 @@ Una indicación lógica de si la corrección de continuidad de Yates debe aplica
 #&gt;  Exact binomial test
 #&gt; 
 #&gt; data:  x and n
-#&gt; number of successes = 16, number of trials = 18, p-value = 0.0006561
+#&gt; number of successes = 16, number of trials = 18, p-value =
+#&gt; 0.0006561
 #&gt; alternative hypothesis: true probability of success is greater than 0.5
 #&gt; 95 percent confidence interval:
 #&gt;  0.6897373 1.0000000
@@ -1552,7 +1553,8 @@ Conteo
 #&gt;  Exact binomial test
 #&gt; 
 #&gt; data:  s and n
-#&gt; number of successes = 12, number of trials = 14, p-value = 0.00647
+#&gt; number of successes = 12, number of trials = 14, p-value =
+#&gt; 0.00647
 #&gt; alternative hypothesis: true probability of success is greater than 0.5
 #&gt; 99 percent confidence interval:
 #&gt;  0.5217357 1.0000000
@@ -5484,8 +5486,8 @@ Posición de la puntuación con respecto a la mediana
 #&gt; [1] &quot;El valor del estadístico R = 10&quot;
 #&gt; [1] &quot;El p.valor = 0.3009&quot;</code></pre>
 <p><br /></p>
-<p>Note en la salida anterior que el valor del estadístico <span class="math inline">\(R = 10\)</span>. Mientras que, el <span class="math inline">\(p_{valor} = 0,3009\)</span>, por lo tanto las puntuaciones de agresión de acuerdo al orden en que fueron colectadas tienen un comportamiento aleatorio, lo que implica que las discusiones no tienen efecto en el nivel de agresión en las sesiones de juego.</p>
-<p>La figura <a href="#fig:rachas9">1.4</a> muestra la gráfica de las rachas por debajo y por arriba de la mediana de la muestra (linea horizontal roja). Y en esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio, lo cual contrasta con la conclusión anterior.</p>
+<p>Note en la salida anterior que el valor del estadístico <span class="math inline">\(R = 10\)</span>. Mientras que, el <span class="math inline">\(p_{valor} = 0.3008894\)</span>, por lo tanto las puntuaciones de agresión de acuerdo al orden en que fueron colectadas tienen un comportamiento aleatorio, lo que implica que las discusiones no tienen efecto en el nivel de agresión en las sesiones de juego.</p>
+<p>La figura <a href="#fig:rachas9">1.4</a> muestra la gráfica de las rachas por debajo y por arriba de la mediana de la muestra (linea horizontal roja). Y esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio, lo cual contrasta con la conclusión anterior.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos9, <span class="fu">aes</span>(<span class="at">x =</span> niños, <span class="at">y =</span> puntuacion)) <span class="sc">+</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">as.factor</span>(signo)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
@@ -5546,11 +5548,11 @@ Figura 1.4: Rachas para las puntuaciones de agresión de acuerdo al orden de ocu
 #&gt;  Runs Test
 #&gt; 
 #&gt; data:  puntuacion
-#&gt; statistic = -1.2523, runs = 10, n1 = 12, n2 = 12, n = 24, p-value =
-#&gt; 0.3009
+#&gt; statistic = -1.2523, runs = 10, n1 = 12, n2 = 12, n = 24,
+#&gt; p-value = 0.3009
 #&gt; alternative hypothesis: nonrandomness</code></pre>
 <p><br /></p>
-<p>La función <code>runs.test</code> del paquete <code>randtests</code> también realiza el gráfico mostrado en la figura <a href="#fig:rachas9">1.4</a>, pero menos elegante que este. Si se quiere ver este gráfico se cambia el parámetro <code>plot</code> a <code>TRUE</code>.</p>
+<p>La función runs.test<code>del paquete</code>randtests<code>también realiza el gráfico mostrado en la figura \@ref(fig:rachas9), pero menos elegante que este. Si se quiere ver este gráfico se cambia el parámetro</code>plot<code>a</code>TRUE`.</p>
 <p>La función <code>runs.test</code> del paquete <code>snpar</code> también ejecuta la prueba, como se muestra en el siguiente trozo de código.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>snpar<span class="sc">::</span><span class="fu">runs.test</span>(</span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> puntuacion, <span class="at">exact =</span> T,</span>
@@ -5633,8 +5635,8 @@ Los datos fueron tomados de Siegel (2012, pág. 86)</p>
 #&gt; [1] &quot;El p.valor.aprox = 0.002888&quot;
 #&gt; [1] &quot;El p.valor.aprox con corrección = 0.004649&quot;</code></pre>
 <p><br /></p>
-<p>Como se observa en la salida anterior el <span class="math inline">\(p_{valor} = 0,0037\)</span>, lo que indica que la disposición de hombres y mujeres en la fila enfrente de la taquilla del teatro no es aleatorio. Note que <span class="math inline">\(R = 35 &gt; \mu_R = 25\)</span>, por lo que el <span class="math inline">\(p_{valor}=2P\left(R \geq r \right)\)</span>.</p>
-<p>La figura <a href="#fig:datos10">1.5</a> muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta muestra que las longitudes de las rachas no tienen un comportamiento aleatorio, lo cual contrasta con la conclusión anterior.</p>
+<p>Como se observa en la salida anterior el <span class="math inline">\(p_{valor} = 0.0037481\)</span>, lo que indica que la disposición de hombres y mujeres en una fila enfrente de la taquilla del teatro no es aleatorio. Note que <span class="math inline">\(R = 35 &gt; \mu_R = 25\)</span>, por lo que el <span class="math inline">\(p_{valor}=2P\left(R \geq r \right)\)</span>.</p>
+<p>La figura <a href="#fig:datos10">1.5</a> muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta muestra que las longitudes de las rachas tienen un comportamiento aleatorio, lo cual contrasta con la conclusión anterior.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>datos10 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">personas =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cola),</span>
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cola =</span> cola,</span>
@@ -5690,7 +5692,7 @@ Los datos fueron tomados de Siegel (2012, pág. 86)</p>
 Figura 1.5: Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia
 </p>
 </div>
-<p>Los resultados anteriores se pueden contrastar aplicando la función <code>runs.test</code> del paquete <code>randtests</code>. Note que en el trozo de código que se muestra abajo el parámetro <code>pvalue</code> se ha establecido como <code>&quot;exact&quot;</code> para generar el <span class="math inline">\(p_{valor}\)</span> exacto. Si este se establece como <code>&quot;normal&quot;</code>, el <span class="math inline">\(p_{valor}\)</span> que muestra la salida es el aproximado sin corrección por continuidad. Intente correr este script cambiando la configuración de este parámetro y observe el <span class="math inline">\(p_{valor}\)</span>.</p>
+<p>Los resultados anteriores se pueden contrastar aplicando la función <code>runs.test</code> del paquete <code>randtests</code>. Note que en el trozo de código que se muestra abajo el parámetro <code>pvalue</code> se ha establecido como <code>&quot;exact&quot;</code> para generar el <span class="math inline">\(p_{valor}\)</span> exacto. Si este se establece como <code>&quot;norma&quot;l</code>, el <span class="math inline">\(p_{valor}\)</span> que muestra la salida es el aproximado sin corrección por continuidad. Intente correr este script cambiando la configuración de este parámetro y observe el <span class="math inline">\(p_{valor}\)</span>.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>randtests<span class="sc">::</span><span class="fu">runs.test</span>(</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> datos10<span class="sc">$</span>codigo, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
 <span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>, <span class="at">pvalue =</span> <span class="st">&quot;exact&quot;</span>,</span>
@@ -5700,8 +5702,8 @@ Figura 1.5: Rachas para las puntuaciones de agresión de acuerdo al orden de ocu
 #&gt;  Runs Test
 #&gt; 
 #&gt; data:  datos10$codigo
-#&gt; statistic = 2.9794, runs = 35, n1 = 30, n2 = 20, n = 50, p-value =
-#&gt; 0.003748
+#&gt; statistic = 2.9794, runs = 35, n1 = 30, n2 = 20, n = 50,
+#&gt; p-value = 0.003748
 #&gt; alternative hypothesis: nonrandomness</code></pre>
 <p><br /></p>
 <p>Con el siguiente trozo de código se ha ejecutado la prueba con la función <code>runs.test</code> del paquete <code>snpar</code>. Observe que el parámetro <code>exact = FALSE</code>. Compare este <span class="math inline">\(p_{valor}\)</span> con los anteriores.</p>
@@ -5735,155 +5737,181 @@ Figura 1.5: Rachas para las puntuaciones de agresión de acuerdo al orden de ocu
 <span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">&quot;multiple&quot;</span>,</span>
 <span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">class =</span> <span class="st">&quot;cell-border stripe&quot;</span></span>
 <span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div id="htmlwidget-8dbd15a832e0ff96ed57" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8dbd15a832e0ff96ed57">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4d858f1b256aa74e4d48" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4d858f1b256aa74e4d48">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="bibliografía" class="section level1 unnumbered">
 <h1>Bibliografía</h1>
-<p>[1] J. Allaire, Y. Xie, J. McPherson, et al. <em>rmarkdown: Dynamic
-Documents for R</em>. R package version 2.11. 2021. &lt;URL:
-<a href="https://CRAN.R-project.org/package=rmarkdown" class="uri">https://CRAN.R-project.org/package=rmarkdown</a>&gt;.</p>
-<p>[2] A. T. Arnholt and B. Evans. <em>BSDA: Basic Statistics and Data
-Analysis</em>. R package version 1.2.0. 2017. &lt;URL:
+<p>[1] G. Aden-Buie. <em>cleanrmd: Clean Class-Less R Markdown
+HTML Documents</em>. R package version 0.0.7. 2021. &lt;URL:
+<a href="https://github.com/gadenbuie/cleanrmd" class="uri">https://github.com/gadenbuie/cleanrmd</a>&gt;.</p>
+<p>[2] J. Allaire, Y. Xie, J. McPherson, et al. <em>rmarkdown:
+Dynamic Documents for R</em>. R package version 2.11. 2021.
+&lt;URL: <a href="https://CRAN.R-project.org/package=rmarkdown" class="uri">https://CRAN.R-project.org/package=rmarkdown</a>&gt;.</p>
+<p>[3] A. T. Arnholt and B. Evans. <em>BSDA: Basic Statistics
+and Data Analysis</em>. R package version 1.2.0. 2017. &lt;URL:
 <a href="https://CRAN.R-project.org/package=BSDA" class="uri">https://CRAN.R-project.org/package=BSDA</a>&gt;.</p>
-<p>[3] S. M. Bache and H. Wickham. <em>magrittr: A Forward-Pipe Operator for
-R</em>. R package version 2.0.1. 2020. &lt;URL:
+<p>[4] S. M. Bache and H. Wickham. <em>magrittr: A Forward-Pipe
+Operator for R</em>. R package version 2.0.1. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=magrittr" class="uri">https://CRAN.R-project.org/package=magrittr</a>&gt;.</p>
-<p>[4] C. Boettiger. <em>knitcitations: Citations for Knitr Markdown Files</em>.
-R package version 1.0.12. 2021. &lt;URL:
+<p>[5] C. Boettiger. <em>knitcitations: Citations for Knitr
+Markdown Files</em>. R package version 1.0.12. 2021. &lt;URL:
 <a href="https://github.com/cboettig/knitcitations" class="uri">https://github.com/cboettig/knitcitations</a>&gt;.</p>
-<p>[5] F. Caeiro and A. Mateus. <em>randtests: Testing randomness in R</em>. R
-package version 1.0. 2014. &lt;URL:
+<p>[6] F. Caeiro and A. Mateus. <em>randtests: Testing
+randomness in R</em>. R package version 1.0. 2014. &lt;URL:
 <a href="https://CRAN.R-project.org/package=randtests" class="uri">https://CRAN.R-project.org/package=randtests</a>&gt;.</p>
-<p>[6] L. Carvalho. “An Improved Evaluation of Kolmogorov’s Distribution”.
-In: <em>Journal of Statistical Software</em> 65.3 (2015), pp. 1-7. &lt;URL:
-<a href="http://www.jstatsoft.org/v65/c03/" class="uri">http://www.jstatsoft.org/v65/c03/</a>&gt;.</p>
-<p>[7] L. Carvalho. <em>kolmim: An Improved Evaluation of Kolmogorov’s
-Distribution</em>. R package version 1.0. 2015. &lt;URL:
-<a href="https://CRAN.R-project.org/package=kolmim" class="uri">https://CRAN.R-project.org/package=kolmim</a>&gt;.</p>
-<p>[8] S. Chasalow. <em>combinat: combinatorics utilities</em>. R package version
-0.0-8. 2012. &lt;URL: <a href="https://CRAN.R-project.org/package=combinat" class="uri">https://CRAN.R-project.org/package=combinat</a>&gt;.</p>
-<p>[9] J. Cheng, C. Sievert, B. Schloerke, et al. <em>htmltools: Tools for
-HTML</em>. R package version 0.5.2. 2021. &lt;URL:
-<a href="https://github.com/rstudio/htmltools" class="uri">https://github.com/rstudio/htmltools</a>&gt;.</p>
-<p>[10] R. K. S. Hankin. “Additive integer partitions in R”. In: <em>Journal
-of Statistical Software, Code Snippets</em> 16 (1 may. 2006).</p>
-<p>[11] R. K. S. Hankin. <em>partitions: Additive Partitions of Integers</em>. R
-package version 1.10-2. 2021. &lt;URL:
+<p>[7] L. Carvalho. “An Improved Evaluation of Kolmogorov’s
+Distribution”. In: <em>Journal of Statistical Software</em> 65.3
+(2015), pp. 1-7. &lt;URL: <a href="http://www.jstatsoft.org/v65/c03/" class="uri">http://www.jstatsoft.org/v65/c03/</a>&gt;.</p>
+<p>[8] L. Carvalho. <em>kolmim: An Improved Evaluation of
+Kolmogorov’s Distribution</em>. R package version 1.0. 2015.
+&lt;URL: <a href="https://CRAN.R-project.org/package=kolmim" class="uri">https://CRAN.R-project.org/package=kolmim</a>&gt;.</p>
+<p>[9] S. Chasalow. <em>combinat: combinatorics utilities</em>. R
+package version 0.0-8. 2012. &lt;URL:
+<a href="https://CRAN.R-project.org/package=combinat" class="uri">https://CRAN.R-project.org/package=combinat</a>&gt;.</p>
+<p>[10] J. Cheng, C. Sievert, B. Schloerke, et al.
+<em>htmltools: Tools for HTML</em>. R package version 0.5.2.
+2021. &lt;URL: <a href="https://github.com/rstudio/htmltools" class="uri">https://github.com/rstudio/htmltools</a>&gt;.</p>
+<p>[11] R. K. S. Hankin. “Additive integer partitions in R”.
+In: <em>Journal of Statistical Software, Code Snippets</em> 16 (1
+may. 2006).</p>
+<p>[12] R. K. S. Hankin. <em>partitions: Additive Partitions of
+Integers</em>. R package version 1.10-2. 2021. &lt;URL:
 <a href="https://github.com/RobinHankin/partitions" class="uri">https://github.com/RobinHankin/partitions</a>&gt;.</p>
-<p>[12] F. E. Harrell Jr. <em>Hmisc: Harrell Miscellaneous</em>. R package
-version 4.5-0. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=Hmisc" class="uri">https://CRAN.R-project.org/package=Hmisc</a>&gt;.</p>
-<p>[13] L. Henry and H. Wickham. <em>purrr: Functional Programming Tools</em>. R
-package version 0.3.4. 2020. &lt;URL:
+<p>[13] F. E. Harrell Jr. <em>Hmisc: Harrell Miscellaneous</em>. R
+package version 4.5-0. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=Hmisc" class="uri">https://CRAN.R-project.org/package=Hmisc</a>&gt;.</p>
+<p>[14] L. Henry and H. Wickham. <em>purrr: Functional
+Programming Tools</em>. R package version 0.3.4. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=purrr" class="uri">https://CRAN.R-project.org/package=purrr</a>&gt;.</p>
-<p>[14] K. MÃ¼ller and H. Wickham. <em>tibble: Simple Data Frames</em>. R package
-version 3.1.5. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a>&gt;.</p>
-<p>[15] P. O. Perry. <em>utf8: Unicode Text Processing</em>. R package version
-1.2.1. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=utf8" class="uri">https://CRAN.R-project.org/package=utf8</a>&gt;.</p>
-<p>[16] D. Qiu. <em>snpar: Supplementary Non-parametric Statistics Methods</em>.
-R package version 1.0. 2014. &lt;URL:
+<p>[15] K. MÃ¼ller and H. Wickham. <em>tibble: Simple Data
+Frames</em>. R package version 3.1.5. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a>&gt;.</p>
+<p>[16] P. O. Perry. <em>utf8: Unicode Text Processing</em>. R
+package version 1.2.1. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=utf8" class="uri">https://CRAN.R-project.org/package=utf8</a>&gt;.</p>
+<p>[17] D. Qiu. <em>snpar: Supplementary Non-parametric
+Statistics Methods</em>. R package version 1.0. 2014. &lt;URL:
 <a href="https://CRAN.R-project.org/package=snpar" class="uri">https://CRAN.R-project.org/package=snpar</a>&gt;.</p>
-<p>[17] R Core Team. <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
-2020. &lt;URL: <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
-<p>[18] B. Ripley. <em>MASS: Support Functions and Datasets for Venables and
-Ripley’s MASS</em>. R package version 7.3-54. 2021. &lt;URL:
-<a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
-<p>[19] B. Rudis. <em>hrbrthemes: Additional Themes, Theme Components and
-Utilities for ggplot2</em>. R package version 0.8.0. 2020. &lt;URL:
-<a href="http://github.com/hrbrmstr/hrbrthemes" class="uri">http://github.com/hrbrmstr/hrbrthemes</a>&gt;.</p>
-<p>[20] D. Sarkar. <em>Lattice: Multivariate Data Visualization with R</em>. ISBN
-978-0-387-75968-5. New York: Springer, 2008. &lt;URL:
-<a href="http://lmdvr.r-forge.r-project.org" class="uri">http://lmdvr.r-forge.r-project.org</a>&gt;.</p>
-<p>[21] D. Sarkar. <em>lattice: Trellis Graphics for R</em>. R package version
-0.20-44. 2021. &lt;URL: <a href="http://lattice.r-forge.r-project.org/" class="uri">http://lattice.r-forge.r-project.org/</a>&gt;.</p>
-<p>[22] G. Schneider, E. Chicken, and R. Becvarik. <em>NSM3: Functions and
-Datasets to Accompany Hollander, Wolfe, and Chicken - Nonparametric
-Statistical Methods, Third Edition</em>. R package version 1.16. 2021.
-&lt;URL: <a href="https://CRAN.R-project.org/package=NSM3" class="uri">https://CRAN.R-project.org/package=NSM3</a>&gt;.</p>
-<p>[23] C. Sievert. <em>Interactive Web-Based Data Visualization with R,
-plotly, and shiny</em>. Chapman and Hall/CRC, 2020. ISBN: 9781138331457.
-&lt;URL: <a href="https://plotly-r.com" class="uri">https://plotly-r.com</a>&gt;.</p>
-<p>[24] C. Sievert, C. Parmer, T. Hocking, et al. <em>plotly: Create
-Interactive Web Graphics via plotly.js</em>. R package version 4.10.0.
-2021. &lt;URL: <a href="https://CRAN.R-project.org/package=plotly" class="uri">https://CRAN.R-project.org/package=plotly</a>&gt;.</p>
-<p>[25] Terry M. Therneau and Patricia M. Grambsch. <em>Modeling Survival
-Data: Extending the Cox Model</em>. New York: Springer, 2000. ISBN:
-0-387-98784-3.</p>
-<p>[26] T. M. Therneau. <em>survival: Survival Analysis</em>. R package version
-3.2-11. 2021. &lt;URL: <a href="https://github.com/therneau/survival" class="uri">https://github.com/therneau/survival</a>&gt;.</p>
-<p>[27] R. Vaidyanathan, Y. Xie, J. Allaire, et al. <em>htmlwidgets: HTML
-Widgets for R</em>. R package version 1.5.4. 2021. &lt;URL:
+<p>[18] R Core Team. <em>R: A Language and Environment for
+Statistical Computing</em>. R Foundation for Statistical
+Computing. Vienna, Austria, 2020. &lt;URL:
+<a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
+<p>[19] B. Ripley. <em>MASS: Support Functions and Datasets for
+Venables and Ripley’s MASS</em>. R package version 7.3-54.
+2021. &lt;URL: <a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
+<p>[20] B. Rudis. <em>hrbrthemes: Additional Themes, Theme
+Components and Utilities for ggplot2</em>. R package version
+0.8.0. 2020. &lt;URL: <a href="http://github.com/hrbrmstr/hrbrthemes" class="uri">http://github.com/hrbrmstr/hrbrthemes</a>&gt;.</p>
+<p>[21] D. Sarkar. <em>Lattice: Multivariate Data Visualization
+with R</em>. ISBN 978-0-387-75968-5. New York: Springer, 2008.
+&lt;URL: <a href="http://lmdvr.r-forge.r-project.org" class="uri">http://lmdvr.r-forge.r-project.org</a>&gt;.</p>
+<p>[22] D. Sarkar. <em>lattice: Trellis Graphics for R</em>. R
+package version 0.20-44. 2021. &lt;URL:
+<a href="http://lattice.r-forge.r-project.org/" class="uri">http://lattice.r-forge.r-project.org/</a>&gt;.</p>
+<p>[23] G. Schneider, E. Chicken, and R. Becvarik. <em>NSM3:
+Functions and Datasets to Accompany Hollander, Wolfe, and
+Chicken - Nonparametric Statistical Methods, Third
+Edition</em>. R package version 1.16. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=NSM3" class="uri">https://CRAN.R-project.org/package=NSM3</a>&gt;.</p>
+<p>[24] C. Sievert. <em>Interactive Web-Based Data Visualization
+with R, plotly, and shiny</em>. Chapman and Hall/CRC, 2020.
+ISBN: 9781138331457. &lt;URL: <a href="https://plotly-r.com" class="uri">https://plotly-r.com</a>&gt;.</p>
+<p>[25] C. Sievert, C. Parmer, T. Hocking, et al. <em>plotly:
+Create Interactive Web Graphics via plotly.js</em>. R package
+version 4.10.0. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=plotly" class="uri">https://CRAN.R-project.org/package=plotly</a>&gt;.</p>
+<p>[26] Terry M. Therneau and Patricia M. Grambsch. <em>Modeling
+Survival Data: Extending the Cox Model</em>. New York:
+Springer, 2000. ISBN: 0-387-98784-3.</p>
+<p>[27] T. M. Therneau. <em>survival: Survival Analysis</em>. R
+package version 3.2-11. 2021. &lt;URL:
+<a href="https://github.com/therneau/survival" class="uri">https://github.com/therneau/survival</a>&gt;.</p>
+<p>[28] R. Vaidyanathan, Y. Xie, J. Allaire, et al.
+<em>htmlwidgets: HTML Widgets for R</em>. R package version
+1.5.4. 2021. &lt;URL:
 <a href="https://github.com/ramnathv/htmlwidgets" class="uri">https://github.com/ramnathv/htmlwidgets</a>&gt;.</p>
-<p>[28] W. N. Venables and B. D. Ripley. <em>Modern Applied Statistics with
-S</em>. Fourth. ISBN 0-387-95457-0. New York: Springer, 2002. &lt;URL:
+<p>[29] W. N. Venables and B. D. Ripley. <em>Modern Applied
+Statistics with S</em>. Fourth. ISBN 0-387-95457-0. New York:
+Springer, 2002. &lt;URL:
 <a href="https://www.stats.ox.ac.uk/pub/MASS4/" class="uri">https://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
-<p>[29] H. Wickham. <em>forcats: Tools for Working with Categorical Variables
-(Factors)</em>. R package version 0.5.1. 2021. &lt;URL:
-<a href="https://CRAN.R-project.org/package=forcats" class="uri">https://CRAN.R-project.org/package=forcats</a>&gt;.</p>
-<p>[30] H. Wickham. <em>ggplot2: Elegant Graphics for Data Analysis</em>.
-Springer-Verlag New York, 2016. ISBN: 978-3-319-24277-4. &lt;URL:
-<a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>&gt;.</p>
-<p>[31] H. Wickham. <em>reshape2: Flexibly Reshape Data: A Reboot of the
-Reshape Package</em>. R package version 1.4.4. 2020. &lt;URL:
-<a href="https://github.com/hadley/reshape" class="uri">https://github.com/hadley/reshape</a>&gt;.</p>
-<p>[32] H. Wickham. “Reshaping Data with the reshape Package”. In:
-<em>Journal of Statistical Software</em> 21.12 (2007), pp. 1-20. &lt;URL:
+<p>[30] H. Wickham. <em>forcats: Tools for Working with
+Categorical Variables (Factors)</em>. R package version 0.5.1.
+2021. &lt;URL: <a href="https://CRAN.R-project.org/package=forcats" class="uri">https://CRAN.R-project.org/package=forcats</a>&gt;.</p>
+<p>[31] H. Wickham. <em>ggplot2: Elegant Graphics for Data
+Analysis</em>. Springer-Verlag New York, 2016. ISBN:
+978-3-319-24277-4. &lt;URL: <a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>&gt;.</p>
+<p>[32] H. Wickham. <em>reshape2: Flexibly Reshape Data: A
+Reboot of the Reshape Package</em>. R package version 1.4.4.
+2020. &lt;URL: <a href="https://github.com/hadley/reshape" class="uri">https://github.com/hadley/reshape</a>&gt;.</p>
+<p>[33] H. Wickham. “Reshaping Data with the reshape
+Package”. In: <em>Journal of Statistical Software</em> 21.12
+(2007), pp. 1-20. &lt;URL:
 <a href="http://www.jstatsoft.org/v21/i12/" class="uri">http://www.jstatsoft.org/v21/i12/</a>&gt;.</p>
-<p>[33] H. Wickham. <em>stringr: Simple, Consistent Wrappers for Common
-String Operations</em>. R package version 1.4.0. 2019. &lt;URL:
-<a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>&gt;.</p>
-<p>[34] H. Wickham. <em>tidyr: Tidy Messy Data</em>. R package version 1.1.4.
-2021. &lt;URL: <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>&gt;.</p>
-<p>[35] H. Wickham. <em>tidyverse: Easily Install and Load the Tidyverse</em>. R
-package version 1.3.1. 2021. &lt;URL:
+<p>[34] H. Wickham. <em>stringr: Simple, Consistent Wrappers for
+Common String Operations</em>. R package version 1.4.0. 2019.
+&lt;URL: <a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>&gt;.</p>
+<p>[35] H. Wickham. <em>tidyr: Tidy Messy Data</em>. R package
+version 1.1.4. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>&gt;.</p>
+<p>[36] H. Wickham. <em>tidyverse: Easily Install and Load the
+Tidyverse</em>. R package version 1.3.1. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=tidyverse" class="uri">https://CRAN.R-project.org/package=tidyverse</a>&gt;.</p>
-<p>[36] H. Wickham, M. Averick, J. Bryan, et al. “Welcome to the
-tidyverse”. In: <em>Journal of Open Source Software</em> 4.43 (2019), p. 1686.
-DOI: 10.21105/joss.01686.</p>
-<p>[37] H. Wickham, J. Bryan, and M. Barrett. <em>usethis: Automate Package
-and Project Setup</em>. R package version 2.1.3. 2021. &lt;URL:
+<p>[37] H. Wickham, M. Averick, J. Bryan, et al. “Welcome to
+the tidyverse”. In: <em>Journal of Open Source Software</em> 4.43
+(2019), p. 1686. DOI: 10.21105/joss.01686.</p>
+<p>[38] H. Wickham, J. Bryan, and M. Barrett. <em>usethis:
+Automate Package and Project Setup</em>. R package version
+2.1.3. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=usethis" class="uri">https://CRAN.R-project.org/package=usethis</a>&gt;.</p>
-<p>[38] H. Wickham, W. Chang, L. Henry, et al. <em>ggplot2: Create Elegant
-Data Visualisations Using the Grammar of Graphics</em>. R package version
-3.3.5. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>&gt;.</p>
-<p>[39] H. Wickham, R. FranÃ§ois, L. Henry, et al. <em>dplyr: A Grammar of
-Data Manipulation</em>. R package version 1.0.6. 2021. &lt;URL:
-<a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>&gt;.</p>
-<p>[40] H. Wickham and J. Hester. <em>readr: Read Rectangular Text Data</em>. R
-package version 1.4.0. 2020. &lt;URL:
+<p>[39] H. Wickham, W. Chang, L. Henry, et al. <em>ggplot2:
+Create Elegant Data Visualisations Using the Grammar of
+Graphics</em>. R package version 3.3.5. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>&gt;.</p>
+<p>[40] H. Wickham, R. FranÃ§ois, L. Henry, et al. <em>dplyr: A
+Grammar of Data Manipulation</em>. R package version 1.0.6.
+2021. &lt;URL: <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>&gt;.</p>
+<p>[41] H. Wickham and J. Hester. <em>readr: Read Rectangular
+Text Data</em>. R package version 1.4.0. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=readr" class="uri">https://CRAN.R-project.org/package=readr</a>&gt;.</p>
-<p>[41] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
-Developing R Packages Easier</em>. R package version 2.4.2. 2021. &lt;URL:
+<p>[42] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools
+to Make Developing R Packages Easier</em>. R package version
+2.4.2. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=devtools" class="uri">https://CRAN.R-project.org/package=devtools</a>&gt;.</p>
-<p>[42] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
-Markdown</em>. ISBN 978-1138700109. Boca Raton, Florida: Chapman and
-Hall/CRC, 2016. &lt;URL: <a href="https://bookdown.org/yihui/bookdown" class="uri">https://bookdown.org/yihui/bookdown</a>&gt;.</p>
-<p>[43] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
-Markdown</em>. R package version 0.24. 2021. &lt;URL:
-<a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>&gt;.</p>
-<p>[44] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
-Guide</em>. ISBN 9781138359338. Boca Raton, Florida: Chapman and Hall/CRC,
-2018. &lt;URL: <a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</p>
-<p>[45] Y. Xie, J. Cheng, and X. Tan. <em>DT: A Wrapper of the JavaScript
-Library DataTables</em>. R package version 0.19. 2021. &lt;URL:
-<a href="https://github.com/rstudio/DT" class="uri">https://github.com/rstudio/DT</a>&gt;.</p>
-<p>[46] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
-9780367563837. Boca Raton, Florida: Chapman and Hall/CRC, 2020. &lt;URL:
+<p>[43] Y. Xie. <em>bookdown: Authoring Books and Technical
+Documents with R Markdown</em>. ISBN 978-1138700109. Boca
+Raton, Florida: Chapman and Hall/CRC, 2016. &lt;URL:
+<a href="https://bookdown.org/yihui/bookdown" class="uri">https://bookdown.org/yihui/bookdown</a>&gt;.</p>
+<p>[44] Y. Xie. <em>bookdown: Authoring Books and Technical
+Documents with R Markdown</em>. R package version 0.24. 2021.
+&lt;URL: <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>&gt;.</p>
+<p>[45] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown:
+The Definitive Guide</em>. ISBN 9781138359338. Boca Raton,
+Florida: Chapman and Hall/CRC, 2018. &lt;URL:
+<a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</p>
+<p>[46] Y. Xie, J. Cheng, and X. Tan. <em>DT: A Wrapper of the
+JavaScript Library DataTables</em>. R package version 0.19.
+2021. &lt;URL: <a href="https://github.com/rstudio/DT" class="uri">https://github.com/rstudio/DT</a>&gt;.</p>
+<p>[47] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown
+Cookbook</em>. ISBN 9780367563837. Boca Raton, Florida:
+Chapman and Hall/CRC, 2020. &lt;URL:
 <a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>&gt;.</p>
-<p>[47] A. Zeileis and Y. Croissant. “Extended Model Formulas in R:
-Multiple Parts and Multiple Responses”. In: <em>Journal of Statistical
-Software</em> 34.1 (2010), pp. 1-13. DOI: 10.18637/jss.v034.i01.</p>
-<p>[48] A. Zeileis and Y. Croissant. <em>Formula: Extended Model Formulas</em>. R
-package version 1.2-4. 2020. &lt;URL:
+<p>[48] A. Zeileis and Y. Croissant. “Extended Model Formulas
+in R: Multiple Parts and Multiple Responses”. In: <em>Journal
+of Statistical Software</em> 34.1 (2010), pp. 1-13. DOI:
+10.18637/jss.v034.i01.</p>
+<p>[49] A. Zeileis and Y. Croissant. <em>Formula: Extended Model
+Formulas</em>. R package version 1.2-4. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=Formula" class="uri">https://CRAN.R-project.org/package=Formula</a>&gt;.</p>
-<p>[49] P. Zhao. <em>bookdownplus: Generate Assorted Books and Documents with
-R bookdown Package</em>. R package version 1.5.8. 2020. &lt;URL:
+<p>[50] P. Zhao. <em>bookdownplus: Generate Assorted Books and
+Documents with R bookdown Package</em>. R package version
+1.5.8. 2020. &lt;URL:
 <a href="https://github.com/pzhaonet/bookdownplus" class="uri">https://github.com/pzhaonet/bookdownplus</a>&gt;.</p>
-<p>[50] H. Zhu. <em>kableExtra: Construct Complex Table with kable and Pipe
-Syntax</em>. R package version 1.3.4. 2021. &lt;URL:
-<a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a>&gt;.</p>
+<p>[51] H. Zhu. <em>kableExtra: Construct Complex Table with
+kable and Pipe Syntax</em>. R package version 1.3.4. 2021.
+&lt;URL: <a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a>&gt;.</p>
+<!--chapter:end:index.Rmd-->
 </div>
 
 

@@ -83,9 +83,13 @@ colorize <- function(x, color) {
   if (knitr::is_latex_output()) {
     sprintf("\\textcolor{%s}{%s}", color, x)
   } else if (knitr::is_html_output()) {
-    sprintf("<span style='color: %s;'>%s</span>", color,
-      x)
-  } else x
+    sprintf(
+      "<span style='color: %s;'>%s</span>", color,
+      x
+    )
+  } else {
+    x
+  }
 }
 ```
 
@@ -106,9 +110,9 @@ formato <- function(x) {
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE, error = FALSE, warning = FALSE, 
+  echo = TRUE, error = FALSE, warning = FALSE,
   message = FALSE, strip.white = FALSE, tidy = "styler",
-  results = "hold", strip.white = FALSE,  comment = "#>",
+  results = "hold", strip.white = FALSE, comment = "#>",
   tidy.opts = list(blank = FALSE, width.cutoff = 60)
 )
 ```
@@ -134,11 +138,11 @@ El siguiente bloque de código permite instalar y cargar los paquetes usados par
 
 ```{r cargar-paquetes, class.source = "watch-out"}
 packages <- c(
-   "rmarkdown", "bookdown", "bookdownplus", "magrittr",
-   "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
-   "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
-   "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
-   "reshape2", "randtests", "snpar", "knitcitations"
+  "rmarkdown", "bookdown", "bookdownplus", "magrittr",
+  "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
+  "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
+  "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
+  "reshape2", "randtests", "snpar", "knitcitations"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -272,10 +276,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -302,10 +306,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -408,8 +412,8 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   kable_classic_2()
@@ -438,10 +442,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -459,7 +463,7 @@ x <- 16
 n <- 18
 p0 <- 0.5
 p.valor <- 1 - pbinom(q = x - 1, size = n, prob = p0)
-paste("El p.valor = ", p.valor) 
+paste("El p.valor = ", p.valor)
 ```
 <br/>
 
@@ -468,9 +472,13 @@ Como se puede ver en la salida generada por el código anterior, el $p_{valor}= 
 El resultado anterior, también se puede obtener a través de la función `binom.test`, cuyos parámetros se describen en la tabla \@ref(tab:par-prueba-binom), a través del siguiente código:
 
 ```{r binomtest1, class.source = "watch-out", class.output = "bg-warning"}
-x <- 16; n <- 18; p0 <- 0.5
-(ejemplo1 <- binom.test(x = x, n = n, p = p0, alternative = "greater", 
-                        conf.level = 0.95))
+x <- 16
+n <- 18
+p0 <- 0.5
+(ejemplo1 <- binom.test(
+  x = x, n = n, p = p0, alternative = "greater",
+  conf.level = 0.95
+))
 ```
 <br/>
 
@@ -482,7 +490,7 @@ Por otro lado, la aproximación asintótica del $p_{valor}$ indicado por la ecua
 x <- 16
 n <- 18
 p0 <- 0.5
-z <- (x - 0.5 - n*p0)/sqrt(n*p0*(1 - p0))
+z <- (x - 0.5 - n * p0) / sqrt(n * p0 * (1 - p0))
 (p.valor.aprox <- 1 - pnorm(q = z))
 ```
 <br/>
@@ -492,8 +500,10 @@ Note que el $p_{valor \ aprox.} = `r format(round(p.valor.aprox, digits = 4), mo
 También, la aproximación del $p_{valor}$ se puede obtener con la función `prop.test` del paquete `base`, como se muestra a continuación, con el siguiente código.
 
 ```{r proptest1, class.source = "watch-out", class.output = "bg-warning"}
-prop.test(x = 16, n = 18, p = 0.5, alternative = "greater",
-          conf.level = 0.95, correct = TRUE)
+prop.test(
+  x = 16, n = 18, p = 0.5, alternative = "greater",
+  conf.level = 0.95, correct = TRUE
+)
 ```
 <br/>
 
@@ -622,10 +632,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -718,22 +728,22 @@ datos2 <- tibble(
         co < mediana ~ "\\-"
       )
     )
-  ) %>% 
+  ) %>%
   arrange(co)
-  kableExtra::kbl(
-    datos2,
-    col.names = c("Observación", "Clasificación de octano", "Signo"),
-    format.args = list(decimal.mark = ",", big.mark = "."),
-    booktabs = TRUE,
-    caption = "\\label{tab2:datos2}Clasificación de octano de cierto tipo de gasolina",
-    escape = FALSE
-    ) %>%
+kableExtra::kbl(
+  datos2,
+  col.names = c("Observación", "Clasificación de octano", "Signo"),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:datos2}Clasificación de octano de cierto tipo de gasolina",
+  escape = FALSE
+) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
-  row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>% 
+  ) %>%
+  row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
@@ -754,10 +764,10 @@ kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -765,13 +775,13 @@ kable(
 La hipótesis alternativa que se pretende contrastar es unilateral superior $H_{1}:\widetilde{\mu}> 98,0$. Para este caso el valor del estadístico de prueba $s$ y el $p_{valor}$ vienen dados por las ecuaciones \@ref(eq:estadistico-signo) y \@ref(eq:pus-signo). El siguiente código permite determinar el valor del estadístico de prueba $s$ y el $p_{valor}$, necesarios para contrastar la hipótesis planteada.
 
 ```{r estadistico, class.source = "watch-out", class.output = "bg-warning"}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo))
-n <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% 
-                  sum())
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo))
+n <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>%
+  sum())
 p.valor <- 1 - pbinom(q = s - 1, size = n, prob = 0.5)
 paste("El estadístico de prueba  s =", s, "y el p.valor =", p.valor)
 ```
@@ -789,27 +799,29 @@ BSDA::SIGN.test(x = co, md = 98, alternative = "g", conf.level = 0.99)
 Dado que la prueba del signo se puede considerar como un caso particular de la prueba binomial cuando $p_{0}=\frac{1}{2}$, la función `binom.test` también puede ser usada para realizar la prueba del signo. El siguiente código muestra la ejecución de la prueba del signo a través de esta función. Note que el $p_{valor}$ obtenido aquí es idénticos a los anteriores.
 
 ```{r binomtest2, class.source = "watch-out", class.output = "bg-warning"}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo)) # se ha colocado dplyr::select para 
-n <- as.numeric(conteo_signo %>%         # evitar conflicto con MASS::select
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% sum())
-binom.test(x = s, n = n, p = 0.5, alternative =  "greater", 
-           conf.level = 0.99)
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo)) # se ha colocado dplyr::select para
+n <- as.numeric(conteo_signo %>% # evitar conflicto con MASS::select
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>% sum())
+binom.test(
+  x = s, n = n, p = 0.5, alternative = "greater",
+  conf.level = 0.99
+)
 ```
 <br/>
 
 Como se dijo anteriormente, el $p_{valor}$ para la prueba del signo, cuando $n$ es suficientemente grande, se puede aproximar con la ecuación \@ref(eq:paproxus-signo). El siguiente código permite evaluar tal ecuación. Como se puede ver, el $p_{valor \ aprox.}$ generado por este procedimiento $\left(`r format(round(1 - pnorm(q = (2*s - 1 - n)/sqrt(n)), digits = 4), decimal.mark = ",")`\right)$ no difiere mucho del $p_{valor}$ exacto $\left(`r format(round(p.valor, digits = 4), decimal.mark = ",")`\right)$ obtenido por los métodos anteriores. Note que el $p_{valor \ aprox.}$ sigue siendo menor que el nivel de significancia establecido para esta prueba, lo que conduce, de igual manera, a rechazar la hipótesis nula $H_{0}: \widetilde{\mu}=98,0$.
 
 ```{r suigno2-aproximado, class.source = "watch-out", class.output = "bg-warning"}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo))
-n <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% 
-                  sum())
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo))
+n <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>%
+  sum())
 p.valor.aprox <- 1 - pnorm(q = (2 * s - 1 - n) / sqrt(n))
 paste(
   "El p.valor.aprox = ",
@@ -824,15 +836,17 @@ paste(
 Otra manera de calcular el $p_{valor \ aprox.}$ es usando la función `prop.test`, de manera análoga a la prueba binomial.
 
 ```{r proptest2, class.source = "watch-out", class.output = "bg-warning"}
-s <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo == "\\+") %>% 
-                  dplyr::select(conteo))
-n <- as.numeric(conteo_signo %>% 
-                  dplyr::filter(signo != "=") %>% 
-                  dplyr::select(conteo) %>% 
-                  sum())
-prop.test(x = s, n = n, p = 0.5, alternative = "greater", 
-          conf.level = 0.99, correct = TRUE)
+s <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo == "\\+") %>%
+  dplyr::select(conteo))
+n <- as.numeric(conteo_signo %>%
+  dplyr::filter(signo != "=") %>%
+  dplyr::select(conteo) %>%
+  sum())
+prop.test(
+  x = s, n = n, p = 0.5, alternative = "greater",
+  conf.level = 0.99, correct = TRUE
+)
 ```
 <br/>
 
@@ -990,10 +1004,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1025,10 +1039,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1126,10 +1140,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1141,23 +1155,25 @@ knitr::kable(
 ```{r datos-mendel, class.source = "watch-out"}
 datos3 <- data.frame(
   stringsAsFactors = FALSE,
-  Tipo.de.Guisante = c("Amarillo Liso","Amarillo Arrugado",
-                       "Verde Liso","Verde Arrugado"),
+  Tipo.de.Guisante = c(
+    "Amarillo Liso", "Amarillo Arrugado",
+    "Verde Liso", "Verde Arrugado"
+  ),
   Frecuencia.Observada = c(315L, 101L, 108L, 32L),
   Frecuencia.Esperada = c(313L, 104L, 104L, 35L)
-  )
+)
 knitr::kable(
   datos3,
   booktabs = TRUE,
   col.names = c("Tipo de Guisante", "Frecuencia Observada", "Frecuencia Esperada"),
   caption = "\\label{tab2:datos-mendel}Distribución de los guisantes",
   escape = FALSE
-  ) %>%
+) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1175,8 +1191,8 @@ Según la ecuación \@ref(eq:criterio-ba-jicuadrado), el valor del estadístico 
 
 ```{r jicuadrado1, class.source = "watch-out", class.output = "bg-warning"}
 alfa <- 0.01
-Ji_cuadrado <- sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada)^2 / 
-             datos3$Frecuencia.Esperada)
+Ji_cuadrado <- sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada)^2 /
+  datos3$Frecuencia.Esperada)
 est_tab <- qchisq(p = 1 - alfa, df = nrow(datos3) - 1)
 p_valor <- 1 - pchisq(q = Ji_cuadrado, df = nrow(datos3) - 1)
 paste("El estadísitico Ji-cuadrado =", round(Ji_cuadrado, digits = 4))
@@ -1188,8 +1204,11 @@ paste("El p_valor =", round(p_valor, digits = 4))
 El estadístico de prueba $\chi^2$ y el $p_{valor \, aprox.}$ se pueden obtener de manera directa con la función `chisq.test` descrita en la tabla \@ref(tab:par-prueba-jicuadrado), como se muestra en el siguiente código.
 
 ```{r chisqtest3, class.source = "watch-out", class.output = "bg-warning"}
-chisq.test(x = datos3$Frecuencia.Observada, 
-           p = datos3$Frecuencia.Esperada/sum(datos3$Frecuencia.Esperada))
+chisq.test(
+  x = datos3$Frecuencia.Observada,
+  p = datos3$Frecuencia.Esperada /
+    sum(datos3$Frecuencia.Esperada)
+)
 ```
 <br/>
 
@@ -1234,11 +1253,11 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
-  row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>% 
+  ) %>%
+  row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1246,8 +1265,7 @@ knitr::kable(
 Como se nota en la tabla generada por el script anterior, las clases 7 y 8 tienen frecuencias esperadas menores que 5, y peor aún, la de la clase 8 es menor que 1. Por tanto, estas se funden con la clase 6 para dar lugar a la clase 5 o más accidentes en un día, para que sea procedente utilizar la prueba de bondad de ajuste Ji-Cuadrado.
 
 ```{r datos4-corregidos, class.source = "watch-out"}
-datos4 <- bind_rows(datos4[1:5, ], colSums(datos4[6:8, ])
-) %>% 
+datos4 <- bind_rows(datos4[1:5, ], colSums(datos4[6:8, ])) %>%
   mutate(accidentes = as.character(accidentes))
 datos4[6, 1] <- "$\\geq5$"
 knitr::kable(
@@ -1262,10 +1280,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1285,8 +1303,10 @@ $$
 De los resultados anteriores, se concluye que no se puede rechazar la hipótesis de que los accidentes diarios en cada regimiento del ejercito sigue una distribución de Poisson con $\lambda = 2$, a un nivel de significancia del 5%.
 
 ```{r chisqtes4, class.source = "watch-out", class.output = "bg-warning"}
-chisq.test(x = datos4$dias, p = datos4$Ei, 
-           rescale.p = TRUE)
+chisq.test(
+  x = datos4$dias, p = datos4$Ei,
+  rescale.p = TRUE
+)
 ```
 <br/>
 
@@ -1325,8 +1345,8 @@ datos5 <- as.data.frame(table(cut(
       ),
       mean = 10.5, sd = 0.15
     )
-  )))
-datos5 <- datos5 %>% 
+)))
+datos5 <- datos5 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -1339,8 +1359,8 @@ datos5 <- datos5 %>%
       )
     ),
     Oi = Freq,
-    p0i =  rep(x = 1 / 8, times = 8),
-    Ei =  p0i * sum(Oi)
+    p0i = rep(x = 1 / 8, times = 8),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos5,
@@ -1353,8 +1373,8 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   kable_classic_2()
@@ -1383,8 +1403,8 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
   ) +
   geom_line(stat = "density", color = "blue") +
   expand_limits(y = 0) +
-  xlab("Longitud de la pieza") + 
-  ylab("Densidad") + 
+  xlab("Longitud de la pieza") +
+  ylab("Densidad") +
   theme_minimal()
 ```
 
@@ -1394,21 +1414,25 @@ lim_int <- qnorm(
   p = seq(
     from = 0, to = 1,
     by = 0.125
-    ),
+  ),
   mean = 10.502, sd = 0.2026
-  )
+)
 lim_int[c(1, 9)] <- c(min(lp), max(lp))
-qplot(lp, geom = 'blank') +   
-  geom_line(aes(y = ..density..), colour=26, stat = 'density', 
-            size = 1, alpha = .6) + 
-  geom_histogram(aes(y = ..density..), fill = 28, col = "black",
-                 alpha = 0.3,
-                 breaks = round(lim_int, digits = 2)
-                 ) +
+qplot(lp, geom = "blank") +
+  geom_line(aes(y = ..density..),
+    colour = 26, stat = "density",
+    size = 1, alpha = .6
+  ) +
+  geom_histogram(aes(y = ..density..),
+    fill = 28, col = "black",
+    alpha = 0.3,
+    breaks = round(lim_int, digits = 2)
+  ) +
   scale_x_continuous(
-    breaks = round(lim_int, digits = 2)) +
-  xlab("Longitud de la pieza") + 
-  ylab("Densidad") + 
+    breaks = round(lim_int, digits = 2)
+  ) +
+  xlab("Longitud de la pieza") +
+  ylab("Densidad") +
   ggtitle("Distribución de la longitud de la pieza") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90))
@@ -1418,8 +1442,10 @@ qplot(lp, geom = 'blank') +
 ```{r densidad3-lp, fig.cap = "Densidad de la longitud de la pieza", echo = FALSE, eval = FALSE}
 hist(
   lp,
-  breaks = c(-Inf, 10.32745, 10.39883, 10.4522, 10.5, 
-             10.5478, 10.60117, 10.67255, Inf),
+  breaks = c(
+    -Inf, 10.32745, 10.39883, 10.4522, 10.5,
+    10.5478, 10.60117, 10.67255, Inf
+  ),
   freq = FALSE,
   main = "Densidad de la longitud de",
   xlab = "Longitud de la pieza",
@@ -1435,7 +1461,8 @@ lines(
   lwd = 1
 )
 curve(
-  dnorm(x, mean = 10.5, sd = 0.15), add = TRUE, col = "red", lwd = 1
+  dnorm(x, mean = 10.5, sd = 0.15),
+  add = TRUE, col = "red", lwd = 1
 )
 ```
 
@@ -1463,11 +1490,12 @@ fitdistr(x = lp, densfun = "normal")
 El siguiente código permite construir la tabla de distribución de frecuencia observadas y esperadas estimadas. Estas últimas se calculan a partir de las probabilidades estimadas de cada clase ($\hat{E}_i=n\hat{p}_{0i}$). La construcción de la tabla se obtiene con el siguiente código.
 
 ```{r datos6, class.source = "watch-out"}
-lim_int <- c(-Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, Inf)
+lim_int <- c(-Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 
+             10.8, 10.9, Inf)
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks = lim_int
 )))
-datos6 <- datos6 %>% 
+datos6 <- datos6 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -1480,8 +1508,8 @@ datos6 <- datos6 %>%
       )
     ),
     Oi = Freq,
-    p0i =  diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
-    Ei =  p0i * sum(Oi)
+    p0i = diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos6,
@@ -1495,11 +1523,11 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
-  row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>% 
+  row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1511,7 +1539,7 @@ lim_int <- c(-Inf, 10.3, 10.4, 10.5, 10.6, 10.7, Inf)
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks = lim_int
 )))
-datos6 <- datos6 %>% 
+datos6 <- datos6 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -1524,8 +1552,8 @@ datos6 <- datos6 %>%
       )
     ),
     Oi = Freq,
-    p0i =  diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
-    Ei =  p0i * sum(Oi)
+    p0i = diff(pnorm(q = lim_int, mean = 10.502, sd = 0.2026)),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos6,
@@ -1539,10 +1567,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1550,8 +1578,8 @@ knitr::kable(
 Fíjese que la prueba de hipótesis que se plantea en este ejemplo es compuesta, dado que los parámetros de la distribución bajo la hipótesis nula son desconocidos (la media $\mu$ y la desviación estándar $\sigma$). Por lo tanto, el estadístico de la prueba se distribuye asintóticamente Ji-cuadrado con $k-r-1=6-2-1=3$ grados de libertad. El valor del estadístico $\chi^{2}$ y el $p_{valor \,aprox}$ se generan con el siguiente código.
 
 ```{r jicuadrado6, class.source = "watch-out", class.output = "bg-warning"}
-X2 <- sum((datos6$Oi - datos6$Ei) ^ 2 / datos6$Ei)
-p.valor <-  pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
+X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
+p.valor <- pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
 paste("El estadístic Ji-Cuadrado =", X2)
 paste("el p.valor =", p.valor)
 ```
@@ -1572,7 +1600,7 @@ datos6 <- as.data.frame(table(cut(
       mean = 10.502, sd = 0.2026
     )
 )))
-datos6 <- datos6 %>% 
+datos6 <- datos6 %>%
   transmute(
     Clase = str_replace_all(
       string = as.character(Var1),
@@ -1585,8 +1613,8 @@ datos6 <- datos6 %>%
       )
     ),
     Oi = Freq,
-    p0i =  rep(x = 1 / 8, times = 8),
-    Ei =  p0i * sum(Oi)
+    p0i = rep(x = 1 / 8, times = 8),
+    Ei = p0i * sum(Oi)
   )
 knitr::kable(
   datos6,
@@ -1599,10 +1627,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1610,8 +1638,8 @@ knitr::kable(
 Como se puede ver en la tabla anterior, todas las frecuencias esperadas son mayores o iguales que 5, por lo que se procede a aplicar la prueba, por medio de las siguientes instrucciones.
 
 ```{r jicuadrado6-sin-correccion, class.source = "watch-out", class.output = "bg-warning"}
-X2 <- sum((datos6$Oi - datos6$Ei) ^ 2 / datos6$Ei)
-p.valor <-  pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
+X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
+p.valor <- pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
 paste("El estadístic Ji-Cuadrado =", X2)
 paste("el p.valor =", p.valor)
 ```
@@ -1805,18 +1833,18 @@ knitr::kable(
     stringsAsFactors = FALSE,
     H0 = c("", "$F\\left(x \\right)=F_0\\left(x \\right)$", ""),
     H1 = c(
-      "$F\\left(x \\right)\\neq F_0\\left(x \\right)$", 
-      "$F\\left(x \\right)>F_0\\left(x \\right)$", 
+      "$F\\left(x \\right)\\neq F_0\\left(x \\right)$",
+      "$F\\left(x \\right)>F_0\\left(x \\right)$",
       "$F\\left(x \\right)<F_0\\left(x \\right)$"
     ),
     region_critica = c(
-      "$D_{n}> d_{n,\\alpha }$", 
-      "$D_{n}^{+}> d_{n,\\alpha}^{+}$", 
+      "$D_{n}> d_{n,\\alpha }$",
+      "$D_{n}^{+}> d_{n,\\alpha}^{+}$",
       "$D_{n}^{-}> d_{n,\\alpha }^{-}$"
     ),
     p_valor = c(
-      "$P \\left( D_{n} > d_{n} \\right)$", 
-      "$P \\left(D_{n}^{+ }> d_{n}^{+} \\right)$", 
+      "$P \\left( D_{n} > d_{n} \\right)$",
+      "$P \\left(D_{n}^{+ }> d_{n}^{+} \\right)$",
       "$P \\left(D_{n}^{-}> d_{n}^{-} \\right)$"
     )
   ),
@@ -1828,8 +1856,8 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   kable_classic_2()
@@ -1857,10 +1885,10 @@ knitr::kable(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1885,8 +1913,10 @@ $$
 Para aplicar la prueba de bondad de ajuste Kolmogorov-Smirnov se debe construir la tabla con la distribución de frecuencias observadas y esperadas, y a partir de estas se obtienen los estadísticos de Kolmogorov-Smirnov $D_{n}^{+}$, $D_{n}^{-}$ y $D_n$, definidos en las ecuaciones \@ref(eq:Dmas), \@ref(eq:Dmenos) y \@ref(eq:D), respectivamente.
 
 ```{r datos7, class.source = "watch-out"}
-reflectancia <- c(0.608, 0.533, 0.912, 0.498, 0.885, 0.291, 0.805, 
-                  0.436, 0.868, 0.712)
+reflectancia <- c(
+  0.608, 0.533, 0.912, 0.498, 0.885, 0.291, 0.805,
+  0.436, 0.868, 0.712
+)
 Xi <- sort(unique(reflectancia))
 i <- numeric(length(Xi))
 for (j in 1:length(Xi)) {
@@ -1895,12 +1925,12 @@ for (j in 1:length(Xi)) {
 datos7 <- data.frame(
   i = i,
   Xi = Xi
-) %>% 
+) %>%
   mutate(
-    Fn = i/length(reflectancia),
+    Fn = i / length(reflectancia),
     F0 = punif(q = Xi),
     D_mas = Fn - F0,
-    D_menos = F0 - (i - 1)/length(reflectancia)  
+    D_menos = F0 - (i - 1) / length(reflectancia)
   )
 kableExtra::kbl(
   datos7,
@@ -1913,7 +1943,7 @@ kableExtra::kbl(
     "$F_{n}^{*}\\left( x_{\\left( i \\right)} \\right)$",
     "$F_{0}\\left( x_{\\left( i \\right)} \\right)$",
     "$D_{n}^{+}$",
-    "$D_{n}^{-}$" 
+    "$D_{n}^{-}$"
   ),
   align = c("c", "c", "c", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -1921,20 +1951,20 @@ kableExtra::kbl(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
   ) %>%
   column_spec(
-    5, 
-    color = if_else(datos7$D_mas == max(datos7$D_mas), "red", "black"), 
+    5,
+    color = if_else(datos7$D_mas == max(datos7$D_mas), "red", "black"),
     bold = if_else(datos7$D_mas == max(datos7$D_mas), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   column_spec(
-    6, 
-    color = if_else(datos7$D_menos == max(datos7$D_menos), "red", "black"), 
+    6,
+    color = if_else(datos7$D_menos == max(datos7$D_menos), "red", "black"),
     bold = if_else(datos7$D_menos == max(datos7$D_menos), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   kable_classic_2()
 ```
 <br/>
@@ -1996,21 +2026,25 @@ ggplot(as.data.frame(reflectancia), aes(x = reflectancia)) +
     axis.text.y = element_text(size = 9),
     plot.title = element_text(size = 12),
     plot.background = element_rect(fill = "antiquewhite1")
-  ) 
+  )
 ```
 
 
 ```{r distribucion-reflectancia2, fig.cap = "Función de distribución acumulada empírica de reflectancia", eval = FALSE, echo = FALSE, class.source = "watch-out"}
-plot(ecdf(reflectancia), xlim = c(0,1), verticals = TRUE, 
-     xlab = "Reflectancia", main = "")
+plot(ecdf(reflectancia),
+  xlim = c(0, 1), verticals = TRUE,
+  xlab = "Reflectancia", main = ""
+)
 curve(punif, from = 0, to = 1, add = TRUE, lty = "dashed", lwd = 2)
 ```
 
 Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste Kolmogorov-Smirnov, para determinar si la muestra obtenida de la variable reflectancia se puede modelar por la distribución uniforme estándar.
 
 ```{r kstest7, class.source = "watch-out", class.output = "bg-warning"}
-ks.test(reflectancia, "punif", min = 0, max = 1, 
-        alternative = "two.sided")
+ks.test(reflectancia, "punif",
+  min = 0, max = 1,
+  alternative = "two.sided"
+)
 ```
 <br/> 
 
@@ -2021,11 +2055,13 @@ Note que los valores $D_n$ y el $p_{valor}$ obtenidos en esta salida coinciden c
 La tabla \@ref(tab:datos8) muestra la función de distribución acumulada empíricas y la función de distribución acumulada propuesta en $H_0$.
 
 ```{r datos8, class.source = "watch-out"}
-lp <- c(10.39, 10.66, 10.12, 10.32, 10.25, 10.91, 10.52, 10.83,
-        10.72, 10.28, 10.35, 10.46, 10.54, 10.72, 10.23, 10.18,
-        10.62, 10.49, 10.32, 10.61, 10.64, 10.23, 10.29, 10.78,
-        10.81, 10.39, 10.34, 10.62, 10.75, 10.34, 10.41, 10.81,
-        10.64, 10.53, 10.31, 10.46, 10.47, 10.43, 10.57, 10.74)
+lp <- c(
+  10.39, 10.66, 10.12, 10.32, 10.25, 10.91, 10.52, 10.83,
+  10.72, 10.28, 10.35, 10.46, 10.54, 10.72, 10.23, 10.18,
+  10.62, 10.49, 10.32, 10.61, 10.64, 10.23, 10.29, 10.78,
+  10.81, 10.39, 10.34, 10.62, 10.75, 10.34, 10.41, 10.81,
+  10.64, 10.53, 10.31, 10.46, 10.47, 10.43, 10.57, 10.74
+)
 Xi <- sort(unique(lp))
 i <- numeric(length(Xi))
 for (j in 1:length(Xi)) {
@@ -2034,12 +2070,12 @@ for (j in 1:length(Xi)) {
 datos8 <- data.frame(
   i = i,
   Xi = Xi
-) %>% 
+) %>%
   mutate(
-    Fn = i/length(lp),
+    Fn = i / length(lp),
     F0 = pnorm(q = Xi, mean = 10.5, sd = 0.15),
     D_mas = Fn - F0,
-    D_menos = F0 - (i - 1)/length(lp)  
+    D_menos = F0 - (i - 1) / length(lp)
   )
 kableExtra::kbl(
   datos8,
@@ -2052,7 +2088,7 @@ kableExtra::kbl(
     "$F_{n}^{*}\\left( x_{\\left( i \\right)} \\right)$",
     "$F_{0}\\left( x_{\\left( i \\right)} \\right)$",
     "$D_{n}^{+}$",
-    "$D_{n}^{-}$" 
+    "$D_{n}^{-}$"
   ),
   align = c("c", "c", "c", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -2060,20 +2096,20 @@ kableExtra::kbl(
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
-    full_width  = FALSE,
+    bootstrap_options = "striped",
+    full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   column_spec(
-    5, 
-    color = if_else(datos8$D_mas == max(datos8$D_mas), "red", "black"), 
+    5,
+    color = if_else(datos8$D_mas == max(datos8$D_mas), "red", "black"),
     bold = if_else(datos8$D_mas == max(datos8$D_mas), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   column_spec(
-    6, 
-    color = if_else(datos8$D_menos == max(datos8$D_menos), "red", "black"), 
+    6,
+    color = if_else(datos8$D_menos == max(datos8$D_menos), "red", "black"),
     bold = if_else(datos8$D_menos == max(datos8$D_menos), TRUE, FALSE)
-  ) %>% 
+  ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
@@ -2135,14 +2171,16 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
     axis.text.y = element_text(size = 9),
     plot.title = element_text(size = 12),
     plot.background = element_rect(fill = "antiquewhite1")
-  ) 
+  )
 ```
 
 Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste Kolmogorov-Smirnov, para determinar si la muestra obtenida de la longitud de la pieza se puede modelar por la distribución $N\left(\mu=10,5;\, \sigma =0,15 \right)$.
 
 ```{r kstest8, class.source="watch-out", class.output = "bg-warning"}
-ks.test(lp, "pnorm", mean = 10.5, sd = 0.15, 
-        alternative = "two.sided", exact = TRUE)
+ks.test(lp, "pnorm",
+  mean = 10.5, sd = 0.15,
+  alternative = "two.sided", exact = TRUE
+)
 ```
 <br/>
 
@@ -2336,7 +2374,7 @@ kableExtra::kbl(
   col.names = c(
     "Niños",
     "Puntuación",
-    "Posición de la puntuación con respecto a la mediana " 
+    "Posición de la puntuación con respecto a la mediana "
   ),
   align = c("c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -2345,10 +2383,10 @@ orden de ocurrencia",
   escape = FALSE
 ) %>%
   kable_styling(
-    bootstrap_options = "striped", 
+    bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = T
-  ) %>% 
+  ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
@@ -2357,32 +2395,36 @@ Los datos fueron tomados de Siegel (2012, pág. 85).
 El siguiente trozo de código permite determinar el valor del estadístico $R$, el $p_{valor}$, la media y la varianza de $R$.
 
 ```{r estadisticos, class.source = "watch-out", class.output = "bg-warning"}
-mediana <- datos9 %>% pull(puntuacion) %>% median(., na.rm = TRUE)
-n1 <- datos9 %>% 
-  dplyr::filter(signo == "\\+") %>% 
-  pull(signo) %>% 
-  as.character(.) %>% 
+mediana <- datos9 %>%
+  pull(puntuacion) %>%
+  median(., na.rm = TRUE)
+n1 <- datos9 %>%
+  dplyr::filter(signo == "\\+") %>%
+  pull(signo) %>%
+  as.character(.) %>%
   length(.)
-n2 <- datos9 %>% 
-  dplyr::filter(signo == "\\-") %>% 
-  pull(signo) %>% 
-  as.character(.) %>% 
+n2 <- datos9 %>%
+  dplyr::filter(signo == "\\-") %>%
+  pull(signo) %>%
+  as.character(.) %>%
   length(.)
 n <- n1 + n2
 rachas <- rle(sign(na.omit(puntuacion) - mediana))
-rachas9 <- as.data.frame.list(rachas) %>% 
+rachas9 <- as.data.frame.list(rachas) %>%
   dplyr::rename(
     lonjitud = lengths,
     signo = values
   )
-r1 <- rachas9 %>% 
+r1 <- rachas9 %>%
   dplyr::filter(
     signo == 1
-  ) %>% nrow(.)
-r2 <- rachas9 %>% 
+  ) %>%
+  nrow(.)
+r2 <- rachas9 %>%
   dplyr::filter(
     signo == -1
-  ) %>% nrow(.)
+  ) %>%
+  nrow(.)
 r <- r1 + r2
 mu_R <- 2 * n1 * n2 / n + 1
 var_R <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
@@ -2394,9 +2436,9 @@ paste("El p.valor =", round(x = p.valor, digits = 4))
 ```
 <br/>
 
-Note en la salida anterior que el valor del estadístico $R = `r r`$. Mientras que, el $p_{valor} = `r p.valor`$, por lo tanto las puntuaciones de agresión de acuerdo al orden en que fueron colectadas tienen un comportamiento aleatorio, lo que implica que las discusiones no tienen efecto en el nivel de agresión en las sesiones de juego.
+Note en la salida anterior que el valor del estadístico $R = `r r`$. Mientras que, el $p_{valor} = `r formato(p.valor)`$, por lo tanto las puntuaciones de agresión de acuerdo al orden en que fueron colectadas tienen un comportamiento aleatorio, lo que implica que las discusiones no tienen efecto en el nivel de agresión en las sesiones de juego.
 
-La figura \@ref(fig:rachas9) muestra la gráfica de las rachas por debajo y por arriba de la mediana de la muestra (linea horizontal roja). Y esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio,  lo cual contrasta con la conclusión anterior.  
+La figura \@ref(fig:rachas9) muestra la gráfica de las rachas por debajo y por arriba de la mediana de la muestra (linea horizontal roja). Y en esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio, lo cual contrasta con la conclusión anterior.  
 
 ```{r rachas9, fig.cap = "Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia", class.source = "watch-out"}
 ggplot(datos9, aes(x = niños, y = puntuacion)) +
@@ -2422,7 +2464,7 @@ ggplot(datos9, aes(x = niños, y = puntuacion)) +
     y = "Puntuación"
   ) +
   theme_minimal() +
-   scale_colour_brewer(palette = "Set1") +
+  scale_colour_brewer(palette = "Set1") +
   theme(
     panel.grid.major = element_line(
       colour = "lightsteelblue1",
@@ -2456,13 +2498,13 @@ randtests::runs.test(
 ```
 <br/>
 
-La función runs.test` del paquete `randtests` también realiza el gráfico mostrado en la figura \@ref(fig:rachas9), pero menos elegante que este. Si se quiere ver este gráfico se cambia el parámetro `plot` a `TRUE`.
+La función `runs.test` del paquete `randtests` también realiza el gráfico mostrado en la figura \@ref(fig:rachas9), pero menos elegante que este. Si se quiere ver este gráfico se cambia el parámetro `plot` a `TRUE`.
 
 La función `runs.test` del paquete `snpar` también ejecuta la prueba, como se muestra en el siguiente trozo de código.
 
 ```{r snpar-runstest, class.source = "watch-out", class.output = "bg-warning"}
 snpar::runs.test(
-  x = puntuacion, exact = T, 
+  x = puntuacion, exact = T,
   alternative = "two.sided"
 )
 ```
@@ -2483,36 +2525,42 @@ Los datos fueron tomados de Siegel (2012, pág. 86)
 
 
 ```{r rachas10, class.source = "watch-out", class.output = "bg-warning"}
-cola <- c("M", "F", "M", "F", "M", "M", "M", "F", "F", "M", "F", 
-          "M", "F", "M", "F", "M", "M", "M", "M", "F", "M", "F",
-          "M", "F", "M", "M", "F", "F", "F", "M", "F", "M", "F", 
-          "M", "F", "M", "M", "F", "M", "M", "F", "M", "M", "M",
-          "M", "F", "M", "F", "M", "M")
+cola <- c(
+  "M", "F", "M", "F", "M", "M", "M", "F", "F", "M", "F",
+  "M", "F", "M", "F", "M", "M", "M", "M", "F", "M", "F",
+  "M", "F", "M", "M", "F", "F", "F", "M", "F", "M", "F",
+  "M", "F", "M", "M", "F", "M", "M", "F", "M", "M", "M",
+  "M", "F", "M", "F", "M", "M"
+)
 n1 <- min(table(cola))
 n2 <- max(table(cola))
 n <- n1 + n2
-ind <- fct_infreq(cola)  %>% fct_rev() %>% levels(.)
+ind <- fct_infreq(cola) %>%
+  fct_rev() %>%
+  levels(.)
 n1 <- length(cola[cola == ind[1]])
 n2 <- length(cola[cola == ind[2]])
 rachas <- rle(cola)
-rachas10 <- as.data.frame.list(rachas) %>% 
+rachas10 <- as.data.frame.list(rachas) %>%
   dplyr::rename(
     lonjitud = lengths,
     signo = values
   )
-r1 <- rachas10 %>% 
+r1 <- rachas10 %>%
   dplyr::filter(
     signo == ind[1]
-  ) %>% nrow(.)
-r2 <- rachas10 %>% 
+  ) %>%
+  nrow(.)
+r2 <- rachas10 %>%
   dplyr::filter(
     signo == ind[2]
-  ) %>% nrow(.)
+  ) %>%
+  nrow(.)
 r <- r1 + r2
 mu_R <- 2 * n1 * n2 / n + 1
 var_R <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
 z <- (r - mu_R) / sqrt(var_R)
-z.corr <- (r - mu_R - 0.5) / sqrt(var_R) 
+z.corr <- (r - mu_R - 0.5) / sqrt(var_R)
 p.valor <- 2 * pruns(q = r - 1, n1 = n1, n2 = n2, lower.tail = FALSE)
 p.valor.aprox <- 2 * pnorm(z, lower.tail = FALSE)
 p.valor.aprox.cor <- 2 * pnorm(z.corr, lower.tail = FALSE)
@@ -2528,9 +2576,9 @@ paste("El p.valor.aprox con corrección =", round(x = p.valor.aprox.cor, digits 
 ```
 <br/>
 
-Como se observa en la salida anterior el  $p_{valor} = `r p.valor`$, lo que indica que disposición de hombres y mujeres en una fila enfrente de la taquilla del teatro no es aleatorio. Note que $R = `r r` > \mu_R = `r  mu_R`$, por lo que el $p_{valor}=2P\left(R \geq r \right)$.
+Como se observa en la salida anterior el  $p_{valor} = `r formato(p.valor)`$, lo que indica que la disposición de hombres y mujeres en la fila enfrente de la taquilla del teatro no es aleatorio. Note que $R = `r r` > \mu_R = `r  mu_R`$, por lo que el $p_{valor}=2P\left(R \geq r \right)$.
 
-La figura \@ref(fig:datos10) muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio,  lo cual contrasta con la conclusión anterior.  
+La figura \@ref(fig:datos10) muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta muestra que las longitudes de las rachas no tienen un comportamiento aleatorio,  lo cual contrasta con la conclusión anterior.  
 
 ```{r datos10, fig.cap = "Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia", class.source = "watch-out"}
 datos10 <- tibble(
@@ -2561,7 +2609,7 @@ ggplot(datos10, aes(x = personas, y = codigo)) +
     y = "Puntuación"
   ) +
   theme_minimal() +
-   scale_colour_brewer(palette = "Set1") +
+  scale_colour_brewer(palette = "Set1") +
   theme(
     panel.grid.major = element_line(
       colour = "lightsteelblue1",
@@ -2584,7 +2632,7 @@ ggplot(datos10, aes(x = personas, y = codigo)) +
   )
 ```
 
-Los resultados anteriores se pueden contrastar aplicando la función `runs.test` del paquete `randtests`. Note que en el trozo de código que se muestra abajo el parámetro `pvalue` se ha establecido como `"exact"` para generar el $p_{valor}$ exacto. Si este se establece como `"norma"l`, el $p_{valor}$ que muestra la salida es el aproximado sin corrección por continuidad. Intente correr este script cambiando la configuración de este parámetro y observe el $p_{valor}$.
+Los resultados anteriores se pueden contrastar aplicando la función `runs.test` del paquete `randtests`. Note que en el trozo de código que se muestra abajo el parámetro `pvalue` se ha establecido como `"exact"` para generar el $p_{valor}$ exacto. Si este se establece como `"normal"`, el $p_{valor}$ que muestra la salida es el aproximado sin corrección por continuidad. Intente correr este script cambiando la configuración de este parámetro y observe el $p_{valor}$.
 
 ```{r randtests-runstest10, class.source = "watch-out", class.output = "bg-warning"}
 randtests::runs.test(
@@ -2599,13 +2647,11 @@ Con el siguiente trozo de código se ha ejecutado la prueba con la función `run
 
 ```{r snpar-runstest10, class.source = "watch-out", class.output = "bg-warning"}
 snpar::runs.test(
-  x = datos10$codigo, exact = FALSE, 
+  x = datos10$codigo, exact = FALSE,
   alternative = "two.sided"
 )
 ```
 <br/>
-
-
 
 
 ## Información de Sesión {#sesion}
@@ -2638,8 +2684,7 @@ knitr::write_bib(c(
   "htmlwidgets", "utf8", "stringr", "MASS", "Hmisc",
   "kolmim", "hrbrthemes", "plotly", "NSM3", "reshape2",
   "randtests", "snpar", "knitcitations"
-  ), "packages.bib"
-)
+), "packages.bib")
 ```
 
 
@@ -2651,5 +2696,3 @@ cleanbib()
 options("citation_format" = "pandoc")
 read.bibtex(file = "packages.bib")
 ```
-
-
