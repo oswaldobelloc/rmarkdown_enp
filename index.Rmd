@@ -609,7 +609,7 @@ p_{valor}=
 \end{equation}
 $$
 
-`r colorize("R", "blue")` proporciona la función `SIGN.test(x, y = NULL, md = 0, alternative = "two.sided", conf.level = 0.95, \dotsc)` disponible en el paquete `BSDA` que permite ejecutar la prueba del signo para una muestra (desarrollada acá) y dos muestras relacionadas (tratada en el siguiente núcleo temático). Los parámetros de esta función se definen en la tabla \@ref(tab:par-prueba-signo).
+`r colorize("R", "blue")` proporciona la función `SIGN.test(x, y = NULL, md = 0, alternative = "two.sided", conf.level = 0.95, ...)` disponible en el paquete `BSDA` que permite ejecutar la prueba del signo para una muestra (desarrollada acá) y dos muestras relacionadas (tratada en el siguiente núcleo temático). Los parámetros de esta función se definen en la tabla \@ref(tab:par-prueba-signo).
 
 (ref:foo5) Descripción de los parámetros de la función `SIGN.test` de `r colorize("R", "blue")`
 
@@ -617,7 +617,7 @@ $$
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
-    Parámetros = c("x", "y", "md", "alternative", "conf.level", "…"),
+    Parámetros = c("x", "y", "md", "alternative", "conf.level", "$\\dotsc$"),
     Descripción = c(
       "Vector numérico; los NA e Inf están permitidos pero serán eliminados.",
       "Vector numérico opcional; los NA e Inf están permitidos pero serán eliminados.",
@@ -690,7 +690,6 @@ p_{valor}\cong \begin{cases}
 \end{equation}
 $$
 
-`r colorize("R", "blue")` proporciona la función `SIGN.test(x, y = NULL, md = 0, alternative = "two.sided", conf.level = 0.95, \dotsc)` disponible en el paquete `BSDA` que permite ejecutar la prueba del signo para una muestra (desarrollada acá) y dos muestras relacionadas (tratada en el siguiente núcleo temático). Los parámetros de esta función se definen en la siguiente tabla.
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba del Signo {#signo1-R}
 
@@ -2102,8 +2101,11 @@ kableExtra::kbl(
   ) %>%
   column_spec(
     5,
-    color = if_else(datos8$D_mas == max(datos8$D_mas), "red", "black"),
-    bold = if_else(datos8$D_mas == max(datos8$D_mas), TRUE, FALSE)
+    color = if_else(datos8$D_mas == max(datos8$D_mas),
+                    "red", "black"),
+    bold = 
+      if_else(datos8$D_mas == max(datos8$D_mas), 
+              TRUE, FALSE)
   ) %>%
   column_spec(
     6,
@@ -2159,8 +2161,10 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
       size = 0.25, linetype = "twodash"
     ),
     axis.title = element_text(face = "bold.italic"),
-    panel.background = element_rect(fill = "white", linetype = "solid"),
-    plot.background = element_rect(fill = "antiquewhite", colour = NA)
+    panel.background = 
+      element_rect(fill = "white", linetype = "solid"),
+    plot.background = 
+      element_rect(fill = "antiquewhite", colour = NA)
   ) +
   theme(
     axis.line = element_line(
@@ -2350,8 +2354,8 @@ knitr::kable(
 
 ```{r datos9, class.source = "watch-out"}
 puntuacion <- c(
-  31L, 23L, 36L, 43L, 51L, 44L, 12L, 26L, 43L, 75L, 2L, 3L, 15L, 18L,
-  78L, 24L, 13L, 27L, 86L, 61L, 13L, 7L, 6L, 8L
+  31L, 23L, 36L, 43L, 51L, 44L, 12L, 26L, 43L, 75L, 2L, 3L,
+  15L, 18L, 78L, 24L, 13L, 27L, 86L, 61L, 13L, 7L, 6L, 8L
 )
 datos9 <- data.frame(
   niños = 1:length(puntuacion),
@@ -2471,8 +2475,10 @@ ggplot(datos9, aes(x = niños, y = puntuacion)) +
       size = 0.25, linetype = "twodash"
     ),
     axis.title = element_text(face = "bold.italic"),
-    panel.background = element_rect(fill = "white", linetype = "solid"),
-    plot.background = element_rect(fill = "antiquewhite", colour = NA)
+    panel.background = 
+      element_rect(fill = "white", linetype = "solid"),
+    plot.background = 
+      element_rect(fill = "antiquewhite", colour = NA)
   ) +
   theme(
     axis.line = element_line(
@@ -2561,10 +2567,12 @@ mu_R <- 2 * n1 * n2 / n + 1
 var_R <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
 z <- (r - mu_R) / sqrt(var_R)
 z.corr <- (r - mu_R - 0.5) / sqrt(var_R)
-p.valor <- 2 * pruns(q = r - 1, n1 = n1, n2 = n2, lower.tail = FALSE)
+p.valor <- 2 * pruns(q = r - 1, n1 = n1, n2 = n2, 
+                     lower.tail = FALSE)
 p.valor.aprox <- 2 * pnorm(z, lower.tail = FALSE)
 p.valor.aprox.cor <- 2 * pnorm(z.corr, lower.tail = FALSE)
-paste("n =", n, "n1 =", n1, "n2 =", n2, "r1 =", r1, "r2 =", r2)
+paste("n =", n, "n1 =", n1, "n2 =", n2, "r1 =", r1, 
+      "r2 =", r2)
 paste("La media del estadístico R =", mu_R)
 paste("La varianza del estadístico R =", var_R)
 paste("El valor del estadístico R =", r)
@@ -2652,6 +2660,59 @@ snpar::runs.test(
 )
 ```
 <br/>
+
+### Problemas Propuestos {#broblemas-rachas1}
+
+1)  En una cola hay 20 hombres y 13 mujeres formados para comprar boletos de entrada al juego del Mundialito de Béisbol. Las posiciones fueron:
+$$
+\begin{array}{ccccccccccccc}
+\hline
+H & M & H & M & H & H & H & M & H & M & H & H \\
+H & M & M & H & H & H & M & M & H & M & H & H \\
+H & H & M & H & H & H & M & M & M\\
+\hline
+\end{array}
+$$
+¿Es el proceso aleatorio?
+
+
+2)	Un entrenador de fútbol piensa que el ganar un campeonato un año incrementa la motivación del equipo para ganar el siguiente año. Expresó esta teoría a un estudiante de estadística, quien le pidió los registros de los éxitos y fracasos del equipo de los últimos años. El entrenador le dio una lista, especificando si el equipo había ganado (G) o perdido (P) el campeonato ese año. Los resultados de estas marcas son:
+$$
+\begin{array}{cccccccccc}
+\hline
+G & G & G & G & G & G & P & G & G & G \\ 
+G & G & P & G & G & G & G & P & P & G \\
+G & G & G & G & G\\
+\hline
+\end{array}
+$$
+  a)  A un nivel de significancia de 10%. ¿es aleatoria la ocurrencia de éxitos y fracasos?
+  b)  ¿Su respuesta a la parte a), combinada con una inspección ocular de los datos, le dice algo sobre la prueba de corridas?
+
+3)  Supóngase que los siguientes datos constituyen la secuencia de residuos para una ecuación de regresión estimada:
+$$
+\begin{array}{ccccccccc}
+\hline
+-2,98 & -4,19 & -0,51 & 5,19 & 2,38 & 6,73 & 0,93 & 1,29 &   -3,18\\
+-1,14 & -0,54 & -2,76 & -1,89 & -4,28 & -0,18 & 0,32 & 0,48 & 1,48\\
+-2,43 & -4,69 & 3,18 & 0,64 & 0,89 & 2,08 & 0,98 & -3,28\\
+\hline
+\end{array}
+$$
+¿Existe alguna razón para creer que esta secuencia de residuos no es aleatoria? Úsese $\alpha=0,05$. Los datos fueron tomados de Canavos (1988, pág. 590).
+
+4)  En una línea de producción industrial los artículos se inspeccionan de forma periódica en busca de defectos. La siguiente es una secuencia de artículos defectuosos, D, y no defectuosos, N, producidos por esta línea:
+$$
+\begin{array}{cccccccccccccc}
+\hline
+D & D & N & N & N & D & N & N & D & D & N & N & N & N\\
+N & D & D & D & N & N & D & N & N & N & N & D & N & D\\
+\hline
+\end{array}
+$$
+Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de significancia de 0.05 para determinar si los artículos defectuosos ocurren al azar. Tomado de Walpole (2012, pág. 677).
+
+5)  Se utiliza un proceso de plateado para cubrir cierto tipo de charola de servicio. Cuando el proceso está bajo control el espesor de la plata sobre la charola variara de forma aleatoria siguiendo una distribución normal con una media de 0,02 milímetros y una desviación estándar de 0,005 milímetros. Suponga que las siguientes 12 charolas examinadas muestran los siguientes espesores de plata: 0,019; 0,021; 0,020; 0,019; 0,020; 0,018; 0,023; 0,021; 0,024; 0,022; 0,023; 0,022. Utilice la prueba de rachas para determinar si las fluctuaciones en el espesor de una charola a otra son aleatorias. Utilice $\alpha= 0.05$. Tomado de Walpole (2012, pág. 677).
 
 
 ## Información de Sesión {#sesion}
