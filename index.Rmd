@@ -669,7 +669,7 @@ p_{valor}\cong 1-F_{N}\left ( Z= \frac{2s-1-n}{\sqrt{n}}, \ \mu_{Z}=0, \ \sigma_
 \end{equation}
 $$
 
-De manera análoga, cuando la hipótesis alternativa es unilateral inferior $\left(H_{1}:\widetilde{\mu}< \widetilde{\mu}_{0}\right)$, el $p-{valor}$ aproximado se obtiene reemplazando en la ecuación \@ref(eq:paproxui-binomial) $p_{0}$ por $\frac{1}{2}$, como sigue:
+De manera análoga, cuando la hipótesis alternativa es unilateral inferior $\left(H_{1}:\widetilde{\mu}< \widetilde{\mu}_{0}\right)$, el $p_{valor}$ aproximado se obtiene reemplazando en la ecuación \@ref(eq:paproxui-binomial) $p_{0}$ por $\frac{1}{2}$, como sigue:
 
 $$
 \begin{equation}
@@ -952,7 +952,7 @@ $$
 \end{equation}
 $$
 
-En base la estadístico de prueba $\chi^{2}$ dado en la ecuación \@ref(eq:ba-jicuadrdada), la hipótesis alternativa, en este caso, puede ser rechazada si
+En base al estadístico de prueba $\chi^{2}$ dado en la ecuación \@ref(eq:ba-jicuadrado), la hipótesis alternativa, en este caso, puede ser rechazada si
 
 $$
 \begin{equation}
@@ -961,7 +961,7 @@ $$
 \end{equation}
 $$
 
-Usando el $p{valor}$ la hipótesis alternativa es rechazada si la siguiente proposición es verdadera
+Usando el $p_{valor}$ la hipótesis alternativa es rechazada si la siguiente proposición es verdadera
 
 $$
 \begin{equation}
@@ -970,7 +970,7 @@ p_{valor \ aprox}=1-F_{\chi_{k-1}^{2}}\left(\chi^{2} \right) \leq \alpha.
 \end{equation}
 $$
 
-Donde $F_{\chi_{k-1}^{2}}\left(\chi^{2} \right)$ es la función de distribución acumula de una variable aleatoria ji-cuadrado con $k-1$ grados de libertad, la cual se encuentra ampliamente tabulada. La distribución base de `r colorize("R", "blue")` proporciona las siguientes funciones, las cuales permiten evaluar estas y otras funciones relacionadas con esta distribución de probabilidad:
+Donde $F_{\chi_{k-1}^{2}}\left(\chi^{2} \right)$ es la función de distribución acumulada de una variable aleatoria ji-cuadrado con $k-1$ grados de libertad, la cual se encuentra ampliamente tabulada. La distribución base de `r colorize("R", "blue")` proporciona las siguientes funciones, las cuales permiten evaluar estas y otras funciones relacionadas con esta distribución de probabilidad:
 
 -   `dchisq(x, df, ncp = 0, log = FALSE)`
 -   `pchisq(q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)`

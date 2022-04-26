@@ -363,7 +363,7 @@ div.tocify {
 <h1 class="title toc-ignore">Pruebas que Usan Datos de Una Muestra Aleatoria Simple</h1>
 <h4 class="author">Prof: Oswaldo Bello (<a href="mailto:oswaldobelloc@gmail.com" class="email">oswaldobelloc@gmail.com</a>)</h4>
 <address class="author_afil">
-Universidade de Oriente, Venezuela<br><h4 class="date">Domingo, 03 de abril de 2022 (02:15:01 a.m.)</h4>
+Universidade de Oriente, Venezuela<br><h4 class="date">Lunes, 25 de abril de 2022 (11:13:00 p.m.)</h4>
 
 </div>
 
@@ -1187,7 +1187,7 @@ p_{valor}\cong 1-F_{N}\left ( Z= \frac{2s-1-n}{\sqrt{n}}, \ \mu_{Z}=0, \ \sigma_
 \tag{1.20}
 \end{equation}
 \]</span></p>
-<p>De manera análoga, cuando la hipótesis alternativa es unilateral inferior <span class="math inline">\(\left(H_{1}:\widetilde{\mu}&lt; \widetilde{\mu}_{0}\right)\)</span>, el <span class="math inline">\(p-{valor}\)</span> aproximado se obtiene reemplazando en la ecuación <a href="#eq:paproxui-binomial">(1.10)</a> <span class="math inline">\(p_{0}\)</span> por <span class="math inline">\(\frac{1}{2}\)</span>, como sigue:</p>
+<p>De manera análoga, cuando la hipótesis alternativa es unilateral inferior <span class="math inline">\(\left(H_{1}:\widetilde{\mu}&lt; \widetilde{\mu}_{0}\right)\)</span>, el <span class="math inline">\(p_{valor}\)</span> aproximado se obtiene reemplazando en la ecuación <a href="#eq:paproxui-binomial">(1.10)</a> <span class="math inline">\(p_{0}\)</span> por <span class="math inline">\(\frac{1}{2}\)</span>, como sigue:</p>
 <p><span class="math display" id="eq:paproxui-signo">\[
 \begin{equation}
 p_{valor}\cong F_{N}\left ( Z= \frac{2s+1-n}{\sqrt{n}}, \ \mu_{Z}=0, \ \sigma_{Z}=1 \right ).
@@ -1678,21 +1678,21 @@ D^2 (p_0,\widehat{p}_i )=\sum_{i=1}^{k} \frac{\left( n_{i} -np_{i0} \right)^2}{n
 \tag{1.24}
 \end{equation}
 \]</span></p>
-<p>En base la estadístico de prueba <span class="math inline">\(\chi^{2}\)</span> dado en la ecuación <a href="#eq:ba-jicuadrdada">(<strong>??</strong>)</a>, la hipótesis alternativa, en este caso, puede ser rechazada si</p>
+<p>En base al estadístico de prueba <span class="math inline">\(\chi^{2}\)</span> dado en la ecuación <a href="#eq:ba-jicuadrado">(1.24)</a>, la hipótesis alternativa, en este caso, puede ser rechazada si</p>
 <p><span class="math display" id="eq:criterio-ba-jicuadrado">\[
 \begin{equation}
 \chi^{2}\geq \chi_{k-1;1-\alpha}^{2}.
 \tag{1.25}
 \end{equation}
 \]</span></p>
-<p>Usando el <span class="math inline">\(p{valor}\)</span> la hipótesis alternativa es rechazada si la siguiente proposición es verdadera</p>
+<p>Usando el <span class="math inline">\(p_{valor}\)</span> la hipótesis alternativa es rechazada si la siguiente proposición es verdadera</p>
 <p><span class="math display" id="eq:pus-ba-jicuadrado">\[
 \begin{equation}
 p_{valor \ aprox}=1-F_{\chi_{k-1}^{2}}\left(\chi^{2} \right) \leq \alpha.
 \tag{1.26}
 \end{equation}
 \]</span></p>
-<p>Donde <span class="math inline">\(F_{\chi_{k-1}^{2}}\left(\chi^{2} \right)\)</span> es la función de distribución acumula de una variable aleatoria ji-cuadrado con <span class="math inline">\(k-1\)</span> grados de libertad, la cual se encuentra ampliamente tabulada. La distribución base de <span style="color: blue;">R</span> proporciona las siguientes funciones, las cuales permiten evaluar estas y otras funciones relacionadas con esta distribución de probabilidad:</p>
+<p>Donde <span class="math inline">\(F_{\chi_{k-1}^{2}}\left(\chi^{2} \right)\)</span> es la función de distribución acumulada de una variable aleatoria ji-cuadrado con <span class="math inline">\(k-1\)</span> grados de libertad, la cual se encuentra ampliamente tabulada. La distribución base de <span style="color: blue;">R</span> proporciona las siguientes funciones, las cuales permiten evaluar estas y otras funciones relacionadas con esta distribución de probabilidad:</p>
 <ul>
 <li><code>dchisq(x, df, ncp = 0, log = FALSE)</code></li>
 <li><code>pchisq(q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)</code></li>
@@ -5797,8 +5797,8 @@ Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de si
 <span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">&quot;multiple&quot;</span>,</span>
 <span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">class =</span> <span class="st">&quot;cell-border stripe&quot;</span></span>
 <span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div id="htmlwidget-fea7da83779c66fc416d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fea7da83779c66fc416d">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-697a8131153e3eed849d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-697a8131153e3eed849d">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="bibliografía" class="section level1 unnumbered">
