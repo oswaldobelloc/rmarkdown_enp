@@ -363,7 +363,7 @@ div.tocify {
 <h1 class="title toc-ignore">Pruebas que Usan Datos de Una Muestra Aleatoria Simple</h1>
 <h4 class="author">Prof: Oswaldo Bello (<a href="mailto:oswaldobelloc@gmail.com" class="email">oswaldobelloc@gmail.com</a>)</h4>
 <address class="author_afil">
-Universidade de Oriente, Venezuela<br><h4 class="date">Lunes, 25 de abril de 2022 (11:13:00 p.m.)</h4>
+Universidade de Oriente, Venezuela<br><h4 class="date">Jueves, 28 de abril de 2022 (11:52:19 p.m.)</h4>
 
 </div>
 
@@ -410,14 +410,15 @@ pre[class] {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;kableExtra&quot;</span>, <span class="st">&quot;BSDA&quot;</span>, <span class="st">&quot;DT&quot;</span>, <span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;htmltools&quot;</span>, <span class="st">&quot;htmlwidgets&quot;</span>, <span class="st">&quot;utf8&quot;</span>, <span class="st">&quot;stringr&quot;</span>, <span class="st">&quot;MASS&quot;</span>,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;kolmim&quot;</span>, <span class="st">&quot;hrbrthemes&quot;</span>, <span class="st">&quot;plotly&quot;</span>, <span class="st">&quot;NSM3&quot;</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;reshape2&quot;</span>, <span class="st">&quot;randtests&quot;</span>, <span class="st">&quot;snpar&quot;</span>, <span class="st">&quot;knitcitations&quot;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>package.check <span class="ot">&lt;-</span> <span class="fu">lapply</span>(packages, <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(x, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(x, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(x, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;reshape2&quot;</span>, <span class="st">&quot;randtests&quot;</span>, <span class="st">&quot;snpar&quot;</span>, <span class="st">&quot;knitcitations&quot;</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;exactRankTests&quot;</span>, <span class="st">&quot;stats&quot;</span>, <span class="st">&quot;exact2x2&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>package.check <span class="ot">&lt;-</span> <span class="fu">lapply</span>(packages, <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(x, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(x, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(x, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p><br /></p>
 <div id="binomial1" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Prueba Binomial</h2>
@@ -930,7 +931,8 @@ Una indicación lógica de si la corrección de continuidad de Yates debe aplica
 </div>
 <div id="binomial1-R" class="section level3" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba Binomial</h3>
-<p><strong>Ejemplo 1</strong>: En un estudio de los efectos del estrés, un investigador enseño a 18 estudiantes dos métodos diferentes para hacer el mismo nudo. La mitad de los sujetos (seleccionados aleatoriamente) aprendieron primero el método A y la otra mitad aprendió primero el método B. Posteriormente –a medianoche y después de un examen final de cuatro horas de duración–, a cada sujeto se le pidió que hiciera el nudo. La predicción fue que el estrés induciría regresión, esto es, que los sujetos regresarían al primer método aprendido para hacer el nudo. Cada sujeto fue categorizado conforme a si usó el primero o el segundo método aprendido de hacer nudos cuando se le pedía que hiciera el nudo bajo estrés. Resultando que 16 de los 18 utilizó el primer método aprendido para hacer el nudo. Este ejemplo es tomado de Sigel (1995, pág. 64).</p>
+<div class="example">
+<p><span id="exm:ejemp1-binomial1" class="example"><strong>Ejemplo 1.1  (Prueba Binomial) </strong></span>En un estudio de los efectos del estrés, un investigador enseño a 18 estudiantes dos métodos diferentes para hacer el mismo nudo. La mitad de los sujetos (seleccionados aleatoriamente) aprendieron primero el método A y la otra mitad aprendió primero el método B. Posteriormente –a medianoche y después de un examen final de cuatro horas de duración–, a cada sujeto se le pidió que hiciera el nudo. La predicción fue que el estrés induciría regresión, esto es, que los sujetos regresarían al primer método aprendido para hacer el nudo. Cada sujeto fue categorizado conforme a si usó el primero o el segundo método aprendido de hacer nudos cuando se le pedía que hiciera el nudo bajo estrés. Resultando que 16 de los 18 utilizó el primer método aprendido para hacer el nudo. Este ejemplo es tomado de Sigel (1995, pág. 64).</p>
 <p>En este ejemplo, la hipótesis alternativa que se quiere contrastar es que el estrés induce regresión en los estudiantes, es decir, que bajo estrés, la proporción de estudiantes que realiza el primer método aprendido para hacer el nudo es mayor que los que usan el segundo método aprendido <span class="math inline">\(\left(H_1:p&gt;\frac{1}{2}\right)\)</span>. Dicho de otra manera, bajo estrés, la proporción de estudiantes que deciden realizar el primer nudo aprendido es mayor que 0,5.</p>
 <p>El siguiente código muestra la evaluación de la ecuación <a href="#eq:pus-binomial">(1.4)</a> usando la función <code>pbinom</code>, la cual evalúa la función de distribución acumulada binomial con parámetros <span class="math inline">\(n=18\)</span> y <span class="math inline">\(p=0,5\)</span>, en <span class="math inline">\(X=16-1=15\)</span>; es decir, <span class="math inline">\(F\left(X=15, n=18,p=0,5\right)\)</span>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">16</span></span>
@@ -989,6 +991,7 @@ Una indicación lógica de si la corrección de continuidad de Yates debe aplica
 #&gt; 0.8888889</code></pre>
 <p><br /></p>
 <p>Note que la aproximación del <span class="math inline">\(p_{valor}\)</span> obtenida en estas dos últimas salidas son iguales.</p>
+</div>
 </div>
 <div id="broblemas-binomial1" class="section level3" number="1.1.3">
 <h3><span class="header-section-number">1.1.3</span> Problemas Propuestos</h3>
@@ -1207,7 +1210,8 @@ p_{valor}\cong \begin{cases}
 </div>
 <div id="signo1-R" class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba del Signo</h3>
-<p><strong>Ejemplo 2</strong>: Los siguientes datos constituyen una muestra aleatoria de 15 mediciones de la clasificación de octano de cierto tipo de gasolina:</p>
+<div class="example">
+<p><span id="exm:ejemp1-signo1" class="example"><strong>Ejemplo 1.2  (Prueba del Signo) </strong></span>Los siguientes datos constituyen una muestra aleatoria de 15 mediciones de la clasificación de octano de cierto tipo de gasolina:</p>
 <p><span class="math display">\[
 \begin{array}{cccccccc}
 \hline
@@ -1600,6 +1604,7 @@ Conteo
 #&gt; sample estimates:
 #&gt;         p 
 #&gt; 0.8571429</code></pre>
+</div>
 <p><br /></p>
 </div>
 <div id="broblemas-signo1" class="section level3" number="1.2.3">
@@ -2031,7 +2036,8 @@ Parámetros adicionales, tanto para densfun como para optimizar. En particular, 
 </div>
 <div id="jicuadrado1-R" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba de Bondad de Ajuste Ji-cuadrado</h3>
-<p><strong>Ejemplo 3:</strong> En 1865 Mendel descubrió un código genético básico mediante la cría de guisantes verdes y amarillos en un experimento. Debido a que el gen amarillo del guisante es dominante, los híbridos de la primera generación fueron amarillos, pero los de la segunda generación eran aproximadamente 75% amarillos y 25% verdes. El color verde reaparece en la segunda generación porque hay un 25% de probabilidad de que dos guisantes, ambos con un gen amarillo y otros con un gen verde, contribuyan con el verde a la siguiente semilla híbrida. En otro experimento de guisantes se consideró tanto el color como las características de la textura. Los resultados de los experimentos se muestran en la tabla <a href="#tab:datos-mendel">1.11</a>.</p>
+<div class="example">
+<p><span id="exm:ejemp1-jicuadrado1" class="example"><strong>Ejemplo 1.3  (Prueba de Bondad de Ajuste Ji-cuadrado) </strong></span>En 1865 Mendel descubrió un código genético básico mediante la cría de guisantes verdes y amarillos en un experimento. Debido a que el gen amarillo del guisante es dominante, los híbridos de la primera generación fueron amarillos, pero los de la segunda generación eran aproximadamente 75% amarillos y 25% verdes. El color verde reaparece en la segunda generación porque hay un 25% de probabilidad de que dos guisantes, ambos con un gen amarillo y otros con un gen verde, contribuyan con el verde a la siguiente semilla híbrida. En otro experimento de guisantes se consideró tanto el color como las características de la textura. Los resultados de los experimentos se muestran en la tabla <a href="#tab:datos-mendel">1.11</a>.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>datos3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tipo.de.Guisante =</span> <span class="fu">c</span>(</span>
@@ -2148,8 +2154,10 @@ Verde Arrugado
 #&gt; 
 #&gt; data:  datos3$Frecuencia.Observada
 #&gt; X-squared = 0.51031, df = 3, p-value = 0.9166</code></pre>
+</div>
 <p><br /></p>
-<p><strong>Ejemplo 4:</strong> Se ha estimado que el número de accidentes diarios en cada regimiento del ejército sigue una distribución de Poisson de parámetro 2. Un determinado regimiento ha recogido, durante 200 días, los siguientes datos:</p>
+<div class="example">
+<p><span id="exm:ejemp2-jicuadrado1" class="example"><strong>Ejemplo 1.4  (Prueba de Bondad de Ajuste Ji-cuadrado) </strong></span>Se ha estimado que el número de accidentes diarios en cada regimiento del ejército sigue una distribución de Poisson de parámetro 2. Un determinado regimiento ha recogido, durante 200 días, los siguientes datos:</p>
 <p><span class="math display">\[
 \begin{array}{lccccccc}
 \hline
@@ -2515,8 +2523,10 @@ p_{valor \, aprox}=1-F_{\chi_{k-1=5}^{2}}\left( 2,2131 \right)=1- 0,1811 = 0,818
 #&gt; 
 #&gt; data:  datos4$dias
 #&gt; X-squared = 2.2104, df = 5, p-value = 0.8193</code></pre>
+</div>
 <p><br /></p>
-<p><strong>Ejemplo 5:</strong> Una máquina, en correcto estado de funcionamiento, produce piezas cuya longitud se distribuye normalmente con media 10,5 y desviación estándar 0,15. En determinado momento se observa la siguiente muestra, de tamaño 40, de la longitud de las piezas producidas:</p>
+<div class="example">
+<p><span id="exm:ejemplo3-jicuadrado1" class="example"><strong>Ejemplo 1.5  (Prueba de Bondad de Ajuste Ji-cuadrado) </strong></span>Una máquina, en correcto estado de funcionamiento, produce piezas cuya longitud se distribuye normalmente con media 10,5 y desviación estándar 0,15. En determinado momento se observa la siguiente muestra, de tamaño 40, de la longitud de las piezas producidas:</p>
 <p><span class="math display">\[
 \begin{array}{ccccccc}
 \hline
@@ -2767,7 +2777,9 @@ Clase
 Figura 1.1: Densidad de la longitud de la pieza
 </p>
 </div>
-<p><strong>Ejemplo 6:</strong> La muestra del <em>ejemplo 5</em> ha puesto de relieve un funcionamiento incorrecto de la máquina, que no se ajusta a la distribución <span class="math inline">\(N\left(\mu = 10,5; \: \sigma = 0,15 \right)\)</span>. Cabe, sin embargo, la posibilidad de que el desajuste haya afectado a la media y la desviación típica, pero que la distribución de la longitud de las piezas producidas siga siendo de tipo normal. Para verificar tal posibilidad hay que estimar (por máxima verosimilitud) la media y la desviación típica poblacional.</p>
+</div>
+<div class="example">
+<p><span id="exm:ejemplo4-jicuadrado1" class="example"><strong>Ejemplo 1.6  (Prueba de Bondad de Ajuste Ji-cuadrado) </strong></span>La muestra del <a href="#exm:ejemplo3-jicuadrado1">1.5</a> ha puesto de relieve un funcionamiento incorrecto de la máquina, que no se ajusta a la distribución <span class="math inline">\(N\left(\mu = 10,5; \: \sigma = 0,15 \right)\)</span>. Cabe, sin embargo, la posibilidad de que el desajuste haya afectado a la media y la desviación típica, pero que la distribución de la longitud de las piezas producidas siga siendo de tipo normal. Para verificar tal posibilidad hay que estimar (por máxima verosimilitud) la media y la desviación típica poblacional.</p>
 <p>El estimación por máxima verosimilitud de la media de la distribución normal es:</p>
 <p><span class="math display">\[
 \hat{\mu} = \bar{x} = \frac{\sum_{i=1}^{n}xi}{n} = \frac{420,08}{40} = 10,502.
@@ -3382,6 +3394,7 @@ Clase
 <p><br /></p>
 <p>Como se nota en la salida anterior el <span class="math inline">\(p_{valor \, aprox} = 0,549416\)</span> lo que conduce, de igual manera, a aceptar la hipótesis de que los datos se distribuyen normalmente.</p>
 </div>
+</div>
 <div id="problemas-jicuadrado1" class="section level3" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Problemas Propuestos</h3>
 <ol style="list-style-type: decimal">
@@ -3702,7 +3715,8 @@ Indica la hipótesis alternativa y debe ser: &quot; “two.sided” (por defecto
 </div>
 <div id="kolgomorov1-R" class="section level3" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba de Bondad de Ajuste Kolmogorov-Smirnov</h3>
-<p><strong>Ejemplo 7:</strong> Consideremos un experimento industrial en el que tenemos una muestra de n=10 tejidos sometido a un lavado. El objetivo del experimento es analizar el desempeño de un nuevo detergente experimental para la ropa. Específicamente, la variable de respuesta bajo estudio es la llamada reflectancia, es decir, la proporción de luz incidente que una determinada superficie (de tela) es capaz de reflejar, lo que puede ser considerado una medida relacionada con la eficacia de limpieza del detergente. Supongamos que deseamos probar, en el nivel de significación <span class="math inline">\(\alpha=5\%\)</span>, si la reflectancia está o no uniformemente distribuida, es decir, si sigue la ley de distribución U(0,1). Los datos fueron tomados de Bonnini et al (2014, pág. 28).</p>
+<div class="example">
+<p><span id="exm:ejemplo1-kolmogorovsmirnov1" class="example"><strong>Ejemplo 1.7  (Prueba de Bondad de Ajuste Kolmogorov-Smirnov) </strong></span>Consideremos un experimento industrial en el que tenemos una muestra de n=10 tejidos sometido a un lavado. El objetivo del experimento es analizar el desempeño de un nuevo detergente experimental para la ropa. Específicamente, la variable de respuesta bajo estudio es la llamada reflectancia, es decir, la proporción de luz incidente que una determinada superficie (de tela) es capaz de reflejar, lo que puede ser considerado una medida relacionada con la eficacia de limpieza del detergente. Supongamos que deseamos probar, en el nivel de significación <span class="math inline">\(\alpha=5\%\)</span>, si la reflectancia está o no uniformemente distribuida, es decir, si sigue la ley de distribución U(0,1). Los datos fueron tomados de Bonnini et al (2014, pág. 28).</p>
 <p><span class="math display">\[
 \begin{array}{ccccccc}
 \hline
@@ -4070,7 +4084,9 @@ Figura 1.2: Función de distribución acumulada empírica de la reflectancia
 #&gt; alternative hypothesis: two-sided</code></pre>
 <p><br /></p>
 <p>Note que los valores <span class="math inline">\(D_n\)</span> y el <span class="math inline">\(p_{valor}\)</span> obtenidos en esta salida coinciden con los anteriores.</p>
-<p><strong>Ejemplo 8:</strong> La prueba de bondad de ajuste Chi-Cuadrada aplicada en el ejemplo 5 mostró que la longitud de la pieza no se distribuyen normalmente con media 10,5 y desviación estándar 0,15. A continuación se procede a verificar esta conclusión aplicando la <em>prueba de bondad de ajuste Kolmogorov-Smirnov</em>.</p>
+</div>
+<div class="example">
+<p><span id="exm:ejemplo2-kolmogorovsmirnov1" class="example"><strong>Ejemplo 1.8  (Prueba de Bondad de Ajuste Kolmogorov-Smirnov) </strong></span>La prueba de bondad de ajuste Chi-Cuadrada aplicada en el ejemplo <a href="#exm:ejemplo3-jicuadrado1">1.5</a> mostró que la longitud de la pieza no se distribuyen normalmente con media 10,5 y desviación estándar 0,15. A continuación se procede a verificar esta conclusión aplicando la <em>prueba de bondad de ajuste Kolmogorov-Smirnov</em>.</p>
 <p>La tabla <a href="#tab:datos8">1.16</a> muestra la función de distribución acumulada empíricas y la función de distribución acumulada propuesta en <span class="math inline">\(H_0\)</span>.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>lp <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">10.39</span>, <span class="fl">10.66</span>, <span class="fl">10.12</span>, <span class="fl">10.32</span>, <span class="fl">10.25</span>, <span class="fl">10.91</span>, <span class="fl">10.52</span>, <span class="fl">10.83</span>,</span>
@@ -4859,6 +4875,7 @@ Figura 1.3: Función de distribución acumulada empírica de la longitud de la p
 <p><br /></p>
 <p>Note que los valores <span class="math inline">\(D_n\)</span> y <span class="math inline">\(p_{valor}\)</span> son iguales a los obtenidos anteriormente.</p>
 </div>
+</div>
 <div id="broblemas-KolgomoroSmirnov1" class="section level3" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> Problemas Propuestos</h3>
 <ol style="list-style-type: decimal">
@@ -5115,7 +5132,8 @@ Valor lógico para indicar si se debe crear un gráfico. Si es ‘TRUE’, enton
 </div>
 <div id="R-rachas1" class="section level3" number="1.5.2">
 <h3><span class="header-section-number">1.5.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba de Rachas o Carreras de Walf-Wolfowits</h3>
-<p><strong>Ejemplo 9:</strong> En un estudio de la dinámica de agresión en niños pequeños, un investigador observó pares de niños en una situación de juego controlada. La mayoría de los 24 niños que sirvieron como sujetos en el estudio provenía de la misma guardería y, por lo tanto, jugaban juntos diariamente. Ya que el observador fue capaz de ingeniarse para observar sólo dos niños en cualquier día, estaba interesado en que podría haberse introducido sesgo en el estudio por discusiones entre aquellos niños que ya habían servido como sujetos y aquellos que sirvieron posteriormente. Si tales discusiones tenían algún efecto en el nivel de agresión en las sesiones de juego, este efecto podría mostrarse como una carencia de aleatoriedad en las puntuaciones de agresión en el orden en que fueron colectadas. Después de concluir el estudio, la aleatoriedad de la secuencia de puntuaciones fue probada al convertir las puntuaciones de agresión de cada niño a un signo más o a un signo menos, dependiendo si se encontraba por arriba o por debajo de la mediana del grupo. Los datos se muestran en la tabla <a href="#tab:datos9">1.19</a>.</p>
+<div class="example">
+<p><span id="exm:ejemplo1-rachas1" class="example"><strong>Ejemplo 1.9  (Prueba de Rachas o Carreras de Walf-Wolfowits) </strong></span>En un estudio de la dinámica de agresión en niños pequeños, un investigador observó pares de niños en una situación de juego controlada. La mayoría de los 24 niños que sirvieron como sujetos en el estudio provenía de la misma guardería y, por lo tanto, jugaban juntos diariamente. Ya que el observador fue capaz de ingeniarse para observar sólo dos niños en cualquier día, estaba interesado en que podría haberse introducido sesgo en el estudio por discusiones entre aquellos niños que ya habían servido como sujetos y aquellos que sirvieron posteriormente. Si tales discusiones tenían algún efecto en el nivel de agresión en las sesiones de juego, este efecto podría mostrarse como una carencia de aleatoriedad en las puntuaciones de agresión en el orden en que fueron colectadas. Después de concluir el estudio, la aleatoriedad de la secuencia de puntuaciones fue probada al convertir las puntuaciones de agresión de cada niño a un signo más o a un signo menos, dependiendo si se encontraba por arriba o por debajo de la mediana del grupo. Los datos se muestran en la tabla <a href="#tab:datos9">1.19</a>.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>puntuacion <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  31L, 23L, 36L, 43L, 51L, 44L, 12L, 26L, 43L, 75L, 2L, 3L,</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  15L, 18L, 78L, 24L, 13L, 27L, 86L, 61L, 13L, 7L, 6L, 8L</span>
@@ -5568,8 +5586,10 @@ Figura 1.4: Rachas para las puntuaciones de agresión de acuerdo al orden de ocu
 #&gt; data:  puntuacion
 #&gt; Runs = 10, p-value = 0.3009
 #&gt; alternative hypothesis: two.sided</code></pre>
+</div>
 <p><br /></p>
-<p><strong>Ejemplo 10:</strong> Un investigador estaba interesado en averiguar si la disposición de hombres y mujeres en una fila enfrente de la taquilla de un teatro era un arreglo aleatorio. Los datos se obtuvieron simplemente anotando el sexo de cada una de las 50 personas al aproximarse a la taquilla.
+<div class="example">
+<p><span id="exm:ejemplo2-rachas1" class="example"><strong>Ejemplo 1.10  (Prueba de Rachas o Carreras de Walf-Wolfowits) </strong></span>Un investigador estaba interesado en averiguar si la disposición de hombres y mujeres en una fila enfrente de la taquilla de un teatro era un arreglo aleatorio. Los datos se obtuvieron simplemente anotando el sexo de cada una de las 50 personas al aproximarse a la taquilla.
 <span class="math display">\[
 \begin{array}{ccccccccccccc}
 \hline
@@ -5723,6 +5743,7 @@ Figura 1.5: Rachas para las puntuaciones de agresión de acuerdo al orden de ocu
 #&gt; data:  datos10$codigo
 #&gt; Runs = 35, p-value = 0.002888
 #&gt; alternative hypothesis: two.sided</code></pre>
+</div>
 <p><br /></p>
 </div>
 <div id="broblemas-rachas1" class="section level3" number="1.5.3">
@@ -5780,25 +5801,421 @@ Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de si
 </ol>
 </div>
 </div>
-<div id="sesion" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Información de Sesión</h2>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(devtools<span class="sc">::</span><span class="fu">session_info</span>()<span class="sc">$</span>packages) <span class="sc">%&gt;%</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    package, loadedversion, source</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>    package <span class="sc">%in%</span> packages</span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
-<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colnames =</span> <span class="fu">c</span>(<span class="st">&quot;Paquete&quot;</span>, <span class="st">&quot;Versión&quot;</span>, <span class="st">&quot;Fuente&quot;</span>),</span>
-<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Información de sesión&quot;</span>,</span>
-<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">filter =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">&quot;multiple&quot;</span>,</span>
-<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">class =</span> <span class="st">&quot;cell-border stripe&quot;</span></span>
-<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div id="htmlwidget-697a8131153e3eed849d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-697a8131153e3eed849d">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="dos-muestra-relacionadas" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Pruebas que Usan Datos de Dos Muestras Relacionadas</h1>
+<ol style="list-style-type: decimal">
+<li><p><strong>Prueba del Signo</strong>* (Sección <a href="#signo2">2.1</a>)</p></li>
+<li><p><strong><em>Prueba de Rangos Asignados de Wilcoxon</em></strong> (Sección <a href="#rangos-asignados2">2.2</a>)</p></li>
+<li><p><strong><em>Prueba para Datos en Forma de Frecuencias de Mcnemar</em></strong> (Sección <a href="#fecuencia-mcnemar2">2.3</a>)</p></li>
+</ol>
+<div id="signo2" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Prueba del Signo</h2>
+<div id="racionalizacion-signo2" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Racionalización de la Prueba del Signo</h3>
+</div>
+<div id="R-signo2" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba del Signo</h3>
+<div class="example">
+<p><span id="exm:ejemplo1-signo2" class="example"><strong>Ejemplo 2.1  (Prueba del Signo) </strong></span>Un investigador estaba estudiando el proceso de toma de decisión esposo-esposa. Se estudió exhaustivamente una muestra de parejas esposo-esposa para determinar el papel percibido de cada uno de ellos respecto de mejorar las adquisiciones domésticas. En cada ocasión, una pareja (cada uno por separado) contestaba un cuestionario concerniente a la influencia que creía ejercer cuando el matrimonio enfrentaba una situación en la que tenía que decidirse la adquisición de enseres para el hogar. Las respuestas a las preguntas se evaluaban mediante una escala que iba de esposo dominante a esposa dominante. Para cada pareja, la diferencia entre sus “percepciones” era determinada y codificada como + si a juicio del esposo, la esposa no debería tener una mayor influencia que él y esto no coincidía con lo informado por la esposa (esposo: “mi opinión debería tener mayor peso que la de ella”, y esposa: “ambos deberíamos ponernos de acuerdo para decidir”). La diferencia se codificaba como (-) cuando ocurría el caso contrario. La diferencia se codificaba como 0 (cero) si la pareja estaba en completo de acuerdo acerca del grado de influencia ejercida en la decisión. Los datos fueron tomados de Sigel (1995, pág. 107). Estos se presentan en la siguiente tabla, por medio del siguiente código.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>pareja <span class="ot">&lt;-</span> <span class="fu">c</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">17</span>])</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>esposo <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  5L, 4L, 6L, 6L, 3L, 2L, 5L, 3L, 1L, 4L, 5L, 4L, 4L, 7L,</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  5L, 5L, 5L</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>esposa <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>  3L, 3L, 4L, 5L, 3L, 3L, 2L, 3L, 2L, 3L, 2L, 2L, 5L, 2L,</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  5L, 3L, 1L</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>pareja <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">pareja =</span> pareja,</span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">esposo =</span> esposo,</span>
+<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">esposa =</span> esposa,</span>
+<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">signo =</span> <span class="fu">as.factor</span>(</span>
+<span id="cb83-17"><a href="#cb83-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(</span>
+<span id="cb83-18"><a href="#cb83-18" aria-hidden="true" tabindex="-1"></a>        (esposo <span class="sc">-</span> esposa) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">+&quot;</span>,</span>
+<span id="cb83-19"><a href="#cb83-19" aria-hidden="true" tabindex="-1"></a>        (esposo <span class="sc">-</span> esposa) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;0&quot;</span>,</span>
+<span id="cb83-20"><a href="#cb83-20" aria-hidden="true" tabindex="-1"></a>        (esposo <span class="sc">-</span> esposa) <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">-&quot;</span></span>
+<span id="cb83-21"><a href="#cb83-21" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb83-22"><a href="#cb83-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb83-23"><a href="#cb83-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb83-24"><a href="#cb83-24" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(</span>
+<span id="cb83-25"><a href="#cb83-25" aria-hidden="true" tabindex="-1"></a>  pareja,</span>
+<span id="cb83-26"><a href="#cb83-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Pareja&quot;</span>, <span class="st">&quot;Esposo&quot;</span>, <span class="st">&quot;Esposa&quot;</span>, <span class="st">&quot;Signo&quot;</span>),</span>
+<span id="cb83-27"><a href="#cb83-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">decimal.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">big.mark =</span> <span class="st">&quot;.&quot;</span>),</span>
+<span id="cb83-28"><a href="#cb83-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb83-29"><a href="#cb83-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">label{tab2:pareja}Juicios acerca de la influencia en la toma de decisiones&quot;</span>,</span>
+<span id="cb83-30"><a href="#cb83-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span></span>
+<span id="cb83-31"><a href="#cb83-31" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb83-32"><a href="#cb83-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb83-33"><a href="#cb83-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>,</span>
+<span id="cb83-34"><a href="#cb83-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb83-35"><a href="#cb83-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">fixed_thead =</span> T</span>
+<span id="cb83-36"><a href="#cb83-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb83-37"><a href="#cb83-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="fu">which</span>(pareja<span class="sc">$</span>signo <span class="sc">==</span> <span class="st">&quot;0&quot;</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb83-38"><a href="#cb83-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">strikeout =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb83-39"><a href="#cb83-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb83-40"><a href="#cb83-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped lightable-classic-2" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:pareja">Tabla 2.1: </span>Juicios acerca de la influencia en la toma de decisiones
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Pareja
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Esposo
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Esposa
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Signo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-decoration: line-through;color: red !important;">
+E
+</td>
+<td style="text-align:right;text-decoration: line-through;color: red !important;">
+3
+</td>
+<td style="text-align:right;text-decoration: line-through;color: red !important;">
+3
+</td>
+<td style="text-align:left;text-decoration: line-through;color: red !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-decoration: line-through;color: red !important;">
+H
+</td>
+<td style="text-align:right;text-decoration: line-through;color: red !important;">
+3
+</td>
+<td style="text-align:right;text-decoration: line-through;color: red !important;">
+3
+</td>
+<td style="text-align:left;text-decoration: line-through;color: red !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+K
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-decoration: line-through;color: red !important;">
+O
+</td>
+<td style="text-align:right;text-decoration: line-through;color: red !important;">
+5
+</td>
+<td style="text-align:right;text-decoration: line-through;color: red !important;">
+5
+</td>
+<td style="text-align:left;text-decoration: line-through;color: red !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
++
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br /></p>
+<p>Aquí la hipótesis nula que se quieres contrastar es que: los esposos y las esposas están de acuerdo en el grado de influencia que ambos deben tener cuando deciden sobre las adquisiciones domésticas. Mientras que la hipótesis alternativa es: los esposos juzgan que ellos deben tener mayor influencia que sus esposas acerca de las decisiones de adquirir enseres para el hogar. Para contrastar estas hipótesis se procede a aplicar la prueba del signo con un nivel de confianza del 95%.</p>
+<p>Bajo el supuesto planteado en la hipótesis nula, es de esperarse que el número de diferencias positvas <em>S</em> se distribuya binomialmente con <span class="math inline">\(n = 14\)</span> (número de diferencias distintas de cero) y <span class="math inline">\(p = 1/2\)</span> (probabilidad de que ocurra una diferencia positiva en la muestra), es decir, <span class="math inline">\(S\sim B(n=14, p=1/2)\)</span>. El siguiente código muestra la ejecución de la prueba para los datos previamente mencionados.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> pareja <span class="sc">%&gt;%</span> </span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(signo <span class="sc">!=</span> <span class="st">&quot;0&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> pareja <span class="sc">%&gt;%</span> </span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(signo <span class="sc">==</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">+&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>p.valor <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> s <span class="sc">-</span> <span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;El valor del estadístico S =&quot;</span>, s)</span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;El p.valor =&quot;</span>, <span class="fu">round</span>(<span class="at">x =</span> p.valor, <span class="at">digits =</span> <span class="dv">4</span>))</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;El valor del estadístico S = 11&quot;
+#&gt; [1] &quot;El p.valor = 0.0287&quot;</code></pre>
+<p><br /></p>
+<p>Como se nota de la salida anterior, el <span class="math inline">\(p_{valor}=0,0287\)</span>, lo que indica que los esposos creen que son ellos los que deben tener una mayor influencia al momento de tomar decisiones acerca de la adquisición de enseres domésticos, en comparación con la que deben tener las esposas. Los resultados anteriores pueden ser obtenidos con la función <em>SIGN.test</em> del paquete <strong>BSDA</strong>, como se meustra a continuación, con el siguiente segmento de código.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SIGN.test</span>(</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> esposo, <span class="at">y =</span> esposa, <span class="at">md =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">&quot;g&quot;</span>,</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Dependent-samples Sign-Test
+#&gt; 
+#&gt; data:  esposo and esposa
+#&gt; S = 11, p-value = 0.02869
+#&gt; alternative hypothesis: true median difference is greater than 0
+#&gt; 95 percent confidence interval:
+#&gt;    0 Inf
+#&gt; sample estimates:
+#&gt; median of x-y 
+#&gt;             1 
+#&gt; 
+#&gt; Achieved and Interpolated Confidence Intervals: 
+#&gt; 
+#&gt;                   Conf.Level L.E.pt U.E.pt
+#&gt; Lower Achieved CI     0.9283      0    Inf
+#&gt; Interpolated CI       0.9500      0    Inf
+#&gt; Upper Achieved CI     0.9755      0    Inf</code></pre>
+<p><br /></p>
+<p>Los resultados anteriores, también se pueden obtener con la función <code>binom.test</code> de la distribución base de <span style="color: blue;">R</span>, como sigue.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> s, <span class="at">n =</span> n, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span></span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Exact binomial test
+#&gt; 
+#&gt; data:  s and n
+#&gt; number of successes = 11, number of trials = 14, p-value = 0.02869
+#&gt; alternative hypothesis: true probability of success is greater than 0.5
+#&gt; 95 percent confidence interval:
+#&gt;  0.5343434 1.0000000
+#&gt; sample estimates:
+#&gt; probability of success 
+#&gt;              0.7857143</code></pre>
+</div>
+</div>
+</div>
+<div id="rangos-asignados2" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Prueba de Rangos Asignados de Wilcoxon</h2>
+<div id="racionalizacion-rangos-asignados2" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Racionalización de la Prueba de Rangos Asignados de Wilcoxon</h3>
+</div>
+<div id="R-rangos-asignados2" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba del Signo</h3>
+</div>
+</div>
+<div id="fecuencia-mcnemar2" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Prueba para Datos en Forma de Frecuencias de Mcnemar</h2>
+<div id="racionalizacion-fecuencia-mcnemar2" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Racionalización de la Prueba para Datos en Forma de Frecuencias de Mcnemar</h3>
+</div>
+<div id="R-fecuencia-mcnemar2" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Implementación en <span style="color: blue;">R</span> de la Prueba para Datos en Forma de Frecuencias de Mcnemar</h3>
+</div>
+</div>
+<div id="sesion" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Información de Sesión</h2>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(devtools<span class="sc">::</span><span class="fu">session_info</span>()<span class="sc">$</span>packages) <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>    package, loadedversion, source</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>    package <span class="sc">%in%</span> packages</span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colnames =</span> <span class="fu">c</span>(<span class="st">&quot;Paquete&quot;</span>, <span class="st">&quot;Versión&quot;</span>, <span class="st">&quot;Fuente&quot;</span>),</span>
+<span id="cb90-11"><a href="#cb90-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Información de sesión&quot;</span>,</span>
+<span id="cb90-12"><a href="#cb90-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">filter =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb90-13"><a href="#cb90-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">&quot;multiple&quot;</span>,</span>
+<span id="cb90-14"><a href="#cb90-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">class =</span> <span class="st">&quot;cell-border stripe&quot;</span></span>
+<span id="cb90-15"><a href="#cb90-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div id="htmlwidget-4272dda78073979669b1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4272dda78073979669b1">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Información de sesión<\/caption>","data":[["bookdown","bookdownplus","BSDA","devtools","DT","exact2x2","exactRankTests","Hmisc","hrbrthemes","htmltools","htmlwidgets","kableExtra","knitcitations","kolmim","magrittr","MASS","NSM3","plotly","randtests","reshape2","rmarkdown","snpar","stringr","tidyverse","utf8"],["0.24","1.5.8","1.2.0","2.4.2","0.19","1.6.5","0.8-32","4.5-0","0.8.0","0.5.2","1.5.4","1.3.4","1.0.12","1.0","2.0.1","7.3-54","1.16","4.10.0","1.0","1.4.4","2.11","1.0","1.4.0","1.3.1","1.2.1"],["CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.4)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)","CRAN (R 4.0.3)","CRAN (R 4.0.5)","CRAN (R 4.0.3)"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Paquete<\/th>\n      <th>Versión<\/th>\n      <th>Fuente<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="bibliografía" class="section level1 unnumbered">
@@ -5829,121 +6246,161 @@ Distribution</em>. R package version 1.0. 2015. &lt;URL:
 <p>[9] J. Cheng, C. Sievert, B. Schloerke, et al. <em>htmltools: Tools for
 HTML</em>. R package version 0.5.2. 2021. &lt;URL:
 <a href="https://github.com/rstudio/htmltools" class="uri">https://github.com/rstudio/htmltools</a>&gt;.</p>
-<p>[10] R. K. S. Hankin. “Additive integer partitions in R”. In: <em>Journal
+<p>[10] M. P. Fay. “Confidence intervals that match Fisher’s exact or
+Blaker’s exact tests”. In: <em>Biostatistics</em> 11.2 (2010), pp. 373-374.
+&lt;URL: <a href="https://www.niaid.nih.gov/about/brb-staff-fay" class="uri">https://www.niaid.nih.gov/about/brb-staff-fay</a>&gt;.</p>
+<p>[11] M. P. Fay. <em>exactci: Exact P-Values and Matching Confidence
+Intervals for Simple Discrete Parametric Cases</em>. R package version
+1.4-2. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=exactci" class="uri">https://CRAN.R-project.org/package=exactci</a>&gt;.</p>
+<p>[12] M. P. Fay. <em>ssanv: Sample Size Adjusted for Nonadherence or
+Variability of Input Parameters</em>. R package version 1.1. 2015. &lt;URL:
+<a href="https://CRAN.R-project.org/package=ssanv" class="uri">https://CRAN.R-project.org/package=ssanv</a>&gt;.</p>
+<p>[13] M. P. Fay. “Two-sided Exact Tests and Matching Confidence
+Intervals for Discrete Data”. In: <em>R Journal</em> 2.1 (2010), pp. 53-58.
+&lt;URL: <a href="https://journal.r-project.org/" class="uri">https://journal.r-project.org/</a>&gt;.</p>
+<p>[14] M. P. Fay. “Two-sided Exact Tests and Matching Confidence
+Intervals for Discrete Data”. In: <em>R Journal</em> 2.1 (2010), pp. 53-58.
+&lt;URL: <a href="https://journal.R-project.org/" class="uri">https://journal.R-project.org/</a>&gt;.</p>
+<p>[15] M. P. Fay, M. E. Halloran, and D. A. Follmann. “Accounting for
+variability in sample size estimation with applications to nonadherence
+and estimation of variance and effect size”. In: <em>Biometrics</em> 63
+(2007), pp. 465-474.</p>
+<p>[16] M. P. Fay, S. A. Hunsberger, M. Nason, et al. <em>exact2x2: Exact
+Tests and Confidence Intervals for 2x2 Tables</em>. R package version
+1.6.5. 2020. &lt;URL: <a href="https://CRAN.R-project.org/package=exact2x2" class="uri">https://CRAN.R-project.org/package=exact2x2</a>&gt;.</p>
+<p>[17] M. P. Fay and K. Lumbard. “Confidence Intervals for Difference in
+Proportions for Matched Pairs Compatible with Exact McNemars or Sign
+Tests”. In: <em>unpublished manuscript</em> (2020).</p>
+<p>[18] M. P. Fay, M. A. Proschan, and E. Brittain. “Combining one sample
+confidence procedures for inference in the two sample case”. In:
+<em>Biometrics</em> (2014). &lt;URL:
+<a href="https://www.niaid.nih.gov/about/brb-staff-fay" class="uri">https://www.niaid.nih.gov/about/brb-staff-fay</a>&gt;.</p>
+<p>[19] E. E. Gabriel, M. Nason, M. P. Fay, et al. “A boundary-optimized
+rejection region test for the two-sample binomial problem”. In:
+<em>Statistics in Medicine</em> 37.7 (2018), pp. 1047-1058.</p>
+<p>[20] R. K. S. Hankin. “Additive integer partitions in R”. In: <em>Journal
 of Statistical Software, Code Snippets</em> 16 (1 may. 2006).</p>
-<p>[11] R. K. S. Hankin. <em>partitions: Additive Partitions of Integers</em>. R
+<p>[21] R. K. S. Hankin. <em>partitions: Additive Partitions of Integers</em>. R
 package version 1.10-2. 2021. &lt;URL:
 <a href="https://github.com/RobinHankin/partitions" class="uri">https://github.com/RobinHankin/partitions</a>&gt;.</p>
-<p>[12] F. E. Harrell Jr. <em>Hmisc: Harrell Miscellaneous</em>. R package
+<p>[22] F. E. Harrell Jr. <em>Hmisc: Harrell Miscellaneous</em>. R package
 version 4.5-0. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=Hmisc" class="uri">https://CRAN.R-project.org/package=Hmisc</a>&gt;.</p>
-<p>[13] L. Henry and H. Wickham. <em>purrr: Functional Programming Tools</em>. R
+<p>[23] L. Henry and H. Wickham. <em>purrr: Functional Programming Tools</em>. R
 package version 0.3.4. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=purrr" class="uri">https://CRAN.R-project.org/package=purrr</a>&gt;.</p>
-<p>[14] K. MÃ¼ller and H. Wickham. <em>tibble: Simple Data Frames</em>. R package
+<p>[24] T. Hothorn and K. Hornik. <em>exactRankTests: Exact Distributions for
+Rank and Permutation Tests</em>. R package version 0.8-32. 2021. &lt;URL:
+<a href="https://CRAN.R-project.org/package=exactRankTests" class="uri">https://CRAN.R-project.org/package=exactRankTests</a>&gt;.</p>
+<p>[25] K. MÃ¼ller and H. Wickham. <em>tibble: Simple Data Frames</em>. R package
 version 3.1.5. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=tibble" class="uri">https://CRAN.R-project.org/package=tibble</a>&gt;.</p>
-<p>[15] P. O. Perry. <em>utf8: Unicode Text Processing</em>. R package version
+<p>[26] P. O. Perry. <em>utf8: Unicode Text Processing</em>. R package version
 1.2.1. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=utf8" class="uri">https://CRAN.R-project.org/package=utf8</a>&gt;.</p>
-<p>[16] D. Qiu. <em>snpar: Supplementary Non-parametric Statistics Methods</em>.
+<p>[27] D. Qiu. <em>snpar: Supplementary Non-parametric Statistics Methods</em>.
 R package version 1.0. 2014. &lt;URL:
 <a href="https://CRAN.R-project.org/package=snpar" class="uri">https://CRAN.R-project.org/package=snpar</a>&gt;.</p>
-<p>[17] R Core Team. <em>R: A Language and Environment for Statistical
+<p>[28] R Core Team. <em>R: A Language and Environment for Statistical
 Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
 2020. &lt;URL: <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
-<p>[18] B. Ripley. <em>MASS: Support Functions and Datasets for Venables and
+<p>[29] B. Ripley. <em>MASS: Support Functions and Datasets for Venables and
 Ripley’s MASS</em>. R package version 7.3-54. 2021. &lt;URL:
 <a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
-<p>[19] B. Rudis. <em>hrbrthemes: Additional Themes, Theme Components and
+<p>[30] B. Rudis. <em>hrbrthemes: Additional Themes, Theme Components and
 Utilities for ggplot2</em>. R package version 0.8.0. 2020. &lt;URL:
 <a href="http://github.com/hrbrmstr/hrbrthemes" class="uri">http://github.com/hrbrmstr/hrbrthemes</a>&gt;.</p>
-<p>[20] D. Sarkar. <em>Lattice: Multivariate Data Visualization with R</em>. ISBN
+<p>[31] D. Sarkar. <em>Lattice: Multivariate Data Visualization with R</em>. ISBN
 978-0-387-75968-5. New York: Springer, 2008. &lt;URL:
 <a href="http://lmdvr.r-forge.r-project.org" class="uri">http://lmdvr.r-forge.r-project.org</a>&gt;.</p>
-<p>[21] D. Sarkar. <em>lattice: Trellis Graphics for R</em>. R package version
+<p>[32] D. Sarkar. <em>lattice: Trellis Graphics for R</em>. R package version
 0.20-44. 2021. &lt;URL: <a href="http://lattice.r-forge.r-project.org/" class="uri">http://lattice.r-forge.r-project.org/</a>&gt;.</p>
-<p>[22] G. Schneider, E. Chicken, and R. Becvarik. <em>NSM3: Functions and
+<p>[33] G. Schneider, E. Chicken, and R. Becvarik. <em>NSM3: Functions and
 Datasets to Accompany Hollander, Wolfe, and Chicken - Nonparametric
 Statistical Methods, Third Edition</em>. R package version 1.16. 2021.
 &lt;URL: <a href="https://CRAN.R-project.org/package=NSM3" class="uri">https://CRAN.R-project.org/package=NSM3</a>&gt;.</p>
-<p>[23] C. Sievert. <em>Interactive Web-Based Data Visualization with R,
+<p>[34] C. Sievert. <em>Interactive Web-Based Data Visualization with R,
 plotly, and shiny</em>. Chapman and Hall/CRC, 2020. ISBN: 9781138331457.
 &lt;URL: <a href="https://plotly-r.com" class="uri">https://plotly-r.com</a>&gt;.</p>
-<p>[24] C. Sievert, C. Parmer, T. Hocking, et al. <em>plotly: Create
+<p>[35] C. Sievert, C. Parmer, T. Hocking, et al. <em>plotly: Create
 Interactive Web Graphics via plotly.js</em>. R package version 4.10.0.
 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=plotly" class="uri">https://CRAN.R-project.org/package=plotly</a>&gt;.</p>
-<p>[25] Terry M. Therneau and Patricia M. Grambsch. <em>Modeling Survival
+<p>[36] Terry M. Therneau and Patricia M. Grambsch. <em>Modeling Survival
 Data: Extending the Cox Model</em>. New York: Springer, 2000. ISBN:
 0-387-98784-3.</p>
-<p>[26] T. M. Therneau. <em>survival: Survival Analysis</em>. R package version
+<p>[37] T. M. Therneau. <em>survival: Survival Analysis</em>. R package version
 3.2-11. 2021. &lt;URL: <a href="https://github.com/therneau/survival" class="uri">https://github.com/therneau/survival</a>&gt;.</p>
-<p>[27] R. Vaidyanathan, Y. Xie, J. Allaire, et al. <em>htmlwidgets: HTML
+<p>[38] R. Vaidyanathan, Y. Xie, J. Allaire, et al. <em>htmlwidgets: HTML
 Widgets for R</em>. R package version 1.5.4. 2021. &lt;URL:
 <a href="https://github.com/ramnathv/htmlwidgets" class="uri">https://github.com/ramnathv/htmlwidgets</a>&gt;.</p>
-<p>[28] W. N. Venables and B. D. Ripley. <em>Modern Applied Statistics with
+<p>[39] W. N. Venables and B. D. Ripley. <em>Modern Applied Statistics with
 S</em>. Fourth. ISBN 0-387-95457-0. New York: Springer, 2002. &lt;URL:
 <a href="https://www.stats.ox.ac.uk/pub/MASS4/" class="uri">https://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
-<p>[29] H. Wickham. <em>forcats: Tools for Working with Categorical Variables
+<p>[40] H. Wickham. <em>forcats: Tools for Working with Categorical Variables
 (Factors)</em>. R package version 0.5.1. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=forcats" class="uri">https://CRAN.R-project.org/package=forcats</a>&gt;.</p>
-<p>[30] H. Wickham. <em>ggplot2: Elegant Graphics for Data Analysis</em>.
+<p>[41] H. Wickham. <em>ggplot2: Elegant Graphics for Data Analysis</em>.
 Springer-Verlag New York, 2016. ISBN: 978-3-319-24277-4. &lt;URL:
 <a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>&gt;.</p>
-<p>[31] H. Wickham. <em>reshape2: Flexibly Reshape Data: A Reboot of the
+<p>[42] H. Wickham. <em>reshape2: Flexibly Reshape Data: A Reboot of the
 Reshape Package</em>. R package version 1.4.4. 2020. &lt;URL:
 <a href="https://github.com/hadley/reshape" class="uri">https://github.com/hadley/reshape</a>&gt;.</p>
-<p>[32] H. Wickham. “Reshaping Data with the reshape Package”. In:
+<p>[43] H. Wickham. “Reshaping Data with the reshape Package”. In:
 <em>Journal of Statistical Software</em> 21.12 (2007), pp. 1-20. &lt;URL:
 <a href="http://www.jstatsoft.org/v21/i12/" class="uri">http://www.jstatsoft.org/v21/i12/</a>&gt;.</p>
-<p>[33] H. Wickham. <em>stringr: Simple, Consistent Wrappers for Common
+<p>[44] H. Wickham. <em>stringr: Simple, Consistent Wrappers for Common
 String Operations</em>. R package version 1.4.0. 2019. &lt;URL:
 <a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>&gt;.</p>
-<p>[34] H. Wickham. <em>tidyr: Tidy Messy Data</em>. R package version 1.1.4.
+<p>[45] H. Wickham. “testthat: Get Started with Testing”. In: <em>The R
+Journal</em> 3 (2011), pp. 5-10. &lt;URL:
+<a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf" class="uri">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>&gt;.</p>
+<p>[46] H. Wickham. <em>testthat: Unit Testing for R</em>. R package version
+3.0.4. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=testthat" class="uri">https://CRAN.R-project.org/package=testthat</a>&gt;.</p>
+<p>[47] H. Wickham. <em>tidyr: Tidy Messy Data</em>. R package version 1.1.4.
 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>&gt;.</p>
-<p>[35] H. Wickham. <em>tidyverse: Easily Install and Load the Tidyverse</em>. R
+<p>[48] H. Wickham. <em>tidyverse: Easily Install and Load the Tidyverse</em>. R
 package version 1.3.1. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=tidyverse" class="uri">https://CRAN.R-project.org/package=tidyverse</a>&gt;.</p>
-<p>[36] H. Wickham, M. Averick, J. Bryan, et al. “Welcome to the
+<p>[49] H. Wickham, M. Averick, J. Bryan, et al. “Welcome to the
 tidyverse”. In: <em>Journal of Open Source Software</em> 4.43 (2019), p. 1686.
 DOI: 10.21105/joss.01686.</p>
-<p>[37] H. Wickham, J. Bryan, and M. Barrett. <em>usethis: Automate Package
+<p>[50] H. Wickham, J. Bryan, and M. Barrett. <em>usethis: Automate Package
 and Project Setup</em>. R package version 2.1.3. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=usethis" class="uri">https://CRAN.R-project.org/package=usethis</a>&gt;.</p>
-<p>[38] H. Wickham, W. Chang, L. Henry, et al. <em>ggplot2: Create Elegant
+<p>[51] H. Wickham, W. Chang, L. Henry, et al. <em>ggplot2: Create Elegant
 Data Visualisations Using the Grammar of Graphics</em>. R package version
 3.3.5. 2021. &lt;URL: <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>&gt;.</p>
-<p>[39] H. Wickham, R. FranÃ§ois, L. Henry, et al. <em>dplyr: A Grammar of
+<p>[52] H. Wickham, R. FranÃ§ois, L. Henry, et al. <em>dplyr: A Grammar of
 Data Manipulation</em>. R package version 1.0.6. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>&gt;.</p>
-<p>[40] H. Wickham and J. Hester. <em>readr: Read Rectangular Text Data</em>. R
+<p>[53] H. Wickham and J. Hester. <em>readr: Read Rectangular Text Data</em>. R
 package version 1.4.0. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=readr" class="uri">https://CRAN.R-project.org/package=readr</a>&gt;.</p>
-<p>[41] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
+<p>[54] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
 Developing R Packages Easier</em>. R package version 2.4.2. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=devtools" class="uri">https://CRAN.R-project.org/package=devtools</a>&gt;.</p>
-<p>[42] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
+<p>[55] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
 Markdown</em>. ISBN 978-1138700109. Boca Raton, Florida: Chapman and
 Hall/CRC, 2016. &lt;URL: <a href="https://bookdown.org/yihui/bookdown" class="uri">https://bookdown.org/yihui/bookdown</a>&gt;.</p>
-<p>[43] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
+<p>[56] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
 Markdown</em>. R package version 0.24. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>&gt;.</p>
-<p>[44] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
+<p>[57] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
 Guide</em>. ISBN 9781138359338. Boca Raton, Florida: Chapman and Hall/CRC,
 2018. &lt;URL: <a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</p>
-<p>[45] Y. Xie, J. Cheng, and X. Tan. <em>DT: A Wrapper of the JavaScript
+<p>[58] Y. Xie, J. Cheng, and X. Tan. <em>DT: A Wrapper of the JavaScript
 Library DataTables</em>. R package version 0.19. 2021. &lt;URL:
 <a href="https://github.com/rstudio/DT" class="uri">https://github.com/rstudio/DT</a>&gt;.</p>
-<p>[46] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
+<p>[59] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
 9780367563837. Boca Raton, Florida: Chapman and Hall/CRC, 2020. &lt;URL:
 <a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>&gt;.</p>
-<p>[47] A. Zeileis and Y. Croissant. “Extended Model Formulas in R:
+<p>[60] A. Zeileis and Y. Croissant. “Extended Model Formulas in R:
 Multiple Parts and Multiple Responses”. In: <em>Journal of Statistical
 Software</em> 34.1 (2010), pp. 1-13. DOI: 10.18637/jss.v034.i01.</p>
-<p>[48] A. Zeileis and Y. Croissant. <em>Formula: Extended Model Formulas</em>. R
+<p>[61] A. Zeileis and Y. Croissant. <em>Formula: Extended Model Formulas</em>. R
 package version 1.2-4. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=Formula" class="uri">https://CRAN.R-project.org/package=Formula</a>&gt;.</p>
-<p>[49] P. Zhao. <em>bookdownplus: Generate Assorted Books and Documents with
+<p>[62] P. Zhao. <em>bookdownplus: Generate Assorted Books and Documents with
 R bookdown Package</em>. R package version 1.5.8. 2020. &lt;URL:
 <a href="https://github.com/pzhaonet/bookdownplus" class="uri">https://github.com/pzhaonet/bookdownplus</a>&gt;.</p>
-<p>[50] H. Zhu. <em>kableExtra: Construct Complex Table with kable and Pipe
+<p>[63] H. Zhu. <em>kableExtra: Construct Complex Table with kable and Pipe
 Syntax</em>. R package version 1.3.4. 2021. &lt;URL:
 <a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a>&gt;.</p>
 </div>

@@ -142,7 +142,8 @@ packages <- c(
   "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
   "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
   "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
-  "reshape2", "randtests", "snpar", "knitcitations"
+  "reshape2", "randtests", "snpar", "knitcitations",
+  "exactRankTests", "stats", "exact2x2"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -452,7 +453,8 @@ knitr::kable(
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba Binomial {#binomial1-R}
 
-**Ejemplo 1**: En un estudio de los efectos del estrés, un investigador enseño a 18 estudiantes dos métodos diferentes para hacer el mismo nudo. La mitad de los sujetos (seleccionados aleatoriamente) aprendieron primero el método A y la otra mitad aprendió primero el método B. Posteriormente --a medianoche y después de un examen final de cuatro horas de duración--, a cada sujeto se le pidió que hiciera el nudo. La predicción fue que el estrés induciría regresión, esto es, que los sujetos regresarían al primer método aprendido para hacer el nudo. Cada sujeto fue categorizado conforme a si usó el primero o el segundo método aprendido de hacer nudos cuando se le pedía que hiciera el nudo bajo estrés. Resultando que 16 de los 18 utilizó el primer método aprendido para hacer el nudo. Este ejemplo es tomado de Sigel (1995, pág. 64).
+::: {.example #ejemp1-binomial1 name="Prueba Binomial"}
+En un estudio de los efectos del estrés, un investigador enseño a 18 estudiantes dos métodos diferentes para hacer el mismo nudo. La mitad de los sujetos (seleccionados aleatoriamente) aprendieron primero el método A y la otra mitad aprendió primero el método B. Posteriormente --a medianoche y después de un examen final de cuatro horas de duración--, a cada sujeto se le pidió que hiciera el nudo. La predicción fue que el estrés induciría regresión, esto es, que los sujetos regresarían al primer método aprendido para hacer el nudo. Cada sujeto fue categorizado conforme a si usó el primero o el segundo método aprendido de hacer nudos cuando se le pedía que hiciera el nudo bajo estrés. Resultando que 16 de los 18 utilizó el primer método aprendido para hacer el nudo. Este ejemplo es tomado de Sigel (1995, pág. 64).
 
 En este ejemplo, la hipótesis alternativa que se quiere contrastar es que el estrés induce regresión en los estudiantes, es decir, que bajo estrés, la proporción de estudiantes que realiza el primer método aprendido para hacer el nudo es mayor que los que usan el segundo método aprendido $\left(H_1:p>\frac{1}{2}\right)$. Dicho de otra manera, bajo estrés, la proporción de estudiantes que deciden realizar el primer nudo aprendido es mayor que 0,5.
 
@@ -508,6 +510,7 @@ prop.test(
 <br/>
 
 Note que la aproximación del $p_{valor}$ obtenida en estas dos últimas salidas son iguales.
+:::
 
 ### Problemas Propuestos {#broblemas-binomial1}
 
@@ -692,8 +695,8 @@ $$
 
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba del Signo {#signo1-R}
-
-**Ejemplo 2**: Los siguientes datos constituyen una muestra aleatoria de 15 mediciones de la clasificación de octano de cierto tipo de gasolina:
+::: {.example #ejemp1-signo1 name="Prueba del Signo"}
+Los siguientes datos constituyen una muestra aleatoria de 15 mediciones de la clasificación de octano de cierto tipo de gasolina:
 
 $$
 \begin{array}{cccccccc}
@@ -847,6 +850,7 @@ prop.test(
   conf.level = 0.99, correct = TRUE
 )
 ```
+:::
 <br/>
 
 ### Problemas Propuestos {#broblemas-signo1}
@@ -1148,8 +1152,8 @@ knitr::kable(
 <br/>
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba de Bondad de Ajuste Ji-cuadrado {#jicuadrado1-R}
-
-**Ejemplo 3:** En 1865 Mendel descubrió un código genético básico mediante la cría de guisantes verdes y amarillos en un experimento. Debido a que el gen amarillo del guisante es dominante, los híbridos de la primera generación fueron amarillos, pero los de la segunda generación eran aproximadamente 75% amarillos y 25% verdes. El color verde reaparece en la segunda generación porque hay un 25% de probabilidad de que dos guisantes, ambos con un gen amarillo y otros con un gen verde, contribuyan con el verde a la siguiente semilla híbrida. En otro experimento de guisantes se consideró tanto el color como las características de la textura. Los resultados de los experimentos se muestran en la tabla \@ref(tab:datos-mendel).
+::: {.example #ejemp1-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
+En 1865 Mendel descubrió un código genético básico mediante la cría de guisantes verdes y amarillos en un experimento. Debido a que el gen amarillo del guisante es dominante, los híbridos de la primera generación fueron amarillos, pero los de la segunda generación eran aproximadamente 75% amarillos y 25% verdes. El color verde reaparece en la segunda generación porque hay un 25% de probabilidad de que dos guisantes, ambos con un gen amarillo y otros con un gen verde, contribuyan con el verde a la siguiente semilla híbrida. En otro experimento de guisantes se consideró tanto el color como las características de la textura. Los resultados de los experimentos se muestran en la tabla \@ref(tab:datos-mendel).
 
 ```{r datos-mendel, class.source = "watch-out"}
 datos3 <- data.frame(
@@ -1209,9 +1213,11 @@ chisq.test(
     sum(datos3$Frecuencia.Esperada)
 )
 ```
+:::
 <br/>
 
-**Ejemplo 4:** Se ha estimado que el número de accidentes diarios en cada regimiento del ejército sigue una distribución de Poisson de parámetro 2. Un determinado regimiento ha recogido, durante 200 días, los siguientes datos:
+::: {.example #ejemp2-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
+Se ha estimado que el número de accidentes diarios en cada regimiento del ejército sigue una distribución de Poisson de parámetro 2. Un determinado regimiento ha recogido, durante 200 días, los siguientes datos:
 
 $$
 \begin{array}{lccccccc}
@@ -1307,9 +1313,11 @@ chisq.test(
   rescale.p = TRUE
 )
 ```
+:::
 <br/>
 
-**Ejemplo 5:** Una máquina, en correcto estado de funcionamiento, produce piezas cuya longitud se distribuye normalmente con media 10,5 y desviación estándar 0,15. En determinado momento se observa la siguiente muestra, de tamaño 40, de la longitud de las piezas producidas:
+::: {.example #ejemplo3-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
+Una máquina, en correcto estado de funcionamiento, produce piezas cuya longitud se distribuye normalmente con media 10,5 y desviación estándar 0,15. En determinado momento se observa la siguiente muestra, de tamaño 40, de la longitud de las piezas producidas:
 
 $$
 \begin{array}{ccccccc}
@@ -1464,8 +1472,10 @@ curve(
   add = TRUE, col = "red", lwd = 1
 )
 ```
+:::
 
-**Ejemplo 6:** La muestra del *ejemplo 5* ha puesto de relieve un funcionamiento incorrecto de la máquina, que no se ajusta a la distribución $N\left(\mu = 10,5; \: \sigma = 0,15 \right)$. Cabe, sin embargo, la posibilidad de que el desajuste haya afectado a la media y la desviación típica, pero que la distribución de la longitud de las piezas producidas siga siendo de tipo normal. Para verificar tal posibilidad hay que estimar (por máxima verosimilitud) la media y la desviación típica poblacional.
+::: {.example #ejemplo4-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
+La muestra del \@ref(exm:ejemplo3-jicuadrado1) ha puesto de relieve un funcionamiento incorrecto de la máquina, que no se ajusta a la distribución $N\left(\mu = 10,5; \: \sigma = 0,15 \right)$. Cabe, sin embargo, la posibilidad de que el desajuste haya afectado a la media y la desviación típica, pero que la distribución de la longitud de las piezas producidas siga siendo de tipo normal. Para verificar tal posibilidad hay que estimar (por máxima verosimilitud) la media y la desviación típica poblacional.
 
 El estimación por máxima verosimilitud de la media de la distribución normal es:
 
@@ -1645,6 +1655,7 @@ paste("el p.valor =", p.valor)
 <br/>
 
 Como se nota en la salida anterior el $p_{valor \, aprox} = `r format(p.valor, decimal.mark = ",", big.mark = ".")`$ lo que conduce, de igual manera, a aceptar la hipótesis de que los datos se distribuyen normalmente.
+:::
 
 ### Problemas Propuestos {#problemas-jicuadrado1}
 
@@ -1895,8 +1906,8 @@ knitr::kable(
 De igual manera, la función `ks.test.imp(x, y, ...)` del paquete `kolmin` permite ejecutar esta prueba. 
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba de Bondad de Ajuste Kolmogorov-Smirnov {#kolgomorov1-R} 
-
-**Ejemplo 7:** Consideremos un experimento industrial en el que tenemos una muestra de n=10 tejidos sometido a un lavado. El objetivo del experimento es analizar el desempeño de un nuevo detergente experimental para la ropa. Específicamente, la variable de respuesta bajo estudio es la llamada reflectancia, es decir, la proporción de luz incidente que una determinada superficie (de tela) es capaz de reflejar, lo que puede ser considerado una medida relacionada con la eficacia de limpieza del detergente. Supongamos que deseamos probar, en el nivel de significación $\alpha=5\%$, si la reflectancia está o no uniformemente distribuida, es decir, si sigue la ley de distribución U(0,1). Los datos fueron tomados de Bonnini et al (2014, pág. 28).
+::: {.example #ejemplo1-kolmogorovsmirnov1 name="Prueba de Bondad de Ajuste Kolmogorov-Smirnov"}
+Consideremos un experimento industrial en el que tenemos una muestra de n=10 tejidos sometido a un lavado. El objetivo del experimento es analizar el desempeño de un nuevo detergente experimental para la ropa. Específicamente, la variable de respuesta bajo estudio es la llamada reflectancia, es decir, la proporción de luz incidente que una determinada superficie (de tela) es capaz de reflejar, lo que puede ser considerado una medida relacionada con la eficacia de limpieza del detergente. Supongamos que deseamos probar, en el nivel de significación $\alpha=5\%$, si la reflectancia está o no uniformemente distribuida, es decir, si sigue la ley de distribución U(0,1). Los datos fueron tomados de Bonnini et al (2014, pág. 28).
 
 $$
 \begin{array}{ccccccc}
@@ -2048,8 +2059,10 @@ ks.test(reflectancia, "punif",
 <br/> 
 
 Note que los valores $D_n$ y el $p_{valor}$ obtenidos en esta salida coinciden con los anteriores.
+:::
 
-**Ejemplo 8:** La prueba de bondad de ajuste Chi-Cuadrada aplicada en el ejemplo 5 mostró que la longitud de la pieza no se distribuyen normalmente con media 10,5 y desviación estándar 0,15. A continuación se procede a verificar esta conclusión aplicando la _prueba de bondad de ajuste Kolmogorov-Smirnov_.
+::: {.example #ejemplo2-kolmogorovsmirnov1 name="Prueba de Bondad de Ajuste Kolmogorov-Smirnov"}
+La prueba de bondad de ajuste Chi-Cuadrada aplicada en el ejemplo \@ref(exm:ejemplo3-jicuadrado1) mostró que la longitud de la pieza no se distribuyen normalmente con media 10,5 y desviación estándar 0,15. A continuación se procede a verificar esta conclusión aplicando la _prueba de bondad de ajuste Kolmogorov-Smirnov_.
 
 La tabla \@ref(tab:datos8) muestra la función de distribución acumulada empíricas y la función de distribución acumulada propuesta en $H_0$.
 
@@ -2189,6 +2202,7 @@ ks.test(lp, "pnorm",
 <br/>
 
 Note que los valores $D_n$ y  $p_{valor}$ son iguales a los obtenidos anteriormente.
+:::
 
 ### Problemas Propuestos {#broblemas-KolgomoroSmirnov1}
 
@@ -2350,7 +2364,8 @@ knitr::kable(
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba de Rachas o Carreras de Walf-Wolfowits {#R-rachas1}
 
-**Ejemplo 9:** En un estudio de la dinámica de agresión en niños pequeños, un investigador observó pares de niños en una situación de juego controlada. La mayoría de los 24 niños que sirvieron como sujetos en el estudio provenía de la misma guardería y, por lo tanto, jugaban juntos diariamente. Ya que el observador fue capaz de ingeniarse para observar sólo dos niños en cualquier día, estaba interesado en que podría haberse introducido sesgo en el estudio por discusiones entre aquellos niños que ya habían servido como sujetos y aquellos que sirvieron posteriormente. Si tales discusiones tenían algún efecto en el nivel de agresión en las sesiones de juego, este efecto podría mostrarse como una carencia de aleatoriedad en las puntuaciones de agresión en el orden en que fueron colectadas. Después de concluir el estudio, la aleatoriedad de la secuencia de puntuaciones fue probada al convertir las puntuaciones de agresión de cada niño a un signo más o a un signo menos, dependiendo si se encontraba por arriba o por debajo de la mediana del grupo. Los datos se muestran en la tabla \@ref(tab:datos9).
+::: {.example #ejemplo1-rachas1 name="Prueba de Rachas o Carreras de Walf-Wolfowits"}
+En un estudio de la dinámica de agresión en niños pequeños, un investigador observó pares de niños en una situación de juego controlada. La mayoría de los 24 niños que sirvieron como sujetos en el estudio provenía de la misma guardería y, por lo tanto, jugaban juntos diariamente. Ya que el observador fue capaz de ingeniarse para observar sólo dos niños en cualquier día, estaba interesado en que podría haberse introducido sesgo en el estudio por discusiones entre aquellos niños que ya habían servido como sujetos y aquellos que sirvieron posteriormente. Si tales discusiones tenían algún efecto en el nivel de agresión en las sesiones de juego, este efecto podría mostrarse como una carencia de aleatoriedad en las puntuaciones de agresión en el orden en que fueron colectadas. Después de concluir el estudio, la aleatoriedad de la secuencia de puntuaciones fue probada al convertir las puntuaciones de agresión de cada niño a un signo más o a un signo menos, dependiendo si se encontraba por arriba o por debajo de la mediana del grupo. Los datos se muestran en la tabla \@ref(tab:datos9).
 
 ```{r datos9, class.source = "watch-out"}
 puntuacion <- c(
@@ -2514,9 +2529,11 @@ snpar::runs.test(
   alternative = "two.sided"
 )
 ```
+:::
 <br/>
 
-**Ejemplo 10:** Un investigador estaba interesado en averiguar si la disposición de hombres y mujeres en una fila enfrente de la taquilla de un teatro era un arreglo aleatorio. Los datos se obtuvieron simplemente anotando el sexo de cada una de las 50 personas al aproximarse a la taquilla.
+::: {.example #ejemplo2-rachas1 name="Prueba de Rachas o Carreras de Walf-Wolfowits"}
+Un investigador estaba interesado en averiguar si la disposición de hombres y mujeres en una fila enfrente de la taquilla de un teatro era un arreglo aleatorio. Los datos se obtuvieron simplemente anotando el sexo de cada una de las 50 personas al aproximarse a la taquilla.
 $$
 \begin{array}{ccccccccccccc}
 \hline
@@ -2659,6 +2676,7 @@ snpar::runs.test(
   alternative = "two.sided"
 )
 ```
+:::
 <br/>
 
 ### Problemas Propuestos {#broblemas-rachas1}
@@ -2714,6 +2732,119 @@ Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de si
 
 5)  Se utiliza un proceso de plateado para cubrir cierto tipo de charola de servicio. Cuando el proceso está bajo control el espesor de la plata sobre la charola variara de forma aleatoria siguiendo una distribución normal con una media de 0,02 milímetros y una desviación estándar de 0,005 milímetros. Suponga que las siguientes 12 charolas examinadas muestran los siguientes espesores de plata: 0,019; 0,021; 0,020; 0,019; 0,020; 0,018; 0,023; 0,021; 0,024; 0,022; 0,023; 0,022. Utilice la prueba de rachas para determinar si las fluctuaciones en el espesor de una charola a otra son aleatorias. Utilice $\alpha= 0.05$. Tomado de Walpole (2012, pág. 677).
 
+# Pruebas que Usan Datos de Dos Muestras Relacionadas {#dos-muestra-relacionadas}
+
+1.  **Prueba del Signo*** (Sección \@ref(signo2))
+
+2.  ***Prueba de Rangos Asignados de Wilcoxon*** (Sección \@ref(rangos-asignados2))
+
+3.  ***Prueba para Datos en Forma de Frecuencias de Mcnemar*** (Sección \@ref(fecuencia-mcnemar2))
+
+
+## Prueba del Signo {#signo2}
+
+###	Racionalización de la Prueba del Signo {#racionalizacion-signo2}
+
+### Implementación en `r colorize("R", "blue")` de la Prueba del Signo {#R-signo2}
+
+::: {.example #ejemplo1-signo2 name="Prueba del Signo"}  
+Un investigador estaba estudiando el proceso de toma de decisión esposo-esposa. Se estudió exhaustivamente una muestra de parejas esposo-esposa para determinar el papel percibido de cada uno de ellos respecto de mejorar las adquisiciones domésticas. En cada ocasión, una pareja (cada uno por separado) contestaba un cuestionario concerniente a la influencia que creía ejercer cuando el matrimonio enfrentaba una situación en la que tenía que decidirse la adquisición de enseres para el hogar. Las respuestas a las preguntas se evaluaban mediante una escala que iba de esposo dominante a esposa dominante. Para cada pareja, la diferencia entre sus "percepciones" era determinada y codificada como + si a juicio del esposo, la esposa no debería tener una mayor influencia que él y esto no coincidía con lo informado por la esposa (esposo: "mi opinión debería tener mayor peso que la de ella", y esposa: "ambos deberíamos ponernos de acuerdo para decidir"). La diferencia se codificaba como (-) cuando ocurría el caso contrario. La diferencia se codificaba como 0 (cero) si la pareja estaba en completo de acuerdo acerca del grado de influencia ejercida en la decisión. Los datos fueron tomados de Sigel (1995, pág. 107). Estos se presentan en la siguiente tabla, por medio del siguiente código.
+
+```{r pareja}
+pareja <- c(LETTERS[1:17])
+esposo <- c(
+  5L, 4L, 6L, 6L, 3L, 2L, 5L, 3L, 1L, 4L, 5L, 4L, 4L, 7L,
+  5L, 5L, 5L
+)
+esposa <- c(
+  3L, 3L, 4L, 5L, 3L, 3L, 2L, 3L, 2L, 3L, 2L, 2L, 5L, 2L,
+  5L, 3L, 1L
+)
+pareja <- tibble(
+  pareja = pareja,
+  esposo = esposo,
+  esposa = esposa,
+) %>% 
+  mutate(
+    signo = as.factor(
+      case_when(
+        (esposo - esposa) > 0 ~ "\\+",
+        (esposo - esposa) == 0 ~ "0",
+        (esposo - esposa) < 0 ~ "\\-"
+      )
+    )
+  )
+kableExtra::kbl(
+  pareja,
+  col.names = c("Pareja", "Esposo", "Esposa", "Signo"),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:pareja}Juicios acerca de la influencia en la toma de decisiones",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = T
+  ) %>%
+  row_spec(which(pareja$signo == "0"), color = "red",
+           strikeout = T) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+  
+Aquí la hipótesis nula que se quieres contrastar es que: los esposos y las esposas están de acuerdo en el grado de influencia que ambos deben tener cuando deciden sobre las adquisiciones domésticas. Mientras que la hipótesis alternativa es: los esposos juzgan que ellos deben tener mayor influencia que sus esposas acerca de las decisiones de adquirir enseres para el hogar. Para contrastar estas hipótesis se procede a aplicar la prueba del signo con un nivel de confianza del 95%.
+
+Bajo el supuesto planteado en la hipótesis nula, es de esperarse que el número de diferencias positvas *S* se distribuya binomialmente con $n = 14$ (número de diferencias distintas de cero) y $p = 1/2$ (probabilidad de que ocurra una diferencia positiva en la muestra), es decir, $S\sim B(n=14, p=1/2)$. El siguiente código muestra la ejecución de la prueba para los datos previamente mencionados.
+
+```{r}
+n <- pareja %>% 
+  dplyr::filter(signo != "0") %>%
+  nrow()
+s <- pareja %>% 
+  dplyr::filter(signo == "\\+") %>%
+  nrow()
+p.valor <- 1 - pbinom(q = s - 1, size = n, prob = 0.5)
+paste("El valor del estadístico S =", s)
+paste("El p.valor =", round(x = p.valor, digits = 4))
+```
+<br/>
+
+Como se nota de la salida anterior, el $p_{valor}=`r formato(p.valor)`$, lo que indica que los esposos creen que son ellos los que deben tener una mayor influencia al momento de tomar decisiones acerca  de la adquisición de enseres domésticos, en comparación con la que deben tener las esposas. Los resultados anteriores pueden ser obtenidos con la función *SIGN.test* del paquete **BSDA**, como se meustra a continuación, con el siguiente segmento de código. 
+
+```{r}
+SIGN.test(
+  x = esposo, y = esposa, md = 0, alternative = "g",
+  conf.level = 0.95
+)
+```
+<br/>
+
+Los resultados anteriores, también se pueden obtener con la función `binom.test` de la distribución base de `r colorize("R", "blue")`, como sigue.
+
+```{r}
+binom.test(
+  x = s, n = n, p = 0.5, alternative = "greater", 
+  conf.level = 0.95
+)
+```
+:::
+
+
+## Prueba de Rangos Asignados de Wilcoxon {#rangos-asignados2}
+
+###	Racionalización de la Prueba de Rangos Asignados de Wilcoxon {#racionalizacion-rangos-asignados2}
+
+### Implementación en `r colorize("R", "blue")` de la Prueba del Signo {#R-rangos-asignados2}
+
+
+## Prueba para Datos en Forma de Frecuencias de Mcnemar {#fecuencia-mcnemar2}
+
+###	Racionalización de la Prueba para Datos en Forma de Frecuencias de Mcnemar {#racionalizacion-fecuencia-mcnemar2}
+
+### Implementación en `r colorize("R", "blue")` de la Prueba para Datos en Forma de Frecuencias de Mcnemar {#R-fecuencia-mcnemar2}
+
 
 ## Información de Sesión {#sesion}
 
@@ -2747,7 +2878,6 @@ knitr::write_bib(c(
   "randtests", "snpar", "knitcitations"
 ), "packages.bib")
 ```
-
 
 `r if (knitr:::is_html_output()) '# Bibliografía {-}'`
 
