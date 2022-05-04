@@ -3055,7 +3055,6 @@ paste("El p.valor.aprox =", round(x = p.valor, digits = 4))
 Como se puede notar el $p_{valor.exacto} = `r formato(p.valor)`$ , no es muy diferente del $p_{valor.aprox} = `r formato(p.valor.aprox)`$. El resultado anterior puede encontrarse por medio de la función `*wilcox.exact*` del paquete `**exactRankTests**`, haciendo el argumento `exact = F`, como sigue.
 
 ```{r}
-library(exactRankTests)
 wilcox.exact(
   x = di, y = NULL, alternative = "g", mu = 0,
   paired = FALSE, exact = F
@@ -3118,44 +3117,43 @@ kableExtra::kbl(
 El cálculo del p.valor corregido por empates se muestra con el siguiente código.
 
 ```{r}
-cor_var <- sum(empates$Tj * (empates$Tj^2 - 1)) / 2
-var.cor <- var - cor_var
+cor.var <- sum(empates$Tj * (empates$Tj^2 - 1)) / 2
+var.cor <- var - cor.var
 z.cor <- (Tmas - media) / sqrt(var.cor)
 p.valor <- pnorm(q = z, lower.tail = F)
 paste(
   "El valor del estadístico Z =", round(
-    x = z.cor, digits = 4
+    x = z.cor, digits = 6
   )
 )
-paste("El p.valor =", round(x = p.valor, digits = 4))
+paste("El p.valor =", round(x = p.valor, digits = 6))
 ```
 <br/>
 En relación con el cálculo anterior, si se realiza la corrección por continuidad, se obtienen los siguientes resultados.
 
 ```{r}
-var.cor <- var - sum(Empate$Ti * (Empate$Ti^2 - 1)) / 48
 z.cor.cont <- (Tmas - 0.5 - media) / sqrt(var.cor)
 p.valor <- pnorm(q = z, lower.tail = F)
 paste("El valor del estadístico Z =", round(
   x = z.cor.cont,
-  digits = 4
+  digits = 6
   )
 )
-paste("El p.valor =", round(x = p.valor, digits = 5))
+paste("El p.valor =", round(x = p.valor, digits = 6))
 ```
 <br/>
 El cálculo del p.valor aproximado, usando la convergencia asintótica del estadístico T propuesto en Conover(1999,pág. 353), se muestra con el siguiente código.
 
 ```{r}
 R <- reclusos %>%
-  dplyr::select(rango) %>%
-  dplyr::filter(rango != 0)
-T <- (sum(abs(R)) - 1) / sqrt(sum(R^2))
+  dplyr::select(rango)
+T <- (sum(abs(R), na.rm = TRUE) - 1) / 
+  sqrt(sum(R^2, na.rm = T))
 p.valor <- pnorm(q = T, lower.tail = F)
 paste(
-  "El valor del estadístico T =", round(x = T, digits = 4)
+  "El valor del estadístico T =", round(x = T, digits = 6)
 )
-paste("El p.valor =", round(x = p.valor, digits = 5))
+paste("El p.valor =", round(x = p.valor, digits = 6))
 ```
 <br/>
 :::
