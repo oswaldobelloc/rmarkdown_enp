@@ -97,7 +97,7 @@ colorize <- function(x, color) {
 ```{r echo = FALSE}
 # función para dar formato a número
 formato <- function(x) {
-  if (!is.numeric(x)) stop("La entrada debe ser numérica!")
+  if (!is.numeric(x)) stop("¡La entrada debe ser numérica!")
   format(
     round(x, digits = 4),
     mode = "double",
@@ -454,7 +454,7 @@ knitr::kable(
 ### Implementación en `r colorize("R", "blue")` de la Prueba Binomial {#binomial1-R}
 
 ::: {.example #ejemp1-binomial1 name="Prueba Binomial"}
-En un estudio de los efectos del estrés, un investigador enseño a 18 estudiantes dos métodos diferentes para hacer el mismo nudo. La mitad de los sujetos (seleccionados aleatoriamente) aprendieron primero el método A y la otra mitad aprendió primero el método B. Posteriormente --a medianoche y después de un examen final de cuatro horas de duración--, a cada sujeto se le pidió que hiciera el nudo. La predicción fue que el estrés induciría regresión, esto es, que los sujetos regresarían al primer método aprendido para hacer el nudo. Cada sujeto fue categorizado conforme a si usó el primero o el segundo método aprendido de hacer nudos cuando se le pedía que hiciera el nudo bajo estrés. Resultando que 16 de los 18 utilizó el primer método aprendido para hacer el nudo. Este ejemplo es tomado de Sigel (1995, pág. 64).
+En un estudio de los efectos del estrés, un investigador enseño a 18 estudiantes dos métodos diferentes para hacer el mismo nudo. La mitad de los sujetos (seleccionados aleatoriamente) aprendieron primero el método A y la otra mitad aprendió primero el método B. Posteriormente --a medianoche y después de un examen final de cuatro horas de duración--, a cada sujeto se le pidió que hiciera el nudo. La predicción fue que el estrés induciría regresión, esto es, que los sujetos regresarían al primer método aprendido para hacer el nudo. Cada sujeto fue categorizado conforme a si usó el primero o el segundo método aprendido de hacer nudos cuando se le pedía que hiciera el nudo bajo estrés. Resultando que 16 de los 18 utilizó el primer método aprendido para hacer el nudo. Este ejemplo es tomado de Siegel (1995, pág. 64).
 
 En este ejemplo, la hipótesis alternativa que se quiere contrastar es que el estrés induce regresión en los estudiantes, es decir, que bajo estrés, la proporción de estudiantes que realiza el primer método aprendido para hacer el nudo es mayor que los que usan el segundo método aprendido $\left(H_1:p>\frac{1}{2}\right)$. Dicho de otra manera, bajo estrés, la proporción de estudiantes que deciden realizar el primer nudo aprendido es mayor que 0,5.
 
@@ -2748,7 +2748,7 @@ Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de si
 ### Implementación en `r colorize("R", "blue")` de la Prueba del Signo {#R-signo2}
 
 ::: {.example #ejemplo1-signo2 name="Prueba del Signo"}  
-Un investigador estaba estudiando el proceso de toma de decisión esposo-esposa. Se estudió exhaustivamente una muestra de parejas esposo-esposa para determinar el papel percibido de cada uno de ellos respecto de mejorar las adquisiciones domésticas. En cada ocasión, una pareja (cada uno por separado) contestaba un cuestionario concerniente a la influencia que creía ejercer cuando el matrimonio enfrentaba una situación en la que tenía que decidirse la adquisición de enseres para el hogar. Las respuestas a las preguntas se evaluaban mediante una escala que iba de esposo dominante a esposa dominante. Para cada pareja, la diferencia entre sus "percepciones" era determinada y codificada como + si a juicio del esposo, la esposa no debería tener una mayor influencia que él y esto no coincidía con lo informado por la esposa (esposo: "mi opinión debería tener mayor peso que la de ella", y esposa: "ambos deberíamos ponernos de acuerdo para decidir"). La diferencia se codificaba como (-) cuando ocurría el caso contrario. La diferencia se codificaba como 0 (cero) si la pareja estaba en completo de acuerdo acerca del grado de influencia ejercida en la decisión. Los datos fueron tomados de Sigel (1995, pág. 107). Estos se presentan en la siguiente tabla, por medio del siguiente código.
+Un investigador estaba estudiando el proceso de toma de decisión esposo-esposa. Se estudió exhaustivamente una muestra de parejas esposo-esposa para determinar el papel percibido de cada uno de ellos respecto de mejorar las adquisiciones domésticas. En cada ocasión, una pareja (cada uno por separado) contestaba un cuestionario concerniente a la influencia que creía ejercer cuando el matrimonio enfrentaba una situación en la que tenía que decidirse la adquisición de enseres para el hogar. Las respuestas a las preguntas se evaluaban mediante una escala que iba de esposo dominante a esposa dominante. Para cada pareja, la diferencia entre sus "percepciones" era determinada y codificada como + si a juicio del esposo, la esposa no debería tener una mayor influencia que él y esto no coincidía con lo informado por la esposa (esposo: "mi opinión debería tener mayor peso que la de ella", y esposa: "ambos deberíamos ponernos de acuerdo para decidir"). La diferencia se codificaba como (-) cuando ocurría el caso contrario. La diferencia se codificaba como 0 (cero) si la pareja estaba en completo de acuerdo acerca del grado de influencia ejercida en la decisión. Los datos fueron tomados de Siegel (1995, pág. 107). Estos se presentan en la siguiente tabla, por medio del siguiente código.
 
 ```{r pareja}
 pareja <- c(LETTERS[1:17])
@@ -2811,7 +2811,7 @@ paste("El p.valor =", round(x = p.valor, digits = 4))
 ```
 <br/>
 
-Como se nota de la salida anterior, el $p_{valor}=`r formato(p.valor)`$, lo que indica que los esposos creen que son ellos los que deben tener una mayor influencia al momento de tomar decisiones acerca  de la adquisición de enseres domésticos, en comparación con la que deben tener las esposas. Los resultados anteriores pueden ser obtenidos con la función *SIGN.test* del paquete **BSDA**, como se meustra a continuación, con el siguiente segmento de código. 
+Como se nota de la salida anterior, el $p_{valor}=`r formato(p.valor)`$, lo que indica que los esposos creen que son ellos los que deben tener una mayor influencia al momento de tomar decisiones acerca  de la adquisición de enseres domésticos, en comparación con la que deben tener las esposas. Los resultados anteriores pueden ser obtenidos con la función `*SIGN.test*` del paquete `**BSDA**`, como se meustra a continuación, con el siguiente segmento de código. 
 
 ```{r}
 SIGN.test(
@@ -2836,8 +2836,329 @@ binom.test(
 
 ###	Racionalización de la Prueba de Rangos Asignados de Wilcoxon {#racionalizacion-rangos-asignados2}
 
-### Implementación en `r colorize("R", "blue")` de la Prueba del Signo {#R-rangos-asignados2}
+### Implementación en `r colorize("R", "blue")` de la Prueba de Rangos Asignados de Wilcoxon {#R-rangos-asignados2}
+::: {.example #ejemplo1-rangos-asignados2 name="Prueba de Rangos Asignados de Wilcoxon"} 
 
+Existe considerable evidencia acerca de que los adultos son capaces de utilizar señales visuales en el procesamiento de información auditiva. En una conversación normal, las personas pueden utilizar los movimientos de los labios en el procesamiento de la charla. La congruencia entre los movimientos de los labios y los sonidos del habla son particularmente benéficos en ambientes ruidosos. La investigación ha demostrado que el procesamiento del habla se deteriora cuando las señales auditivas y visuales no son congruentes. En los niños, la habilidad para discriminar y localizar la fuente de estímulos auditivos y visuales complejos se establece alrededor de los seis meses de edad.
+  
+Se diseñó un experimento para determinar si los niños de 10 a 16 semanas de edad se dan cuenta de la sincronía entre los movimientos de los labios y los sonidos del habla en una conversación normal. Los niños se colocaron en una habitación a prueba de ruido, que tenía una ventana a través de la cual podían ver a una persona hablando. La persona hablaba en un micrófono y el sonido era dirigido directamente al cuarto (en sincronía) o con una demora de 400 milisegundos (fuera de sincronía). En cada condición se midió el tiempo que el niño miraba la cara de la persona que hablaba. Se argumentó que si el pequeño es capaz de discriminar ambas condiciones, la cantidad de tiempo de ver a la persona sería diferente, aunque a priori no se planteó en cuál de las dos condiciones el tiempo sería mayor (en términos de la poca experiencia en sincronía y lo novedoso que era fuera de sincronía).
+
+Existen considerables diferencias individuales entre los infantes respecto al tiempo que pasaron atendiendo al estímulo. Sin embargo, la diferencia en el tiempo que pasaron viendo en la condición en sincronía y el tiempo que pasaron viendo en la condición fuera de sincronía podría ser un indicador confiable de la capacidad de discriminar. Si el niño pasa más tiempo atendiendo al estímulo en la presentación sincrónica, la diferencia sería positiva; y si el niño pasa más tiempo atendiendo al estímulo en la presentación asincrónica, la diferencia sería negativa. Si el pequeño es capaz de discriminar, las diferencias deberían tender hacia una dirección; más aún, cualquier diferencia en dirección contraria debería ser relativamente pequeña.
+
+Aunque el investigador confía en que las diferencias en el tiempo promedio que se pasaron mirando indican las diferencias en la atención, no está seguro de que las puntuaciones sean suficientemente precisas para que sean representadas en una escala que no sea ordinal. Esto es, sólo puede afirmar que las grandes diferencias reflejan incrementos en la atención; por ejemplo, una diferencia de 30 indica una mayor diferencia en atención que una diferencia de 20. Así, aunque la interpretación de las diferencias en las magnitudes numéricas en el tiempo de mirar no reflejan directamente las diferencias en la atención, el establecer los rangos de las diferencias en el mirar reflejará el orden de las diferencias en el atender al estímulo.
+
+Aquí, la hipótesis nula que se quiere contrastar es que la cantidad de tiempo que pasan los niños viendo a través de la ventana no depende del tipo de presentación. En términos de la prueba de Wilcoxon, la suma de los rangos positivos no difiere de la suma de los rangos negativos. Mientras que, la hipótesis alterna es que la cantidad de tiempo que los niños pasan viendo depende del tipo de presentación; la suma de los rangos positivos difiere de la
+suma de los rangos negativos. Los datos son tomados de Siegel (1995, pág. 116) y se muestran con el siguiente código.
+
+
+```{r}
+niños <- tibble(
+  sujetos = c(
+    "DC", "MK", "VH", "JM", "SB", "MM", "RH", "DJ",
+    "JD", "ZC", "CW", "AF"
+  ),
+  sincronia = c(
+    20.3, 17, 6.5, 25, 5.4, 29.2, 2.9, 6.6, 15.8, 8.3,
+    34, 8
+  ),
+  asincronia = c(
+    50.4, 87, 25.1, 28.5, 26.9, 36.6, 1, 43.8, 44.2,
+    10.4, 29.9, 27.7
+  ),
+  di = asincronia - sincronia,
+  rango = sign(di) * rank(abs(di), ties.method = "average")
+)
+kableExtra::kbl(
+  niños,
+  col.names = c(
+    "Sujetos", "En sincronía", "Fuera de sincronía",
+    "$D_i$", "$R_i$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:pareja}Porcentaje de falta de atención en presencia de sincronía y sin ella",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = T
+  ) %>%
+  row_spec(which(niños$di == 0), color = "red",
+           strikeout = T) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+
+Una gráfica de caja y bigote, previa a la aplicación de la prueba, podría dar luces respecto a que si los niños son capaces de discriminar entre la sincronía y asincronía. Esto se puede hacer con el siguiente segmento de código.
+
+```{r}
+plot_ly(data = niños, type = "box") %>% 
+  add_boxplot(
+    y = ~sincronia, name = "En sincronía", jitter = 0.3,
+    boxpoints = "all", pointpos = 0,
+    marker = list(color = 'rgb(9,56,125)'),
+    line = list(color = 'rgb(9,56,125)')
+  ) %>% 
+  add_boxplot(
+    y = ~asincronia, name = "Fuera de sincronía", 
+    jitter = 0.3, boxpoints = "all", pointpos = 0,
+    marker = list(color = 'rgb(9,56,125)'),
+    line = list(color = 'rgb(9,56,125)')
+  ) %>%
+  layout(
+    title = "Tiempo en condición de sincronía y fuera de sincronía",
+    showlegend = TRUE
+  ) %>%
+  layout(
+    xaxis = list(title = "Condición", zeroline = F),
+    yaxis = list(title = "Tiempo", zeroline = F)
+  ) %>%
+  config(locale = "es")
+```
+<br/>
+
+El valor del estadístico de la prueba de rangos con signos de Wilcoxon y el p.valor se puede obtener con el siguiente script.
+
+```{r}
+n <- sum(niños$di != 0)
+Tmas <- sum(niños$rango[niños$rango > 0])
+p.valor <- 2*psignrank(q = Tmas - 1, n = n, lower.tail = FALSE)
+paste("El valor del estadístico Tmas =", Tmas)
+paste("El p.valor =", round(x = p.valor, digits = 4))
+```
+<br/>
+
+Como se observa en la salida anterior, el $p_{valor}=`r formato(Tmas)`$ es menor que $\alpha=0,05$, lo que indica que existe suficiente evidencia estadística de que la cantidad de tiempo que los niños pasan viendo a través de la ventana depende del tipo de presentación. Por otro lado, la prueba de rangos con signos de Wilcoxon se puede aplicar, de manera directa, con la función `*wilcoxon.test*` del paquete `**exactRankTests**`.
+  
+```{r}
+library(exactRankTests)
+exactRankTests::wilcox.exact(
+  x = niños$sincronia, y = niños$asincronia, 
+  alternative = "t", paired = T, exact = T, 
+  conf.int = T, conf.level = 0.95
+)
+```
+<br/>  
+La función `*wilcox.test*` del paquete `**stats**` también realiza esta prueba, como se muestra en el siguiente código.
+
+```{r}
+stats::wilcox.test(
+  x = niños$sincronia, y = niños$asincronia,  
+  alternative = "t", paired = T, exact = T, 
+  conf.int = T, conf.level = 0.95
+)
+```
+<br/>
+:::
+
+::: {.example #ejemplo2-rangos-asignados2 name="Prueba de Rangos Asignados de Wilcoxon"} 
+Los internos de una prisión federal sirvieron como sujetos en un estudio de toma de decisiones. Primero se midió de manera individual la utilidad de los cigarrillos para los reclusos (valor subjetivo), ya que el cigarrillo es el objeto más negociado en las prisiones. Haciendo uso de la función de utilidad de cada sujeto, el investigador intentó predecir las decisiones que cada hombre haría en un juego donde repetidamente tendría que escoger entre dos opciones y en las cuales pudiera perder o ganar cigarrillos.
+
+La hipótesis evaluada fue que los investigadores podrían predecir las decisiones de los sujetos en términos del valor de la utilidad, en lugar de suponer que la utilidad de los cigarrillos es equivalente al valor nominal de los mismos y, por tanto, predecir la elección "racional" en términos del valor objetivo. Esta hipótesis fue confirmada.
+
+Sin embargo, como era de esperarse, algunas respuestas no se predijeron con éxito, por la hipótesis de maximización de la utilidad esperada. Los investigadores habían conjeturado que tales errores en la predicción se deberían a la probable indiferencia de los sujetos hacia las dos opciones disponibles. Esto es, un recluso podía encontrar igual de atractivo ambas opciones o no parecerle atractiva ninguna y, por lo tanto, ser indiferente a la elección entre ambas opciones. Tales elecciones (de indiferencia) son difíciles de predecir. Pero en tales casos, se razonó que el sujeto vacilaría en plantear una apuesta y tardaría más en decidir. Es decir, la latencia entre el ofrecimiento de las opciones y el aceptar alguna de ellas sería mayor. La segunda hipótesis fue que las latencias o tiempos de respuesta que no se predijeron satisfactoriamente por la maximización de la utilidad esperada, serían mayores que las elecciones predichas con éxito. La hipótesis que se quiere probar aquí es que las latencias de las elecciones predichas incorrectamente serán mayores que las predichas correctamente.  Los datos son tomados de Siegel (1995, pág. 119) y se muestran con el siguiente código.
+
+```{r}
+di <- c(
+  -2L, 0L, 0L, 1L, 0L, 0L, 4L, 4L, 1L, 1L, 5L, 3L, 5L, 
+  3L, -1L, 1L, -1L, 5L, 8L, 2L, 2L, 2L, -3L, -2L, 1L, 
+  4L, 8L, 2L, 3L, -1L
+)
+reclusos <- tibble(
+  diferencia = dplyr::if_else(
+    di == 0, NA_integer_, di
+  )
+) %>% 
+  mutate(
+    rango = sign(diferencia) * 
+      rank(
+        abs(diferencia), na.last = TRUE, 
+             ties.method = "average"
+      )
+  ) %>% 
+  dplyr::transmute(
+    reclusos = 1:length(di),
+    diferencia = di,
+    rango 
+  )
+kableExtra::kbl(
+  reclusos,
+  col.names = c(
+    "Reclusos", "$D_i$", "$R_i$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:pareja}Diferencia en el tiempo promedio entre las decisiones correcta e incorrectamente
+predichas de los reclusos",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  row_spec(which(reclusos$diferencia == 0), color = "red",
+           strikeout = TRUE) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>  
+El siguiente código permite hallar el estadístico y el p.valor de la prueba de Wilcoxon.
+
+```{r}
+Tmas <- reclusos %>% 
+  dplyr::select(
+    rango
+  ) %>% 
+  dplyr::filter(
+    rango > 0
+  ) %>% 
+  sum(., na.rm = TRUE)
+n <- length(di[di != 0])
+p.valor <- psignrank(
+  q = Tmas - 1, n = n, lower.tail = FALSE
+)
+paste("El valor del estadístico Tmas =", Tmas)
+paste(
+  "El p.valor =", format(
+    round(p.valor, digits = 5),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+```
+<br/>
+La salida anterior muestra que el $p_{valor}=`r formato(p.valor)`$, lo cual indica que hay suficiente evidencia estadística para afirmar que las latencias de las elecciones predichas incorrectamente serían mayores que las predichas correctamente. 
+  
+```{r}
+library(exactRankTests)
+wilcox.exact(x = di, y = NULL, alternative = "g", mu = 0,
+             paired = FALSE, exact = T)
+```
+<br/>
+En la salida anterior se ha ejecutado la prueba de rangos con signos de Wilcoxon usando la distribución exacta del estadístico $T^{+}$ de Wilcoxon para muestras relacionadas. A continuación se muestra la ejecución de esta prueba haciendo uso de la convergencia asintótica a la normal de este estadístico.
+
+```{r}
+media <- n*(n + 1)/4
+var <- n*(n + 1)*(2*n + 1)/24
+z <- (Tmas - media)/sqrt(var)
+p.valor.aprox <- pnorm(q = z, lower.tail = F)
+paste(
+  "El valor del estadístico Z =", round(x = z, digits = 4)
+)
+paste("El p.valor.aprox =", round(x = p.valor, digits = 4))
+```
+<br/>
+Como se puede notar el $p_{valor.exacto} = `r formato(p.valor)`$ , no es muy diferente del $p_{valor.aprox} = `r formato(p.valor.aprox)`$. El resultado anterior puede encontrarse por medio de la función `*wilcox.exact*` del paquete `**exactRankTests**`, haciendo el argumento `exact = F`, como sigue.
+
+```{r}
+library(exactRankTests)
+wilcox.exact(
+  x = di, y = NULL, alternative = "g", mu = 0,
+  paired = FALSE, exact = F
+)
+```
+<br/>
+La salida anterior muestra el $p_{valor aprox.}$ sin corrección por continuidad. El siguiente código lo muestra usando tal corrección.
+
+```{r}
+z <- (Tmas - 0.5 - media)/sqrt(var)
+p.valor.aprox.cor <- pnorm(q = z, lower.tail = F)
+paste(
+  "El valor del estadístico Z =", round(x = z, digits = 4)
+)
+paste(
+  "El p.valor.aprox.cor =", round(x = p.valor, digits = 4)
+)
+```
+<br/>
+
+```{r}
+wilcox.test(
+  x = di, y = NULL, alternative = "g", mu = 0, 
+            paired = F, exact = F, correct = T
+)
+```
+<br/>
+Note que en los datos de este ejemplo existen rangos empatados, por lo que es necesario ajustar la prueba estadística para considerar el decremento en la variabilidad de $T^{+}$. La corrección requiere contar los empates y reducir la varianza, respectivamente.
+
+```{r}
+empates <- filter(
+  as.data.frame(table(rank(abs(di[di != 0])))), Freq > 1
+) %>% 
+  dplyr::transmute(
+  grupo = 1:nrow(.), 
+  rango = Var1,
+  Tj = Freq
+) %>%
+  as.tibble()
+kableExtra::kbl(
+  empates,
+  col.names = c(
+    "Grupo", "$R_j$", "$T_j$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:empates}Grupos de rangos empatados",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+  
+```
+<br/>
+El cálculo del p.valor corregido por empates se muestra con el siguiente código.
+
+```{r}
+cor_var <- sum(empates$Tj * (empates$Tj^2 - 1)) / 2
+var.cor <- var - cor_var
+z.cor <- (Tmas - media) / sqrt(var.cor)
+p.valor <- pnorm(q = z, lower.tail = F)
+paste(
+  "El valor del estadístico Z =", round(
+    x = z.cor, digits = 4
+  )
+)
+paste("El p.valor =", round(x = p.valor, digits = 4))
+```
+<br/>
+En relación con el cálculo anterior, si se realiza la corrección por continuidad, se obtienen los siguientes resultados.
+
+```{r}
+var.cor <- var - sum(Empate$Ti * (Empate$Ti^2 - 1)) / 48
+z.cor.cont <- (Tmas - 0.5 - media) / sqrt(var.cor)
+p.valor <- pnorm(q = z, lower.tail = F)
+paste("El valor del estadístico Z =", round(
+  x = z.cor.cont,
+  digits = 4
+  )
+)
+paste("El p.valor =", round(x = p.valor, digits = 5))
+```
+<br/>
+El cálculo del p.valor aproximado, usando la convergencia asintótica del estadístico T propuesto en Conover(1999,pág. 353), se muestra con el siguiente código.
+
+```{r}
+R <- reclusos %>%
+  dplyr::select(rango) %>%
+  dplyr::filter(rango != 0)
+T <- (sum(abs(R)) - 1) / sqrt(sum(R^2))
+p.valor <- pnorm(q = T, lower.tail = F)
+paste(
+  "El valor del estadístico T =", round(x = T, digits = 4)
+)
+paste("El p.valor =", round(x = p.valor, digits = 5))
+```
+<br/>
+:::
 
 ## Prueba para Datos en Forma de Frecuencias de Mcnemar {#fecuencia-mcnemar2}
 
