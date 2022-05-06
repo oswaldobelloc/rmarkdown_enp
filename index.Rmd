@@ -2960,7 +2960,7 @@ La hipótesis evaluada fue que los investigadores podrían predecir las decision
 
 Sin embargo, como era de esperarse, algunas respuestas no se predijeron con éxito, por la hipótesis de maximización de la utilidad esperada. Los investigadores habían conjeturado que tales errores en la predicción se deberían a la probable indiferencia de los sujetos hacia las dos opciones disponibles. Esto es, un recluso podía encontrar igual de atractivo ambas opciones o no parecerle atractiva ninguna y, por lo tanto, ser indiferente a la elección entre ambas opciones. Tales elecciones (de indiferencia) son difíciles de predecir. Pero en tales casos, se razonó que el sujeto vacilaría en plantear una apuesta y tardaría más en decidir. Es decir, la latencia entre el ofrecimiento de las opciones y el aceptar alguna de ellas sería mayor. La segunda hipótesis fue que las latencias o tiempos de respuesta que no se predijeron satisfactoriamente por la maximización de la utilidad esperada, serían mayores que las elecciones predichas con éxito. La hipótesis que se quiere probar aquí es que las latencias de las elecciones predichas incorrectamente serán mayores que las predichas correctamente.  Los datos son tomados de Siegel (1995, pág. 119) y se muestran con el siguiente código.
 
-```{r}
+```{r reclusos-empates, knitr.kable.NA = ""}
 di <- c(
   -2L, 0L, 0L, 1L, 0L, 0L, 4L, 4L, 1L, 1L, 5L, 3L, 5L, 
   3L, -1L, 1L, -1L, 5L, 8L, 2L, 2L, 2L, -3L, -2L, 1L, 
@@ -2983,6 +2983,7 @@ reclusos <- tibble(
     diferencia = di,
     rango 
   )
+options(knitr.kable.NA = "")
 kableExtra::kbl(
   reclusos,
   col.names = c(
@@ -3163,6 +3164,80 @@ paste("El p.valor =", round(x = p.valor, digits = 6))
 ###	Racionalización de la Prueba para Datos en Forma de Frecuencias de Mcnemar {#racionalizacion-fecuencia-mcnemar2}
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba para Datos en Forma de Frecuencias de Mcnemar {#R-fecuencia-mcnemar2}
+
+::: {.example #ejemplo1-fecuencia-mcnemar2 name="Prueba para Datos en Forma de Frecuencias de Mcnemar"} 
+Durante las campañas presidenciales (y algunas otras campañas para puestos públicos) de 1980 en Estados Unidos se realizaron debates televisivos entre dos o más candidatos. Un investigador en técnicas de comunicación estaba interesado -tanto como los candidatos- en determinar si los debates entre los candidatos presidenciales en las elecciones de 1980 eran efectivos o no en cuanto a cambiar las preferencias de los televidentes hacia los distintos candidatos. Se predijo que si los candidatos (Jimmy Carter y Ronald Reagan) eran igualmente efectivos, habría cambios comparables en las preferencias a cada candidato por parte de los televidentes. Por otro lado, si un candidato era más efectivo o persuasivo durante el debate, entonces habría un cambio diferencial de un candidato a otro. Para evaluar la efectividad del debate, el investigador seleccionó 70 adultos al azar antes del debate y les pidió que indicaran sus preferencias hacia ambos candidatos. Después de la conclusión del debate, les volvió a preguntar acerca de su predilección. Así, en cada caso el conocía las preferencias de las personas antes del debate y después del mismo. Los resultados, obtenidos de Siegel (1995, pág. 103), se presentan en la siguiente tabla. En base a estos datos, pruebe la hipótesis de que entre los televidentes que cambiaron sus preferencias, la probabilidad de que hayan cambiado de Reagan a Carter será la misma de los que cambiaron de Carter a Reagan, con un nivel de confianza del 95%.
+
+```{r}
+carter <- tibble(
+  antes = c("Carter", "Reagan"),
+  carter = c(28L, 7L),
+  regan = c(13L, 27L)
+)
+kableExtra::kbl(
+  carter,
+  col.names = c(
+    "Preferencia antes del debate televisivo", "Carter",
+    "Reagan"
+  ),
+  align = c("l", "c", "c"),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:empates}Preferencias de los sujetos acerca de los candidatos presidenciales antes
+y después del debate televisivo",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2() %>%
+  column_spec(c(1, 2, 3), width = c("8em", "3em", "3em")) %>% 
+  add_header_above(c(" " = 1, "Preferencia después del debate televisivo" = 2)) %>% 
+  scroll_box(width = "100%", height = "400px")
+```
+<br/> 
+La prueba exacta de McNemar, usando la distribución binomial, se obtiene con la ejecución del siguiente código.
+
+```{r}
+b <- carter$regan[1]
+c <- carter$carter[2]
+n <- b + c
+p.valor <- 2*pbinom(q = c, size = n, prob = 0.5)
+paste("El valor de b =", b)
+paste("El valor de c =", c)
+paste("El p.valor =", round(x = p.valor, digits = 4))
+```
+<br/>
+El cálculo del estadístico $\chi^{2}$ de Mcnemar y el $p_{valor}$, usando la convergencia asintótica a la distribución Ji-cuadrada, se muestra con el siguiente código.
+
+```{r}
+X2 <- (abs(b - c) - 1) ^ 2 / (b + c)
+p.valor.aprox <- pchisq(q = X2, df = 1, lower.tail = F)
+paste("El valor del estadístico X2 =", round(x = X2, digits = 4))
+paste("El p.valor.aprox =", round(x = p.valor.aprox, digits = 4))
+```
+<br/>
+Como se muestra en la salida anterior, dado que el $p_{valor\,aprox}$ es mayor que el nivel de significancia $\alpha = 0,05$ no se puede rechazar la hipótesis de que los candidatos fueron igual de efectivos para cambiar la preferencia de los televidentes.
+
+El resultados anterior, se puede obtener de manera directa, con la aplicación de la función `*mcnemar.test*` del paquete `**stats**`, como sigue.
+  
+```{r}
+mcnemar.test(x = as.matrix(carter[ , 2:3]), correct = T)
+```
+<br/>
+La función `*mcnemar.exact*` del paquete `**exact2x2**`, también ejecuta la prueba para datos en forma de frecuencia de Mcnemar. Como se muestra en el siguiente código.
+
+```{r}
+library(exact2x2)
+exact2x2::mcnemar.exact(
+  x = as.matrix(carter[ , 2:3]), conf.level = 0.95
+)
+```
+<br/>
+:::
+
 
 
 ## Información de Sesión {#sesion}
