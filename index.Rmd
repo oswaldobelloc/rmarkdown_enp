@@ -1,5 +1,5 @@
 ---
-title: "Pruebas que Usan Datos de Una Muestra Aleatoria Simple"
+title: "Estadística No Paramétrica"
 author:
   name: "Prof: Oswaldo Bello (oswaldobelloc@gmail.com)"
   affiliation: "Universidade de Oriente, Venezuela"
@@ -113,7 +113,8 @@ knitr::opts_chunk$set(
   echo = TRUE, error = FALSE, warning = FALSE,
   message = FALSE, strip.white = FALSE, tidy = "styler",
   results = "hold", strip.white = FALSE, comment = "#>",
-  tidy.opts = list(blank = FALSE, width.cutoff = 60)
+  tidy.opts = list(blank = FALSE, width.cutoff = 60),
+  class.source = "bg-success", class.output = "bg-warning"
 )
 ```
 <br/>
@@ -136,7 +137,7 @@ Una vez descrita estas pruebas se procede, mediante ejemplos, a la implementaci�
 
 El siguiente bloque de código permite instalar y cargar los paquetes usados para implementar estas pruebas en `r colorize("R", "blue")`.
 
-```{r cargar-paquetes, class.source = "watch-out"}
+```{r cargar-paquetes}
 packages <- c(
   "rmarkdown", "bookdown", "bookdownplus", "magrittr",
   "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
@@ -255,7 +256,7 @@ La función `dbinom` permite evaluar la función de masa de probabilidad binomia
 
 (ref:foo2) Descripción de los parámetros de funciones  de `r colorize("R", "blue")` relacionadas con la distribución binomial
 
-```{r par-dist-binom, class.source = "watch-out"}
+```{r par-dist-binom}
 knitr::kable(
   data.frame(
     stringsAsFactors = TRUE,
@@ -288,7 +289,7 @@ También, la distribución base de `r colorize("R", "blue")` proporciona la func
 
 (ref:foo) Descripción de los parámetros de la función `binom.test` de `r colorize("R", "blue")`
 
-```{r par-prueba-binom, class.source = "watch-out"}
+```{r par-prueba-binom}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -391,7 +392,7 @@ La tabla \@ref(tab:par-dist-normal) describe los parámetros de estas funciones
 
 (ref:foo3) Descripción de los parámetros de  funciones de `r colorize("R", "blue")` relacionadas con la distribución normal
 
-```{r par-dist-normal, class.source = "watch-out"}
+```{r par-dist-normal}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -424,7 +425,7 @@ La distribución base de `r colorize("R", "blue")` incluye la función `prop.tes
 
 (ref:foo4) Descripción de los parámetros de la función `prop.test` de `r colorize("R", "blue")`
 
-```{r par-prueba-binomial-aprox, class.source = "watch-out"}
+```{r par-prueba-binomial-aprox}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -460,7 +461,7 @@ En este ejemplo, la hipótesis alternativa que se quiere contrastar es que el es
 
 El siguiente código muestra la evaluación de la ecuación \@ref(eq:pus-binomial) usando la función `pbinom`, la cual evalúa la función de distribución acumulada binomial con parámetros $n=18$ y $p=0,5$, en $X=16-1=15$; es decir, $F\left(X=15, n=18,p=0,5\right)$.
 
-```{r binomial1, class.source = "watch-out", class.output = "bg-warning"}
+```{r binomial1}
 x <- 16
 n <- 18
 p0 <- 0.5
@@ -473,7 +474,7 @@ Como se puede ver en la salida generada por el código anterior, el $p_{valor}= 
 
 El resultado anterior, también se puede obtener a través de la función `binom.test`, cuyos parámetros se describen en la tabla \@ref(tab:par-prueba-binom), a través del siguiente código:
 
-```{r binomtest1, class.source = "watch-out", class.output = "bg-warning"}
+```{r binomtest1}
 x <- 16
 n <- 18
 p0 <- 0.5
@@ -488,7 +489,7 @@ Como se nota en la salida, el $p_{valor}$ obtenido por este método es igual al 
 
 Por otro lado, la aproximación asintótica del $p_{valor}$ indicado por la ecuación \@ref(eq:paproxus-binomial), se puede obtener con la ejecución del siguiente código.
 
-```{r binomial1-aprox, class.source = "watch-out", class.output = "bg-warning"}
+```{r binomial1-aprox}
 x <- 16
 n <- 18
 p0 <- 0.5
@@ -501,7 +502,7 @@ Note que el $p_{valor \ aprox.} = `r format(round(p.valor.aprox, digits = 4), mo
 
 También, la aproximación del $p_{valor}$ se puede obtener con la función `prop.test` del paquete `base`, como se muestra a continuación, con el siguiente código.
 
-```{r proptest1, class.source = "watch-out", class.output = "bg-warning"}
+```{r proptest1}
 prop.test(
   x = 16, n = 18, p = 0.5, alternative = "greater",
   conf.level = 0.95, correct = TRUE
@@ -523,7 +524,7 @@ Note que la aproximación del $p_{valor}$ obtenida en estas dos últimas salidas
     b)  ¿Qué pasa si en vez de tomar la muestra aleatoria de 20, se toma una muestra aleatoria de 30? (Use $\alpha = 5\%$).
 
 
-## Prueba del Signo {#signo1}
+##  signo Signo {#signo1}
 
 La *prueba del signo* es un test no paramétrico que se usa para contrastar hipótesis referentes a la mediana de una población. La aplicación de este test requiere que la variable analizada sea continua.
 
@@ -616,7 +617,7 @@ $$
 
 (ref:foo5) Descripción de los parámetros de la función `SIGN.test` de `r colorize("R", "blue")`
 
-```{r par-prueba-signo, class.source = "watch-out"}
+```{r par-prueba-signo}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -711,7 +712,7 @@ Pruebe la hipótesis nula $\widetilde{\mu}=98,0$ contra la hipótesis alternativ
 
 Para contrastar estas hipótesis primero es conveniente ordenar la muestra de mayor a menor y luego asignar a cada observación un signo positivo ("+"), igual ("=") o negativo ("-") según sea mayor, igual o menor que la mediana, respectivamente. Tal como se muestra en la tabla \@ref(tab:datos2).
 
-```{r datos2, class.source = "watch-out"}
+```{r datos2}
 co <- c(
   99.0, 102.3, 99.8, 100.5, 99.7, 96.2, 99.1, 102.5,
   103.3, 97.4, 100.4, 98.9, 98.3, 98.0, 101.6
@@ -753,7 +754,7 @@ kableExtra::kbl(
 
 Note que en la tabla \@ref(tab:datos2) la observación `r as.numeric(datos2 %>% dplyr::filter(signo == "=") %>% dplyr::select(observacion))` es igual que la mediana establecida en la hipótesis nula, por lo que esta observación se elimina de la muestra y $n$ se establece como `r nrow(datos2 %>% filter(signo != "="))`. La tabla anterior se resume en la tabla \@ref(tab:conteo-signos), ejecutando el siguiente código.
 
-```{r conteo-signos, class.source = "watch-out"}
+```{r conteo-signos}
 conteo_signo <- datos2 %>%
   group_by(signo) %>%
   summarise(conteo = n())
@@ -776,7 +777,7 @@ kable(
 
 La hipótesis alternativa que se pretende contrastar es unilateral superior $H_{1}:\widetilde{\mu}> 98,0$. Para este caso el valor del estadístico de prueba $s$ y el $p_{valor}$ vienen dados por las ecuaciones \@ref(eq:estadistico-signo) y \@ref(eq:pus-signo). El siguiente código permite determinar el valor del estadístico de prueba $s$ y el $p_{valor}$, necesarios para contrastar la hipótesis planteada.
 
-```{r estadistico, class.source = "watch-out", class.output = "bg-warning"}
+```{r estadistico, class.output = "bg-warning"}
 s <- as.numeric(conteo_signo %>%
   dplyr::filter(signo == "\\+") %>%
   dplyr::select(conteo))
@@ -793,14 +794,14 @@ En la salida anterior se observa que el valor del estadístico de prueba $s=`r a
 
 Una forma más expedita de ejecutar la prueba del signo en `r colorize("R", "blue")` es a través de la función `SING.test` del paquete `BSDA` cuyos parámetros se describen en la tabla \@ref(tab:par-prueba-signo). El siguiente código muestra la ejecución de la prueba del signo por medio de esta función. Note que el $p_{valor}$ que se muestra en esta salida es igual al obtenido en la salida anterior.
 
-```{r SIGNtest2, class.source = "watch-out", class.output = "bg-warning"}
+```{r SIGNtest2, class.output = "bg-warning"}
 BSDA::SIGN.test(x = co, md = 98, alternative = "g", conf.level = 0.99)
 ```
 <br/>
 
 Dado que la prueba del signo se puede considerar como un caso particular de la prueba binomial cuando $p_{0}=\frac{1}{2}$, la función `binom.test` también puede ser usada para realizar la prueba del signo. El siguiente código muestra la ejecución de la prueba del signo a través de esta función. Note que el $p_{valor}$ obtenido aquí es idénticos a los anteriores.
 
-```{r binomtest2, class.source = "watch-out", class.output = "bg-warning"}
+```{r binomtest2, class.output = "bg-warning"}
 s <- as.numeric(conteo_signo %>%
   dplyr::filter(signo == "\\+") %>%
   dplyr::select(conteo)) # se ha colocado dplyr::select para
@@ -816,7 +817,7 @@ binom.test(
 
 Como se dijo anteriormente, el $p_{valor}$ para la prueba del signo, cuando $n$ es suficientemente grande, se puede aproximar con la ecuación \@ref(eq:paproxus-signo). El siguiente código permite evaluar tal ecuación. Como se puede ver, el $p_{valor \ aprox.}$ generado por este procedimiento $\left(`r format(round(1 - pnorm(q = (2*s - 1 - n)/sqrt(n)), digits = 4), decimal.mark = ",")`\right)$ no difiere mucho del $p_{valor}$ exacto $\left(`r format(round(p.valor, digits = 4), decimal.mark = ",")`\right)$ obtenido por los métodos anteriores. Note que el $p_{valor \ aprox.}$ sigue siendo menor que el nivel de significancia establecido para esta prueba, lo que conduce, de igual manera, a rechazar la hipótesis nula $H_{0}: \widetilde{\mu}=98,0$.
 
-```{r suigno2-aproximado, class.source = "watch-out", class.output = "bg-warning"}
+```{r suigno2-aproximado}
 s <- as.numeric(conteo_signo %>%
   dplyr::filter(signo == "\\+") %>%
   dplyr::select(conteo))
@@ -837,7 +838,7 @@ paste(
 
 Otra manera de calcular el $p_{valor \ aprox.}$ es usando la función `prop.test`, de manera análoga a la prueba binomial.
 
-```{r proptest2, class.source = "watch-out", class.output = "bg-warning"}
+```{r proptest2}
 s <- as.numeric(conteo_signo %>%
   dplyr::filter(signo == "\\+") %>%
   dplyr::select(conteo))
@@ -985,7 +986,7 @@ La función `dchisq` calcula la función de densidad ji-cuadrado, `pchisq` eval�
 
 (ref:foo6) Descripción de los parámetros de funciones de `r colorize("R", "blue")` relacionadas con la distribución ji-cuadrado
 
-```{r par-dist-jicuadrado, class.source = "watch-out"}
+```{r par-dist-jicuadrado}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -1019,7 +1020,7 @@ Por otro lado la función `chisq.test(x, y = NULL, correct = TRUE, p = rep(1/len
 
 (ref:foo7) Descripción de los parámetros de la función `chisq.test` de `r colorize("R", "blue")`
 
-```{r par-prueba-jicuadrado, class.source = "watch-out"}
+```{r par-prueba-jicuadrado}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -1126,7 +1127,7 @@ Para estimar las frecuencias esperadas de cada clase, es necesario estimar las p
 
 (ref:foo8) Descripción de los parámetros de la función `fitdistr` de `r colorize("R", "blue")`
 
-```{r par-fitdistr, class.source = "watch-out"}
+```{r par-fitdistr}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -1155,7 +1156,7 @@ knitr::kable(
 ::: {.example #ejemp1-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
 En 1865 Mendel descubrió un código genético básico mediante la cría de guisantes verdes y amarillos en un experimento. Debido a que el gen amarillo del guisante es dominante, los híbridos de la primera generación fueron amarillos, pero los de la segunda generación eran aproximadamente 75% amarillos y 25% verdes. El color verde reaparece en la segunda generación porque hay un 25% de probabilidad de que dos guisantes, ambos con un gen amarillo y otros con un gen verde, contribuyan con el verde a la siguiente semilla híbrida. En otro experimento de guisantes se consideró tanto el color como las características de la textura. Los resultados de los experimentos se muestran en la tabla \@ref(tab:datos-mendel).
 
-```{r datos-mendel, class.source = "watch-out"}
+```{r datos-mendel}
 datos3 <- data.frame(
   stringsAsFactors = FALSE,
   Tipo.de.Guisante = c(
@@ -1192,7 +1193,7 @@ $$
 
 Según la ecuación \@ref(eq:criterio-ba-jicuadrado), el valor del estadístico tabulado es $\chi_{k-1=3;1-\alpha=0,99}^{2} = `r format(round(qchisq(p = 1 - 0.01, df = nrow(datos3) - 1), digits = 4), mode = "doble", big.mark = ".", decimal.mark = ",")`$ . Mientras que de la ecuación \@ref(eq:pus-ba-jicuadrado), el $p_{valor \, aprox}=1-F_{\chi_{k-1=3}^{2}}\left( `r format(round(sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada)^2/datos3$Frecuencia.Esperada), digits = 4), mode = "doble", big.mark = ".", decimal.mark = ",")`\right)=1-`r format(round(pchisq(q = sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada) ^ 2 / datos3$Frecuencia.Esperada), df = nrow(datos3)-1), digits = 4), mode = "doble", big.mark = ".", decimal.mark = ",")` = `r format(round(1-pchisq(q = sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada) ^ 2 / datos3$Frecuencia.Esperada), df = nrow(datos3)-1), digits = 4), mode = "doble", big.mark = ".", decimal.mark = ",")`$. Dado que el estadístico de prueba $\left(`r format(round(sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada) ^ 2 /datos3$Frecuencia.Esperada), digits = 4), mode = "doble", big.mark = ".", decimal.mark = ",")`\right)$ es mucho menor que el estadístico tabulado $\left(`r format(round(qchisq(p = 1 - 0.01, df = nrow(datos3)), digits = 4), mode = "doble", big.mark = ".", decimal.mark = ",")` \right)$ no se puede rechazar la hipótesis de que las frecuencias observadas se ajustan al modelo propuesto por Mendel. A la misma conclusión se llega si se usa el $p_{valor}$ como criterio de decisión. Los resultados antes descritos se pueden obtener con el siguiente script.
 
-```{r jicuadrado1, class.source = "watch-out", class.output = "bg-warning"}
+```{r jicuadrado1}
 alfa <- 0.01
 Ji_cuadrado <- sum((datos3$Frecuencia.Observada - datos3$Frecuencia.Esperada)^2 /
   datos3$Frecuencia.Esperada)
@@ -1206,7 +1207,7 @@ paste("El p_valor =", round(p_valor, digits = 4))
 
 El estadístico de prueba $\chi^2$ y el $p_{valor \, aprox.}$ se pueden obtener de manera directa con la función `chisq.test` descrita en la tabla \@ref(tab:par-prueba-jicuadrado), como se muestra en el siguiente código.
 
-```{r chisqtest3, class.source = "watch-out", class.output = "bg-warning"}
+```{r chisqtest3}
 chisq.test(
   x = datos3$Frecuencia.Observada,
   p = datos3$Frecuencia.Esperada /
@@ -1238,7 +1239,7 @@ $$
 
 $x=0, 1, 2, \dotsc7$ y $\lambda=2$. La distribución base de `r colorize("R", "blue")` tiene la función `dpois` que permite evaluar esta función.
 
-```{r datos4, class.source = "watch-out"}
+```{r datos4}
 datos4 <- tibble(
   accidentes = c(0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L),
   dias = c(22L, 53L, 58L, 39L, 20L, 5L, 2L, 1L)
@@ -1269,7 +1270,7 @@ knitr::kable(
 
 Como se nota en la tabla generada por el script anterior, las clases 7 y 8 tienen frecuencias esperadas menores que 5, y peor aún, la de la clase 8 es menor que 1. Por tanto, estas se funden con la clase 6 para dar lugar a la clase 5 o más accidentes en un día, para que sea procedente utilizar la prueba de bondad de ajuste Ji-Cuadrado.
 
-```{r datos4-corregidos, class.source = "watch-out"}
+```{r datos4-corregidos}
 datos4 <- bind_rows(datos4[1:5, ], colSums(datos4[6:8, ])) %>%
   mutate(accidentes = as.character(accidentes))
 datos4[6, 1] <- "$\\geq5$"
@@ -1307,7 +1308,7 @@ $$
 
 De los resultados anteriores, se concluye que no se puede rechazar la hipótesis de que los accidentes diarios en cada regimiento del ejercito sigue una distribución de Poisson con $\lambda = 2$, a un nivel de significancia del 5%.
 
-```{r chisqtes4, class.source = "watch-out", class.output = "bg-warning"}
+```{r chisqtes4}
 chisq.test(
   x = datos4$dias, p = datos4$Ei,
   rescale.p = TRUE
@@ -1335,7 +1336,7 @@ y se desea saber si la muestra avala que la máquina está funcionando correctam
 
 Para aplicar el contraste de bondad de ajuste ji-cuadrado, hay que construir la tabla de distribución de frecuencia en intervalos de clases; como $n=40$, se pueden hacer 8 intervalos, con números esperado de observaciones igual a 5, buscando los cuantiles de órdenes $0,125, 0,25, 0,375, \dotsc, 0,875$. El siguiente código permite ejecutar el procedimiento descrito previamente.
 
-```{r datos5, class.source="watch-out", class.source = "watch-out"}
+```{r datos5}
 lp <- c(
   10.39, 10.66, 10.12, 10.32, 10.25, 10.91, 10.52, 10.83,
   10.72, 10.28, 10.35, 10.46, 10.54, 10.72, 10.23, 10.18,
@@ -1392,14 +1393,14 @@ El siguiente código muestra la ejecución de la prueba de bondad de ajuste Ji-c
 
 Como se observa en la salida, el $p_{valor\, aprox} = `r chisq.test(x = datos5$Oi)$p.value`$ lo que indica que se rechaza la hipótesis de que la longitud de la pieza se ajusta a una distribución normal con media 10,5 y desviación estándar 0,15; con un nivel de confianza del 95%.
 
-```{r chisq-datos5, class.source = "watch-out", class.output = "bg-warning"}
+```{r chisq-datos5}
 chisq.test(x = datos5$Oi)
 ```
 <br/>
 
 La siguiente gráfica corrobora la conclusión de que los datos no se ajustan a una distribución $N\left(\mu = 10,5;\: \sigma = 0,15 \right)$. Como se ve en la figura \@ref(fig:densidad-lp) la densidad $N\left(\mu = 10,5; \sigma = 0,15 \right)$ , representada por la línea roja, no se ajusta a la densidad empírica de los datos muestrales, representada por la línea azul.
 
-```{r densidad-lp, fig.cap = "Densidad de la longitud de la pieza", class.source = "watch-out"}
+```{r densidad-lp, fig.cap = "Densidad de la longitud de la pieza"}
 ggplot(as.data.frame(lp), aes(x = lp)) +
   geom_histogram(aes(y = ..density..),
     bins = 8, color = "white", fill = "steelblue"
@@ -1416,7 +1417,7 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
 ```
 
 
-```{r densidad2-lp, fig.cap = "Densidad de la longitud de la pieza", echo = FALSE, eval = FALSE, class.source = "watch-out"}
+```{r densidad2-lp, fig.cap = "Densidad de la longitud de la pieza", echo = FALSE, eval = FALSE}
 lim_int <- qnorm(
   p = seq(
     from = 0, to = 1,
@@ -1491,14 +1492,14 @@ $$
 
 La función `fitdistr` del paquete `MASS` cuyos parámetro se describen en la tabla \@ref(tab:par-fitdistr) calcula los estimadores de máxima verosimilitud de algunas distribuciones de probabilidad univariadas, entre ellas la distribución normal. Con el siguiente código se determinan tales estimaciones, a partir de la información de la muestra.
 
-```{r estimacion-paraetros, class.source = "watch-out", class.output = "bg-warning"}
+```{r estimacion-paraetros}
 fitdistr(x = lp, densfun = "normal")
 ```
 <br/>
 
 El siguiente código permite construir la tabla de distribución de frecuencia observadas y esperadas estimadas. Estas últimas se calculan a partir de las probabilidades estimadas de cada clase ($\hat{E}_i=n\hat{p}_{0i}$). La construcción de la tabla se obtiene con el siguiente código.
 
-```{r datos6, class.source = "watch-out"}
+```{r datos6}
 lim_int <- c(-Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 
              10.8, 10.9, Inf)
 datos6 <- as.data.frame(table(cut(
@@ -1543,7 +1544,7 @@ knitr::kable(
 
 Como se puede ver en la tabla anterior, las dos primeras clases tienen frecuencias esperadas estimadas menores que 5, por la que estas se funden en una sola para dar lugar a la clase longitud de la pieza menor o igual a 10,3. Del mismo modo, las tres últimas clases tienen frecuencias esperadas estimadas menores que 5 por lo se colapsan para dar lugar a la clase longitud de la pieza mayor que 10,7. La nueva tabla se muestra con el siguiente código.
 
-```{r datos6-corregidos, class.source = "watch-out"}
+```{r datos6-corregidos}
 lim_int <- c(-Inf, 10.3, 10.4, 10.5, 10.6, 10.7, Inf)
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks = lim_int
@@ -1586,7 +1587,7 @@ knitr::kable(
 
 Fíjese que la prueba de hipótesis que se plantea en este ejemplo es compuesta, dado que los parámetros de la distribución bajo la hipótesis nula son desconocidos (la media $\mu$ y la desviación estándar $\sigma$). Por lo tanto, el estadístico de la prueba se distribuye asintóticamente Ji-cuadrado con $k-r-1=6-2-1=3$ grados de libertad. El valor del estadístico $\chi^{2}$ y el $p_{valor \,aprox}$ se generan con el siguiente código.
 
-```{r jicuadrado6, class.source = "watch-out", class.output = "bg-warning"}
+```{r jicuadrado6}
 X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
 p.valor <- pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
 paste("El estadístic Ji-Cuadrado =", X2)
@@ -1598,7 +1599,7 @@ Dado que el $p_{valor \, aprox} = `r format(p.valor, decimal.mark = ",", big.mar
 
 Si se propone ahora realizar la prueba, de tal manera que la tabla de frecuencia no amerite ser corregida, como se realizó en el *ejemplo 5*. La tabla quedaría de la siguiente manera, ejecutando el siguiente script.
 
-```{r datos6-sin-correccion, class.source = "watch-out"}
+```{r datos6-sin-correccion}
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks =
     qnorm(
@@ -1646,7 +1647,7 @@ knitr::kable(
 
 Como se puede ver en la tabla anterior, todas las frecuencias esperadas son mayores o iguales que 5, por lo que se procede a aplicar la prueba, por medio de las siguientes instrucciones.
 
-```{r jicuadrado6-sin-correccion, class.source = "watch-out", class.output = "bg-warning"}
+```{r jicuadrado6-sin-correccion}
 X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
 p.valor <- pchisq(q = X2, df = nrow(datos6) - 2 - 1, lower.tail = F)
 paste("El estadístic Ji-Cuadrado =", X2)
@@ -1837,7 +1838,7 @@ La distribución de probabilidad de los estadísticos de Kolgomorov-Smirnov se e
 
 La utilización de estos estadísticos, para contrastar si una m.a.s. proviene de una distribución totalmente especificada $F_0\left(x\right)$, queda recogida en la tabla \@ref(tab:regioncritica-kolgomorovsmirnov).
 
-```{r regioncritica-kolgomorovsmirnov, class.source = "watch-out"}
+```{r regioncritica-kolgomorovsmirnov}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -1878,7 +1879,7 @@ La función `ks.test(x, y, …, alternative = c("two.sided", "less", "greater"),
 
 (ref:foo9) Descripción de los parámetros de la función `ks.test` de `r colorize("R", "blue")`
 
-```{r par-kstest, class.source = "watch-out"}
+```{r par-kstest}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -1922,7 +1923,7 @@ $$
 
 Para aplicar la prueba de bondad de ajuste Kolmogorov-Smirnov se debe construir la tabla con la distribución de frecuencias observadas y esperadas, y a partir de estas se obtienen los estadísticos de Kolmogorov-Smirnov $D_{n}^{+}$, $D_{n}^{-}$ y $D_n$, definidos en las ecuaciones \@ref(eq:Dmas), \@ref(eq:Dmenos) y \@ref(eq:D), respectivamente.
 
-```{r datos7, class.source = "watch-out"}
+```{r datos7}
 reflectancia <- c(
   0.608, 0.533, 0.912, 0.498, 0.885, 0.291, 0.805,
   0.436, 0.868, 0.712
@@ -1985,7 +1986,7 @@ Dado que el $p_{valor}>0,05$ se acepta la hipótesis de que la reflectancia tien
 
 Los resultados anterioores se pueden obtener con el siguiente código.
 
-```{r estadisticos-datos7, class.source = "watch-out", class.output = "bg-warning"}
+```{r estadisticos-datos7}
 D_mas <- max(datos7$D_mas)
 D_menos <- max(datos7$D_menos)
 Dn <- max(D_mas, D_menos)
@@ -1999,7 +2000,7 @@ paste("El p.valor =", p.valor)
 
 La figura \@ref(fig:distribucion-reflectancia), generada por el código que se presenta luego, compara la gráfica de la función de distribución acumulada empíricas  de la muestra y la distribución $U(a=0, b=1)$.
 
-```{r distribucion-reflectancia, fig.cap = "Función de distribución acumulada empírica de la reflectancia", class.source = "watch-out"}
+```{r distribucion-reflectancia, fig.cap = "Función de distribución acumulada empírica de la reflectancia"}
 ggplot(as.data.frame(reflectancia), aes(x = reflectancia)) +
   xlim(0, 1) +
   stat_ecdf(
@@ -2040,7 +2041,7 @@ ggplot(as.data.frame(reflectancia), aes(x = reflectancia)) +
 ```
 
 
-```{r distribucion-reflectancia2, fig.cap = "Función de distribución acumulada empírica de reflectancia", eval = FALSE, echo = FALSE, class.source = "watch-out"}
+```{r distribucion-reflectancia2, fig.cap = "Función de distribución acumulada empírica de reflectancia", eval = FALSE, echo = FALSE}
 plot(ecdf(reflectancia),
   xlim = c(0, 1), verticals = TRUE,
   xlab = "Reflectancia", main = ""
@@ -2050,7 +2051,7 @@ curve(punif, from = 0, to = 1, add = TRUE, lty = "dashed", lwd = 2)
 
 Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste Kolmogorov-Smirnov, para determinar si la muestra obtenida de la variable reflectancia se puede modelar por la distribución uniforme estándar.
 
-```{r kstest7, class.source = "watch-out", class.output = "bg-warning"}
+```{r kstest7}
 ks.test(reflectancia, "punif",
   min = 0, max = 1,
   alternative = "two.sided"
@@ -2066,7 +2067,7 @@ La prueba de bondad de ajuste Chi-Cuadrada aplicada en el ejemplo \@ref(exm:ejem
 
 La tabla \@ref(tab:datos8) muestra la función de distribución acumulada empíricas y la función de distribución acumulada propuesta en $H_0$.
 
-```{r datos8, class.source = "watch-out"}
+```{r datos8}
 lp <- c(
   10.39, 10.66, 10.12, 10.32, 10.25, 10.91, 10.52, 10.83,
   10.72, 10.28, 10.35, 10.46, 10.54, 10.72, 10.23, 10.18,
@@ -2136,7 +2137,7 @@ Dado que el $p_{valor} > 0,05$ se acepta la hipótesis de que la longitud de la 
 
 Los resultados anteriores se pueden obtener con el siguiente código.
 
-```{r estadisticos-datos8, class.source = "watch-out", class.output = "bg-warning"}
+```{r estadisticos-datos8}
 D_mas <- max(datos8$D_mas)
 D_menos <- max(datos8$D_menos)
 Dn <- max(D_mas, D_menos)
@@ -2150,7 +2151,7 @@ paste("El p.valor =", p.valor)
 
 La figura \@ref(fig:distribucion-lp), generada por el código que se presenta luego, compara la gráfica de la función de distribución acumulada empíricas  y la distribución $N\left(\mu=10,5;\, \sigma =0,15 \right)$. Como se nota en esta gráfica, la distribución empírica se ajusta a la distribución  $N\left(\mu=10,5;\, \sigma =0,15 \right)$, representada por la curva roja.
 
-```{r distribucion-lp, fig.cap = "Función de distribución acumulada empírica de la longitud de la  pieza", class.source = "watch-out"}
+```{r distribucion-lp, fig.cap = "Función de distribución acumulada empírica de la longitud de la  pieza"}
 ggplot(as.data.frame(lp), aes(x = lp)) +
   stat_ecdf(
     aes(colour = "Distribución empírica"),
@@ -2193,7 +2194,7 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
 
 Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste Kolmogorov-Smirnov, para determinar si la muestra obtenida de la longitud de la pieza se puede modelar por la distribución $N\left(\mu=10,5;\, \sigma =0,15 \right)$.
 
-```{r kstest8, class.source="watch-out", class.output = "bg-warning"}
+```{r kstest8}
 ks.test(lp, "pnorm",
   mean = 10.5, sd = 0.15,
   alternative = "two.sided", exact = TRUE
@@ -2305,7 +2306,7 @@ La función `druns` determina la función de masa de probabilidad de $R$, la fun
 
 (ref:foo10) Descripción de los parámetros de funciones de `r colorize("R", "blue")` relacionadas con la distribución de las rachas
 
-```{r par-dist-runsks, class.source = "watch-out"}
+```{r par-dist-runsks}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -2336,7 +2337,7 @@ knitr::kable(
 
 Por otro lado, la función `runs.test(x, alternative, threshold, pvalue, plot)` del paquete `randtests`, permite aplicar la _prueba de las rachas de Walf-Wolfowits_. Los parámetros de esta función se especifican en la tabla \@ref(tab:par-runstest).
 
-```{r par-runstest, class.source = "watch-out"}
+```{r par-runstest}
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
@@ -2367,7 +2368,7 @@ knitr::kable(
 ::: {.example #ejemplo1-rachas1 name="Prueba de Rachas o Carreras de Walf-Wolfowits"}
 En un estudio de la dinámica de agresión en niños pequeños, un investigador observó pares de niños en una situación de juego controlada. La mayoría de los 24 niños que sirvieron como sujetos en el estudio provenía de la misma guardería y, por lo tanto, jugaban juntos diariamente. Ya que el observador fue capaz de ingeniarse para observar sólo dos niños en cualquier día, estaba interesado en que podría haberse introducido sesgo en el estudio por discusiones entre aquellos niños que ya habían servido como sujetos y aquellos que sirvieron posteriormente. Si tales discusiones tenían algún efecto en el nivel de agresión en las sesiones de juego, este efecto podría mostrarse como una carencia de aleatoriedad en las puntuaciones de agresión en el orden en que fueron colectadas. Después de concluir el estudio, la aleatoriedad de la secuencia de puntuaciones fue probada al convertir las puntuaciones de agresión de cada niño a un signo más o a un signo menos, dependiendo si se encontraba por arriba o por debajo de la mediana del grupo. Los datos se muestran en la tabla \@ref(tab:datos9).
 
-```{r datos9, class.source = "watch-out"}
+```{r datos9}
 puntuacion <- c(
   31L, 23L, 36L, 43L, 51L, 44L, 12L, 26L, 43L, 75L, 2L, 3L,
   15L, 18L, 78L, 24L, 13L, 27L, 86L, 61L, 13L, 7L, 6L, 8L
@@ -2413,7 +2414,7 @@ Los datos fueron tomados de Siegel (2012, pág. 85).
 
 El siguiente trozo de código permite determinar el valor del estadístico $R$, el $p_{valor}$, la media y la varianza de $R$.
 
-```{r estadisticos, class.source = "watch-out", class.output = "bg-warning"}
+```{r estadisticos}
 mediana <- datos9 %>%
   pull(puntuacion) %>%
   median(., na.rm = TRUE)
@@ -2459,7 +2460,7 @@ Note en la salida anterior que el valor del estadístico $R = `r r`$. Mientras q
 
 La figura \@ref(fig:rachas9) muestra la gráfica de las rachas por debajo y por arriba de la mediana de la muestra (linea horizontal roja). Y en esta se observa que las longitudes de las rachas tienen un comportamiento aleatorio, lo cual contrasta con la conclusión anterior.  
 
-```{r rachas9, fig.cap = "Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia", class.source = "watch-out"}
+```{r rachas9, fig.cap = "Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia"}
 ggplot(datos9, aes(x = niños, y = puntuacion)) +
   geom_point(aes(colour = as.factor(signo)), size = 2) +
   geom_vline(
@@ -2510,7 +2511,7 @@ ggplot(datos9, aes(x = niños, y = puntuacion)) +
 
 `r colorize("R", "blue")` tiene implementadas muchas funciones que ejecutan la _prueba de Rachas o Carreras de Walf-Wolfowits_. Una de ellas es la función `runs.test` del paquete `randtests`, cuyos parámetros se definen en la tabla \@ref(tab:par-runstest). El siguiente script ejecuta la prueba para contrastar la hipótesis de aleatoriedad de la muestra.
 
-```{r randtests-runstest, class.source = "watch-out", class.output = "bg-warning"}
+```{r randtests-runstest}
 randtests::runs.test(
   x = puntuacion, alternative = "two.sided",
   threshold = median(puntuacion), pvalue = "exact",
@@ -2523,7 +2524,7 @@ La función `runs.test` del paquete `randtests` también realiza el gráfico mos
 
 La función `runs.test` del paquete `snpar` también ejecuta la prueba, como se muestra en el siguiente trozo de código.
 
-```{r snpar-runstest, class.source = "watch-out", class.output = "bg-warning"}
+```{r snpar-runstest}
 snpar::runs.test(
   x = puntuacion, exact = T,
   alternative = "two.sided"
@@ -2547,7 +2548,7 @@ $$
 Los datos fueron tomados de Siegel (2012, pág. 86)
 
 
-```{r rachas10, class.source = "watch-out", class.output = "bg-warning"}
+```{r rachas10}
 cola <- c(
   "M", "F", "M", "F", "M", "M", "M", "F", "F", "M", "F",
   "M", "F", "M", "F", "M", "M", "M", "M", "F", "M", "F",
@@ -2605,7 +2606,7 @@ Como se observa en la salida anterior el  $p_{valor} = `r formato(p.valor)`$, lo
 
 La figura \@ref(fig:datos10) muestra la gráfica de las rachas de hombres y mujeres en la taquilla. Y esta muestra que las longitudes de las rachas no tienen un comportamiento aleatorio,  lo cual contrasta con la conclusión anterior.  
 
-```{r datos10, fig.cap = "Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia", class.source = "watch-out"}
+```{r datos10, fig.cap = "Rachas para las puntuaciones de agresión de acuerdo al orden de ocurrencia"}
 datos10 <- tibble(
   personas = 1:length(cola),
   cola = cola,
@@ -2659,7 +2660,7 @@ ggplot(datos10, aes(x = personas, y = codigo)) +
 
 Los resultados anteriores se pueden contrastar aplicando la función `runs.test` del paquete `randtests`. Note que en el trozo de código que se muestra abajo el parámetro `pvalue` se ha establecido como `"exact"` para generar el $p_{valor}$ exacto. Si este se establece como `"normal"`, el $p_{valor}$ que muestra la salida es el aproximado sin corrección por continuidad. Intente correr este script cambiando la configuración de este parámetro y observe el $p_{valor}$.
 
-```{r randtests-runstest10, class.source = "watch-out", class.output = "bg-warning"}
+```{r randtests-runstest10}
 randtests::runs.test(
   x = datos10$codigo, alternative = "two.sided",
   threshold = 0.5, pvalue = "exact",
@@ -2670,7 +2671,7 @@ randtests::runs.test(
 
 Con el siguiente trozo de código se ha ejecutado la prueba con la función `runs.test` del paquete `snpar`. Observe que el parámetro `exact = FALSE`. Compare este $p_{valor}$ con los anteriores.
 
-```{r snpar-runstest10, class.source = "watch-out", class.output = "bg-warning"}
+```{r snpar-runstest10}
 snpar::runs.test(
   x = datos10$codigo, exact = FALSE,
   alternative = "two.sided"
@@ -2796,9 +2797,9 @@ kableExtra::kbl(
   
 Aquí la hipótesis nula que se quieres contrastar es que: los esposos y las esposas están de acuerdo en el grado de influencia que ambos deben tener cuando deciden sobre las adquisiciones domésticas. Mientras que la hipótesis alternativa es: los esposos juzgan que ellos deben tener mayor influencia que sus esposas acerca de las decisiones de adquirir enseres para el hogar. Para contrastar estas hipótesis se procede a aplicar la prueba del signo con un nivel de confianza del 95%.
 
-Bajo el supuesto planteado en la hipótesis nula, es de esperarse que el número de diferencias positvas *S* se distribuya binomialmente con $n = 14$ (número de diferencias distintas de cero) y $p = 1/2$ (probabilidad de que ocurra una diferencia positiva en la muestra), es decir, $S\sim B(n=14, p=1/2)$. El siguiente código muestra la ejecución de la prueba para los datos previamente mencionados.
+Bajo el supuesto planteado en la hipótesis nula, es de esperarse que el número de diferencias positivas $S$ se distribuya binomialmente con $n = 14$ (número de diferencias distintas de cero) y $p = 1/2$ (probabilidad de que ocurra una diferencia positiva en la muestra), es decir, $S\sim B(n=14, p=1/2)$. El siguiente código muestra la ejecución de la prueba para los datos previamente mencionados.
 
-```{r}
+```{r signo-2muestras}
 n <- pareja %>% 
   dplyr::filter(signo != "0") %>%
   nrow()
@@ -2811,9 +2812,9 @@ paste("El p.valor =", round(x = p.valor, digits = 4))
 ```
 <br/>
 
-Como se nota de la salida anterior, el $p_{valor}=`r formato(p.valor)`$, lo que indica que los esposos creen que son ellos los que deben tener una mayor influencia al momento de tomar decisiones acerca  de la adquisición de enseres domésticos, en comparación con la que deben tener las esposas. Los resultados anteriores pueden ser obtenidos con la función `*SIGN.test*` del paquete `**BSDA**`, como se meustra a continuación, con el siguiente segmento de código. 
+Como se nota de la salida anterior, el $p_{valor}=`r formato(p.valor)`$, lo que indica que los esposos creen que son ellos los que deben tener una mayor influencia al momento de tomar decisiones acerca  de la adquisición de enseres domésticos, en comparación con la que deben tener las esposas. Los resultados anteriores pueden ser obtenidos con la función `SIGN.test` del paquete `BSDA`, como se meustra a continuación, con el siguiente segmento de código. 
 
-```{r}
+```{r signo-2muestras-signtest}
 SIGN.test(
   x = esposo, y = esposa, md = 0, alternative = "g",
   conf.level = 0.95
@@ -2823,7 +2824,7 @@ SIGN.test(
 
 Los resultados anteriores, también se pueden obtener con la función `binom.test` de la distribución base de `r colorize("R", "blue")`, como sigue.
 
-```{r}
+```{r signo-2muestras-binomtest}
 binom.test(
   x = s, n = n, p = 0.5, alternative = "greater", 
   conf.level = 0.95
@@ -2851,7 +2852,7 @@ Aquí, la hipótesis nula que se quiere contrastar es que la cantidad de tiempo 
 suma de los rangos negativos. Los datos son tomados de Siegel (1995, pág. 116) y se muestran con el siguiente código.
 
 
-```{r}
+```{r raw-2muetras}
 niños <- tibble(
   sujetos = c(
     "DC", "MK", "VH", "JM", "SB", "MM", "RH", "DJ",
@@ -2893,7 +2894,7 @@ kableExtra::kbl(
 
 Una gráfica de caja y bigote, previa a la aplicación de la prueba, podría dar luces respecto a que si los niños son capaces de discriminar entre la sincronía y asincronía. Esto se puede hacer con el siguiente segmento de código.
 
-```{r}
+```{r raw-2muestras-plotly}
 plot_ly(data = niños, type = "box") %>% 
   add_boxplot(
     y = ~sincronia, name = "En sincronía", jitter = 0.3,
@@ -2921,7 +2922,7 @@ plot_ly(data = niños, type = "box") %>%
 
 El valor del estadístico de la prueba de rangos con signos de Wilcoxon y el p.valor se puede obtener con el siguiente script.
 
-```{r}
+```{r raw-2muestras-manual}
 n <- sum(niños$di != 0)
 Tmas <- sum(niños$rango[niños$rango > 0])
 p.valor <- 2*psignrank(q = Tmas - 1, n = n, lower.tail = FALSE)
@@ -2930,9 +2931,9 @@ paste("El p.valor =", round(x = p.valor, digits = 4))
 ```
 <br/>
 
-Como se observa en la salida anterior, el $p_{valor}=`r formato(Tmas)`$ es menor que $\alpha=0,05$, lo que indica que existe suficiente evidencia estadística de que la cantidad de tiempo que los niños pasan viendo a través de la ventana depende del tipo de presentación. Por otro lado, la prueba de rangos con signos de Wilcoxon se puede aplicar, de manera directa, con la función `*wilcoxon.test*` del paquete `**exactRankTests**`.
+Como se observa en la salida anterior, el $p_{valor}=`r formato(Tmas)`$ es menor que $\alpha=0,05$, lo que indica que existe suficiente evidencia estadística de que la cantidad de tiempo que los niños pasan viendo a través de la ventana depende del tipo de presentación. Por otro lado, la prueba de rangos con signos de Wilcoxon se puede aplicar, de manera directa, con la función `wilcoxon.test` del paquete `exactRankTests`.
   
-```{r}
+```{r raw-2muestras-wilcoxexact}
 library(exactRankTests)
 exactRankTests::wilcox.exact(
   x = niños$sincronia, y = niños$asincronia, 
@@ -2941,9 +2942,9 @@ exactRankTests::wilcox.exact(
 )
 ```
 <br/>  
-La función `*wilcox.test*` del paquete `**stats**` también realiza esta prueba, como se muestra en el siguiente código.
+La función `wilcox.test` del paquete `stats` también realiza esta prueba, como se muestra en el siguiente código.
 
-```{r}
+```{r raw-2muestras-wilcoxtest}
 stats::wilcox.test(
   x = niños$sincronia, y = niños$asincronia,  
   alternative = "t", paired = T, exact = T, 
@@ -3008,7 +3009,7 @@ predichas de los reclusos",
 <br/>  
 El siguiente código permite hallar el estadístico y el p.valor de la prueba de Wilcoxon.
 
-```{r}
+```{r raw-2muestras-empates}
 Tmas <- reclusos %>% 
   dplyr::select(
     rango
@@ -3034,7 +3035,7 @@ paste(
 <br/>
 La salida anterior muestra que el $p_{valor}=`r formato(p.valor)`$, lo cual indica que hay suficiente evidencia estadística para afirmar que las latencias de las elecciones predichas incorrectamente serían mayores que las predichas correctamente. 
   
-```{r}
+```{r raw-wilcoxexact}
 library(exactRankTests)
 wilcox.exact(x = di, y = NULL, alternative = "g", mu = 0,
              paired = FALSE, exact = T)
@@ -3042,7 +3043,7 @@ wilcox.exact(x = di, y = NULL, alternative = "g", mu = 0,
 <br/>
 En la salida anterior se ha ejecutado la prueba de rangos con signos de Wilcoxon usando la distribución exacta del estadístico $T^{+}$ de Wilcoxon para muestras relacionadas. A continuación se muestra la ejecución de esta prueba haciendo uso de la convergencia asintótica a la normal de este estadístico.
 
-```{r}
+```{r raw-aproximacion}
 media <- n*(n + 1)/4
 var <- n*(n + 1)*(2*n + 1)/24
 z <- (Tmas - media)/sqrt(var)
@@ -3053,9 +3054,9 @@ paste(
 paste("El p.valor.aprox =", round(x = p.valor, digits = 4))
 ```
 <br/>
-Como se puede notar el $p_{valor.exacto} = `r formato(p.valor)`$ , no es muy diferente del $p_{valor.aprox} = `r formato(p.valor.aprox)`$. El resultado anterior puede encontrarse por medio de la función `*wilcox.exact*` del paquete `**exactRankTests**`, haciendo el argumento `exact = F`, como sigue.
+Como se puede notar el $p_{valor.exacto} = `r formato(p.valor)`$ , no es muy diferente del $p_{valor.aprox} = `r formato(p.valor.aprox)`$. El resultado anterior puede encontrarse por medio de la función `wilcox.exact` del paquete `exactRankTests`, haciendo el argumento `exact = F`, como sigue.
 
-```{r}
+```{r raw2-noexact}
 wilcox.exact(
   x = di, y = NULL, alternative = "g", mu = 0,
   paired = FALSE, exact = F
@@ -3064,7 +3065,7 @@ wilcox.exact(
 <br/>
 La salida anterior muestra el $p_{valor aprox.}$ sin corrección por continuidad. El siguiente código lo muestra usando tal corrección.
 
-```{r}
+```{r raw2-aprox}
 z <- (Tmas - 0.5 - media)/sqrt(var)
 p.valor.aprox.cor <- pnorm(q = z, lower.tail = F)
 paste(
@@ -3076,7 +3077,7 @@ paste(
 ```
 <br/>
 
-```{r}
+```{r raw2-nec}
 wilcox.test(
   x = di, y = NULL, alternative = "g", mu = 0, 
             paired = F, exact = F, correct = T
@@ -3085,7 +3086,7 @@ wilcox.test(
 <br/>
 Note que en los datos de este ejemplo existen rangos empatados, por lo que es necesario ajustar la prueba estadística para considerar el decremento en la variabilidad de $T^{+}$. La corrección requiere contar los empates y reducir la varianza, respectivamente.
 
-```{r}
+```{r raw2-cve}
 empates <- filter(
   as.data.frame(table(rank(abs(di[di != 0])))), Freq > 1
 ) %>% 
@@ -3117,7 +3118,7 @@ kableExtra::kbl(
 <br/>
 El cálculo del p.valor corregido por empates se muestra con el siguiente código.
 
-```{r}
+```{r raw2-pce}
 cor.var <- sum(empates$Tj * (empates$Tj^2 - 1)) / 2
 var.cor <- var - cor.var
 z.cor <- (Tmas - media) / sqrt(var.cor)
@@ -3132,27 +3133,13 @@ paste("El p.valor =", round(x = p.valor, digits = 6))
 <br/>
 En relación con el cálculo anterior, si se realiza la corrección por continuidad, se obtienen los siguientes resultados.
 
-```{r}
+```{r raw2-cce}
 z.cor.cont <- (Tmas - 0.5 - media) / sqrt(var.cor)
 p.valor <- pnorm(q = z, lower.tail = F)
 paste("El valor del estadístico Z =", round(
   x = z.cor.cont,
   digits = 6
   )
-)
-paste("El p.valor =", round(x = p.valor, digits = 6))
-```
-<br/>
-El cálculo del p.valor aproximado, usando la convergencia asintótica del estadístico T propuesto en Conover(1999,pág. 353), se muestra con el siguiente código.
-
-```{r}
-R <- reclusos %>%
-  dplyr::select(rango)
-T <- (sum(abs(R), na.rm = TRUE) - 1) / 
-  sqrt(sum(R^2, na.rm = T))
-p.valor <- pnorm(q = T, lower.tail = F)
-paste(
-  "El valor del estadístico T =", round(x = T, digits = 6)
 )
 paste("El p.valor =", round(x = p.valor, digits = 6))
 ```
@@ -3168,7 +3155,7 @@ paste("El p.valor =", round(x = p.valor, digits = 6))
 ::: {.example #ejemplo1-fecuencia-mcnemar2 name="Prueba para Datos en Forma de Frecuencias de Mcnemar"} 
 Durante las campañas presidenciales (y algunas otras campañas para puestos públicos) de 1980 en Estados Unidos se realizaron debates televisivos entre dos o más candidatos. Un investigador en técnicas de comunicación estaba interesado -tanto como los candidatos- en determinar si los debates entre los candidatos presidenciales en las elecciones de 1980 eran efectivos o no en cuanto a cambiar las preferencias de los televidentes hacia los distintos candidatos. Se predijo que si los candidatos (Jimmy Carter y Ronald Reagan) eran igualmente efectivos, habría cambios comparables en las preferencias a cada candidato por parte de los televidentes. Por otro lado, si un candidato era más efectivo o persuasivo durante el debate, entonces habría un cambio diferencial de un candidato a otro. Para evaluar la efectividad del debate, el investigador seleccionó 70 adultos al azar antes del debate y les pidió que indicaran sus preferencias hacia ambos candidatos. Después de la conclusión del debate, les volvió a preguntar acerca de su predilección. Así, en cada caso el conocía las preferencias de las personas antes del debate y después del mismo. Los resultados, obtenidos de Siegel (1995, pág. 103), se presentan en la siguiente tabla. En base a estos datos, pruebe la hipótesis de que entre los televidentes que cambiaron sus preferencias, la probabilidad de que hayan cambiado de Reagan a Carter será la misma de los que cambiaron de Carter a Reagan, con un nivel de confianza del 95%.
 
-```{r}
+```{r dfm}
 carter <- tibble(
   antes = c("Carter", "Reagan"),
   carter = c(28L, 7L),
@@ -3200,7 +3187,7 @@ y después del debate televisivo",
 <br/> 
 La prueba exacta de McNemar, usando la distribución binomial, se obtiene con la ejecución del siguiente código.
 
-```{r}
+```{r dfm-pbinom}
 b <- carter$regan[1]
 c <- carter$carter[2]
 n <- b + c
@@ -3212,7 +3199,7 @@ paste("El p.valor =", round(x = p.valor, digits = 4))
 <br/>
 El cálculo del estadístico $\chi^{2}$ de Mcnemar y el $p_{valor}$, usando la convergencia asintótica a la distribución Ji-cuadrada, se muestra con el siguiente código.
 
-```{r}
+```{r dfm-pchisq}
 X2 <- (abs(b - c) - 1) ^ 2 / (b + c)
 p.valor.aprox <- pchisq(q = X2, df = 1, lower.tail = F)
 paste("El valor del estadístico X2 =", round(x = X2, digits = 4))
@@ -3221,15 +3208,15 @@ paste("El p.valor.aprox =", round(x = p.valor.aprox, digits = 4))
 <br/>
 Como se muestra en la salida anterior, dado que el $p_{valor\,aprox}$ es mayor que el nivel de significancia $\alpha = 0,05$ no se puede rechazar la hipótesis de que los candidatos fueron igual de efectivos para cambiar la preferencia de los televidentes.
 
-El resultados anterior, se puede obtener de manera directa, con la aplicación de la función `*mcnemar.test*` del paquete `**stats**`, como sigue.
+El resultados anterior, se puede obtener de manera directa, con la aplicación de la función `mcnemar.test` del paquete `stats`, como sigue.
   
-```{r}
+```{r dfm-mcnemartest}
 mcnemar.test(x = as.matrix(carter[ , 2:3]), correct = T)
 ```
 <br/>
-La función `*mcnemar.exact*` del paquete `**exact2x2**`, también ejecuta la prueba para datos en forma de frecuencia de Mcnemar. Como se muestra en el siguiente código.
+La función `mcnemar.exact` del paquete `exact2x2`, también ejecuta la prueba para datos en forma de frecuencia de Mcnemar. Como se muestra en el siguiente código.
 
-```{r}
+```{r dfm-mcnemarexact}
 library(exact2x2)
 exact2x2::mcnemar.exact(
   x = as.matrix(carter[ , 2:3]), conf.level = 0.95
@@ -3238,11 +3225,9 @@ exact2x2::mcnemar.exact(
 <br/>
 :::
 
-
-
 ## Información de Sesión {#sesion}
 
-```{r informacion-sesion, class.source = "watch-out"}
+```{r informacion-sesion}
 as_tibble(devtools::session_info()$packages) %>%
   dplyr::select(
     package, loadedversion, source
@@ -3281,3 +3266,7 @@ cleanbib()
 options("citation_format" = "pandoc")
 read.bibtex(file = "packages.bib")
 ```
+
+
+
+
