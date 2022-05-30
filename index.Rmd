@@ -99,7 +99,7 @@ colorize <- function(x, color) {
 formato <- function(x) {
   if (!is.numeric(x)) stop("¡La entrada debe ser numérica!")
   format(
-    round(x, digits = 4),
+    round(x, digits = 6),
     mode = "double",
     big.mark = ".",
     decimal.mark = ","
@@ -133,6 +133,8 @@ En este núcleo temático se describen de manera teórica algunas pruebas no par
 
 5.  ***La Prueba de Rachas o Carreras de Walf-Wolfowitz*** (Sección \@ref(rachas1))
 
+5.  ***La Prueba de Rangos Asignados de Wilcoxon*** (Sección \@ref(wilcoxon1))
+
 Una vez descrita estas pruebas se procede, mediante ejemplos, a la implementación en `r colorize("R", "blue")` de las mismas.
 
 El siguiente bloque de código permite instalar y cargar los paquetes usados para implementar estas pruebas en `r colorize("R", "blue")`.
@@ -142,9 +144,9 @@ packages <- c(
   "rmarkdown", "bookdown", "bookdownplus", "magrittr",
   "kableExtra", "BSDA", "DT", "devtools", "tidyverse",
   "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
-  "Hmisc", "kolmim", "hrbrthemes", "plotly", "NSM3",
-  "reshape2", "randtests", "snpar", "knitcitations",
-  "exactRankTests", "stats", "exact2x2"
+  "Hmisc", "kolmim", "hrbrthemes", "plotly", "reshape2",
+  "randtests", "snpar", "knitcitations", "exactRankTests",
+  "stats", "exact2x2"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -524,9 +526,9 @@ Note que la aproximación del $p_{valor}$ obtenida en estas dos últimas salidas
     b)  ¿Qué pasa si en vez de tomar la muestra aleatoria de 20, se toma una muestra aleatoria de 30? (Use $\alpha = 5\%$).
 
 
-##  signo Signo {#signo1}
+## Prueba del Signo {#signo1}
 
-La *prueba del signo* es un test no paramétrico que se usa para contrastar hipótesis referentes a la mediana de una población. La aplicación de este test requiere que la variable analizada sea continua.
+La *prueba del signo* es un test no paramétrico que se usa para contrastar hipótesis referentes a la mediana de una población. La aplicación de este test requiere que la variable analizada sea cuantitativa, medida al menos en una escala ordinal.
 
 ### Racionalización de la Prueba del Signo {#racionalizacion-signo1}
 
@@ -534,8 +536,8 @@ Supóngase que se tiene una variable aleatoria continua $X$ con función de dist
 
 $$
 D_{i}=\begin{cases}
-1, \ \text{ si } X_i> \widetilde{\mu}_0\\
-0, \ \text{ si } X_i< \widetilde{\mu}_0 
+1, \ \textit{ si } X_i> \widetilde{\mu}_0\\
+0, \ \textit{ si } X_i< \widetilde{\mu}_0 
 \end{cases}
 $$
 
@@ -682,7 +684,7 @@ p_{valor}\cong F_{N}\left ( Z= \frac{2s+1-n}{\sqrt{n}}, \ \mu_{Z}=0, \ \sigma_{Z
 \end{equation}
 $$
 
-Del mismo modo, cuando la prueba de hipótesis es a dos colas o bilateral $\left(H_{1}:\widetilde{\mu}\neq \widetilde{\mu}_{0}\right)$, el $p_{valor}$ aproximado se obtiene sustituyendo en la ecuación \@ref(eq:paproxbl-binomial) $p_{0}$ por $\frac{1}{2}$, como sigue:
+Del mismo modo, cuando la prueba de hipótesis es a dos colas o bilateral $\left(H_{1}:\widetilde{\mu}\neq \widetilde{\mu}_{0}\right)$, el $p_{valor}$ (aproximado) se obtiene sustituyendo en la ecuación \@ref(eq:paproxbl-binomial) $p_{0}$ por $\frac{1}{2}$, como sigue:
 
 $$
 \begin{equation}
@@ -804,8 +806,8 @@ Dado que la prueba del signo se puede considerar como un caso particular de la p
 ```{r binomtest2, class.output = "bg-warning"}
 s <- as.numeric(conteo_signo %>%
   dplyr::filter(signo == "\\+") %>%
-  dplyr::select(conteo)) # se ha colocado dplyr::select para
-n <- as.numeric(conteo_signo %>% # evitar conflicto con MASS::select
+  dplyr::select(conteo)) # conflicto con MASS::select
+n <- as.numeric(conteo_signo %>% 
   dplyr::filter(signo != "=") %>%
   dplyr::select(conteo) %>% sum())
 binom.test(
@@ -859,6 +861,356 @@ prop.test(
 1)  Se toman 10 muestras de un baño de cultivo sobre placa utilizado en un proceso de fabricación de componentes electrónicos, y se mide el pH del baño. Los valores de pH medidos son 7,91; 7,85; 6,82; 8,01; 7,46; 6,95; 7,05; 7,35; 7,25; 7,42. Los ingenieros plantean que el pH neutro es 7. ¿La muestra indica que esta proposición es correcta? Use $\alpha = 5\%$.
 
 2)  Los siguientes datos representan el número de horas que un temporizador opera antes de que deba recargarse: 1,5; 2,2; 0,9; 1,3; 2,0; 1,6; 1,8; 1,5; 2,0; 1,2 y 1,7. Utiliza la prueba de los signos para probar la hipótesis al nivel de significancia de 0,05 que este temporizador en particular opera con una mediana de 1,8 horas antes de requerir una recarga.
+
+
+## Prueba de Rangos Asignados de Wilcoxon {#wilcoxon1}
+La prueba de rangos asignados de Wilcoxon, al igual que la prueba del signo discutida  en la sección \@ref(signo1), se usa para contrastar la hipótesis de que la mediana  de una población es igual a un valor especificado, es decir, $H_{0}:\widetilde{\mu}= \widetilde{\mu}_{0}$. Esta prueba es más potente que la prueba del signo dado que considera, además del signo de las diferencias entre cada valor observado en la muestra y la mediana propuesta en la hipótesis nula $D_i-\widetilde{\mu}_{0}$, la magnitud de esta diferencia. Por lo que este test es considerado como la opción más apropiada a la prueba de la mediana cuando no se cumple el supuesto de normalidad de la población bajo estudio.
+
+
+### Racionalización de la Prueba de Rangos Asiganados de Wilcoxon {#racionalizacion-wilcoxon1}
+Suponga que se tiene una variable aleatoria $X$ cuantitativa medida al menos en una escala ordinal y que $X_1, X_2, \dotsc, X_n$ es cualquier muestra aleatoria de tamaño $n$ de $X$. Wilcoxon (1945) propuso el estadístico
+
+$$
+\begin{equation}
+T^+=\sum_{i=1}^{n}S_iR_i.
+(\#eq:Tmas)
+\end{equation}
+$$
+
+El cual se conoce como estadístico de rangos asignados de Wilcoxon. Donde,
+
+$$
+S_i=
+\begin{cases}
+1, \quad si \; D_i>0\\
+0, \quad si \; D_i<0.
+(\#eq:signo)
+\end{cases}
+$$
+
+Siendo $D_i= X_i-\widetilde{\mu}_{0}$ y $R_i=r \left(|D_i| \right)$. En donde la función $r(.)$ determina los ranqueos, en este caso, ranquea los valores absolutos de los $D_i$. Esta función se ejecuta con la función `rank`  de la distribución base de `r colorize("R", "blue")`.
+
+Wilcoxon determinó la distribución exacta del estadístico $T^+$ asumiendo que si $x_1, x_2, \dotsc,x_n$ representa una muestra de una variable aleatoria continua $X$, $x_i \neq \widetilde{\mu}_{0}$, para $i=1, 2, \dotsc, n$, es decir los valores muestrales eran diferente a la mediana propuesta en la hipótesis nula. Además, si $\left(|d_r| \right)$ y $\left(|d_s| \right)$ son los valores absolutos de dos diferencias en la muestra, esto es, $\left(|d_r| \right) \neq \left(|d_s| \right)$, para $r \neq s$.
+
+Las funciones:
+
+```
+dsignrank(x, n, log = FALSE)
+psignrank(q, n, lower.tail = TRUE, log.p = FALSE)
+qsignrank(p, n, lower.tail = TRUE, log.p = FALSE)
+rsignrank(nn, n)
+```
+
+del paquete `stats` permiten evaluar la función de densidad, la función de distribución, la función de cuantiles y generar números aleatorios, respectivamente, de la distribución de rangos asignados de Wilcoxon.
+
+Bajo las suposiciones antes descritas, Wilcoxon demostró que la media de $T^+$ es,
+
+$$
+\begin{equation}
+E \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)}{4};
+(\#eq:media-wilcoxon1)
+\end{equation}
+$$
+
+y la varianza está determinada por
+
+$$
+\begin{equation}
+V \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{4}.
+(\#eq:varianza-wilcoxon1)
+\end{equation}
+$$
+
+Suponga que se quiere contrastar la hipótesis nula $H_0 = \widetilde{\mu}= \widetilde{\mu}_{0}$ contra la hipótesis alternativa $H_0 = \widetilde{\mu}> \widetilde{\mu}_{0}$. Entonces el $p_{valor}$ viene dado por,
+
+$$
+\begin{equation}
+p_{valor}=P \left(T^+ \ge t^+ \right)=1 - P \left(T^+ \le t^+ -1 \right).
+\end{equation}
+$$
+
+Como $T^+$ tiene distribución de rangos asignados de Wilcoxon con parámetro $n$, lo cual se denota como $T^+ \sim W \left( n \right)$, la ecuación anterior puede reescribirse como:
+
+$$
+\begin{equation}
+p_{valor} = 1 - F_W \left(t^ -1, \; n \right).
+(\#eq:pus-wilcoxon1)
+\end{equation}
+$$
+
+Si la hipótesis que se quiere contrastar es que  $H_0: \widetilde{\mu}= \widetilde{\mu}_{0}$ versus la hipótesis alternativa $H_0: \widetilde{\mu} < \widetilde{\mu}_{0}$. El $p_{valor}$ viene dado por,
+
+$$
+\begin{equation}
+p_{valor}=P \left(T^+ \le t^+ \right)=P \left(T^+ \le t^+ \right).
+\end{equation}
+$$
+
+En resumen, el $p_{valor}$ cuando la prueba de hipótesis es unilateral inferior, viene dada por: 
+
+$$
+\begin{equation}
+p_{valor} = F_W \left(t^+ , \; n \right).
+(\#eq:pui-wilcoxon1)
+\end{equation}
+$$
+
+Ahora, si la prueba de hipótesis es bilateral. Es decir, $H_0: \widetilde{\mu}= \widetilde{\mu}_{0}$ $H_0: \widetilde{\mu} \neq \widetilde{\mu}_{0}$. El $p_{valor}$ (aproximado) viene dado por:
+
+$$
+\begin{equation}
+p_{valor}=
+\begin{cases} 
+2\left [ 1-F_{W}\left ( t^+ - 1,\; n \right ) \right ], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
+2F_{W}\left ( t^+,\; n \right ), \; \textit{si} \; t^+ \leq \frac{n \left(n+1 \right)}{4} 
+ \end{cases}.
+(\#eq:pbl-wilcoxon1)
+\end{equation}
+$$
+
+Por otro lado, dado que $T^+$ es una suma de variables aleatorias, por el teorema del límite central, para un tamaño de muestra grande ($n\geq 15$), el estadístico:
+
+$$
+\begin{equation}
+Z= \frac{T^+ \pm 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}} \simeq N \left(\mu=0, \sigma=1\right).
+(\#eq:z-wilcoxon1)
+\end{equation}
+$$
+
+En los casos donde $x_i=\widetilde{\mu}_{0}$ se procede a eliminar estas observaciones de la muestra y se toma $n$ como el número de observaciones en las que $x_i \neq \widetilde{\mu}_{0}$.
+
+Para una prueba unilateral superior, el $p_{valor}$, usando el estadístico dado en la ecuación \@ref(eq:z-wilcoxon1), se determina con,
+
+$$
+\begin{equation}
+p_{valor} = 1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right).
+(\#eq:pusz-wilcoxon1)
+\end{equation}
+$$
+
+Si la prueba es unilateral inferior, cuando se usa el estadístico dado en la ecuación \@ref(eq:z-wilcoxon1), el $p_{valor}$ se aproxima con:
+
+$$
+\begin{equation}
+p_{valor} = F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right).
+(\#eq:puiz-wilcoxon1)
+\end{equation}
+$$
+
+Ahora, si la prueba es a dos colas, el $p_{valor}$ se calcula con:
+
+$$
+\begin{equation}
+p_{valor}=
+\begin{cases} 
+2\left[1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right)], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
+F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right), \; \textit{si} \; t^+ \leq \frac{n \left(n+1 \right)}{4} 
+ \end{cases}.
+(\#eq:pbl-wilcoxon1)
+\end{equation}
+$$
+
+Cuando la muestra es grande($n \ge 15$) y ocurren diferencias iguales en valor absoluto, es decir, $\left(|d_r| \right) = \left(|d_s| \right)$, con $r \ne s$, se asigna el promedio de los ranqueos a los grupos empatados y se realiza una corrección a la varianza \@ref(eq:varianza-wilcoxon1). Esta corrección fue propuesta por Pratt (1.959), como se muestra a continuación:
+
+$$
+\begin{equation}
+V \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}.
+(\#eq:varianzac-wilcoxon1)
+\end{equation}
+$$
+
+Donde $g$ es el número de grupos y $t_j$ es el número de observaciones empatadas en el grupo $j$. De lo anterior, el estadístico dado en la ecuación \@ref(eq:z-wilcoxon1) se redefine de la siguiente manera,
+
+$$
+\begin{equation}
+Z= \frac{T^+ \pm 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}} \simeq N \left(\mu=0, \sigma=1\right).
+(\#eq:zc-wilcoxon1)
+\end{equation}
+$$
+
+Cuando se usa el estadístico anterior para pruebas de hipótesis unilateral superior, el $p_{valor}$ se obtiene evaluando la siguiente expresión:
+
+$$
+\begin{equation}
+p_{valor} = 1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right).
+(\#eq:puszc-wilcoxon1)
+\end{equation}
+$$
+
+Para una prueba unilateral inferior usando el estadístico dado en la ecuación \@ref(eq:zc-wilcoxon1), el $p_{valor}$ se obtiene con:
+
+$$
+\begin{equation}
+p_{valor} = F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right).
+(\#eq:puszc-wilcoxon1)
+\end{equation}
+$$
+
+Para un prueba bilateral, usando el estadístico mostrado en la ecuación \@ref(eq:zc-wilcoxon1), el $p_{valor}$ se halla usando:
+
+$$
+\begin{equation}
+p_{valor}=
+\begin{cases} 
+2\left[1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right)], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
+F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right), \; \textit{si} \; t^+ \leq \frac{n \left(n+1 \right)}{4} 
+ \end{cases}.
+(\#eq:pbl-wilcoxon1)
+\end{equation}
+$$
+
+Conmover (1999, pág. 353) propone el siguiente estadístico de prueba 
+
+$$
+\begin{equation}
+T =T^+ - T^-=2T^+-\frac{n(n+1)}{2}.
+(\#eq:t-wilcoxon1)
+\end{equation}
+$$
+
+Donde,
+
+$$
+T^-=\sum_{i=1}^{n} \left(1- S_i \right)R_i.
+$$
+
+Por el teorema del límite central  la distribución del estadístico  $T$ converge asintóticamente a la distribución normal conforme $n \rightarrow \infty$. La media de este estadístico, bajo la hipótesis nula, es 0, es decir, $E \left(T \;| \; \widetilde{\mu}= \widetilde{\mu}_{0} \right) =0$; mientras que su varianza, suponiendo que no es posible encontrar observaciones empatadas en la muestra es
+
+$$
+\begin{equation}
+V \left(T \;| \; \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{6}.
+\end{equation}
+$$
+
+De lo anterior se obtiene que,
+
+$$
+\begin{equation}
+Z= \frac{T \pm 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}} \simeq N \left(\mu=0, \sigma=1\right).
+(\#eq:zt-wilcoxon1)
+\end{equation}
+$$
+
+Si $n$ es grande y hay empates en la muestra, el estadístico dado en la ecuación \@ref(eq:T-wilcoxon1) tiene $E \left(T \;| \; \widetilde{\mu}= \widetilde{\mu}_{0} \right) =0$; y varianza
+
+$$
+\begin{equation}
+V \left(T \;| \; \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\sum_{i=1}^{n}R_i^2.
+\end{equation}
+$$
+
+En consecuencia,
+
+$$
+\begin{equation}
+Z= \frac{T \pm 0,5}{\sqrt{\sum_{i=1}^{n}R_i^2}} \simeq N \left(\mu=0, \sigma = 1\right).
+(\#eq:zte-wilcoxon1)
+\end{equation}
+$$
+
+Para el estadístico $T$ dado en la ecuación \@ref(eq:t-wilcoxon1) el $p_{valor} para una prueba unilateral superior cuando no hay empates, viene dado por:
+
+$$
+\begin{equation}
+p_{valor} = 1 - F_N \left(Z= \frac{T - 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}}; \; \mu = 0, \; \sigma = 1 \right).
+(\#eq:pusz-wilcoxon1)
+\end{equation}
+$$
+
+Cuando la prueba es unilateral inferior y se usa el estadístico dado en la ecuación \@ref(eq:t-wilcoxon1) sin presencia de empates, el $p_{valor} es:
+
+
+$$
+\begin{equation}
+p_{valor} =F_N \left(Z= \frac{T + 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}}; \; \mu = 0, \; \sigma = 1 \right).
+(\#eq:pusz-wilcoxon1)
+\end{equation}
+$$
+
+
+
+
+### Implementación en `r colorize("R", "blue")` de la Prueba de Rangos Asignados de Wilcoxon {#wilcoxon-R}
+Use la prueba de rangos asignados de Wilcoxon a los datos del ejemplo \@ref(exm:ejemp1-signo1) para contrastar las hipótesis planteadas en el ejemplo.
+
+La siguiente tabla muestra los rangos asignados para la concentración de octano.
+
+```{r co-wilcoxon1}
+co <- c(
+  99.0, 102.3, 99.8, 100.5, 99.7, 96.2, 99.1, 102.5,
+  103.3, 97.4, 100.4, 98.9, 98.3, 98.0, 101.6
+)
+mediana <- 98
+tabla_co <- tibble(
+  i = 1:length(co),
+  co = co,
+  diferencia = co - mediana
+) %>% 
+  mutate(
+    rango = dplyr::if_else(
+      diferencia == 0, NA_real_, 
+      sign(diferencia) * 
+      rank(
+        abs(diferencia), na.last = TRUE, 
+             ties.method = "average"
+        )
+      )
+    )
+options(knitr.kable.NA = "")
+kableExtra::kbl(
+  tabla_co,
+  col.names = c(
+    "$i$", "Concentración de octano", "$D_i$", "$R_i$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:co}Ranqueo de la concentración de octano",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  row_spec(which(tabla_co$diferencia == 0), color = "red",
+           strikeout = TRUE) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+
+En el siguiente script se muestra el calculo  del estadístico $T^+$ y el $p_{valor}$ para una prueba unilateral superior.
+
+```{r tmas-wilcoxon1}
+Tmas <- tabla_co %>% 
+  dplyr::select(
+    rango
+  ) %>% 
+  dplyr::filter(
+    rango > 0
+  ) %>% 
+  sum(., na.rm = TRUE)
+n <- length(co[co != 0])
+p.valor <- psignrank(
+  q = Tmas - 1, n = n, lower.tail = FALSE
+)
+paste("El valor del estadístico Tmas =", Tmas)
+paste(
+  "El p.valor =", format(
+    round(p.valor, digits = 6),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+```
+<br/>
+
+Como se muestra en la salida anterior, el estadístico $T^+=`formato(mas)`$. Mientras que el $p_{valor}=`formato(p.valor)`$, lo cual implica que hay suficiente evidencia estadística para asegurar con un 99\% de que la mediana de la concentración de octano es superior a 98.
+
+Note que el $p_valor$ obtenido con la prueba del signo (0,0065) en el ejemplo \@ref(exm:ejemp1-signo1) no difiere mucho del obtenido con esta prueba (0,0021). En ambos casos se rechaza la hipótesis nula, dado que $p_{valor} < 0,01$.
+
+La prueba de rango
 
 ## Prueba de Bondad de Ajuste Ji-cuadrado {#jicuadrado1}
 
@@ -1476,7 +1828,7 @@ curve(
 :::
 
 ::: {.example #ejemplo4-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
-La muestra del \@ref(exm:ejemplo3-jicuadrado1) ha puesto de relieve un funcionamiento incorrecto de la máquina, que no se ajusta a la distribución $N\left(\mu = 10,5; \: \sigma = 0,15 \right)$. Cabe, sin embargo, la posibilidad de que el desajuste haya afectado a la media y la desviación típica, pero que la distribución de la longitud de las piezas producidas siga siendo de tipo normal. Para verificar tal posibilidad hay que estimar (por máxima verosimilitud) la media y la desviación típica poblacional.
+La muestra del ejemplo \@ref(exm:ejemplo3-jicuadrado1) ha puesto de relieve un funcionamiento incorrecto de la máquina, debido a que la longitud de las piezas producidas por esta no se ajustan a la distribución $N\left(\mu = 10,5; \: \sigma = 0,15 \right)$. Cabe, sin embargo, la posibilidad de que el desajuste haya afectado a la media y la desviación típica, pero que la distribución de la longitud de las piezas producidas siga siendo de tipo normal. Para verificar tal posibilidad hay que estimar (por máxima verosimilitud) la media y la desviación típica poblacional.
 
 El estimación por máxima verosimilitud de la media de la distribución normal es:
 
@@ -1585,7 +1937,7 @@ knitr::kable(
 ```
 <br/>
 
-Fíjese que la prueba de hipótesis que se plantea en este ejemplo es compuesta, dado que los parámetros de la distribución bajo la hipótesis nula son desconocidos (la media $\mu$ y la desviación estándar $\sigma$). Por lo tanto, el estadístico de la prueba se distribuye asintóticamente Ji-cuadrado con $k-r-1=6-2-1=3$ grados de libertad. El valor del estadístico $\chi^{2}$ y el $p_{valor \,aprox}$ se generan con el siguiente código.
+Fíjese que la prueba de hipótesis que se plantea en este ejemplo es compuesta, dado que los parámetros de la distribución bajo la hipótesis nula son desconocidos (la media $\mu$ y la desviación estándar $\sigma$). Por lo tanto, el estadístico de la prueba se distribuye asintóticamente Ji-cuadrado con $k-r-1=6-2-1=3$ grados de libertad. El valor del estadístico $\chi^{2}$ y el $p_{valor \, aprox}$ se generan con el siguiente código.
 
 ```{r jicuadrado6}
 X2 <- sum((datos6$Oi - datos6$Ei)^2 / datos6$Ei)
@@ -2133,7 +2485,7 @@ kableExtra::kbl(
 
 Como se observa en la tabla \@ref(tab:datos8) $D_{n}^{+} = `r format(max(datos8$D_mas), decimal.mark = ",")`$ y $D_{n}^{-} = `r format(max(datos8$D_menos), decimal.mark = ",")`$. En consecuencia, el _estadístico bilateral de Kolgomoro-Smirnov_ es $D_{n} = `r format(max(c(max(datos8$D_mas), max(datos8$D_menos))), decimal.mark = ",")`$. Mientras que $p_{valor} = `r format(1 - pkolmim(d =  max(c(max(datos8$D_mas), max(datos8$D_menos))), n = length(reflectancia)), decimal.mark = ",")`$.
 
-Dado que el $p_{valor} > 0,05$ se acepta la hipótesis de que la longitud de la pieza tiene distribución $N\left(\mu=10,5;\, \sigma =0,15 \right)$.
+Dado que el $p_{valor} > 0,05$ se acepta la hipótesis de que la longitud de la pieza tiene distribución $N\left(\mu=10,5;\; \sigma =0,15 \right)$.
 
 Los resultados anteriores se pueden obtener con el siguiente código.
 
@@ -2149,7 +2501,7 @@ paste("El p.valor =", p.valor)
 ```
 <br/>
 
-La figura \@ref(fig:distribucion-lp), generada por el código que se presenta luego, compara la gráfica de la función de distribución acumulada empíricas  y la distribución $N\left(\mu=10,5;\, \sigma =0,15 \right)$. Como se nota en esta gráfica, la distribución empírica se ajusta a la distribución  $N\left(\mu=10,5;\, \sigma =0,15 \right)$, representada por la curva roja.
+La figura \@ref(fig:distribucion-lp), generada por el código que se presenta luego, compara la gráfica de la función de distribución acumulada empíricas  y la distribución $N\left(\mu=10,5;\; \sigma =0,15 \right)$. Como se nota en esta gráfica, la distribución empírica se ajusta a la distribución  $N\left(\mu=10,5;\; \sigma =0,15 \right)$, representada por la curva roja.
 
 ```{r distribucion-lp, fig.cap = "Función de distribución acumulada empírica de la longitud de la  pieza"}
 ggplot(as.data.frame(lp), aes(x = lp)) +
@@ -2192,7 +2544,7 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
   )
 ```
 
-Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste Kolmogorov-Smirnov, para determinar si la muestra obtenida de la longitud de la pieza se puede modelar por la distribución $N\left(\mu=10,5;\, \sigma =0,15 \right)$.
+Luego, la ejecución del siguiente código muestra la prueba de bondad de ajuste Kolmogorov-Smirnov, para determinar si la muestra obtenida de la longitud de la pieza se puede modelar por la distribución $N\left(\mu=10,5;\; \sigma =0,15 \right)$.
 
 ```{r kstest8}
 ks.test(lp, "pnorm",
@@ -2291,7 +2643,7 @@ Z=\frac{R+h-\frac{2n_1n_2}{n} -1}{\sqrt{\frac{2n_1n_2\left ( 2n_1n_2-n \right )}
 \end{equation}
 $$
 
-Donde $h=+0,5$ si $r<(2n_1 n_2)⁄n \,+1$, y $h=-0,5$ si $r>(2n_1 n_2)⁄n\,+1$.
+Donde $h=+0,5$ si $r<(2n_1 n_2)⁄n \;+1$, y $h=-0,5$ si $r>(2n_1 n_2)⁄n\;+1$.
 
 Para contrastar la hipótesis nula $H_0:$ la cual representa que la muestra es aleatoria usando el estadístico $R$ es necesario determinar el valor crítico de $R$ para un nivel de significancia $\alpha$ especificado y los valores de los parámetros $n_1$ y $n_2$, determinados a partir de la muestra. En la literatura existen diversas tablas que proporcionan estos valores, generalmente para $n_1, n_2 \leq20$. Otra forma de contrastar $H_0$ es a través del $p_{valor}$ calculado por medio de la función de distribución acumulada de $R$.
 
