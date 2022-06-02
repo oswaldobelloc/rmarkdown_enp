@@ -538,7 +538,7 @@ $$
 D_{i}=\begin{cases}
 1, \ \textit{ si } X_i> \widetilde{\mu}_0\\
 0, \ \textit{ si } X_i< \widetilde{\mu}_0 
-\end{cases}
+\end{cases}.
 $$
 
 De lo anterior se deduce que la probabilidad de encontrar cualquier valor en la muestra que esté por encima de la mediana $\widetilde{\mu}_0$, de manera teórica, es:
@@ -864,7 +864,7 @@ prop.test(
 
 
 ## Prueba de Rangos Asignados de Wilcoxon {#wilcoxon1}
-La prueba de rangos asignados de Wilcoxon, al igual que la prueba del signo discutida  en la sección \@ref(signo1), se usa para contrastar la hipótesis de que la mediana  de una población es igual a un valor especificado, es decir, $H_{0}:\widetilde{\mu}= \widetilde{\mu}_{0}$. Esta prueba es más potente que la prueba del signo dado que considera, además del signo de las diferencias entre cada valor observado en la muestra y la mediana propuesta en la hipótesis nula $D_i-\widetilde{\mu}_{0}$, la magnitud de esta diferencia. Por lo que este test es considerado como la opción más apropiada a la prueba de la mediana cuando no se cumple el supuesto de normalidad de la población bajo estudio.
+La prueba de rangos asignados de Wilcoxon, al igual que la prueba del signo discutida  en la sección \@ref(signo1), se usa para contrastar la hipótesis de que la mediana  de una población es igual a un valor especificado, es decir, $H_{0}:\widetilde{\mu}= \widetilde{\mu}_{0}$. Esta prueba es más potente que la prueba del signo dado que considera, además del signo de las diferencias entre cada valor observado en la muestra y la mediana propuesta en la hipótesis nula $X_i-\widetilde{\mu}_{0}$, la magnitud de esta diferencia. Por lo que este test es considerado como la opción más apropiada a la prueba de la mediana cuando no se cumple el supuesto de normalidad de la población bajo estudio.
 
 
 ### Racionalización de la Prueba de Rangos Asiganados de Wilcoxon {#racionalizacion-wilcoxon1}
@@ -880,17 +880,19 @@ $$
 El cual se conoce como estadístico de rangos asignados de Wilcoxon. Donde,
 
 $$
+\begin{equation}
 S_i=
 \begin{cases}
 1, \quad si \; D_i>0\\
-0, \quad si \; D_i<0.
+0, \quad si \; D_i<0
+\end{cases}.
 (\#eq:signo)
-\end{cases}
+\end{equation}
 $$
 
 Siendo $D_i= X_i-\widetilde{\mu}_{0}$ y $R_i=r \left(|D_i| \right)$. En donde la función $r(.)$ determina los ranqueos, en este caso, ranquea los valores absolutos de los $D_i$. Esta función se ejecuta con la función `rank`  de la distribución base de `r colorize("R", "blue")`.
 
-Wilcoxon determinó la distribución exacta del estadístico $T^+$ asumiendo que si $x_1, x_2, \dotsc,x_n$ representa una muestra de una variable aleatoria continua $X$, $x_i \neq \widetilde{\mu}_{0}$, para $i=1, 2, \dotsc, n$, es decir los valores muestrales eran diferente a la mediana propuesta en la hipótesis nula. Además, si $\left(|d_r| \right)$ y $\left(|d_s| \right)$ son los valores absolutos de dos diferencias en la muestra, esto es, $\left(|d_r| \right) \neq \left(|d_s| \right)$, para $r \neq s$.
+Wilcoxon determinó la distribución exacta del estadístico $T^+$ asumiendo que si $x_1, x_2, \dotsc,x_n$ representa una muestra de una variable aleatoria continua $X$, $x_i \neq \widetilde{\mu}_{0}$, para $i=1, 2, \dotsc, n$, es decir los valores muestrales eran diferente a la mediana propuesta en la hipótesis nula. Además, si $\left(|d_r| \right)$ y $\left(|d_s| \right)$ son los valores absolutos de las diferencias de las observaciones $r$ y $s$ a la mediana propuesta en la hipótesis nula $\widetilde{\mu}_{0}$. Esto es, $\left(|d_r| \right) \neq \left(|d_s| \right)$, para $r \neq s$.
 
 Las funciones:
 
@@ -916,7 +918,7 @@ y la varianza está determinada por
 
 $$
 \begin{equation}
-V \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{4}.
+V \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{24}.
 (\#eq:varianza-wilcoxon1)
 \end{equation}
 $$
@@ -933,7 +935,7 @@ Como $T^+$ tiene distribución de rangos asignados de Wilcoxon con parámetro $n
 
 $$
 \begin{equation}
-p_{valor} = 1 - F_W \left(t^ -1, \; n \right).
+p_{valor} = 1 - F_W \left(t^+ - 1, \; n \right).
 (\#eq:pus-wilcoxon1)
 \end{equation}
 $$
@@ -972,7 +974,7 @@ Por otro lado, dado que $T^+$ es una suma de variables aleatorias, por el teorem
 
 $$
 \begin{equation}
-Z= \frac{T^+ \pm 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}} \simeq N \left(\mu=0, \sigma=1\right).
+Z= \frac{T^+ \pm 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}}} \simeq N \left(\mu=0, \sigma=1\right).
 (\#eq:z-wilcoxon1)
 \end{equation}
 $$
@@ -983,7 +985,7 @@ Para una prueba unilateral superior, el $p_{valor}$, usando el estadístico dado
 
 $$
 \begin{equation}
-p_{valor} = 1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right).
+p_{valor} = 1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}}}; \; \mu = 0, \; \sigma = 1 \right).
 (\#eq:pusz-wilcoxon1)
 \end{equation}
 $$
@@ -992,7 +994,7 @@ Si la prueba es unilateral inferior, cuando se usa el estadístico dado en la ec
 
 $$
 \begin{equation}
-p_{valor} = F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right).
+p_{valor} = F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}}}; \; \mu = 0, \; \sigma = 1 \right).
 (\#eq:puiz-wilcoxon1)
 \end{equation}
 $$
@@ -1003,10 +1005,10 @@ $$
 \begin{equation}
 p_{valor}=
 \begin{cases} 
-2\left[1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right)], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
-F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}}}; \; \mu = 0, \; \sigma = 1 \right), \; \textit{si} \; t^+ \leq \frac{n \left(n+1 \right)}{4} 
- \end{cases}.
-(\#eq:pbl-wilcoxon1)
+2\left [ 1-F_{N}\left ( \frac{t^+ - 0,5 - \frac{n(n + 1)}{4}}{\sqrt{\frac{n(n+)(2n +1)}{24}}}; \; \mu_Z = 0, \sigma_Z = 1 \right ) \right ], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
+F_{N}\left ( \frac{t^+ + 0,5 - \frac{n(n + 1)}{4}}{\sqrt{\frac{n(n+)(2n + 1)}{24}}}; \; \mu_Z = 0, \sigma_Z = 1 \right ), \; \textit{si} \; t^+ \le \frac{n \left(n+1 \right)}{4}
+\end{cases}.  
+(\#eq:pblz-wilcoxon1)
 \end{equation}
 $$
 
@@ -1014,16 +1016,18 @@ Cuando la muestra es grande($n \ge 15$) y ocurren diferencias iguales en valor a
 
 $$
 \begin{equation}
-V \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}.
+V \left(T^+| \widetilde{\mu}= \widetilde{\mu}_{0} \right)=\frac{n(n+1)(2n+1)}{24}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}.
 (\#eq:varianzac-wilcoxon1)
 \end{equation}
 $$
 
-Donde $g$ es el número de grupos y $t_j$ es el número de observaciones empatadas en el grupo $j$. De lo anterior, el estadístico dado en la ecuación \@ref(eq:z-wilcoxon1) se redefine de la siguiente manera,
+Donde $g$ es el número de grupos y $t_j$ es el número de observaciones empatadas en el grupo $j$. Como se puede notar, una observación no empatada es considerada como un grupo de tamaño 1. En particular, si no hay valores de $\left|D_i \right|$ iguales, entonces $g = n$ y $t_j = 1$ para $j = 1, 2, \dotsc, n$. En este caso, cada término en la ecuación  \@ref(eq:varianzac-wilcoxon1) de la forma $t_j (t_j^2 − 1)$ se reduce a cero, y la varianza dada en la ecuación \@ref(eq:varianzac-wilcoxon1) se reduce a la varianza del estadístico $T^+$ cuando no hay empates, mostrada en la ecuación \@ref(eq:varianza-wilcoxon1).
+
+De lo anterior, el estadístico dado en la ecuación \@ref(eq:z-wilcoxon1) se redefine de la siguiente manera,
 
 $$
 \begin{equation}
-Z= \frac{T^+ \pm 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}} \simeq N \left(\mu=0, \sigma=1\right).
+Z= \frac{T^+ \pm 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}} \simeq N \left(\mu=0, \sigma=1\right).
 (\#eq:zc-wilcoxon1)
 \end{equation}
 $$
@@ -1032,7 +1036,7 @@ Cuando se usa el estadístico anterior para pruebas de hipótesis unilateral sup
 
 $$
 \begin{equation}
-p_{valor} = 1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right).
+p_{valor} = 1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu_Z = 0, \; \sigma_Z = 1 \right).
 (\#eq:puszc-wilcoxon1)
 \end{equation}
 $$
@@ -1041,7 +1045,7 @@ Para una prueba unilateral inferior usando el estadístico dado en la ecuación 
 
 $$
 \begin{equation}
-p_{valor} = F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right).
+p_{valor} = F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu_Z = 0, \; \sigma_Z = 1 \right).
 (\#eq:puszc-wilcoxon1)
 \end{equation}
 $$
@@ -1052,14 +1056,14 @@ $$
 \begin{equation}
 p_{valor}=
 \begin{cases} 
-2\left[1 - F_N \left(Z= \frac{T^+ - 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right)], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
-F_N \left(Z= \frac{T^+ + 0,5-\frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{4}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu = 0, \; \sigma = 1 \right), \; \textit{si} \; t^+ \leq \frac{n \left(n+1 \right)}{4} 
- \end{cases}.
-(\#eq:pbl-wilcoxon1)
+2\left [ 1-F_{N}\left ( \frac{t^+ - 0,5 - \frac{n(n + 1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu_Z = 0, \sigma_Z = 1 \right ) \right ], \; \textit{si} \; t^+ > \frac{n \left(n+1 \right)}{4} \\ 
+F_{N}\left ( \frac{t^+ + 0,5 - \frac{n(n + 1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}-\sum_{j=1}^{g} \frac{t_i \left(t_i^2-1 \right)}{48}}}; \; \mu_Z = 0, \sigma_Z = 1 \right ), \; \textit{si} \; t^+ \le \frac{n \left(n+1 \right)}{4}
+\end{cases}. 
+(\#eq:pblz-wilcoxon1)
 \end{equation}
 $$
 
-Conmover (1999, pág. 353) propone el siguiente estadístico de prueba 
+En Conover (1999, pág. 353) se propone el siguiente estadístico de prueba cuando el tamaño de muestra es grande.
 
 $$
 \begin{equation}
@@ -1091,7 +1095,40 @@ Z= \frac{T \pm 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}} \simeq N \left(\mu=0, \sigma=
 \end{equation}
 $$
 
-Si $n$ es grande y hay empates en la muestra, el estadístico dado en la ecuación \@ref(eq:T-wilcoxon1) tiene $E \left(T \;| \; \widetilde{\mu}= \widetilde{\mu}_{0} \right) =0$; y varianza
+Para el estadístico $T$ dado en la ecuación \@ref(eq:t-wilcoxon1) el $p_{valor}$ para una prueba unilateral superior cuando no hay empates, viene dado por:
+
+$$
+\begin{equation}
+p_{valor} = 1 - F_N \left(Z= \frac{t - 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}}; \; \mu_Z = 0, \; \sigma_Z = 1 \right).
+(\#eq:pusz-wilcoxon1)
+\end{equation}
+$$
+
+Cuando la prueba es unilateral inferior y se usa el estadístico dado en la ecuación \@ref(eq:t-wilcoxon1) sin presencia de empates, el $p_{valor}$ es:
+
+$$
+\begin{equation}
+p_{valor} =F_N \left(Z= \frac{t + 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}}; \; \mu_Z = 0, \; \sigma_Z = 1 \right).
+(\#eq:pusz-wilcoxon1)
+\end{equation}
+$$
+
+Ahora, si la prueba es bilateral y no hay empates, el $p_{valor}$ se calcula con, 
+
+
+$$
+\begin{equation}
+p_{valor}=
+\begin{cases} 
+2\left [ 1-F_{N}\left ( \frac{t - 0,5 }{\sqrt{\frac{n(n+)(2n + 1)}{6}}}; \; \mu_Z = 0, \sigma_Z = 1 \right ) \right ], \; \textit{si} \; t > 0 \\ 
+F_{N}\left ( \frac{t + 0,5 }{\sqrt{\frac{n(n+)(2n + 1)}{6}}}; \; \mu_Z = 0, \sigma_Z = 1 \right ), \; t \le 0
+\end{cases}. 
+(\#eq:pblzt-wilcoxon1)
+\end{equation}
+$$
+
+
+Cuando hay empates en la muestra y esta es grande ($n \ge 15$), el estadístico dado en la ecuación \@ref(eq:t-wilcoxon1) tiene $E \left(T \;| \; \widetilde{\mu}= \widetilde{\mu}_{0} \right) =0$; y varianza
 
 $$
 \begin{equation}
@@ -1108,24 +1145,33 @@ Z= \frac{T \pm 0,5}{\sqrt{\sum_{i=1}^{n}R_i^2}} \simeq N \left(\mu=0, \sigma = 1
 \end{equation}
 $$
 
-Para el estadístico $T$ dado en la ecuación \@ref(eq:t-wilcoxon1) el $p_{valor} para una prueba unilateral superior cuando no hay empates, viene dado por:
+Por lo que, para muestras grandes y sin empates, haciendo uso del estadístico dado en la ecuación anterior, el calculo del $p_{valor}$ para pruebas de hipótesis unilateral superior, unilateral inferior y bilateral viene dadas por las siguientes ecuaciones, respectivamente. 
 
 $$
 \begin{equation}
-p_{valor} = 1 - F_N \left(Z= \frac{T - 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}}; \; \mu = 0, \; \sigma = 1 \right).
-(\#eq:pusz-wilcoxon1)
+p_{valor} = 1 - F_N \left(Z= \frac{t - 0,5}{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \; \sigma_Z = 1 \right).
+(\#eq:puszte-wilcoxon1)
 \end{equation}
 $$
-
-Cuando la prueba es unilateral inferior y se usa el estadístico dado en la ecuación \@ref(eq:t-wilcoxon1) sin presencia de empates, el $p_{valor} es:
-
 
 $$
 \begin{equation}
-p_{valor} =F_N \left(Z= \frac{T + 0,5}{\sqrt{\frac{n(n+1)(2n+1)}{6}}}; \; \mu = 0, \; \sigma = 1 \right).
-(\#eq:pusz-wilcoxon1)
+p_{valor} =F_N \left(Z= \frac{t + 0,5}{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \; \sigma_Z = 1 \right).
+(\#eq:puszte-wilcoxon1)
 \end{equation}
 $$
+
+$$
+\begin{equation}
+p_{valor}=
+\begin{cases} 
+2\left [ 1-F_{N}\left ( \frac{t - 0,5 }{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \sigma_Z = 1 \right ) \right ], \; \textit{si} \; t > 0 \\ 
+F_{N}\left ( \frac{t + 0,5 }{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \sigma_Z = 1 \right ), \; t \le 0
+\end{cases}. 
+(\#eq:pblzte-wilcoxon1)
+\end{equation}
+$$
+
 
 
 
@@ -1144,23 +1190,19 @@ mediana <- 98
 tabla_co <- tibble(
   i = 1:length(co),
   co = co,
-  diferencia = co - mediana
+  dif = co - mediana,
+  va_dif = na_if(abs(dif), 0),
+  rango = sign(dif) * rank(
+    va_dif, ties.method = "average") %>% 
+    na_if(max(.))
 ) %>% 
-  mutate(
-    rango = dplyr::if_else(
-      diferencia == 0, NA_real_, 
-      sign(diferencia) * 
-      rank(
-        abs(diferencia), na.last = TRUE, 
-             ties.method = "average"
-        )
-      )
-    )
+  arrange(va_dif)
 options(knitr.kable.NA = "")
 kableExtra::kbl(
   tabla_co,
   col.names = c(
-    "$i$", "Concentración de octano", "$D_i$", "$R_i$"
+    "$i$", "Concentración de octano", "$D_i$",  
+    "$\\left| D_i \\right|$","$R_i$"
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
@@ -1172,27 +1214,27 @@ kableExtra::kbl(
     full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
-  row_spec(which(tabla_co$diferencia == 0), color = "red",
+  row_spec(which(tabla_co$dif == 0), color = "red",
            strikeout = TRUE) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 
-En el siguiente script se muestra el calculo  del estadístico $T^+$ y el $p_{valor}$ para una prueba unilateral superior.
+En el siguiente script se muestra el calculo  del estadístico $T^+$ y el $p_{valor}$ para una prueba unilateral superior, dados en las ecuaciones \@ref(eq:Tmas) y \@ref(eq:pus-wilcoxon1).
 
 ```{r tmas-wilcoxon1}
-Tmas <- tabla_co %>% 
+Tmas <- tabla_co %>%
   dplyr::select(
     rango
-  ) %>% 
+  ) %>%
   dplyr::filter(
     rango > 0
-  ) %>% 
+  ) %>%
   sum(., na.rm = TRUE)
-n <- length(co[co != 0])
-p.valor <- psignrank(
-  q = Tmas - 1, n = n, lower.tail = FALSE
+n <- nrow(drop_na(tabla_co))
+p.valor <- 1 - psignrank(
+  q = Tmas - 1, n = n, lower.tail = TRUE
 )
 paste("El valor del estadístico Tmas =", Tmas)
 paste(
@@ -1206,11 +1248,31 @@ paste(
 ```
 <br/>
 
-Como se muestra en la salida anterior, el estadístico $T^+=`formato(mas)`$. Mientras que el $p_{valor}=`formato(p.valor)`$, lo cual implica que hay suficiente evidencia estadística para asegurar con un 99\% de que la mediana de la concentración de octano es superior a 98.
+Como se muestra en la salida anterior, el estadístico $T^+ =`r formato(Tmas)`$. Mientras que el $p_{valor} = `r formato(p.valor)`$, lo cual implica que hay suficiente evidencia estadística para asegurar con un 99\% de que la mediana de la concentración de octano es superior a 98.
 
-Note que el $p_valor$ obtenido con la prueba del signo (0,0065) en el ejemplo \@ref(exm:ejemp1-signo1) no difiere mucho del obtenido con esta prueba (0,0021). En ambos casos se rechaza la hipótesis nula, dado que $p_{valor} < 0,01$.
+Note que el $p_valor$ obtenido con la prueba del signo (0,0065) en el ejemplo \@ref(exm:ejemp1-signo1) no difiere mucho del obtenido con esta prueba (0,002014). En ambos casos se rechaza la hipótesis nula, dado que $p_{valor} < 0,01$.
 
-La prueba de rango
+La prueba de rangos con signos de Wilcoxon se puede aplicar, de manera directa, con la función `wilcoxon.test` del paquete `exactRankTests`.
+  
+```{r}
+library(exactRankTests)
+wilcox.exact(
+  x = co, y = NULL, alternative = "g", mu = 98,
+  paired = FALSE, exact = TRUE, conf.int = TRUE,
+  conf.level = 0.99
+)
+```
+
+La función `wilcox.test` del paquete `stats` también realiza esta prueba, como se muestra en el siguiente código.
+
+```{r}
+wilcox.test(
+  x = co, y = NULL, alternative = "g", mu = 98,
+  paired = F, exact = T, conf.int = T, conf.level = 0.99
+)
+```
+
+**Nota:** La función `wilcox.test` no ejecuta la prueba exacta en parecencia de ceros y/o empates.  
 
 ## Prueba de Bondad de Ajuste Ji-cuadrado {#jicuadrado1}
 
@@ -2066,8 +2128,8 @@ $$
 F_{n}^{*}\left ( x \right )=\begin{cases}
 0, & \text{ si } x< x_{\left ( i \right )}\\
 \frac{i}{n}, & \text{ si } x_{\left ( i \right )}\leq x< x_{\left ( i +1\right )}, \text{ para }\: i=1, \dotsc, n-1 \\
-1, & \text{ si } x\geq x_{\left ( n \right )}.
-\end{cases}
+1, & \text{ si } x\geq x_{\left ( n \right )}
+\end{cases}.
 (\#eq:fdae)
 \end{equation}
 $$
