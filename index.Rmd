@@ -129,11 +129,13 @@ En este núcleo temático se describen de manera teórica algunas pruebas no par
 
 3.  ***La Prueba de Bondad de Ajuste Ji-cuadrado*** (Sección \@ref(jicuadrado1))
 
-4.  ***La Prueba de Bondad de Ajuste Kolmogorov-Smirnov*** (Sección \@ref(kolgomorov1))
+4.  ***La Prueba de Rangos Asignados de Wilcoxon*** (Sección \@ref(wilcoxon1))
 
-5.  ***La Prueba de Rachas o Carreras de Walf-Wolfowitz*** (Sección \@ref(rachas1))
+5.  ***La Prueba de Bondad de Ajuste Kolmogorov-Smirnov*** (Sección \@ref(kolgomorov1))
 
-5.  ***La Prueba de Rangos Asignados de Wilcoxon*** (Sección \@ref(wilcoxon1))
+6.  ***La Prueba de Rachas o Carreras de Walf-Wolfowitz*** (Sección \@ref(rachas1))
+
+
 
 Una vez descrita estas pruebas se procede, mediante ejemplos, a la implementación en `r colorize("R", "blue")` de las mismas.
 
@@ -246,13 +248,13 @@ $$
 
 Note que el cálculo del $p_{valor}$ depende de la evaluación de la función de distribución binomial $\left ( F_{B} \left ( x,n,p_{0} \right )\right )$, la cual se encuentra ampliamente tabulada para diferentes valores de $n$ y $p$ (generalmente $n\leq25$ y $p\leq1/2$). En la actualidad estas tablas han quedado en desuso dado que existen una gran cantidad de softwares informáticos que permiten evaluar esta función sin prácticamente restricciones sobre estos parámetros. En este sentido, la distribución base de `r colorize("R", "blue")` proporciona las funciones:
 
--   `dbinom(x, size, prob, log = FALSE)`
-
--   `pbinom(q, size, prob, lower.tail = TRUE, log.p = FALSE)`
-
--   `qbinom(p, size, prob, lower.tail = TRUE, log.p = FALSE)`
-
--   `rbinom(n, size, prob)`.
+```
+dbinom(x, size, prob, log = FALSE)
+pbinom(q, size, prob, lower.tail = TRUE, log.p = FALSE)
+qbinom(p, size, prob, lower.tail = TRUE, log.p = FALSE)
+rbinom(n, size, prob)
+```
+<br/>
 
 La función `dbinom` permite evaluar la función de masa de probabilidad binomial definida por la ecuación \@ref(eq:fmp-binomial), `pbinom` calcula la función de distribución binomial descrita por la ecuación \@ref(eq:fdp-binomial), `qbinom` determina los cuantiles binomiales y `rbinom` genera números pseudoaleatorios binomiales. Los parámetros de estas funciones se describen en la tabla \@ref(tab:par-dist-binom).
 
@@ -272,7 +274,7 @@ knitr::kable(
       "Número de ensayos (cero o más).",
       "Probabilidad de éxito en cada ensayo.",
       "Lógico; si es TRUE, las probabilidades p se dan como log(p).",
-      "Lógico; si es TRUE (por defecto), las probabilidades son $P[X     \\leq x]$, de lo contrario, $P[X > x]$."
+      "Lógico; si es TRUE (por defecto), las probabilidades son $P[X \\leq x]$, de lo contrario, $P[X > x]$."
     )
   ),
   booktabs = TRUE,
@@ -281,8 +283,9 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE,
+    htmltable_class = "lightable-hover"
   ) %>%
   kable_classic_2()
 ```
@@ -311,8 +314,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -382,13 +385,14 @@ $$
 
 Como se puede observar, el calculo del $p_{valor}$ aproximado depende de la función de distribución normal estándar, como se observa en las ecuaciones \@ref(eq:paproxus-binomial), \@ref(eq:paproxui-binomial) y \@ref(eq:paproxbl-binomial). La distribución base de `r colorize("R", "blue")` proporciona esta y otras funciones relacionadas con la distribución normal, tales como:
 
--   `dnorm(x, mean = 0, sd = 1, log = FALSE)`
+```
+dnorm(x, mean = 0, sd = 1, log = FALSE)
+pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+rnorm(n, mean = 0, sd = 1)
+```
+<br/>
 
--   `pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)`
-
--   `qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)`
-
--   `rnorm(n, mean = 0, sd = 1)`.
 
 La tabla \@ref(tab:par-dist-normal) describe los parámetros de estas funciones
 
@@ -417,8 +421,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -447,10 +451,11 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
-  kable_classic_2()
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 
@@ -639,10 +644,11 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
-  kable_classic_2()
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 
@@ -745,8 +751,8 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>%
   kable_classic_2() %>%
@@ -770,8 +776,8 @@ kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -1166,22 +1172,21 @@ $$
 p_{valor}=
 \begin{cases} 
 2\left [ 1-F_{N}\left ( \frac{t - 0,5 }{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \sigma_Z = 1 \right ) \right ], \; \textit{si} \; t > 0 \\ 
-F_{N}\left ( \frac{t + 0,5 }{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \sigma_Z = 1 \right ), \; t \le 0
+2F_{N}\left ( \frac{t + 0,5 }{\sqrt{\sum_{i=1}^{n}R_i^2}}; \; \mu_Z = 0, \sigma_Z = 1 \right ), \; t \le 0
 \end{cases}. 
 (\#eq:pblzte-wilcoxon1)
 \end{equation}
 $$
-
-
-
-
+<br/>
 
 ### Implementación en `r colorize("R", "blue")` de la Prueba de Rangos Asignados de Wilcoxon {#wilcoxon-R}
+
+::: {.example #ejemp1-wilcoxon1 name="Prueba de Rangos Asignados de Wilcoxon"}
 Use la prueba de rangos asignados de Wilcoxon a los datos del ejemplo \@ref(exm:ejemp1-signo1) para contrastar las hipótesis planteadas en el ejemplo.
 
 La siguiente tabla muestra los rangos asignados para la concentración de octano.
 
-```{r co-wilcoxon1}
+```{r datos-co}
 co <- c(
   99.0, 102.3, 99.8, 100.5, 99.7, 96.2, 99.1, 102.5,
   103.3, 97.4, 100.4, 98.9, 98.3, 98.0, 101.6
@@ -1206,12 +1211,12 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:co}Ranqueo de la concentración de octano",
+  caption = "\\label{tab2:datos-co}Ranqueo de la concentración de octano",
   escape = FALSE
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
+    full_width = NULL,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(tabla_co$dif == 0), color = "red",
@@ -1254,25 +1259,103 @@ Note que el $p_valor$ obtenido con la prueba del signo (0,0065) en el ejemplo \@
 
 La prueba de rangos con signos de Wilcoxon se puede aplicar, de manera directa, con la función `wilcoxon.test` del paquete `exactRankTests`.
   
-```{r}
-library(exactRankTests)
+```{r wilcoxexact-ejemplo1}
 wilcox.exact(
   x = co, y = NULL, alternative = "g", mu = 98,
   paired = FALSE, exact = TRUE, conf.int = TRUE,
   conf.level = 0.99
 )
 ```
+<br/>
+
+Dado que el tamaño de la muestra es razonablemente grande el $p_{valor}$ puede aproximarse haciendo uso  de la convergencia asintótica a la normal del estadístico $T^+$ con la ecuación \@ref(eq:pusz-wilcoxon1). El cálculo se muestra en el siguiente trozo de código.
+
+```{r pusz-wilcoxon1}
+media <- n*(n + 1)/4
+var <- n*(n + 1)*(2*n + 1)/24
+z <- (Tmas - 0.5 - media)/sqrt(var)
+p.valor <- 1 - pnorm(q = z)
+paste("El valor del estadístico Z =", round(x = z, digits = 4))
+paste("El p.valor =", round(x = p.valor, digits = 4))
+```
+
+Como se observa, en la tabla \@ref(tab:datos-co) hay presencia de ceros y rangos empatados por lo que conviene calcular el $p_{valor}$ usando la ecuación \@ref(eq:puszc-wilcoxon1). Para ello es necesario construir la tabla de rango empatados, lo cual se muestra con el siguiente script.
+
+```{r empates-co}
+empates <- tabla_co %>%
+  dplyr::select(rango) %>% 
+  drop_na(.) %>%
+  dplyr::transmute(
+    rango = abs(rango)
+  ) %>% 
+  table(.) %>% 
+  as.data.frame(.) %>%
+  dplyr::mutate(
+    j = 1:length(Freq)
+  ) %>% 
+  dplyr::rename(
+    rango = ".",
+    tj = "Freq"
+  ) %>% 
+  dplyr::select(c(3, 1, 2))
+kableExtra::kbl(
+  empates,
+  col.names = c(
+    "$j$", "Rango", "$T_j$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:empates-co}Rangos empatados",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = NULL,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+
+```
+
+El calculo del $p_{valor}$, cuando hay empates, se obtiene con el siguiente script.
+
+```{r pvalor-epates-wilcoxon1}
+cor_var <- sum(empates$tj * (empates$tj^2 - 1)) / 48
+var.cor <- var - cor_var
+z.cor <- (Tmas - 0.5 - media)/sqrt(var.cor)
+p.valor <- 1 - pnorm(q = z.cor)
+paste("El valor del estadístico Z =", round(x = z.cor, digits = 4))
+paste("El p.valor =", round(x = p.valor, digits = 6))
+```
+
 
 La función `wilcox.test` del paquete `stats` también realiza esta prueba, como se muestra en el siguiente código.
 
-```{r}
+```{r wilcoxontest1}
 wilcox.test(
   x = co, y = NULL, alternative = "g", mu = 98,
   paired = F, exact = T, conf.int = T, conf.level = 0.99
 )
 ```
+<br/>
 
-**Nota:** La función `wilcox.test` no ejecuta la prueba exacta en parecencia de ceros y/o empates.  
+**Nota:** La función `wilcox.test` no ejecuta la prueba exacta en presencia de ceros y/o empates.
+
+Otra forma de hallar el $p_{valor}$, cuando hay empates, es usando la convergencia asintótica a la normal del estadístico $T$, por medio de la ecuación \@ref(eq:puszte-wilcoxon1).
+
+```{r estadistiticoT11}
+T <- sum(tabla_co$rango, na.rm = TRUE)
+var_T <- sum(tabla_co$rango ^ 2, na.rm = TRUE)
+z <- (Tmas - 0.5)/sqrt(var_T)
+p.valor <- 1 - pnorm(q = z)
+paste("El valor del estadístico Z =", round(x = z, digits = 6))
+paste("El p.valor =", round(x = p.valor, digits = 6))
+
+
+```
+<br/>
+:::
 
 ## Prueba de Bondad de Ajuste Ji-cuadrado {#jicuadrado1}
 
@@ -1391,10 +1474,13 @@ $$
 
 Donde $F_{\chi_{k-1}^{2}}\left(\chi^{2} \right)$ es la función de distribución acumulada de una variable aleatoria ji-cuadrado con $k-1$ grados de libertad, la cual se encuentra ampliamente tabulada. La distribución base de `r colorize("R", "blue")` proporciona las siguientes funciones, las cuales permiten evaluar estas y otras funciones relacionadas con esta distribución de probabilidad:
 
--   `dchisq(x, df, ncp = 0, log = FALSE)`
--   `pchisq(q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)`
--   `qchisq(p, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)`
--   `rchisq(n, df, ncp = 0)`.
+```
+dchisq(x, df, ncp = 0, log = FALSE)
+pchisq(q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)
+qchisq(p, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)
+rchisq(n, df, ncp = 0)
+```
+<br/>
 
 La función `dchisq` calcula la función de densidad ji-cuadrado, `pchisq` evalúa la función de distribución ji-cuadrado, `qchisq` determina los cuantiles de la distribución ji-cuadrado y `rchisq` genera números aleatorios de esta distribución. Los parámetros de estas funciones se describen en la tabla \@ref(tab:par-dist-jicuadrado):
 
@@ -1423,8 +1509,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -1438,11 +1524,11 @@ Por otro lado la función `chisq.test(x, y = NULL, correct = TRUE, p = rep(1/len
 knitr::kable(
   data.frame(
     stringsAsFactors = FALSE,
-    Parámetros = c(
+    Parametros = c(
       "x", "y", "correct", "p",
       "rescale.p", "simulate.p.value", "B"
     ),
-    Descripción = c(
+    Descripcion = c(
       "Un vector o matriz numérica. x e y también pueden ser factores.",
       "Un vector numérico; ignorado si x es una matriz. Si x es un factor, y debe ser un factor de la misma longitud.",
       "Lógica que indica si se debe aplicar o no la corrección de continuidad de Yate al calcular el estadístico de prueba para las tablas de 2 por 2. No se realiza ninguna corrección si simulate.p.value. = TRUE.",
@@ -1458,10 +1544,11 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
-  kable_classic_2()
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 
@@ -1559,10 +1646,11 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
-  kable_classic_2()
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 
@@ -1589,8 +1677,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -1642,7 +1730,7 @@ N^{\circ} \, de \, días       & 22 &  53 & 58 &  39 &  20 &  5 & 2 & 1 \\
 \hline
 \end{array}
 $$
-
+<br/>
 Los datos fueron tomados de Vélez y García (2012, pág. 435).
 
 En la tabla \@ref(tab:datos4) se aprecian las frecuencia observadas y esperadas. Donde las frecuencias esperadas viene dada por $E_i=np_{0i}$. Donde $n$ es el tamaño de la muestra (`r sum(c(22L, 53L, 58L, 39L, 20L, 5L, 2L, 1L))`) y $p_{0i}$ son las probabilidades esperadas, las cuales se obtiene sustituyendo en la función de probabilidad de Poisson
@@ -1674,15 +1762,15 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>%
-  kable_classic_2()
+  kable_classic_2() 
 ```
 <br/>
 
-Como se nota en la tabla generada por el script anterior, las clases 7 y 8 tienen frecuencias esperadas menores que 5, y peor aún, la de la clase 8 es menor que 1. Por tanto, estas se funden con la clase 6 para dar lugar a la clase 5 o más accidentes en un día, para que sea procedente utilizar la prueba de bondad de ajuste Ji-Cuadrado.
+Como se nota en la tabla anterior, las clases 7 y 8 tienen frecuencias esperadas menores que 5, y peor aún, la de la clase 8 es menor que 1. Por tanto, estas se funden con la clase 6 para dar lugar a la clase 5 o más accidentes en un día, para que sea procedente utilizar la prueba de bondad de ajuste Ji-Cuadrado.
 
 ```{r datos4-corregidos}
 datos4 <- bind_rows(datos4[1:5, ], colSums(datos4[6:8, ])) %>%
@@ -1701,10 +1789,10 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
-  kable_classic_2()
+  kable_classic_2() 
 ```
 <br/>
 
@@ -1796,8 +1884,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -1887,6 +1975,7 @@ curve(
   add = TRUE, col = "red", lwd = 1
 )
 ```
+<br\>
 :::
 
 ::: {.example #ejemplo4-jicuadrado1 name="Prueba de Bondad de Ajuste Ji-cuadrado"}
@@ -1948,8 +2037,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>%
   kable_classic_2()
@@ -1992,8 +2081,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -2052,8 +2141,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -2282,8 +2371,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -2311,8 +2400,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -2377,8 +2466,8 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   column_spec(
     5,
@@ -2390,7 +2479,8 @@ kableExtra::kbl(
     color = if_else(datos7$D_menos == max(datos7$D_menos), "red", "black"),
     bold = if_else(datos7$D_menos == max(datos7$D_menos), TRUE, FALSE)
   ) %>%
-  kable_classic_2()
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 
@@ -2398,7 +2488,7 @@ Como se observa en la tabla \@ref(tab:datos7) $D_{n}^{+} = `r format(max(datos7$
 
 Dado que el $p_{valor}>0,05$ se acepta la hipótesis de que la reflectancia tiene distribución $U(a=0, b=1)$.
 
-Los resultados anterioores se pueden obtener con el siguiente código.
+Los resultados anteriores se pueden obtener con el siguiente código.
 
 ```{r estadisticos-datos7}
 D_mas <- max(datos7$D_mas)
@@ -2519,13 +2609,13 @@ kableExtra::kbl(
   ),
   align = c("c", "c", "c", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
-  caption = "\\label{tab2:datos7}Distribución empírica de la longitud de la pieza Vs la distribución $N\\left(\\mu=10,5;\\, \\sigma =0,15 \\right)$",
+  caption = "\\label{tab2:datos8}Distribución empírica de la longitud de la pieza Vs la distribución $N\\left(\\mu=10,5;\\, \\sigma =0,15 \\right)$",
   escape = FALSE
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   column_spec(
     5,
@@ -2711,10 +2801,13 @@ Para contrastar la hipótesis nula $H_0:$ la cual representa que la muestra es a
 
 El paquete `randtests` proporciona las siguientes funciones relacionadas con la distribución de las rachas:
 
-*  `druns(x, n1, n2, log = FALSE)`
-*  `pruns(q, n1, n2, lower.tail = TRUE, log.p = FALSE)`
-*  `qruns(p, n1, n2, lower.tail = TRUE, log.p = FALSE)`
-*  `rruns(n, n1, n2)` 
+```
+druns(x, n1, n2, log = FALSE)
+pruns(q, n1, n2, lower.tail = TRUE, log.p = FALSE)
+qruns(p, n1, n2, lower.tail = TRUE, log.p = FALSE)
+rruns(n, n1, n2)
+```
+<br/>
 
 La función `druns` determina la función de masa de probabilidad de $R$, la función `pruns` evalúa la función de distribución de $R$, la función `qruns` determina valores críticos de $R$ y `rruns` genera números aleatorios de $R$. Los parámetros de estas funciones se describen en la tabla \@ref(tab:par-dist-runs).
 
@@ -2733,7 +2826,7 @@ knitr::kable(
       "Número valores aleatorios de rachas a generar",
       "El número de elementos del primer y segundo tipo, respectivamente",
       "Lógico; si es TRUE, las probabilidades p se dan como log(p)",
-      "Lógico; si es TRUE (por defecto), las probabilidades son $P[X     \\leq x]$, de lo contrario, $P[X > x]$"
+      "Lógico; si es TRUE (por defecto), las probabilidades son $P[X \\leq x]$, de lo contrario, $P[X > x]$."
     )
   ),
   booktabs = TRUE,
@@ -2742,8 +2835,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -2770,8 +2863,8 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2()
 ```
@@ -2818,8 +2911,8 @@ orden de ocurrencia",
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
@@ -3199,8 +3292,8 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   row_spec(which(pareja$signo == "0"), color = "red",
            strikeout = T) %>%
@@ -3296,8 +3389,8 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
-    fixed_thead = T
+    full_width = NULL,
+    fixed_thead = TRUE
   ) %>%
   row_spec(which(niños$di == 0), color = "red",
            strikeout = T) %>%
@@ -3412,7 +3505,7 @@ predichas de los reclusos",
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
+    full_width = NULL,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(reclusos$diferencia == 0), color = "red",
@@ -3522,12 +3615,10 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
+    full_width = NULL,
     fixed_thead = TRUE
   ) %>%
-  kable_classic_2() %>%
-  scroll_box(width = "100%", height = "400px")
-  
+  kable_classic_2()
 ```
 <br/>
 El cálculo del p.valor corregido por empates se muestra con el siguiente código.
@@ -3590,13 +3681,12 @@ y después del debate televisivo",
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE,
+    full_width = NULL,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
   column_spec(c(1, 2, 3), width = c("8em", "3em", "3em")) %>% 
-  add_header_above(c(" " = 1, "Preferencia después del debate televisivo" = 2)) %>% 
-  scroll_box(width = "100%", height = "400px")
+  add_header_above(c(" " = 1, "Preferencia después del debate televisivo" = 2))
 ```
 <br/> 
 La prueba exacta de McNemar, usando la distribución binomial, se obtiene con la ejecución del siguiente código.
@@ -3660,7 +3750,7 @@ as_tibble(devtools::session_info()$packages) %>%
 ```
 
 
-```{r include=FALSE}
+```{r paquetes-usados, include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(),
