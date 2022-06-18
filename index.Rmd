@@ -148,7 +148,8 @@ packages <- c(
   "htmltools", "htmlwidgets", "utf8", "stringr", "MASS",
   "Hmisc", "kolmim", "hrbrthemes", "plotly", "reshape2",
   "randtests", "snpar", "knitcitations", "exactRankTests",
-  "stats", "exact2x2", "NSM3"
+  "stats", "exact2x2", "NSM3", "gmodels", "RVAideMemoire",
+  "MultNonParam"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -158,6 +159,7 @@ package.check <- lapply(packages, FUN = function(x) {
 })
 ```
 <br/>
+
 
 ## Prueba Binomial {#binomial1}
 
@@ -3733,7 +3735,7 @@ exact2x2::mcnemar.exact(
 
 1.  **Prueba de la Probabilidad Exacta de Fisher*** (Sección \@ref(exacta-fisher2i))
 
-2.  ***Prueba de la Mediana*** (Sección \@ref(mediana2r))
+2.  ***Prueba de la Mediana*** (Sección \@ref(mediana2i))
 
 3.  ***Prueba $U$ de Mann-Whitney*** (Sección \@ref(mann-whitney2i))
 
@@ -3784,13 +3786,12 @@ kableExtra::kbl(
   kable_classic_2() %>%
   column_spec(c(1, 2, 3, 4), width = c("8em", "5em", "5em",
                                     "5em")) %>% 
-  add_header_above(c(" " = 1, "Multitud" = 2, " " = 1))
-
-
+  add_header_above(c(" " = 1, "Multitud" = 2, " " = 1)) %>% 
+  column_spec(c(1, 3), border_right = c(TRUE, TRUE))
 
 ```
 <br/>
-El $p_{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a partir del siguiente segmento de código. En esta salida se puede observar que el $p_{valor}$ (0.0563) es menor que el nivel de significancia especificado (10%), lo que indica que el hostigamiento por parte de las multitudes que atestiguan una amenaza de suicidio es afectada por la temperatura (medida según el mes del año).
+El ||{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a partir del siguiente segmento de código. En esta salida se puede observar que el $p_{valor}$ (0.0563) es menor que el nivel de significancia especificado (10%), lo que indica que el hostigamiento por parte de las multitudes que atestiguan una amenaza de suicidio es afectada por la temperatura (medida según el mes del año).
 
 ```{r}
 p.valor <- phyper(
@@ -3800,10 +3801,18 @@ p.valor <- phyper(
   k = as.integer(datos4.1[1, 4]),
   lower.tail = FALSE
 )
-paste("El p.valor =", round(x = p.valor, digits = 4))
+paste(
+  "El p.valor =", 
+  format(
+    round(p.valor, digits = 6),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
 ```
 <br/>
-La función `fisher.test` del paquete `stats`, permite ejecutar, de manera directa, la prueba de la probabilidad exacta de Fisher, como se muestra en el siguiente código. Fíjese que el $p_{valor}$ obtenido en esta salida es idéntico al anterior.
+La función `fisher.test` del paquete `stats`, permite ejecutar, de manera directa, la prueba de la probabilidad exacta de Fisher, como se muest/14en el siguiente código. Fíjese que el $p_{valor}$ obtenido en esta salida es idéntico al anterior.
 
 ```{r}
 fisher.test(x = datos4.1[1:2, 2:3], 
@@ -3819,6 +3828,156 @@ fisher.exact(x = datos4.1[1:2, 2:3],
              alternative = "greater",
              conf.int = TRUE, conf.level = 0.9)
 ``` 
+<br/>
+
+El $p_{valor}$ aproximado se puede obtener usando la aproximación asintótica a la distribución Ji-cuadrada, con el siguiente script.
+
+```{r}
+X2 <- (as.integer(datos4.1[3, 4]) * (abs(as.integer(datos4.1[1, 2]) * as.integer(datos4.1[2, 3]) - as.integer(datos4.1[1, 3]) * as.integer(datos4.1[2, 2])) - as.integer(datos4.1[3, 4]) / 2)^2) / (as.integer(datos4.1[1, 4]) * as.integer(datos4.1[2, 4]) * as.integer(datos4.1[3, 2]) * as.integer(datos4.1[3, 3]))
+p.valor <- pchisq(q = X2, df = 1, lower.tail = FALSE) / 2
+paste(
+  "El p.valor =", 
+  format(
+    round(p.valor, digits = 6),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+```
+<br/>
+:::
+
+## Prueba de la Mediana {#mediana2i}
+
+###	Racionalización de la Prueba de la Mediana {#racionalizacion-mediana2i}
+
+### Implementación en `r colorize("R", "blue")` de la Prueba de la Mediana {#R-mediana2i}
+
+::: {.example #ejemplo1-mediana2i name="Prueba de la Mediana"}
+Los datos siguientes representan la duración en horas de dos tipos diferentes de baterías:
+$$
+\begin{array}{ccccccc}
+\hline
+\mathbf{Tipo \, I}: 40.1 & 30.5 & 40.2 & 45 & 55.5 & 30.6\\
+\mathbf{Tipo \, II}: 50.5 & 50.7 & 45.5 & 55.7 & 60 & 40.8\\
+\hline
+\end{array}
+$$
+Contraste la hipótesis, con un nivel de riesgo del 5%, de que la mediana de la duración de la batería del tipo I es menor que la del tipo II. Los datos fueron tomados de Gómez (2005, pág. 437).
+
+Para ejecutar la prueba se deben ordenar las muestras combinadas de manera creciente para después identificar el número observaciones que son menores que la mediana global $\left ( M = `r formato(median(c(40.1, 30.5, 40.2, 45, 55.5, 30.6,50.5, 50.7, 45.5, 55.7, 60, 40.8)))` \right )$ y las que son mayores o iguales que este valor para cada tipo de batería, como se muestra a continuación, con el siguiente código.
+
+```{r baterias}
+I <- c(40.1, 30.5, 40.2, 45, 55.5, 30.6)
+II <- c(50.5, 50.7, 45.5, 55.7, 60, 40.8)
+Dur <- c(I, II)
+TB <- factor(rep(x = c("I", "II"), 
+                 times = c(length(I), length(II))))
+M <- median(Dur)
+baterias <- tibble(
+  duracion = Dur,
+  tb = TB,
+  comparacion = factor(
+    if_else(Dur < M, "$< M$", "$\\ge M$")
+  )
+) %>% 
+  arrange(duracion)
+kableExtra::kbl(
+  baterias,
+  col.names = c(
+    "Duración", "Tipo de batería", "Comparación"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:baterias}Tiempo de duración de las baterías (horas)",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+Ahora, el siguiente código muestra la tabla de contingencia con el número observaciones que son menores y mayores o iguales que la mediana global para cada tipo de batería.
+
+```{r}
+tf_baterias <- baterias %>% 
+  group_by(tb, comparacion) %>% 
+  tally() %>% 
+  spread(tb, n) %>% 
+  dplyr::arrange(desc(comparacion)) %>% 
+  dplyr::mutate(
+    Total = I + II
+  ) %>% 
+  dplyr::select_if(is.numeric) %>% 
+  add_row(., summarise_all(., sum)) %>% 
+  dplyr::mutate(
+    comparacion = c("$ < M $", "$ \\ge M $", "Total")
+  ) %>% 
+  dplyr::select(comparacion, I, II, Total)
+kableExtra::kbl(
+  tf_baterias,
+  col.names = c(
+    "Comparación", "Tipo I", "Tipo II", "Total"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:baterias}Duración de baterias menores y mayores o iguales que la mediana global",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2("hover") %>% 
+  add_header_above(c(" " = 1, "Baterías" = 2, " " = 1)) %>% 
+  column_spec(c(1, 3), border_right = c(TRUE, TRUE))  
+```
+<br/>
+En este orden de ideas, el siguiente procedimiento muestra el estadístico y el p.valor de la prueba de la mediana de Mood-Westenberg.
+
+```{r}
+p.valor <- phyper(
+  q = as.integer(tf_baterias[1, 2]) - 1, 
+  m = as.integer(tf_baterias[3, 2]), 
+  n = as.integer(tf_baterias[3, 3]),
+  k = as.integer(tf_baterias[1, 4]), 
+  lower.tail = FALSE
+)
+paste("El valor del Estadístico U =", tf_baterias[1, 2])
+paste("El p.valor =", round(x = p.valor, digits = 5))
+```
+<br/>
+De la salida anterior se observa que el $p.valor =`r  formato(p.valor)`$, lo cual indica que las batería del tipo I duran menos que las del tipo II.
+
+```{r}
+library(RVAideMemoire)
+mood.medtest(x = Dur, g = TB, exact = T)
+```
+<br/>
+La prueba exacta de Fisher se puede ejecutar con la función `fisher.test`, como se muestra en la siguiente salida, generada con el siguiente código.
+
+```{r}
+fisher.test(x =  select_if(tf_baterias[1:2, 2:3], is.numeric), 
+            alternative = "greater", conf.int = 0.95)
+```
+<br/>
+
+Las funciones `mood.medtest` del paquete `RVAideMemoire` muestra el $p_{valor}$ de la prueba de la mediana de Mood para dos colas. De tal manera que si éste $p_{valor}$ se divide por dos, se obtiene el p.valor para la prueba a una cola.
+
+```{r}
+RVAideMemoire::mood.medtest(x = Dur, g = TB, exact = T)
+```
+<br/>
+El resultado anterior, también se puede obtener con la función `mood.median.test` del paquete `MultNonParam`.
+```{r}
+MultNonParam::mood.median.test(x = I, y = II, exact = T)
+```
 <br/>
 :::
 
