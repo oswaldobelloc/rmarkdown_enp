@@ -3242,7 +3242,7 @@ Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de si
 
 5)  Se utiliza un proceso de plateado para cubrir cierto tipo de charola de servicio. Cuando el proceso está bajo control el espesor de la plata sobre la charola variara de forma aleatoria siguiendo una distribución normal con una media de 0,02 milímetros y una desviación estándar de 0,005 milímetros. Suponga que las siguientes 12 charolas examinadas muestran los siguientes espesores de plata: 0,019; 0,021; 0,020; 0,019; 0,020; 0,018; 0,023; 0,021; 0,024; 0,022; 0,023; 0,022. Utilice la prueba de rachas para determinar si las fluctuaciones en el espesor de una charola a otra son aleatorias. Utilice $\alpha= 0.05$. Tomado de Walpole (2012, pág. 677).
 
-# Pruebas que Usan Datos de Dos Muestras Relacionadas {#dos-muestra-relacionadas}
+# Pruebas que Usan Datos de Dos Muestras Relacionadas {#dos-muestras-relacionadas}
 
 1.  **Prueba del Signo*** (Sección \@ref(signo2))
 
@@ -3731,7 +3731,7 @@ exact2x2::mcnemar.exact(
 <br/>
 :::
 
-# Pruebas que Usan Datos de Dos Muestras Independientes {#dos-muestra-relacionadas}
+# Pruebas que Usan Datos de Dos Muestras Independientes {#dos-muestras-independientes}
 
 1.  **Prueba de la Probabilidad Exacta de Fisher*** (Sección \@ref(exacta-fisher2i))
 
@@ -3739,7 +3739,7 @@ exact2x2::mcnemar.exact(
 
 3.  ***Prueba $U$ de Mann-Whitney*** (Sección \@ref(mann-whitney2i))
 
-4.  **Prueba de las Rachas*** (Sección \@ref(rachas2i))
+4.  ***Prueba de las Rachas*** (Sección \@ref(rachas2i))
 
 5.  ***Prueba Ji-cuadrado*** (Sección \@ref(jicuadrado2i))
 
@@ -3769,8 +3769,8 @@ datos4.1 <- tibble(
 kableExtra::kbl(
   datos4.1,
   col.names = c(
-    "Mes", "Hostigamiento", "No hostigamientp",
-    "Combinación"
+    "Mes", "Hostigamiento", 
+    "No hostigamientp", "Combinación"
   ),
   align = c("l", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -3791,7 +3791,7 @@ kableExtra::kbl(
 
 ```
 <br/>
-El ||{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a partir del siguiente segmento de código. En esta salida se puede observar que el $p_{valor}$ (0.0563) es menor que el nivel de significancia especificado (10%), lo que indica que el hostigamiento por parte de las multitudes que atestiguan una amenaza de suicidio es afectada por la temperatura (medida según el mes del año).
+El $p_{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a partir del siguiente segmento de código. En esta salida se puede observar que el $p_{valor}$ (0.0563) es menor que el nivel de significancia especificado (10%), lo que indica que el hostigamiento por parte de las multitudes que atestiguan una amenaza de suicidio es afectada por la temperatura (medida según el mes del año).
 
 ```{r}
 p.valor <- phyper(
@@ -3812,7 +3812,7 @@ paste(
 )
 ```
 <br/>
-La función `fisher.test` del paquete `stats`, permite ejecutar, de manera directa, la prueba de la probabilidad exacta de Fisher, como se muest/14en el siguiente código. Fíjese que el $p_{valor}$ obtenido en esta salida es idéntico al anterior.
+La función `fisher.test` del paquete `stats`, permite ejecutar, de manera directa, la prueba de la probabilidad exacta de Fisher, como se muestra en el siguiente bolque de código. Fíjese que el $p_{valor}$ obtenido en esta salida es idéntico al anterior.
 
 ```{r}
 fisher.test(x = datos4.1[1:2, 2:3], 
@@ -3866,7 +3866,7 @@ $$
 $$
 Contraste la hipótesis, con un nivel de riesgo del 5%, de que la mediana de la duración de la batería del tipo I es menor que la del tipo II. Los datos fueron tomados de Gómez (2005, pág. 437).
 
-Para ejecutar la prueba se deben ordenar las muestras combinadas de manera creciente para después identificar el número observaciones que son menores que la mediana global $\left ( M = `r formato(median(c(40.1, 30.5, 40.2, 45, 55.5, 30.6,50.5, 50.7, 45.5, 55.7, 60, 40.8)))` \right )$ y las que son mayores o iguales que este valor para cada tipo de batería, como se muestra a continuación, con el siguiente código.
+Para ejecutar la prueba se deben ordenar las muestras combinadas de manera creciente para después identificar el número observaciones que son menores que la mediana global $\left ( M = `r formato(median(c(40.1, 30.5, 40.2, 45, 55.5, 30.6,50.5, 50.7, 45.5, 55.7, 60, 40.8)))` \right )$ y las que son mayores o iguales que este valor para cada tipo de batería. Lo descrito anteriormente se puede ejecutar con el siguiente bloque código.
 
 ```{r baterias}
 I <- c(40.1, 30.5, 40.2, 45, 55.5, 30.6)
@@ -3891,7 +3891,8 @@ kableExtra::kbl(
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
   caption = "\\label{tab2:baterias}Tiempo de duración de las baterías (horas)",
-  escape = FALSE
+  escape = FALSE, 
+  format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
@@ -3909,16 +3910,17 @@ tf_baterias <- baterias %>%
   group_by(tb, comparacion) %>% 
   tally() %>% 
   spread(tb, n) %>% 
-  dplyr::arrange(desc(comparacion)) %>% 
+  dplyr::arrange(comparacion) %>% 
   dplyr::mutate(
     Total = I + II
   ) %>% 
   dplyr::select_if(is.numeric) %>% 
   add_row(., summarise_all(., sum)) %>% 
   dplyr::mutate(
-    comparacion = c("$ < M $", "$ \\ge M $", "Total")
+    comparacion = c("$< M$", "$\\ge M$", "Total")
   ) %>% 
-  dplyr::select(comparacion, I, II, Total)
+  dplyr::select(comparacion, I, II, Total) %>% 
+  ungroup()
 kableExtra::kbl(
   tf_baterias,
   col.names = c(
@@ -3926,8 +3928,9 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Duración de baterias menores y mayores o iguales que la mediana global",
-  escape = FALSE
+  caption = "\\label{tab2:baterias}Tipos de baterias con tiempo de duración (en horas) menores o iguales y mayores que la mediana global",
+  escape = FALSE, 
+  format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
@@ -3938,6 +3941,9 @@ kableExtra::kbl(
   add_header_above(c(" " = 1, "Baterías" = 2, " " = 1)) %>% 
   column_spec(c(1, 3), border_right = c(TRUE, TRUE))  
 ```
+
+
+
 <br/>
 En este orden de ideas, el siguiente procedimiento muestra el estadístico y el p.valor de la prueba de la mediana de Mood-Westenberg.
 
@@ -3953,7 +3959,7 @@ paste("El valor del Estadístico U =", tf_baterias[1, 2])
 paste("El p.valor =", round(x = p.valor, digits = 5))
 ```
 <br/>
-De la salida anterior se observa que el $p.valor =`r  formato(p.valor)`$, lo cual indica que las batería del tipo I duran menos que las del tipo II.
+De la salida anterior se observa que el $p_{valor} =`r  formato(p.valor)`$, lo cual indica que las batería del tipo I duran menos que las del tipo II a un nivel de confianza del 90\%.
 
 ```{r}
 library(RVAideMemoire)
@@ -3968,7 +3974,7 @@ fisher.test(x =  select_if(tf_baterias[1:2, 2:3], is.numeric),
 ```
 <br/>
 
-Las funciones `mood.medtest` del paquete `RVAideMemoire` muestra el $p_{valor}$ de la prueba de la mediana de Mood para dos colas. De tal manera que si éste $p_{valor}$ se divide por dos, se obtiene el p.valor para la prueba a una cola.
+Las funciones `mood.medtest` del paquete `RVAideMemoire` muestra el $p_{valor}$ de la prueba de la mediana de Mood para dos colas. De tal manera que si éste $p_{valor}$ se divide por dos, se obtiene el $p_{valor}$ para la prueba a una cola.
 
 ```{r}
 RVAideMemoire::mood.medtest(x = Dur, g = TB, exact = T)
@@ -3977,6 +3983,279 @@ RVAideMemoire::mood.medtest(x = Dur, g = TB, exact = T)
 El resultado anterior, también se puede obtener con la función `mood.median.test` del paquete `MultNonParam`.
 ```{r}
 MultNonParam::mood.median.test(x = I, y = II, exact = T)
+```
+<br/>
+:::
+
+::: {.example #ejemplo2-mediana2i name="Prueba de la Mediana para Muestras Grandes"}
+  Las ventas de los establecimientos **A** y **B** fueron controladas durante 9 y 12 días respectivamente, con los siguientes resultados (en miles de pesetas)
+
+$$
+\begin{array}{lcccccccc}
+\hline
+\mathbf{A}: 132.5 & 167.4 & 189.8 & 124.6 & 136.6 & 147.5 &  159.9 & 117.8 & 106.3\\
+ \mathbf{B}: 97.4 & 108.2 & 114.1 & 86.3 & 101.8 & 122.6 &  78.3 & 136.2 & 89.5 & 118.4 & 109.2 & 92.7\\
+\hline
+\end{array}
+$$
+
+Pruebe la hipótesis de que la mediana de las ventas del establecimiento **A** es mayor a la del establecimiento **B**, con un nivel de riesgo del 5%. Los datos son tomados de Vélez (2012, pág. 475).
+
+El siguiente código presenta las muestras combinadas ordenadas de manera reciente con la identificación de las observaciones que son menores o iguales que la mediana global, como las que son mayores para cada establecimiento.
+  
+```{r}
+A <- c(132.5, 167.4, 189.8, 124.6, 136.6, 147.5, 159.9,
+       117.8, 106.3)
+B <- c(97.4, 108.2, 114.1, 86.3, 101.8, 122.6, 78.3, 136.2,
+       89.5, 118.4, 109.2, 92.7)
+M <- median(c(A, B))
+establecimientos <- tibble(
+  venta = c(A, B), 
+  est = factor(
+    rep(x = c("A", "B"), times = c(length(A), length(B)))
+  ),
+  comp = factor(
+    if_else(venta <= M, "$\\le M$", "$> M$")
+  )
+) %>% 
+  arrange(venta)
+kableExtra::kbl(
+  establecimientos,
+  col.names = c(
+    "Venta", "Establecimiento", "Comparación"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:baterias}Ventas por establecimiento",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+El siguiente código muestra la tabla de contingencia con el número de observaciones menores o iguales y por arriba de la mediana de las muestras combinadas $\left(M=`r M` \right)$ para cada tipo de establecimiento.
+
+```{r}
+tf_establecimientos <- establecimientos %>% 
+  group_by(est, comp) %>% 
+  tally() %>% 
+  spread(est, n) %>% 
+  dplyr::arrange(comp) %>% 
+  dplyr::mutate(
+    Total = A + B
+  ) %>% 
+  dplyr::select_if(is.numeric) %>% 
+  add_row(., summarise_all(., sum)) %>% 
+  dplyr::mutate(
+    comparacion = c("$\\le M$", "$> M$", "Total")
+  ) %>% 
+  dplyr::select(comparacion, A, B, Total) %>% 
+  ungroup()
+kableExtra::kbl(
+  tf_establecimientos,
+  col.names = c(
+    "Comparación", "A", "B", "Total"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:baterias}Establecimientos con ventas menores o iguales y mayores que la mediana global",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2("hover") %>% 
+  add_header_above(c(" " = 1, "Establecimiento" = 2, " " = 1)) %>% 
+  column_spec(c(1, 3), border_right = c(TRUE, TRUE))  
+```
+<br/>
+El siguiente script muestra el estadístico y el p.valor de la prueba de la mediana de Mood-Westenberg.
+
+```{r}
+p.valor <- phyper(
+  q = as.numeric(tf_establecimientos[1, 2]), 
+  m = as.numeric(tf_establecimientos[3, 2]), 
+  n = as.numeric(tf_establecimientos[3, 3]), 
+  k = as.numeric(tf_establecimientos[1, 4])
+)
+paste(
+  "El valor del estadístico T =",
+  as.numeric(tf_establecimientos[1, 2])
+)
+paste(
+  "El p.valor =", 
+  format(
+    round(p.valor, digits = 6),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+```
+<br/>
+Como se observa en la salida anterior, dado que el $p_{valor}= `r p.valor`$ es menor que el nivel de riesgo (0,05), se puede concluir que las ventas del establecimiento A son mayores que las del B.
+
+```{r}
+library(RVAideMemoire)
+mood.medtest(
+  x = establecimientos$venta, 
+  g = establecimientos$est, 
+  exact = TRUE
+)
+```
+<br/>
+Usando la función `fisher.test` para estos datos, se obtiene el siguiente resultado.
+
+```{r}
+fisher.test(
+  x = tf_establecimientos[1:2, 2:3], 
+  alternative = "less", 
+  conf.int = TRUE , 
+  conf.level = 0.95
+)
+```
+<br/>
+:::
+
+## Prueba $U$ de Mann-Whitney {#mann-whitney2i}
+
+###	Racionalización de la Prueba $U$ de Mann-Whitney {#racionalizacion-mann-whitney2i}
+
+### Implementación en `r colorize("R", "blue")` de la Prueba $U$ de Mann-Whitney {#R-mann-whitney2i}
+
+::: {.example #ejemplo1-mann-whitney2i name="Prueba $U$ de Mann-Whitney"}
+Solomon y Coles estudiaron si las ratas generalizaban
+aprendizaje de imitación cuando eran colocadas bajo un nuevo impulso (una nueva condición motivante) y en una nueva situación. Cinco ratas fueron entrenadas en imitar a ratas líderes en un laberinto en T, cuando tenían hambre. Los sujetos se encontraban en un régimen de privación de alimento y debían seguir al líder a través del laberinto para conseguir comida. Después que se logró que las ratas experimentales imitaran a las ratas líderes, fueron
+cambiadas a una situación de evitación de choques eléctricos, donde la imitación que hicieran del líder les permitiría evitar dicha estimulación aversiva. La conducta en la situación de evitación se comparó con la de cuatro sujetos control que no habían tenido entrenamiento previo en seguir a líderes. La hipótesis era que las primeras cinco ratas que habían sido entrenadas para imitar transferirían ese entrenamiento a la nueva situación y así, alcanzarían el criterio de aprendizaje en la situación de evitación más rápidamente que las cuatro ratas control. Las comparaciones se realizaron en términos de cuántos ensayos le tomó a cada rata alcanzar el criterio de 10 respuestas correctas en 10 ensayos. Contraste la hipótesis nula de que el número de ensayos necesarios para alcanzar el criterio en la situación de evitación es el mismo para las ratas que fueron entrenadas para seguir a un líder con el fin de conseguir comida, que para aquellas que no fueron previamente entrenadas versus la hipótesis alternativa de que las ratas que fueron previamente entrenadas para seguir a un líder con el fin de conseguir comida alcanzarán el criterio de ejecución en la situación de evitación de choques eléctricos en menos ensayos que las que no tuvieron el entrenamiento previo; a un nivel de significancia del 5\%. Los datos fueron tomados de Siegel(1995, pág. 160).
+$$
+\begin{array}{lccccc}
+\hline
+\mathbf{Ratas \ controles}: & 110 & 70 & 53 & 51\\
+\mathbf{Ratas \ experimentales}: & 78 & 64 & 75 & 45 & 82\\
+\hline
+\end{array}
+$$
+
+```{r}
+control <- c(110, 70, 53, 51)
+experimental <- c(78, 64, 75, 45, 82)
+library(dplyr)
+datos4.5 <- tibble(
+  punt = c(control, experimental),
+  grupo = c(
+    rep(
+      x = "control",
+      times = length(control)
+    ),
+    rep(
+      x = "experimental",
+      times = length(experimental)
+    )
+  ),
+  rango = rank(punt,
+    ties.method = "average"
+  )
+) %>% 
+  arrange(punt)
+kableExtra::kbl(
+  datos4.5,
+  col.names = c(
+    "Puntuación", "Grupo", "Rango"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:baterias}Ranqueo de las puntuaciones",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2("hover")
+```
+<br/>
+Los estadísticos de la prueba de suma de rangos de Mann-Whitney, se obtiene con el siguiente código.
+  
+```{r}
+estad <- datos4.5 %>% 
+  dplyr::group_by(grupo) %>% 
+  summarise(W = sum(rango), n = n()) %>% 
+  dplyr::mutate(
+    media_W = n * (n + 1) / 2,
+    U = W - media_W,
+    media_U = prod(n) / 2, 
+    var_U = prod(n) * (sum(n) + 1) / 12
+  ) %>% 
+  dplyr::arrange(U) %>% 
+  dplyr::ungroup()
+kableExtra::kbl(
+  estad,
+  col.names = c(
+    "Grupo", "$W$", "$n$", "$E\\left(W \\right)$", "$U$",
+    "$E\\left(U \\right)$", "$V\\left(U \\right)$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:baterias}Estadístico de Mann-Whitney para las puntuaciones",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE
+  ) %>%
+  kable_classic_2() 
+```
+<br/>
+Note que en la tabla que muestra los datos no hay puntuaciones empatadas, por lo que el cálculo del p.valor exacto de la prueba U de Wilcoxon-Mann-Whitney se obtiene con el siguiente código.
+
+```{r}
+p.valor <- pwilcox(
+  q = estad$U[1] - 1, 
+  m = estad$n[1], 
+  n = estad$n[2],
+  lower.tail = F
+)
+paste(
+  "El p.valor =", 
+  format(
+    round(p.valor, digits = 6),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+```
+<br/>
+Como se muestra en la salida anterior, dado que el $p_{valor]=`r p.valor`$ es mayor que el nivel de significancia, no se puede rechazar la hipótesis de que el número de ensayos necesarios para alcanzar el criterio en la situación de evitación es el mismo para las ratas que fueron entrenadas para seguir a un líder con el fin de conseguir comida, que para aquellas que no fueron previamente entrenadas. En otros términos, se puede afirmar que estos datos no apoyan la hipótesis de que el entrenamiento previo en imitación se generalice a otras situaciones y en otras circunstancias motivacionales.
+
+De manera directa, el estadístico $U$ de Mann-Whitney y el $p_{valor}$ exacto para esta prueba se obtiene con el siguiente código.
+
+```{r}
+wilcox.test(x = control, y = experimental, 
+            alternative = "greater", paired = F, 
+            exact = T, correct = T, conf.int = T,
+            conf.level = 0.95)
+```
+<br/>
+La función `wilcox.exact` del paquete `exactRankTests`, también permite ejecutar esta prueba. 
+
+```{r}
+library(exactRankTests)
+wilcox.exact(x = control, y = experimental, 
+             alternative = "greater", paired = F, 
+             exact = T, conf.int = T, conf.level = 0.95)
 ```
 <br/>
 :::
