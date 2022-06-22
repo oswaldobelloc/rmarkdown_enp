@@ -4126,7 +4126,7 @@ fisher.test(
 <br/>
 :::
 
-## Prueba $U$ de Mann-Whitney {#mann-whitney2i}
+## Prueba $U$ de Mann-Whitney-Wilcoxon {#mann-whitney2i}
 
 ###	Racionalización de la Prueba $U$ de Mann-Whitney {#racionalizacion-mann-whitney2i}
 
@@ -4207,7 +4207,7 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Estadístico de Mann-Whitney para las puntuaciones",
+  caption = "\\label{tab2:baterias}Estadístico de Mann-Whitney_Wilcoxon para las puntuaciones",
   escape = FALSE, 
   format = "html"
 ) %>%
@@ -4218,7 +4218,7 @@ kableExtra::kbl(
   kable_classic_2() 
 ```
 <br/>
-Note que en la tabla que muestra los datos no hay puntuaciones empatadas, por lo que el cálculo del p.valor exacto de la prueba U de Wilcoxon-Mann-Whitney se obtiene con el siguiente código.
+Note que en la tabla que muestra los datos no hay puntuaciones empatadas, por lo que el cálculo del p.valor exacto de la prueba U de Mann-Whitney-Wilcoxon se obtiene con el siguiente código.
 
 ```{r}
 p.valor <- pwilcox(
@@ -4240,7 +4240,7 @@ paste(
 <br/>
 Como se muestra en la salida anterior, dado que el $p_{valor]=`r p.valor`$ es mayor que el nivel de significancia, no se puede rechazar la hipótesis de que el número de ensayos necesarios para alcanzar el criterio en la situación de evitación es el mismo para las ratas que fueron entrenadas para seguir a un líder con el fin de conseguir comida, que para aquellas que no fueron previamente entrenadas. En otros términos, se puede afirmar que estos datos no apoyan la hipótesis de que el entrenamiento previo en imitación se generalice a otras situaciones y en otras circunstancias motivacionales.
 
-De manera directa, el estadístico $U$ de Mann-Whitney y el $p_{valor}$ exacto para esta prueba se obtiene con el siguiente código.
+De manera directa, el estadístico $U$ de Mann-Whitney-Wilcoxon y el $p_{valor}$ exacto para esta prueba se obtiene con el siguiente código.
 
 ```{r}
 wilcox.test(x = control, y = experimental, 
