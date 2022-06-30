@@ -135,8 +135,6 @@ En este núcleo temático se describen de manera teórica algunas pruebas no par
 
 6.  ***La Prueba de Rachas o Carreras de Walf-Wolfowitz*** (Sección \@ref(rachas1))
 
-
-
 Una vez descrita estas pruebas se procede, mediante ejemplos, a la implementación en `r colorize("R", "blue")` de las mismas.
 
 El siguiente bloque de código permite instalar y cargar los paquetes usados para implementar estas pruebas en `r colorize("R", "blue")`.
@@ -149,7 +147,7 @@ packages <- c(
   "Hmisc", "kolmim", "hrbrthemes", "plotly", "reshape2",
   "randtests", "snpar", "knitcitations", "exactRankTests",
   "stats", "exact2x2", "NSM3", "gmodels", "RVAideMemoire",
-  "MultNonParam"
+  "MultNonParam", "rstatix"
 )
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
@@ -285,7 +283,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE,
     htmltable_class = "lightable-hover"
   ) %>%
@@ -316,7 +314,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -423,7 +421,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -453,7 +451,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -646,7 +644,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -753,7 +751,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>%
@@ -778,7 +776,7 @@ kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -1218,7 +1216,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(tabla_co$dif == 0), color = "red",
@@ -1312,7 +1310,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -1511,7 +1509,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -1546,7 +1544,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -1648,7 +1646,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -1679,7 +1677,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -1764,7 +1762,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>%
@@ -1791,7 +1789,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() 
@@ -1886,7 +1884,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2039,7 +2037,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>%
@@ -2083,7 +2081,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2143,7 +2141,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2373,7 +2371,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2402,7 +2400,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2468,7 +2466,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   column_spec(
@@ -2616,7 +2614,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   column_spec(
@@ -2728,7 +2726,7 @@ $$
 2)	Se utiliza un proceso de plateado para cubrir cierto tipo de charola de servicio. Cuando el proceso está bajo control el espesor de la plata sobre la charola variara de forma aleatoria siguiendo una distribución normal con una media de 0,02 milímetros y una desviación estándar de 0,005 milímetros. Suponga que las siguientes 12 charolas examinadas muestran los siguientes espesores de plata: 0,019; 0,021; 0,020; 0,019; 0,020; 0,018; 0,023; 0,021; 0,024; 0,022; 0,023; 0,022. Utilice la prueba de Kolmogorov-Smirnov para determinar si está bajo control. Utilice $\alpha= 0,05$.
 
 
-##	Prueba de Rachas o Carreras de Walf-Wolfowits {#rachas1}
+## Prueba de Rachas o Carreras de Walf-Wolfowits {#rachas1}
 
 Si un investigador desea llegar a alguna conclusión acerca de una población usando la información contenida en una muestra extraída de esa población, entonces la muestra debe ser aleatoria; es decir, las observaciones sucesivas deben ser independientes. En este sentido la prueba de la racha o carrera se usa para probar la hipótesis de que una muestra tomada de una población es aleatoria.
 
@@ -2837,7 +2835,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2865,7 +2863,7 @@ knitr::kable(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -2913,7 +2911,7 @@ orden de ocurrencia",
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -3244,7 +3242,7 @@ Utilice la teoría de muestras grandes para la prueba de rachas a un nivel de si
 
 # Pruebas que Usan Datos de Dos Muestras Relacionadas {#dos-muestras-relacionadas}
 
-1.  **Prueba del Signo*** (Sección \@ref(signo2))
+1.  ***Prueba del Signo*** (Sección \@ref(signo2))
 
 2.  ***Prueba de Rangos Asignados de Wilcoxon*** (Sección \@ref(rangos-asignados2))
 
@@ -3294,7 +3292,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(pareja$signo == "0"), color = "red",
@@ -3391,7 +3389,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(niños$di == 0), color = "red",
@@ -3507,7 +3505,7 @@ predichas de los reclusos",
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   row_spec(which(reclusos$diferencia == 0), color = "red",
@@ -3617,7 +3615,7 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2()
@@ -3683,7 +3681,7 @@ y después del debate televisivo",
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
@@ -3733,13 +3731,13 @@ exact2x2::mcnemar.exact(
 
 # Pruebas que Usan Datos de Dos Muestras Independientes {#dos-muestras-independientes}
 
-1.  **Prueba de la Probabilidad Exacta de Fisher*** (Sección \@ref(exacta-fisher2i))
+1.  ***Prueba de la Probabilidad Exacta de Fisher*** (Sección \@ref(exacta-fisher2i))
 
 2.  ***Prueba de la Mediana*** (Sección \@ref(mediana2i))
 
-3.  ***Prueba $U$ de Mann-Whitney*** (Sección \@ref(mann-whitney2i))
+3.  ***Prueba $U$ de Mann-Whitney-Wilcoxon*** (Sección \@ref(mann-whitney2i))
 
-4.  ***Prueba de las Rachas*** (Sección \@ref(rachas2i))
+4.  ***Prueba de las Rachas de Wald-Wolfowitz*** (Sección \@ref(rachas2i))
 
 5.  ***Prueba Ji-cuadrado*** (Sección \@ref(jicuadrado2i))
 
@@ -3769,8 +3767,8 @@ datos4.1 <- tibble(
 kableExtra::kbl(
   datos4.1,
   col.names = c(
-    "Mes", "Hostigamiento", 
-    "No hostigamientp", "Combinación"
+    "Mes", "Hostigamiento",
+    "No hostigamientp", "Total"
   ),
   align = c("l", "c", "c", "c"),
   format.args = list(decimal.mark = ",", big.mark = "."),
@@ -3780,20 +3778,21 @@ kableExtra::kbl(
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = NULL,
+    full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
   kable_classic_2() %>%
-  column_spec(c(1, 2, 3, 4), width = c("8em", "5em", "5em",
-                                    "5em")) %>% 
-  add_header_above(c(" " = 1, "Multitud" = 2, " " = 1)) %>% 
+  column_spec(c(1, 2, 3, 4), width = c(
+    "8em", "5em", "5em",
+    "5em"
+  )) %>%
+  add_header_above(c(" " = 1, "Multitud" = 2, " " = 1)) %>%
   column_spec(c(1, 3), border_right = c(TRUE, TRUE))
-
 ```
 <br/>
-El $p_{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a partir del siguiente segmento de código. En esta salida se puede observar que el $p_{valor}$ (0.0563) es menor que el nivel de significancia especificado (10%), lo que indica que el hostigamiento por parte de las multitudes que atestiguan una amenaza de suicidio es afectada por la temperatura (medida según el mes del año).
+El $p_{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a partir del siguiente segmento de código. En esta salida se puede observar que el $p_{valor}$ (0.0563) es menor que el nivel de significancia especificado (10\%), lo que indica que el hostigamiento por parte de las multitudes que atestiguan una amenaza de suicidio es afectada por la temperatura (medida según el mes del año).
 
-```{r}
+```{r p-phyper}
 p.valor <- phyper(
   q = as.integer(datos4.1[1, 2] - 1), 
   m = as.integer(datos4.1[3, 2]),
@@ -3814,7 +3813,7 @@ paste(
 <br/>
 La función `fisher.test` del paquete `stats`, permite ejecutar, de manera directa, la prueba de la probabilidad exacta de Fisher, como se muestra en el siguiente bolque de código. Fíjese que el $p_{valor}$ obtenido en esta salida es idéntico al anterior.
 
-```{r}
+```{r p-fishertest}
 fisher.test(x = datos4.1[1:2, 2:3], 
             alternative = "greater",
             conf.int = TRUE , conf.level = 0.9)
@@ -3822,17 +3821,18 @@ fisher.test(x = datos4.1[1:2, 2:3],
 <br/>
 Otra función que permite ejecutar esta prueba es `fisher.exact`, la cual se encuentra en el paquete `exact2x2`. El siguiente código muestra la aplicación de la prueba por medio de la mencionada función.
 
-```{r}
-library(exact2x2)
-fisher.exact(x = datos4.1[1:2, 2:3], 
-             alternative = "greater",
-             conf.int = TRUE, conf.level = 0.9)
+```{r p-fisherexact}
+exact2x2::fisher.exact(
+  x = datos4.1[1:2, 2:3],
+  alternative = "greater",
+  conf.int = TRUE, conf.level = 0.9
+)
 ``` 
 <br/>
 
 El $p_{valor}$ aproximado se puede obtener usando la aproximación asintótica a la distribución Ji-cuadrada, con el siguiente script.
 
-```{r}
+```{r paprox-pchisq}
 X2 <- (as.integer(datos4.1[3, 4]) * (abs(as.integer(datos4.1[1, 2]) * as.integer(datos4.1[2, 3]) - as.integer(datos4.1[1, 3]) * as.integer(datos4.1[2, 2])) - as.integer(datos4.1[3, 4]) / 2)^2) / (as.integer(datos4.1[1, 4]) * as.integer(datos4.1[2, 4]) * as.integer(datos4.1[3, 2]) * as.integer(datos4.1[3, 3]))
 p.valor <- pchisq(q = X2, df = 1, lower.tail = FALSE) / 2
 paste(
@@ -3897,7 +3897,8 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    protect_latex = TRUE
   ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
@@ -3905,7 +3906,7 @@ kableExtra::kbl(
 <br/>
 Ahora, el siguiente código muestra la tabla de contingencia con el número observaciones que son menores y mayores o iguales que la mediana global para cada tipo de batería.
 
-```{r}
+```{r frecuencia-baterias}
 tf_baterias <- baterias %>% 
   group_by(tb, comparacion) %>% 
   tally() %>% 
@@ -3928,32 +3929,30 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Tipos de baterias con tiempo de duración (en horas) menores o iguales y mayores que la mediana global",
+  caption = "\\label{tab2:frecuencia-baterias}Tipos de baterias con tiempo de duración (en horas) menores o iguales y mayores que la mediana global",
   escape = FALSE, 
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    protect_latex = TRUE
   ) %>%
   kable_classic_2("hover") %>% 
   add_header_above(c(" " = 1, "Baterías" = 2, " " = 1)) %>% 
   column_spec(c(1, 3), border_right = c(TRUE, TRUE))  
 ```
-
-
-
 <br/>
-En este orden de ideas, el siguiente procedimiento muestra el estadístico y el p.valor de la prueba de la mediana de Mood-Westenberg.
+En este orden de ideas, el siguiente procedimiento muestra el estadístico y el $p_{valor}$ de la prueba de la mediana.
 
-```{r}
+```{r p-baterias}
 p.valor <- phyper(
-  q = as.integer(tf_baterias[1, 2]) - 1, 
+  q = as.integer(tf_baterias[1, 2]), 
   m = as.integer(tf_baterias[3, 2]), 
   n = as.integer(tf_baterias[3, 3]),
   k = as.integer(tf_baterias[1, 4]), 
-  lower.tail = FALSE
+  lower.tail = TRUE
 )
 paste("El valor del Estadístico U =", tf_baterias[1, 2])
 paste("El p.valor =", round(x = p.valor, digits = 5))
@@ -3961,34 +3960,30 @@ paste("El p.valor =", round(x = p.valor, digits = 5))
 <br/>
 De la salida anterior se observa que el $p_{valor} =`r  formato(p.valor)`$, lo cual indica que las batería del tipo I duran menos que las del tipo II a un nivel de confianza del 90\%.
 
-```{r}
-library(RVAideMemoire)
-mood.medtest(x = Dur, g = TB, exact = T)
-```
-<br/>
 La prueba exacta de Fisher se puede ejecutar con la función `fisher.test`, como se muestra en la siguiente salida, generada con el siguiente código.
 
-```{r}
-fisher.test(x =  select_if(tf_baterias[1:2, 2:3], is.numeric), 
-            alternative = "greater", conf.int = 0.95)
+```{r baterias-fishertest}
+fisher.test(
+  x = select_if(tf_baterias[1:2, 3:2], is.numeric),
+  alternative = "greater", conf.int = 0.95
+)
 ```
 <br/>
-
 Las funciones `mood.medtest` del paquete `RVAideMemoire` muestra el $p_{valor}$ de la prueba de la mediana de Mood para dos colas. De tal manera que si éste $p_{valor}$ se divide por dos, se obtiene el $p_{valor}$ para la prueba a una cola.
 
-```{r}
+```{r baterias-moodmedtest}
 RVAideMemoire::mood.medtest(x = Dur, g = TB, exact = T)
 ```
 <br/>
 El resultado anterior, también se puede obtener con la función `mood.median.test` del paquete `MultNonParam`.
-```{r}
+```{r baterias-moodmediantest}
 MultNonParam::mood.median.test(x = I, y = II, exact = T)
 ```
 <br/>
 :::
 
 ::: {.example #ejemplo2-mediana2i name="Prueba de la Mediana para Muestras Grandes"}
-  Las ventas de los establecimientos **A** y **B** fueron controladas durante 9 y 12 días respectivamente, con los siguientes resultados (en miles de pesetas)
+Las ventas de los establecimientos **A** y **B** fueron controladas durante 9 y 12 días respectivamente, con los siguientes resultados (en miles de pesetas)
 
 $$
 \begin{array}{lcccccccc}
@@ -4003,21 +3998,25 @@ Pruebe la hipótesis de que la mediana de las ventas del establecimiento **A** e
 
 El siguiente código presenta las muestras combinadas ordenadas de manera reciente con la identificación de las observaciones que son menores o iguales que la mediana global, como las que son mayores para cada establecimiento.
   
-```{r}
-A <- c(132.5, 167.4, 189.8, 124.6, 136.6, 147.5, 159.9,
-       117.8, 106.3)
-B <- c(97.4, 108.2, 114.1, 86.3, 101.8, 122.6, 78.3, 136.2,
-       89.5, 118.4, 109.2, 92.7)
+```{r ventas}
+A <- c(
+  132.5, 167.4, 189.8, 124.6, 136.6, 147.5, 159.9,
+  117.8, 106.3
+)
+B <- c(
+  97.4, 108.2, 114.1, 86.3, 101.8, 122.6, 78.3, 136.2,
+  89.5, 118.4, 109.2, 92.7
+)
 M <- median(c(A, B))
 establecimientos <- tibble(
-  venta = c(A, B), 
+  venta = c(A, B),
   est = factor(
     rep(x = c("A", "B"), times = c(length(A), length(B)))
   ),
   comp = factor(
     if_else(venta <= M, "$\\le M$", "$> M$")
   )
-) %>% 
+) %>%
   arrange(venta)
 kableExtra::kbl(
   establecimientos,
@@ -4026,14 +4025,15 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Ventas por establecimiento",
-  escape = FALSE, 
+  caption = "\\label{tab2:ventas}Ventas por establecimiento",
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    protect_latex = TRUE
   ) %>%
   kable_classic_2() %>%
   scroll_box(width = "100%", height = "400px")
@@ -4041,21 +4041,21 @@ kableExtra::kbl(
 <br/>
 El siguiente código muestra la tabla de contingencia con el número de observaciones menores o iguales y por arriba de la mediana de las muestras combinadas $\left(M=`r M` \right)$ para cada tipo de establecimiento.
 
-```{r}
-tf_establecimientos <- establecimientos %>% 
-  group_by(est, comp) %>% 
-  tally() %>% 
-  spread(est, n) %>% 
-  dplyr::arrange(comp) %>% 
+```{r frecuancia-ventas}
+tf_establecimientos <- establecimientos %>%
+  group_by(est, comp) %>%
+  tally() %>%
+  spread(est, n) %>%
+  dplyr::arrange(comp) %>%
   dplyr::mutate(
     Total = A + B
-  ) %>% 
-  dplyr::select_if(is.numeric) %>% 
-  add_row(., summarise_all(., sum)) %>% 
+  ) %>%
+  dplyr::select_if(is.numeric) %>%
+  add_row(., summarise_all(., sum)) %>%
   dplyr::mutate(
     comparacion = c("$\\le M$", "$> M$", "Total")
-  ) %>% 
-  dplyr::select(comparacion, A, B, Total) %>% 
+  ) %>%
+  dplyr::select(comparacion, A, B, Total) %>%
   ungroup()
 kableExtra::kbl(
   tf_establecimientos,
@@ -4064,23 +4064,24 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Establecimientos con ventas menores o iguales y mayores que la mediana global",
-  escape = FALSE, 
+  caption = "\\label{tab2:frecuencia-ventas}Establecimientos con ventas menores o iguales y mayores que la mediana global",
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    protect_latex = TRUE
   ) %>%
-  kable_classic_2("hover") %>% 
-  add_header_above(c(" " = 1, "Establecimiento" = 2, " " = 1)) %>% 
-  column_spec(c(1, 3), border_right = c(TRUE, TRUE))  
+  kable_classic_2("hover") %>%
+  add_header_above(c(" " = 1, "Establecimiento" = 2, " " = 1)) %>%
+  column_spec(c(1, 3), border_right = c(TRUE, TRUE))
 ```
 <br/>
-El siguiente script muestra el estadístico y el p.valor de la prueba de la mediana de Mood-Westenberg.
+El siguiente script muestra el estadístico y el $p_{valor}$ de la prueba de la mediana de Mood-Westenberg.
 
-```{r}
+```{r ventas-phyper}
 p.valor <- phyper(
   q = as.numeric(tf_establecimientos[1, 2]), 
   m = as.numeric(tf_establecimientos[3, 2]), 
@@ -4104,9 +4105,8 @@ paste(
 <br/>
 Como se observa en la salida anterior, dado que el $p_{valor}= `r p.valor`$ es menor que el nivel de riesgo (0,05), se puede concluir que las ventas del establecimiento A son mayores que las del B.
 
-```{r}
-library(RVAideMemoire)
-mood.medtest(
+```{r ventas-moodmedtest}
+RVAideMemoire::mood.medtest(
   x = establecimientos$venta, 
   g = establecimientos$est, 
   exact = TRUE
@@ -4115,7 +4115,7 @@ mood.medtest(
 <br/>
 Usando la función `fisher.test` para estos datos, se obtiene el siguiente resultado.
 
-```{r}
+```{r ventas-fishertest}
 fisher.test(
   x = tf_establecimientos[1:2, 2:3], 
   alternative = "less", 
@@ -4128,14 +4128,17 @@ fisher.test(
 
 ## Prueba $U$ de Mann-Whitney-Wilcoxon {#mann-whitney2i}
 
-###	Racionalización de la Prueba $U$ de Mann-Whitney {#racionalizacion-mann-whitney2i}
+###	Racionalización de la Prueba $U$ de Mann-Whitney-Wilcoxon {#racionalizacion-mann-whitney2i}
 
-### Implementación en `r colorize("R", "blue")` de la Prueba $U$ de Mann-Whitney {#R-mann-whitney2i}
+(ref:foo11) Prueba $U$ de Mann-Whitney-Wilcoxon
 
-::: {.example #ejemplo1-mann-whitney2i name="Prueba $U$ de Mann-Whitney"}
+### Implementación en `r colorize("R", "blue")` de la Prueba $U$ de Mann-Whitney-Wilcoxon {#R-mann-whitney2i}
+
+::: {.example #ejemplo1-mann-whitney2i name="(ref:foo11)"}
 Solomon y Coles estudiaron si las ratas generalizaban
 aprendizaje de imitación cuando eran colocadas bajo un nuevo impulso (una nueva condición motivante) y en una nueva situación. Cinco ratas fueron entrenadas en imitar a ratas líderes en un laberinto en T, cuando tenían hambre. Los sujetos se encontraban en un régimen de privación de alimento y debían seguir al líder a través del laberinto para conseguir comida. Después que se logró que las ratas experimentales imitaran a las ratas líderes, fueron
 cambiadas a una situación de evitación de choques eléctricos, donde la imitación que hicieran del líder les permitiría evitar dicha estimulación aversiva. La conducta en la situación de evitación se comparó con la de cuatro sujetos control que no habían tenido entrenamiento previo en seguir a líderes. La hipótesis era que las primeras cinco ratas que habían sido entrenadas para imitar transferirían ese entrenamiento a la nueva situación y así, alcanzarían el criterio de aprendizaje en la situación de evitación más rápidamente que las cuatro ratas control. Las comparaciones se realizaron en términos de cuántos ensayos le tomó a cada rata alcanzar el criterio de 10 respuestas correctas en 10 ensayos. Contraste la hipótesis nula de que el número de ensayos necesarios para alcanzar el criterio en la situación de evitación es el mismo para las ratas que fueron entrenadas para seguir a un líder con el fin de conseguir comida, que para aquellas que no fueron previamente entrenadas versus la hipótesis alternativa de que las ratas que fueron previamente entrenadas para seguir a un líder con el fin de conseguir comida alcanzarán el criterio de ejecución en la situación de evitación de choques eléctricos en menos ensayos que las que no tuvieron el entrenamiento previo; a un nivel de significancia del 5\%. Los datos fueron tomados de Siegel(1995, pág. 160).
+
 $$
 \begin{array}{lccccc}
 \hline
@@ -4145,7 +4148,7 @@ $$
 \end{array}
 $$
 
-```{r}
+```{r ratas}
 control <- c(110, 70, 53, 51)
 experimental <- c(78, 64, 75, 45, 82)
 library(dplyr)
@@ -4173,7 +4176,7 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Ranqueo de las puntuaciones",
+  caption = "\\label{tab2:puntuaciones}Ranqueo de las puntuaciones en los dos grupos de ratas",
   escape = FALSE, 
   format = "html"
 ) %>%
@@ -4182,12 +4185,13 @@ kableExtra::kbl(
     full_width = FALSE,
     fixed_thead = TRUE
   ) %>%
-  kable_classic_2("hover")
+  kable_classic_2("hover") %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 <br/>
-Los estadísticos de la prueba de suma de rangos de Mann-Whitney, se obtiene con el siguiente código.
+Los estadísticos de la prueba de suma de rangos de Mann-Whitney-Wilcoxon, se obtiene con el siguiente código.
   
-```{r}
+```{r estadisticos-ratas}
 estad <- datos4.5 %>% 
   dplyr::group_by(grupo) %>% 
   summarise(W = sum(rango), n = n()) %>% 
@@ -4207,25 +4211,26 @@ kableExtra::kbl(
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
-  caption = "\\label{tab2:baterias}Estadístico de Mann-Whitney_Wilcoxon para las puntuaciones",
+  caption = "\\label{tab2:estadisticos-ratas}Estadístico de Mann-Whitney-Wilcoxon para las puntuaciones en los dos grupos de ratas",
   escape = FALSE, 
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE
+    full_width = FALSE, 
+    protect_latex = TRUE
   ) %>%
   kable_classic_2() 
 ```
 <br/>
-Note que en la tabla que muestra los datos no hay puntuaciones empatadas, por lo que el cálculo del p.valor exacto de la prueba U de Mann-Whitney-Wilcoxon se obtiene con el siguiente código.
+Note que en la tabla \@ref(tab:ratas), la cual muestra las puntuaciones en los dos grupos de ratas no se observan empates, por lo que el cálculo del $p_{valor}$ exacto de la prueba $U$ de Mann-Whitney-Wilcoxon se obtiene con la función `pwilcox` com se muestra en el siguiente código.
 
-```{r}
+```{r ratas-pwilcox}
 p.valor <- pwilcox(
-  q = estad$U[1] - 1, 
+  q = estad$U[1], 
   m = estad$n[1], 
   n = estad$n[2],
-  lower.tail = F
+  lower.tail = TRUE
 )
 paste(
   "El p.valor =", 
@@ -4238,24 +4243,396 @@ paste(
 )
 ```
 <br/>
-Como se muestra en la salida anterior, dado que el $p_{valor]=`r p.valor`$ es mayor que el nivel de significancia, no se puede rechazar la hipótesis de que el número de ensayos necesarios para alcanzar el criterio en la situación de evitación es el mismo para las ratas que fueron entrenadas para seguir a un líder con el fin de conseguir comida, que para aquellas que no fueron previamente entrenadas. En otros términos, se puede afirmar que estos datos no apoyan la hipótesis de que el entrenamiento previo en imitación se generalice a otras situaciones y en otras circunstancias motivacionales.
+Como se muestra en la salida anterior, dado que el $p_{valor}=`r p.valor`$ es mayor que el nivel de significancia, no se puede rechazar la hipótesis de que el número de ensayos necesarios para alcanzar el criterio en la situación de evitación es el mismo para las ratas que fueron entrenadas para seguir a un líder con el fin de conseguir comida, que para aquellas que no fueron previamente entrenadas. En otros términos, se puede afirmar que estos datos no apoyan la hipótesis de que el entrenamiento previo en imitación se generalice a otras situaciones y en otras circunstancias motivacionales.
 
 De manera directa, el estadístico $U$ de Mann-Whitney-Wilcoxon y el $p_{valor}$ exacto para esta prueba se obtiene con el siguiente código.
 
-```{r}
-wilcox.test(x = control, y = experimental, 
-            alternative = "greater", paired = F, 
-            exact = T, correct = T, conf.int = T,
-            conf.level = 0.95)
+```{r ratas-wilcoxtest}
+wilcox.test(
+  x = control, y = experimental,
+  alternative = "less", paired = F,
+  exact = T, correct = T, conf.int = T,
+  conf.level = 0.95
+)
 ```
 <br/>
 La función `wilcox.exact` del paquete `exactRankTests`, también permite ejecutar esta prueba. 
 
+```{r ratas-exactRankTests}
+exactRankTests::wilcox.exact(
+  x = control, y = experimental,
+  alternative = "less", paired = F,
+  exact = T, conf.int = T, conf.level = 0.95
+)
+```
+<br/>
+
+La función `wilcoxon_test` del paquete `rstatix` también permite ejecutar la prueba $U$ de Mann-Whitney-Wilcoxon, como se muestra en el siguiente script.
 ```{r}
-library(exactRankTests)
-wilcox.exact(x = control, y = experimental, 
-             alternative = "greater", paired = F, 
-             exact = T, conf.int = T, conf.level = 0.95)
+wilcox_test(
+  data = datos4.5,
+  formula = punt ~ grupo,
+  comparisons = NULL,
+  ref.group = NULL,
+  p.adjust.method = "holm",
+  paired = FALSE,
+  exact = TRUE,
+  alternative = "less",
+  mu = 0,
+  conf.level = 0.95,
+  detailed = FALSE
+) %>% 
+  dplyr::select(-1) %>% 
+  kableExtra::kbl(
+  .,
+  col.names = c(
+    "Grupo 1", "Grupo 2", "$n_1$", "$n_2$", "$U$",
+    "$p_{valor}$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:estadisticos-ratas}Estadístico $U$ de Mann-Whitney-Wilcoxon y $p_{valor}$ para las puntuaciones en los dos grupos de ratas",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE, 
+    protect_latex = TRUE
+  ) %>%
+  kable_classic_2() 
+```
+<br/>
+:::
+
+(ref:foot12) Prueba $U$ de Mann-Whitney-Wilcoxon con Empates
+
+::: {.example #ejemplo2-mann-whitney2i name="(ref:foot12)"
+Se encontró que el contenido de nicotina de dos marcas de cigarrillos, medido en miligramos, es el siguiente:
+
+$$
+\begin{array}{lccccccccccc}
+\hline
+\mathbf{Marca \ A}: & 2.1 & 4.0 & 6.3 & 5.4 & 4.8 & 3.7 & 6.1 & 3.3\\
+\mathbf{Marca \ B}: & 4.1 & 0.6 & 3.1 & 2.5 & 4.0 & 6.2 & 1.6 & 2.2 & 1.9 & 5.4\\
+\hline
+\end{array}
+$$
+
+A un nivel de significancia de 0.05 pruebe la hipótesis de que las medianas del contenido de nicotina de las dos marcas son iguales, en comparación con la hipótesis alternativa de que son diferentes. Los datos fueron tomados de Walpole (2012, pág. 667).
+
+El siguiente código muestra el ranqueo del contenido de nicotina para las dos marcas de cigarrillos, lo cual es un paso previo al cálculo del estadístico $U$ de Mann-Whitney-Wilcoxon.
+
+```{r}
+A <- c(2.1, 4.0, 6.3, 5.4, 4.8, 3.7, 6.1, 3.3)
+B <- c(4.1, 0.6, 3.1, 2.5, 4.0, 6.2, 1.6, 2.2, 1.9, 5.4)
+datos4.6 <- tibble(
+  nicotina = c(A, B),
+  marca = c(rep("A", length(A)), rep("B", length(B))),
+  rango = rank(nicotina, ties.method = "average")
+) %>%
+  arrange(nicotina)
+kableExtra::kbl(
+  datos4.6,
+  col.names = c(
+    "Nicotina (mg)", "Marca", "Rango"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:nicotina}Ranqueo del contenido de nicotina en las dos marcas de cigarro",
+  escape = FALSE,
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2("hover") %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+Los estadísticos $U$ de la prueba de suma de rangos de Mann-Whitney-Wilcoxon, se obtiene con el siguiente código.
+  
+```{r estadisticos-mann-whitney2}
+estad <- datos4.6 %>% 
+  dplyr::group_by(marca) %>% 
+  summarise(W = sum(rango), n = n()) %>% 
+  dplyr::mutate(
+    media_W = n * (n + 1) / 2,
+    U = W - media_W,
+    media_U = prod(n) / 2, 
+    var_U = prod(n) * (sum(n) + 1) / 12
+  ) %>% 
+  dplyr::arrange(U) %>% 
+  dplyr::ungroup()
+kableExtra::kbl(
+  estad,
+  col.names = c(
+    "Grupo", "$W$", "$n$", "$E\\left(W \\right)$", "$U$",
+    "$E\\left(U \\right)$", "$V\\left(U \\right)$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:estadisticos-mann-whitney2}Estadístico de Mann-Whitney_Wilcoxon para el contenido de nicotina en las dos marcas de cigarros",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE, 
+    protect_latex = TRUE
+  ) %>%
+  kable_classic_2() 
+```
+<br/>  
+El cálculo del p.valor se obtiene con la función `pwilcox`, como se muestra en el siguiente código.
+
+```{r}
+p.valor <- 2 * pwilcox(
+  q = estad$U[1], 
+  m = estad$n[1], 
+  n = estad$n[2],
+  lower.tail = TRUE
+)
+paste(
+  "El p.valor =", 
+  format(
+    round(p.valor, digits = 6),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+```
+<br/>
+Como se observa en la salida anterior $p=`r formato(p.valor)`$, lo que indica que no se puede rechazar la hipótesis nula de que el contenido de nicotina en las dos marcas de cigarrillos son diferente con un un nivel de riesgo $\alpha=0.05$.
+
+Dado que en ejemplo en cuestión hay algunos rangos empatados, el p.valor exacto mostrado en la salida anterior no es el apropiados debido a que este no toma en cuenta estos empates. Como los rangos empatados inflan la varianza del estadístico $U$ de Mann-Whitney-Wilcoxon por lo que se debe hacer la corrección por empates de la varianza del estadístico y luego calcular el p.valor apróximado por medio de la convergencia asintotica del estadístico $U$ a la normal.  El siguiente código muestra la tabla con los rangos empatados y sus frecuencias.
+
+```{r}
+empates <- datos4.6 %>% 
+  dplyr::select(rango) %>%
+  dplyr::group_by(rango) %>% 
+  dplyr::summarise(Tj = n()) %>% 
+  dplyr::mutate(grupo = 1:nrow(.)) %>% 
+  dplyr::relocate(grupo) %>% 
+  dplyr::ungroup()
+kableExtra::kbl(
+  empates,
+  col.names = c(
+    "Grupo", "$R_j$", "$T_j$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:empates}Grupos de rangos empatados",
+  escape = FALSE
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE,
+    protect_latex = TRUE
+  ) %>%
+  kable_classic_2() %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+El cálculo del $p_{valor}$, usando la aproximación a la normal con corrección por continuidad y empates, se obtiene con el siguiente segmento de código.
+
+```{r}
+############Chakraborti et al(2011, pág. 267)##############
+
+corr_var <- prod(estad$n) /
+  (12 * sum(estad$n) * (sum(estad$n) - 1)) *
+  sum(empates$Tj^3 - empates$Tj)
+Z <- (estad$U[1] - estad$media_U[1]) / sqrt(estad$var_U[1] )
+p.valor <- 2 * pnorm(Z, lower.tail = TRUE)
+paste(
+  "El valor del estadístico Z =",
+  format(
+    round(x = Z, digits = 4),
+    mode = "double",
+    big.mark = ".",
+    decimal.mark = ","
+  )
+)
+paste("El p.valor es =", format(
+  round(x = p.valor, digits = 4),
+  mode = "double",
+  big.mark = ".",
+  decimal.mark = ","
+))
+```
+<br/>
+Esta prueba se puede aplicar, de manera directa, con la función `wilcoxon.test`. Como se muestra en el siguiente script.
+
+```{r}
+wilcox.test(x = A, y = B, alternative = "two.sided", 
+            paired = F, exact = NULL, correct = T, 
+            conf.int = T, conf.level = 0.95)
+```
+<br/>  
+Note que, los p.valores exactos y aproximados no difieren mucho.
+
+Haciendo uso de la función `wilcoxon_test` del paquete `rstatix`, se obtiene el siguiente resultado.
+```{r}
+wilcox_test(
+  data = datos4.6,
+  formula = nicotina ~ marca,
+  comparisons = NULL,
+  ref.group = NULL,
+  p.adjust.method = "holm",
+  paired = FALSE,
+  exact = FALSE,
+  alternative = "two.sided",
+  mu = 0,
+  conf.level = 0.95,
+  detailed = FALSE
+) %>% 
+  dplyr::select(-1) %>% 
+  kableExtra::kbl(
+  .,
+  col.names = c(
+    "Grupo 1", "Grupo 2", "$n_1$", "$n_2$", "$U$",
+    "$p_{valor}$"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:estadisticos-ratas}Estadístico $U$ de Mann-Whitney-Wilcoxon y $p_{valor}$ para el contenido de nicotina en los dos marcas de cigarros",
+  escape = FALSE, 
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE, 
+    protect_latex = TRUE
+  ) %>%
+  kable_classic_2() 
+```
+<br/>
+:::
+
+## Prueba de las Rachas de Wald-Wolfowitz {#rachas2i}
+
+###	Racionalización de la Prueba de las Rachas de Wald-Wolfowitz {#racionalizacion-rachas2i}
+
+### Implementación en `r colorize("R", "blue")` de la Prueba de las Rachas de Wald-Wolfowitz {#R-rachas2i}
+
+::: {.example #ejemplo1-rachas2i name="Prueba de las Rachas de Wald-Wolfowitz"}
+Se sospecha que una compañía lleva a cabo una política de discriminación, con respecto al sexo, en los salarios de sus empleados. Se seleccionaron 12 empleados masculinos y 12 femeninos de entre los que tienen responsabilidades y experiencia similares en el trabajo; sus salarios anuales en miles de dólares son los siguientes.
+$$
+\begin{array}{lcccccccccccc}
+\hline
+\mathbf{Hombre}: & 22.5 & 19.8 & 20.6 & 24.7 & 23.2 & 19.2 & 18.7 &  20.9 & 21.6 & 23.5 & 20.7 & 21.6\\
+\mathbf{Mujer}: & 21.9 & 21.6 & 22.4 & 24.0 & 24.1 & 23.4 & 21.2 &  23.9 & 20.5 & 24.5 & 22.3 & 23.6\\
+\hline
+\end{array}
+$$
+En base a estos datos, ¿existe alguna razón para creer que estas muestras aleatorias provienen de poblaciones con diferentes distribuciones?. Use $\alpha=0,05$. Los datos fueron tomados de Canavos (1997, pág. 576).
+
+```{r}
+mujer <- c(
+  22.5, 19.8, 20.6, 24.7, 23.2, 19.2, 18.7, 20.9, 21.6, 23.5, 
+  20.7, 21.6
+)
+hombre <- c(
+  21.9, 21.6, 22.4, 24.0, 24.1, 23.4, 21.2, 23.9, 20.5, 24.5, 
+  22.3, 23.6
+)
+datos4.7 <- tibble(
+  sexo = rep(
+    x = c("Mujer", "Hombre"), c(length(mujer), length(hombre))
+  ),
+  salario = c(mujer, hombre)
+) %>% 
+  dplyr::mutate(
+    racha = if_else(sexo == "Mujer", "M", "H")
+  ) %>%
+  arrange(salario)
+kableExtra::kbl(
+  datos4.7,
+  col.names = c(
+    "Sexo", "Salario", "Racha"
+  ),
+  format.args = list(decimal.mark = ",", big.mark = "."),
+  booktabs = TRUE,
+  caption = "\\label{tab2:rachas2i}Salario de empleados por sexo",
+  escape = FALSE,
+  format = "html"
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    full_width = FALSE,
+    fixed_thead = TRUE
+  ) %>%
+  kable_classic_2("hover") %>%
+  scroll_box(width = "100%", height = "400px")
+```
+<br/>
+El siguiente código muestra el cálculo del estadístico y el $p_{valor}$ exacto de la prueba de las Rachas de Wald-Wolfowitz para contrastar la hipótesis de que la distribución del salario en la compañía es idéntica tanto en hombre como en mujeres, es decir que no existe una política de discriminación, en cuanto al sexo, en los salarios de los empleados.
+
+```{r}
+rachas <- datos4.7 %>% dplyr::select(racha) %>% pull() %>% rle(.)
+r1 <- length(rachas$lengths[rachas$value == "M"])
+r2 <- length(rachas$lengths[rachas$value == "H"])
+r <- r1 + r2
+paste("el valor de r =", r)
+library(randtests)
+p.valor <- pruns(q = r, n1 = length(mujer), n2 = length(mujer))
+detach("package:randtests")
+paste("El p.valor =", round(x = p.valor, digits = 5))
+```
+<br/>
+El valor del estadístico y el p.valor exacto de la prueba de las Rachas de Wald-Wolfowitz para contrastar la hipótesis de que compañía lleva a cabo una política de discriminación, con respecto al sexo, en los salarios de sus empleados se puede mostrar con la función *runs.test* del paquete **randtests**, como se muestra en el siguiente código.
+
+```{r}
+rachas <- datos4.7 %>% 
+  dplyr::select(sexo) %>% 
+  dplyr::mutate(
+    rachas = if_else(
+      sexo == "Mujer", 1, 0
+    )
+  ) %>% 
+  dplyr::select(rachas) %>% 
+  pull(.)
+  randtests::runs.test(x = rachas, 
+                     alternative = "left.sided",
+                     threshold = 0.5, pvalue = "exact",
+                     plot = F) 
+```
+<br/>
+Otra forma de ejecutar el procedimiento anterior es con la función `runs.test` del paquete `snpar`.
+
+```{r}
+snpar::runs.test(x = rachas, exact = T, 
+                 alternative = "less")
+```
+<br/>
+Por otro lado, el cálculo del p.valor aproximado, usando la convergencia asintótica del estadístico ***R*** de Wald-Wolfowitz a la distribución normal, se muestra con el siguiente código.
+
+```{r}
+n1 <- length(mujer)
+n2 <- length(hombre)
+n <- n1 + n2
+ER <- 2 * n1 * n2 / n + 1
+VR <- 2 * n1 * n2 * (2 * n1 * n2 - n)/(n^2 * (n - 1))
+z <- (r - ER)/sqrt(VR)
+paste("El valor de z =", round(x = z, digits = 5))
+p.valor.aprox <- pnorm(q = z)
+paste("El valor del p.valor.aprox =", 
+      round(x = p.valor.aprox, digits = 4))
+```
+<br/>
+El resultado anterior se puede  obtener con `runs.test` del paquete `randtests` estableciendo el parámetro `pvalue = "normal"`.
+
+```{r}
+library(randtests)
+randtests::runs.test(x = rachas, 
+                     alternative = "left.sided",
+                     threshold = 0.5, pvalue = "normal",
+                     plot = F) 
+detach("package:randtests")
 ```
 <br/>
 :::
