@@ -285,9 +285,10 @@ knitr::kable(
     bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = TRUE,
-    htmltable_class = "lightable-hover"
+    htmltable_class = "lightable-hover",
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 También, la distribución base de `r colorize("R", "blue")` proporciona la función `binom.test(x, n, p = 0.5, alternative = c("two.sided", "less", "greater"), conf.level = 0.95)`; la cual ejecuta la prueba binomial exacta. La descripción de los parámetros de esta función se muestran en la tabla \@ref(tab:par-prueba-binom).
@@ -315,9 +316,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 Como se dijo anteriormente, el cálculo del $p_{valor}$ depende de la evaluación de la función de distribución acumulada binomial dada en la ecuación \@ref(eq:fdp-binomial), lo que implica un gran volumen de cálculo cuando el tamaño de la muestra es grande. Pero, dado que $X$ es una suma de $n$ variables aleatorias independientes de Bernoulli, por el teorema del límite central, la distribución de $X$ se aproxima a la normal en la medida que $n$ tiende a infinito. Esta convergencia se acelera en la medida que $p$ tienda $\frac{1}{2}$. Al respecto, Canavos (1988, pág. 142), establece como criterio de una adecuada aproximación si $np>5$ cuando $p≤\frac{1}{2}$ o si $nq>5$ cuando $p>\frac{1}{2}$. Como $X$ se distribuye binomialmente, bajo la hipótesis nula, su media viene dada por $\mu_{X}=np_{0}$ y su varianza por $\sigma_{X}=np_{0}q_{0}$. En consecuencia, la variable aleatoria $X\simeq N\left ( \mu_{X}=np_{0}, \sigma_{X}=\sqrt{np_{0}q_{0}} \right )$. Por lo que:
@@ -422,9 +424,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 La distribución base de `r colorize("R", "blue")` incluye la función `prop.test(x, n, p = NULL, alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = TRUE)`, la cual permite calcular el $p_{valor}$ aproximado de la prueba binomial para muestra grandes. Los parámetros de esta función se especifican en la tabla \@ref(tab:par-prueba-binomial-aprox).
@@ -452,9 +455,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -645,9 +649,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -752,10 +757,11 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   row_spec(which(datos2$signo == "="), color = "red", strikeout = T) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -777,9 +783,10 @@ kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -813,7 +820,7 @@ Dado que la prueba del signo se puede considerar como un caso particular de la p
 s <- as.numeric(conteo_signo %>%
   dplyr::filter(signo == "\\+") %>%
   dplyr::select(conteo)) # conflicto con MASS::select
-n <- as.numeric(conteo_signo %>% 
+n <- as.numeric(conteo_signo %>%
   dplyr::filter(signo != "=") %>%
   dplyr::select(conteo) %>% sum())
 binom.test(
@@ -963,7 +970,7 @@ p_{valor} = F_W \left(t^+ , \; n \right).
 \end{equation}
 $$
 
-Ahora, si la prueba de hipótesis es bilateral. Es decir, $H_0: \widetilde{\mu}= \widetilde{\mu}_{0}$ $H_0: \widetilde{\mu} \neq \widetilde{\mu}_{0}$. El $p_{valor}$ (aproximado) viene dado por:
+Ahora, si la prueba de hipótesis es bilateral. Es decir, $H_0: \widetilde{\mu}= \widetilde{\mu}_{0}$, $H_1: \widetilde{\mu} \neq \widetilde{\mu}_{0}$. El $p_{valor}$ (aproximado) viene dado por:
 
 $$
 \begin{equation}
@@ -1198,16 +1205,18 @@ tabla_co <- tibble(
   dif = co - mediana,
   va_dif = na_if(abs(dif), 0),
   rango = sign(dif) * rank(
-    va_dif, ties.method = "average") %>% 
+    va_dif,
+    ties.method = "average"
+  ) %>%
     na_if(max(.))
-) %>% 
+) %>%
   arrange(va_dif)
 options(knitr.kable.NA = "")
 kableExtra::kbl(
   tabla_co,
   col.names = c(
-    "$i$", "Concentración de octano", "$D_i$",  
-    "$\\left| D_i \\right|$","$R_i$"
+    "$i$", "Concentración de octano", "$D_i$",
+    "$\\left| D_i \\right|$", "$R_i$"
   ),
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
@@ -1217,11 +1226,14 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  row_spec(which(tabla_co$dif == 0), color = "red",
-           strikeout = TRUE) %>%
-  kable_classic_2() %>%
+  row_spec(which(tabla_co$dif == 0),
+    color = "red",
+    strikeout = TRUE
+  ) %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -1271,9 +1283,9 @@ wilcox.exact(
 Dado que el tamaño de la muestra es razonablemente grande el $p_{valor}$ puede aproximarse haciendo uso  de la convergencia asintótica a la normal del estadístico $T^+$ con la ecuación \@ref(eq:pusz-wilcoxon1). El cálculo se muestra en el siguiente trozo de código.
 
 ```{r pusz-wilcoxon1}
-media <- n*(n + 1)/4
-var <- n*(n + 1)*(2*n + 1)/24
-z <- (Tmas - 0.5 - media)/sqrt(var)
+media <- n * (n + 1) / 4
+var <- n * (n + 1) * (2 * n + 1) / 24
+z <- (Tmas - 0.5 - media) / sqrt(var)
 p.valor <- 1 - pnorm(q = z)
 paste("El valor del estadístico Z =", round(x = z, digits = 4))
 paste("El p.valor =", round(x = p.valor, digits = 4))
@@ -1283,19 +1295,19 @@ Como se observa, en la tabla \@ref(tab:datos-co) hay presencia de ceros y rangos
 
 ```{r empates-co}
 empates <- tabla_co %>%
-  dplyr::select(rango) %>% 
+  dplyr::select(rango) %>%
   drop_na(.) %>%
   dplyr::transmute(
     rango = abs(rango)
-  ) %>% 
-  table(.) %>% 
+  ) %>%
+  table(.) %>%
   as.data.frame(.) %>%
   dplyr::mutate(
     j = 1:length(Freq)
-  ) %>% 
+  ) %>%
   dplyr::rename(
     tj = "Freq"
-  ) %>% 
+  ) %>%
   dplyr::select(c(3, 1, 2))
 kableExtra::kbl(
   empates,
@@ -1310,11 +1322,11 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
-
 ```
 
 El calculo del $p_{valor}$, cuando hay empates, se obtiene con el siguiente script.
@@ -1322,7 +1334,7 @@ El calculo del $p_{valor}$, cuando hay empates, se obtiene con el siguiente scri
 ```{r pvalor-epates-wilcoxon1}
 cor_var <- sum(empates$tj * (empates$tj^2 - 1)) / 48
 var.cor <- var - cor_var
-z.cor <- (Tmas - 0.5 - media)/sqrt(var.cor)
+z.cor <- (Tmas - 0.5 - media) / sqrt(var.cor)
 p.valor <- 1 - pnorm(q = z.cor)
 paste("El valor del estadístico Z =", round(x = z.cor, digits = 4))
 paste("El p.valor =", round(x = p.valor, digits = 6))
@@ -1345,13 +1357,11 @@ Otra forma de hallar el $p_{valor}$, cuando hay empates, es usando la convergenc
 
 ```{r estadistiticoT11}
 T <- sum(tabla_co$rango, na.rm = TRUE)
-var_T <- sum(tabla_co$rango ^ 2, na.rm = TRUE)
-z <- (Tmas - 0.5)/sqrt(var_T)
+var_T <- sum(tabla_co$rango^2, na.rm = TRUE)
+z <- (Tmas - 0.5) / sqrt(var_T)
 p.valor <- 1 - pnorm(q = z)
 paste("El valor del estadístico Z =", round(x = z, digits = 6))
 paste("El p.valor =", round(x = p.valor, digits = 6))
-
-
 ```
 <br/>
 :::
@@ -1509,9 +1519,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -1544,9 +1555,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -1646,9 +1658,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -1677,9 +1690,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -1762,10 +1776,11 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   row_spec(which(datos4$Ei < 5), color = "red", strikeout = T) %>%
-  kable_classic_2() 
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -1789,9 +1804,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() 
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -1884,9 +1900,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2002,8 +2019,10 @@ fitdistr(x = lp, densfun = "normal")
 El siguiente código permite construir la tabla de distribución de frecuencia observadas y esperadas estimadas. Estas últimas se calculan a partir de las probabilidades estimadas de cada clase ($\hat{E}_i=n\hat{p}_{0i}$). La construcción de la tabla se obtiene con el siguiente código.
 
 ```{r datos6}
-lim_int <- c(-Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 
-             10.8, 10.9, Inf)
+lim_int <- c(
+  -Inf, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7,
+  10.8, 10.9, Inf
+)
 datos6 <- as.data.frame(table(cut(
   x = lp, breaks = lim_int
 )))
@@ -2037,10 +2056,11 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   row_spec(which(datos6$Ei < 5), color = "red", strikeout = T) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2081,9 +2101,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2141,9 +2162,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2371,9 +2393,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2400,9 +2423,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2466,7 +2490,8 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   column_spec(
     5,
@@ -2478,7 +2503,7 @@ kableExtra::kbl(
     color = if_else(datos7$D_menos == max(datos7$D_menos), "red", "black"),
     bold = if_else(datos7$D_menos == max(datos7$D_menos), TRUE, FALSE)
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -2614,22 +2639,25 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   column_spec(
     5,
     color = if_else(datos8$D_mas == max(datos8$D_mas),
-                    "red", "black"),
-    bold = 
-      if_else(datos8$D_mas == max(datos8$D_mas), 
-              TRUE, FALSE)
+      "red", "black"
+    ),
+    bold =
+      if_else(datos8$D_mas == max(datos8$D_mas),
+        TRUE, FALSE
+      )
   ) %>%
   column_spec(
     6,
     color = if_else(datos8$D_menos == max(datos8$D_menos), "red", "black"),
     bold = if_else(datos8$D_menos == max(datos8$D_menos), TRUE, FALSE)
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -2678,9 +2706,9 @@ ggplot(as.data.frame(lp), aes(x = lp)) +
       size = 0.25, linetype = "twodash"
     ),
     axis.title = element_text(face = "bold.italic"),
-    panel.background = 
+    panel.background =
       element_rect(fill = "white", linetype = "solid"),
-    plot.background = 
+    plot.background =
       element_rect(fill = "antiquewhite", colour = NA)
   ) +
   theme(
@@ -2835,9 +2863,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2863,9 +2892,10 @@ knitr::kable(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 
@@ -2911,9 +2941,10 @@ orden de ocurrencia",
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 Los datos fueron tomados de Siegel (2012, pág. 85).
@@ -2997,9 +3028,9 @@ ggplot(datos9, aes(x = niños, y = puntuacion)) +
       size = 0.25, linetype = "twodash"
     ),
     axis.title = element_text(face = "bold.italic"),
-    panel.background = 
+    panel.background =
       element_rect(fill = "white", linetype = "solid"),
-    plot.background = 
+    plot.background =
       element_rect(fill = "antiquewhite", colour = NA)
   ) +
   theme(
@@ -3091,12 +3122,16 @@ mu_R <- 2 * n1 * n2 / n + 1
 var_R <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
 z <- (r - mu_R) / sqrt(var_R)
 z.corr <- (r - mu_R - 0.5) / sqrt(var_R)
-p.valor <- 2 * pruns(q = r - 1, n1 = n1, n2 = n2, 
-                     lower.tail = FALSE)
+p.valor <- 2 * pruns(
+  q = r - 1, n1 = n1, n2 = n2,
+  lower.tail = FALSE
+)
 p.valor.aprox <- 2 * pnorm(z, lower.tail = FALSE)
 p.valor.aprox.cor <- 2 * pnorm(z.corr, lower.tail = FALSE)
-paste("n =", n, "n1 =", n1, "n2 =", n2, "r1 =", r1, 
-      "r2 =", r2)
+paste(
+  "n =", n, "n1 =", n1, "n2 =", n2, "r1 =", r1,
+  "r2 =", r2
+)
 paste("La media del estadístico R =", mu_R)
 paste("La varianza del estadístico R =", var_R)
 paste("El valor del estadístico R =", r)
@@ -3271,7 +3306,7 @@ pareja <- tibble(
   pareja = pareja,
   esposo = esposo,
   esposa = esposa,
-) %>% 
+) %>%
   mutate(
     signo = as.factor(
       case_when(
@@ -3292,11 +3327,14 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  row_spec(which(pareja$signo == "0"), color = "red",
-           strikeout = T) %>%
-  kable_classic_2() %>%
+  row_spec(which(pareja$signo == "0"),
+    color = "red",
+    strikeout = T
+  ) %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -3306,10 +3344,10 @@ Aquí la hipótesis nula que se quieres contrastar es que: los esposos y las esp
 Bajo el supuesto planteado en la hipótesis nula, es de esperarse que el número de diferencias positivas $S$ se distribuya binomialmente con $n = 14$ (número de diferencias distintas de cero) y $p = 1/2$ (probabilidad de que ocurra una diferencia positiva en la muestra), es decir, $S\sim B(n=14, p=1/2)$. El siguiente código muestra la ejecución de la prueba para los datos previamente mencionados.
 
 ```{r signo-2muestras}
-n <- pareja %>% 
+n <- pareja %>%
   dplyr::filter(signo != "0") %>%
   nrow()
-s <- pareja %>% 
+s <- pareja %>%
   dplyr::filter(signo == "\\+") %>%
   nrow()
 p.valor <- 1 - pbinom(q = s - 1, size = n, prob = 0.5)
@@ -3332,7 +3370,7 @@ Los resultados anteriores, también se pueden obtener con la función `binom.tes
 
 ```{r signo-2muestras-binomtest}
 binom.test(
-  x = s, n = n, p = 0.5, alternative = "greater", 
+  x = s, n = n, p = 0.5, alternative = "greater",
   conf.level = 0.95
 )
 ```
@@ -3389,11 +3427,14 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  row_spec(which(niños$di == 0), color = "red",
-           strikeout = T) %>%
-  kable_classic_2() %>%
+  row_spec(which(niños$di == 0),
+    color = "red",
+    strikeout = T
+  ) %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -3401,18 +3442,18 @@ kableExtra::kbl(
 Una gráfica de caja y bigote, previa a la aplicación de la prueba, podría dar luces respecto a que si los niños son capaces de discriminar entre la sincronía y asincronía. Esto se puede hacer con el siguiente segmento de código.
 
 ```{r raw-2muestras-plotly}
-plot_ly(data = niños, type = "box") %>% 
+plot_ly(data = niños, type = "box") %>%
   add_boxplot(
     y = ~sincronia, name = "En sincronía", jitter = 0.3,
     boxpoints = "all", pointpos = 0,
-    marker = list(color = 'rgb(9,56,125)'),
-    line = list(color = 'rgb(9,56,125)')
-  ) %>% 
+    marker = list(color = "rgb(9,56,125)"),
+    line = list(color = "rgb(9,56,125)")
+  ) %>%
   add_boxplot(
-    y = ~asincronia, name = "Fuera de sincronía", 
+    y = ~asincronia, name = "Fuera de sincronía",
     jitter = 0.3, boxpoints = "all", pointpos = 0,
-    marker = list(color = 'rgb(9,56,125)'),
-    line = list(color = 'rgb(9,56,125)')
+    marker = list(color = "rgb(9,56,125)"),
+    line = list(color = "rgb(9,56,125)")
   ) %>%
   layout(
     title = "Tiempo en condición de sincronía y fuera de sincronía",
@@ -3431,7 +3472,7 @@ El valor del estadístico de la prueba de rangos con signos de Wilcoxon y el p.v
 ```{r raw-2muestras-manual}
 n <- sum(niños$di != 0)
 Tmas <- sum(niños$rango[niños$rango > 0])
-p.valor <- 2*psignrank(q = Tmas - 1, n = n, lower.tail = FALSE)
+p.valor <- 2 * psignrank(q = Tmas - 1, n = n, lower.tail = FALSE)
 paste("El valor del estadístico Tmas =", Tmas)
 paste("El p.valor =", round(x = p.valor, digits = 4))
 ```
@@ -3442,8 +3483,8 @@ Como se observa en la salida anterior, el $p_{valor}=`r formato(Tmas)`$ es menor
 ```{r raw-2muestras-wilcoxexact}
 library(exactRankTests)
 exactRankTests::wilcox.exact(
-  x = niños$sincronia, y = niños$asincronia, 
-  alternative = "t", paired = T, exact = T, 
+  x = niños$sincronia, y = niños$asincronia,
+  alternative = "t", paired = T, exact = T,
   conf.int = T, conf.level = 0.95
 )
 ```
@@ -3452,8 +3493,8 @@ La función `wilcox.test` del paquete `stats` también realiza esta prueba, como
 
 ```{r raw-2muestras-wilcoxtest}
 stats::wilcox.test(
-  x = niños$sincronia, y = niños$asincronia,  
-  alternative = "t", paired = T, exact = T, 
+  x = niños$sincronia, y = niños$asincronia,
+  alternative = "t", paired = T, exact = T,
   conf.int = T, conf.level = 0.95
 )
 ```
@@ -3469,26 +3510,27 @@ Sin embargo, como era de esperarse, algunas respuestas no se predijeron con éxi
 
 ```{r reclusos-empates, knitr.kable.NA = ""}
 di <- c(
-  -2L, 0L, 0L, 1L, 0L, 0L, 4L, 4L, 1L, 1L, 5L, 3L, 5L, 
-  3L, -1L, 1L, -1L, 5L, 8L, 2L, 2L, 2L, -3L, -2L, 1L, 
+  -2L, 0L, 0L, 1L, 0L, 0L, 4L, 4L, 1L, 1L, 5L, 3L, 5L,
+  3L, -1L, 1L, -1L, 5L, 8L, 2L, 2L, 2L, -3L, -2L, 1L,
   4L, 8L, 2L, 3L, -1L
 )
 reclusos <- tibble(
   diferencia = dplyr::if_else(
     di == 0, NA_integer_, di
   )
-) %>% 
+) %>%
   mutate(
-    rango = sign(diferencia) * 
+    rango = sign(diferencia) *
       rank(
-        abs(diferencia), na.last = TRUE, 
-             ties.method = "average"
+        abs(diferencia),
+        na.last = TRUE,
+        ties.method = "average"
       )
-  ) %>% 
+  ) %>%
   dplyr::transmute(
     reclusos = 1:length(di),
     diferencia = di,
-    rango 
+    rango
   )
 options(knitr.kable.NA = "")
 kableExtra::kbl(
@@ -3505,24 +3547,27 @@ predichas de los reclusos",
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  row_spec(which(reclusos$diferencia == 0), color = "red",
-           strikeout = TRUE) %>%
-  kable_classic_2() %>%
+  row_spec(which(reclusos$diferencia == 0),
+    color = "red",
+    strikeout = TRUE
+  ) %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>  
 El siguiente código permite hallar el estadístico y el p.valor de la prueba de Wilcoxon.
 
 ```{r raw-2muestras-empates}
-Tmas <- reclusos %>% 
+Tmas <- reclusos %>%
   dplyr::select(
     rango
-  ) %>% 
+  ) %>%
   dplyr::filter(
     rango > 0
-  ) %>% 
+  ) %>%
   sum(., na.rm = TRUE)
 n <- length(di[di != 0])
 p.valor <- psignrank(
@@ -3543,16 +3588,18 @@ La salida anterior muestra que el $p_{valor}=`r formato(p.valor)`$, lo cual indi
   
 ```{r raw-wilcoxexact}
 library(exactRankTests)
-wilcox.exact(x = di, y = NULL, alternative = "g", mu = 0,
-             paired = FALSE, exact = T)
+wilcox.exact(
+  x = di, y = NULL, alternative = "g", mu = 0,
+  paired = FALSE, exact = T
+)
 ```
 <br/>
 En la salida anterior se ha ejecutado la prueba de rangos con signos de Wilcoxon usando la distribución exacta del estadístico $T^{+}$ de Wilcoxon para muestras relacionadas. A continuación se muestra la ejecución de esta prueba haciendo uso de la convergencia asintótica a la normal de este estadístico.
 
 ```{r raw-aproximacion}
-media <- n*(n + 1)/4
-var <- n*(n + 1)*(2*n + 1)/24
-z <- (Tmas - media)/sqrt(var)
+media <- n * (n + 1) / 4
+var <- n * (n + 1) * (2 * n + 1) / 24
+z <- (Tmas - media) / sqrt(var)
 p.valor.aprox <- pnorm(q = z, lower.tail = F)
 paste(
   "El valor del estadístico Z =", round(x = z, digits = 4)
@@ -3572,7 +3619,7 @@ wilcox.exact(
 La salida anterior muestra el $p_{valor aprox.}$ sin corrección por continuidad. El siguiente código lo muestra usando tal corrección.
 
 ```{r raw2-aprox}
-z <- (Tmas - 0.5 - media)/sqrt(var)
+z <- (Tmas - 0.5 - media) / sqrt(var)
 p.valor.aprox.cor <- pnorm(q = z, lower.tail = F)
 paste(
   "El valor del estadístico Z =", round(x = z, digits = 4)
@@ -3585,8 +3632,8 @@ paste(
 
 ```{r raw2-nec}
 wilcox.test(
-  x = di, y = NULL, alternative = "g", mu = 0, 
-            paired = F, exact = F, correct = T
+  x = di, y = NULL, alternative = "g", mu = 0,
+  paired = F, exact = F, correct = T
 )
 ```
 <br/>
@@ -3595,12 +3642,12 @@ Note que en los datos de este ejemplo existen rangos empatados, por lo que es ne
 ```{r raw2-cve}
 empates <- filter(
   as.data.frame(table(rank(abs(di[di != 0])))), Freq > 1
-) %>% 
-  dplyr::transmute(
-  grupo = 1:nrow(.), 
-  rango = Var1,
-  Tj = Freq
 ) %>%
+  dplyr::transmute(
+    grupo = 1:nrow(.),
+    rango = Var1,
+    Tj = Freq
+  ) %>%
   as.tibble()
 kableExtra::kbl(
   empates,
@@ -3615,9 +3662,10 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2()
+  kable_classic_2("hover")
 ```
 <br/>
 El cálculo del p.valor corregido por empates se muestra con el siguiente código.
@@ -3643,8 +3691,7 @@ p.valor <- pnorm(q = z, lower.tail = F)
 paste("El valor del estadístico Z =", round(
   x = z.cor.cont,
   digits = 6
-  )
-)
+))
 paste("El p.valor =", round(x = p.valor, digits = 6))
 ```
 <br/>
@@ -3681,10 +3728,11 @@ y después del debate televisivo",
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
-  column_spec(c(1, 2, 3), width = c("8em", "3em", "3em")) %>% 
+  kable_classic_2("hover") %>%
+  column_spec(c(1, 2, 3), width = c("8em", "3em", "3em")) %>%
   add_header_above(c(" " = 1, "Preferencia después del debate televisivo" = 2))
 ```
 <br/> 
@@ -3694,7 +3742,7 @@ La prueba exacta de McNemar, usando la distribución binomial, se obtiene con la
 b <- carter$regan[1]
 c <- carter$carter[2]
 n <- b + c
-p.valor <- 2*pbinom(q = c, size = n, prob = 0.5)
+p.valor <- 2 * pbinom(q = c, size = n, prob = 0.5)
 paste("El valor de b =", b)
 paste("El valor de c =", c)
 paste("El p.valor =", round(x = p.valor, digits = 4))
@@ -3703,7 +3751,7 @@ paste("El p.valor =", round(x = p.valor, digits = 4))
 El cálculo del estadístico $\chi^{2}$ de Mcnemar y el $p_{valor}$, usando la convergencia asintótica a la distribución Ji-cuadrada, se muestra con el siguiente código.
 
 ```{r dfm-pchisq}
-X2 <- (abs(b - c) - 1) ^ 2 / (b + c)
+X2 <- (abs(b - c) - 1)^2 / (b + c)
 p.valor.aprox <- pchisq(q = X2, df = 1, lower.tail = F)
 paste("El valor del estadístico X2 =", round(x = X2, digits = 4))
 paste("El p.valor.aprox =", round(x = p.valor.aprox, digits = 4))
@@ -3714,7 +3762,7 @@ Como se muestra en la salida anterior, dado que el $p_{valor\,aprox}$ es mayor q
 El resultados anterior, se puede obtener de manera directa, con la aplicación de la función `mcnemar.test` del paquete `stats`, como sigue.
   
 ```{r dfm-mcnemartest}
-mcnemar.test(x = as.matrix(carter[ , 2:3]), correct = T)
+mcnemar.test(x = as.matrix(carter[, 2:3]), correct = T)
 ```
 <br/>
 La función `mcnemar.exact` del paquete `exact2x2`, también ejecuta la prueba para datos en forma de frecuencia de Mcnemar. Como se muestra en el siguiente código.
@@ -3722,7 +3770,7 @@ La función `mcnemar.exact` del paquete `exact2x2`, también ejecuta la prueba p
 ```{r dfm-mcnemarexact}
 library(exact2x2)
 exact2x2::mcnemar.exact(
-  x = as.matrix(carter[ , 2:3]), conf.level = 0.95
+  x = as.matrix(carter[, 2:3]), conf.level = 0.95
 )
 ```
 <br/>
@@ -3778,16 +3826,17 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   column_spec(c(1, 2, 3, 4), width = c(
     "8em", "5em", "5em",
     "5em"
   )) %>%
   add_header_above(c(" " = 1, "Multitud" = 2, " " = 1)) %>%
-  column_spec(column = 1,  border_right = TRUE) %>%
-  column_spec(column = 3,  border_right = TRUE)
+  column_spec(column = 1, border_right = TRUE) %>%
+  column_spec(column = 3, border_right = TRUE)
 ```
 <br/>
 
@@ -3795,14 +3844,14 @@ El $p_{valor}$ de la prueba de la probabilidad exacta de Fisher, se obtiene a pa
 
 ```{r p-phyper}
 p.valor <- phyper(
-  q = as.integer(datos4.1[1, 2] - 1), 
+  q = as.integer(datos4.1[1, 2] - 1),
   m = as.integer(datos4.1[3, 2]),
-  n = as.integer(datos4.1[3, 3]), 
+  n = as.integer(datos4.1[3, 3]),
   k = as.integer(datos4.1[1, 4]),
   lower.tail = FALSE
 )
 paste(
-  "El p.valor =", 
+  "El p.valor =",
   format(
     round(p.valor, digits = 6),
     mode = "double",
@@ -3815,9 +3864,11 @@ paste(
 La función `fisher.test` del paquete `stats`, permite ejecutar, de manera directa, la prueba de la probabilidad exacta de Fisher, como se muestra en el siguiente bolque de código. Fíjese que el $p_{valor}$ obtenido en esta salida es idéntico al anterior.
 
 ```{r p-fishertest}
-fisher.test(x = datos4.1[1:2, 2:3], 
-            alternative = "greater",
-            conf.int = TRUE , conf.level = 0.9)
+fisher.test(
+  x = datos4.1[1:2, 2:3],
+  alternative = "greater",
+  conf.int = TRUE, conf.level = 0.9
+)
 ```
 <br/>
 Otra función que permite ejecutar esta prueba es `fisher.exact`, la cual se encuentra en el paquete `exact2x2`. El siguiente código muestra la aplicación de la prueba por medio de la mencionada función.
@@ -3837,7 +3888,7 @@ El $p_{valor}$ aproximado se puede obtener usando la aproximación asintótica a
 X2 <- (as.integer(datos4.1[3, 4]) * (abs(as.integer(datos4.1[1, 2]) * as.integer(datos4.1[2, 3]) - as.integer(datos4.1[1, 3]) * as.integer(datos4.1[2, 2])) - as.integer(datos4.1[3, 4]) / 2)^2) / (as.integer(datos4.1[1, 4]) * as.integer(datos4.1[2, 4]) * as.integer(datos4.1[3, 2]) * as.integer(datos4.1[3, 3]))
 p.valor <- pchisq(q = X2, df = 1, lower.tail = FALSE) / 2
 paste(
-  "El p.valor =", 
+  "El p.valor =",
   format(
     round(p.valor, digits = 6),
     mode = "double",
@@ -3873,8 +3924,10 @@ Para ejecutar la prueba se deben ordenar las muestras combinadas de manera creci
 I <- c(40.1, 30.5, 40.2, 45, 55.5, 30.6)
 II <- c(50.5, 50.7, 45.5, 55.7, 60, 40.8)
 Dur <- c(I, II)
-TB <- factor(rep(x = c("I", "II"), 
-                 times = c(length(I), length(II))))
+TB <- factor(rep(
+  x = c("I", "II"),
+  times = c(length(I), length(II))
+))
 M <- median(Dur)
 baterias <- tibble(
   duracion = Dur,
@@ -3882,7 +3935,7 @@ baterias <- tibble(
   comparacion = factor(
     if_else(Dur < M, "$< M$", "$\\ge M$")
   )
-) %>% 
+) %>%
   arrange(duracion)
 kableExtra::kbl(
   baterias,
@@ -3892,36 +3945,37 @@ kableExtra::kbl(
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
   caption = "\\label{tab2:baterias}Tiempo de duración de las baterías (horas)",
-  escape = FALSE, 
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = TRUE,
-    protect_latex = TRUE
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 Ahora, el siguiente código muestra la tabla de contingencia con el número observaciones que son menores y mayores o iguales que la mediana global para cada tipo de batería.
 
 ```{r frecuencia-baterias}
-tf_baterias <- baterias %>% 
-  group_by(tb, comparacion) %>% 
-  tally() %>% 
-  spread(tb, n) %>% 
-  dplyr::arrange(comparacion) %>% 
+tf_baterias <- baterias %>%
+  group_by(tb, comparacion) %>%
+  tally() %>%
+  spread(tb, n) %>%
+  dplyr::arrange(comparacion) %>%
   dplyr::mutate(
     Total = I + II
-  ) %>% 
-  dplyr::select_if(is.numeric) %>% 
-  add_row(., summarise_all(., sum)) %>% 
+  ) %>%
+  dplyr::select_if(is.numeric) %>%
+  add_row(., summarise_all(., sum)) %>%
   dplyr::mutate(
     comparacion = c("$< M$", "$\\ge M$", "Total")
-  ) %>% 
-  dplyr::select(comparacion, I, II, Total) %>% 
+  ) %>%
+  dplyr::select(comparacion, I, II, Total) %>%
   ungroup()
 kableExtra::kbl(
   tf_baterias,
@@ -3931,18 +3985,19 @@ kableExtra::kbl(
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
   caption = "\\label{tab2:frecuencia-baterias}Tipos de baterias con tiempo de duración (en horas) menores o iguales y mayores que la mediana global",
-  escape = FALSE, 
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = TRUE,
-    protect_latex = TRUE
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2("hover") %>% 
+  kable_classic_2("hover") %>%
   add_header_above(c(" " = 1, "Baterías" = 2, " " = 1)) %>%
-  column_spec(column = 1, border_right = TRUE) %>% 
+  column_spec(column = 1, border_right = TRUE) %>%
   column_spec(column = 3, border_right = TRUE)
 ```
 <br/>
@@ -3950,10 +4005,10 @@ En este orden de ideas, el siguiente procedimiento muestra el estadístico y el 
 
 ```{r p-baterias}
 p.valor <- phyper(
-  q = as.integer(tf_baterias[1, 2]), 
-  m = as.integer(tf_baterias[3, 2]), 
+  q = as.integer(tf_baterias[1, 2]),
+  m = as.integer(tf_baterias[3, 2]),
   n = as.integer(tf_baterias[3, 3]),
-  k = as.integer(tf_baterias[1, 4]), 
+  k = as.integer(tf_baterias[1, 4]),
   lower.tail = TRUE
 )
 paste("El valor del Estadístico U =", tf_baterias[1, 2])
@@ -4035,9 +4090,10 @@ kableExtra::kbl(
     bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = TRUE,
-    protect_latex = TRUE
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
@@ -4055,7 +4111,7 @@ tf_establecimientos <- establecimientos %>%
   dplyr::select_if(is.numeric) %>%
   add_row(., summarise_all(., sum)) %>%
   dplyr::mutate(
-    comparacion = c("$\\le M$", "$> M$", "Total")
+    comparacion = c("$\\le M$", "$>M$", "Total")
   ) %>%
   dplyr::select(comparacion, A, B, Total) %>%
   ungroup()
@@ -4074,11 +4130,12 @@ kableExtra::kbl(
     bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = TRUE,
-    protect_latex = TRUE
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
   kable_classic_2("hover") %>%
   add_header_above(c(" " = 1, "Establecimiento" = 2, " " = 1)) %>%
-  column_spec(column = 1, border_right = TRUE) %>% 
+  column_spec(column = 1, border_right = TRUE) %>%
   column_spec(column = 3, border_right = TRUE)
 ```
 <br/>
@@ -4086,9 +4143,9 @@ El siguiente script muestra el estadístico y el $p_{valor}$ de la prueba de la 
 
 ```{r ventas-phyper}
 p.valor <- phyper(
-  q = as.numeric(tf_establecimientos[1, 2]), 
-  m = as.numeric(tf_establecimientos[3, 2]), 
-  n = as.numeric(tf_establecimientos[3, 3]), 
+  q = as.numeric(tf_establecimientos[1, 2]),
+  m = as.numeric(tf_establecimientos[3, 2]),
+  n = as.numeric(tf_establecimientos[3, 3]),
   k = as.numeric(tf_establecimientos[1, 4])
 )
 paste(
@@ -4096,7 +4153,7 @@ paste(
   as.numeric(tf_establecimientos[1, 2])
 )
 paste(
-  "El p.valor =", 
+  "El p.valor =",
   format(
     round(p.valor, digits = 6),
     mode = "double",
@@ -4110,8 +4167,8 @@ Como se observa en la salida anterior, dado que el $p_{valor}= `r p.valor`$ es m
 
 ```{r ventas-moodmedtest}
 RVAideMemoire::mood.medtest(
-  x = establecimientos$venta, 
-  g = establecimientos$est, 
+  x = establecimientos$venta,
+  g = establecimientos$est,
   exact = TRUE
 )
 ```
@@ -4120,9 +4177,9 @@ Usando la función `fisher.test` para estos datos, se obtiene el siguiente resul
 
 ```{r ventas-fishertest}
 fisher.test(
-  x = tf_establecimientos[1:2, 2:3], 
-  alternative = "less", 
-  conf.int = TRUE , 
+  x = tf_establecimientos[1:2, 2:3],
+  alternative = "less",
+  conf.int = TRUE,
   conf.level = 0.95
 )
 ```
@@ -4170,7 +4227,7 @@ datos4.5 <- tibble(
   rango = rank(punt,
     ties.method = "average"
   )
-) %>% 
+) %>%
   arrange(punt)
 kableExtra::kbl(
   datos4.5,
@@ -4180,13 +4237,14 @@ kableExtra::kbl(
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
   caption = "\\label{tab2:puntuaciones}Ranqueo de las puntuaciones en los dos grupos de ratas",
-  escape = FALSE, 
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
@@ -4195,16 +4253,16 @@ kableExtra::kbl(
 Los estadísticos de la prueba de suma de rangos de Mann-Whitney-Wilcoxon, se obtiene con el siguiente código.
   
 ```{r estadisticos-ratas}
-estad <- datos4.5 %>% 
-  dplyr::group_by(grupo) %>% 
-  summarise(W = sum(rango), n = n()) %>% 
+estad <- datos4.5 %>%
+  dplyr::group_by(grupo) %>%
+  summarise(W = sum(rango), n = n()) %>%
   dplyr::mutate(
     media_W = n * (n + 1) / 2,
     U = W - media_W,
-    media_U = prod(n) / 2, 
+    media_U = prod(n) / 2,
     var_U = prod(n) * (sum(n) + 1) / 12
-  ) %>% 
-  dplyr::arrange(U) %>% 
+  ) %>%
+  dplyr::arrange(U) %>%
   dplyr::ungroup()
 kableExtra::kbl(
   estad,
@@ -4215,28 +4273,29 @@ kableExtra::kbl(
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
   caption = "\\label{tab2:estadisticos-ratas}Estadístico de Mann-Whitney-Wilcoxon para las puntuaciones en los dos grupos de ratas",
-  escape = FALSE, 
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE, 
-    protect_latex = TRUE
+    full_width = FALSE,
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() 
+  kable_classic_2("hover")
 ```
 <br/>
 Note que en la tabla \@ref(tab:ratas), la cual muestra las puntuaciones en los dos grupos de ratas no se observan empates, por lo que el cálculo del $p_{valor}$ exacto de la prueba $U$ de Mann-Whitney-Wilcoxon se obtiene con la función `pwilcox` com se muestra en el siguiente código.
 
 ```{r ratas-pwilcox}
 p.valor <- pwilcox(
-  q = estad$U[1], 
-  m = estad$n[1], 
+  q = estad$U[1],
+  m = estad$n[1],
   n = estad$n[2],
   lower.tail = TRUE
 )
 paste(
-  "El p.valor =", 
+  "El p.valor =",
   format(
     round(p.valor, digits = 6),
     mode = "double",
@@ -4284,26 +4343,27 @@ wilcox_test(
   mu = 0,
   conf.level = 0.95,
   detailed = FALSE
-) %>% 
-  dplyr::select(-1) %>% 
-  kableExtra::kbl(
-  .,
-  col.names = c(
-    "Grupo 1", "Grupo 2", "$n_1$", "$n_2$", "$U$",
-    "$p_{valor}$"
-  ),
-  format.args = list(decimal.mark = ",", big.mark = "."),
-  booktabs = TRUE,
-  caption = "\\label{tab2:estadisticos-ratas}Estadístico $U$ de Mann-Whitney-Wilcoxon y $p_{valor}$ para las puntuaciones en los dos grupos de ratas",
-  escape = FALSE, 
-  format = "html"
 ) %>%
+  dplyr::select(-1) %>%
+  kableExtra::kbl(
+    .,
+    col.names = c(
+      "Grupo 1", "Grupo 2", "$n_1$", "$n_2$", "$U$",
+      "$p_{valor}$"
+    ),
+    format.args = list(decimal.mark = ",", big.mark = "."),
+    booktabs = TRUE,
+    caption = "\\label{tab2:estadisticos-ratas}Estadístico $U$ de Mann-Whitney-Wilcoxon y $p_{valor}$ para las puntuaciones en los dos grupos de ratas",
+    escape = FALSE,
+    format = "html"
+  ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE, 
-    protect_latex = TRUE
+    full_width = FALSE,
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() 
+  kable_classic_2("hover")
 ```
 <br/>
 :::
@@ -4349,7 +4409,8 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
@@ -4358,16 +4419,16 @@ kableExtra::kbl(
 Los estadísticos $U$ de la prueba de suma de rangos de Mann-Whitney-Wilcoxon, se obtiene con el siguiente código.
   
 ```{r estadisticos-mann-whitney2}
-estad <- datos4.6 %>% 
-  dplyr::group_by(marca) %>% 
-  summarise(W = sum(rango), n = n()) %>% 
+estad <- datos4.6 %>%
+  dplyr::group_by(marca) %>%
+  summarise(W = sum(rango), n = n()) %>%
   dplyr::mutate(
     media_W = n * (n + 1) / 2,
     U = W - media_W,
-    media_U = prod(n) / 2, 
+    media_U = prod(n) / 2,
     var_U = prod(n) * (sum(n) + 1) / 12
-  ) %>% 
-  dplyr::arrange(U) %>% 
+  ) %>%
+  dplyr::arrange(U) %>%
   dplyr::ungroup()
 kableExtra::kbl(
   estad,
@@ -4378,28 +4439,29 @@ kableExtra::kbl(
   format.args = list(decimal.mark = ",", big.mark = "."),
   booktabs = TRUE,
   caption = "\\label{tab2:estadisticos-mann-whitney2}Estadístico de Mann-Whitney_Wilcoxon para el contenido de nicotina en las dos marcas de cigarros",
-  escape = FALSE, 
+  escape = FALSE,
   format = "html"
 ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE, 
-    protect_latex = TRUE
+    full_width = FALSE,
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() 
+  kable_classic_2("hover")
 ```
 <br/>  
 El cálculo del p.valor se obtiene con la función `pwilcox`, como se muestra en el siguiente código.
 
 ```{r}
 p.valor <- 2 * pwilcox(
-  q = estad$U[1], 
-  m = estad$n[1], 
+  q = estad$U[1],
+  m = estad$n[1],
   n = estad$n[2],
   lower.tail = TRUE
 )
 paste(
-  "El p.valor =", 
+  "El p.valor =",
   format(
     round(p.valor, digits = 6),
     mode = "double",
@@ -4414,12 +4476,12 @@ Como se observa en la salida anterior $p=`r formato(p.valor)`$, lo que indica qu
 Dado que en ejemplo en cuestión hay algunos rangos empatados, el p.valor exacto mostrado en la salida anterior no es el apropiados debido a que este no toma en cuenta estos empates. Como los rangos empatados inflan la varianza del estadístico $U$ de Mann-Whitney-Wilcoxon por lo que se debe hacer la corrección por empates de la varianza del estadístico y luego calcular el p.valor apróximado por medio de la convergencia asintotica del estadístico $U$ a la normal.  El siguiente código muestra la tabla con los rangos empatados y sus frecuencias.
 
 ```{r}
-empates <- datos4.6 %>% 
+empates <- datos4.6 %>%
   dplyr::select(rango) %>%
-  dplyr::group_by(rango) %>% 
-  dplyr::summarise(Tj = n()) %>% 
-  dplyr::mutate(grupo = 1:nrow(.)) %>% 
-  dplyr::relocate(grupo) %>% 
+  dplyr::group_by(rango) %>%
+  dplyr::summarise(Tj = n()) %>%
+  dplyr::mutate(grupo = 1:nrow(.)) %>%
+  dplyr::relocate(grupo) %>%
   dplyr::ungroup()
 kableExtra::kbl(
   empates,
@@ -4435,21 +4497,22 @@ kableExtra::kbl(
     bootstrap_options = "striped",
     full_width = FALSE,
     fixed_thead = TRUE,
-    protect_latex = TRUE
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() %>%
+  kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 <br/>
 El cálculo del $p_{valor}$, usando la aproximación a la normal con corrección por continuidad y empates, se obtiene con el siguiente segmento de código.
 
 ```{r}
-############Chakraborti et al(2011, pág. 267)##############
+############ Chakraborti et al(2011, pág. 267)##############
 
 corr_var <- prod(estad$n) /
   (12 * sum(estad$n) * (sum(estad$n) - 1)) *
   sum(empates$Tj^3 - empates$Tj)
-Z <- (estad$U[1] - estad$media_U[1]) / sqrt(estad$var_U[1] )
+Z <- (estad$U[1] - estad$media_U[1]) / sqrt(estad$var_U[1])
 p.valor <- 2 * pnorm(Z, lower.tail = TRUE)
 paste(
   "El valor del estadístico Z =",
@@ -4471,9 +4534,11 @@ paste("El p.valor es =", format(
 Esta prueba se puede aplicar, de manera directa, con la función `wilcoxon.test`. Como se muestra en el siguiente script.
 
 ```{r}
-wilcox.test(x = A, y = B, alternative = "two.sided", 
-            paired = F, exact = NULL, correct = T, 
-            conf.int = T, conf.level = 0.95)
+wilcox.test(
+  x = A, y = B, alternative = "two.sided",
+  paired = F, exact = NULL, correct = T,
+  conf.int = T, conf.level = 0.95
+)
 ```
 <br/>  
 Note que, los p.valores exactos y aproximados no difieren mucho.
@@ -4492,26 +4557,27 @@ wilcox_test(
   mu = 0,
   conf.level = 0.95,
   detailed = FALSE
-) %>% 
-  dplyr::select(-1) %>% 
-  kableExtra::kbl(
-  .,
-  col.names = c(
-    "Grupo 1", "Grupo 2", "$n_1$", "$n_2$", "$U$",
-    "$p_{valor}$"
-  ),
-  format.args = list(decimal.mark = ",", big.mark = "."),
-  booktabs = TRUE,
-  caption = "\\label{tab2:estadisticos-ratas}Estadístico $U$ de Mann-Whitney-Wilcoxon y $p_{valor}$ para el contenido de nicotina en los dos marcas de cigarros",
-  escape = FALSE, 
-  format = "html"
 ) %>%
+  dplyr::select(-1) %>%
+  kableExtra::kbl(
+    .,
+    col.names = c(
+      "Grupo 1", "Grupo 2", "$n_1$", "$n_2$", "$U$",
+      "$p_{valor}$"
+    ),
+    format.args = list(decimal.mark = ",", big.mark = "."),
+    booktabs = TRUE,
+    caption = "\\label{tab2:estadisticos-ratas}Estadístico $U$ de Mann-Whitney-Wilcoxon y $p_{valor}$ para el contenido de nicotina en los dos marcas de cigarros",
+    escape = FALSE,
+    format = "html"
+  ) %>%
   kable_styling(
     bootstrap_options = "striped",
-    full_width = FALSE, 
-    protect_latex = TRUE
+    full_width = FALSE,
+    protect_latex = TRUE,
+    position = "left"
   ) %>%
-  kable_classic_2() 
+  kable_classic_2("hover")
 ```
 <br/>
 :::
@@ -4536,11 +4602,11 @@ En base a estos datos, ¿existe alguna razón para creer que estas muestras alea
 
 ```{r}
 mujer <- c(
-  22.5, 19.8, 20.6, 24.7, 23.2, 19.2, 18.7, 20.9, 21.6, 23.5, 
+  22.5, 19.8, 20.6, 24.7, 23.2, 19.2, 18.7, 20.9, 21.6, 23.5,
   20.7, 21.6
 )
 hombre <- c(
-  21.9, 21.6, 22.4, 24.0, 24.1, 23.4, 21.2, 23.9, 20.5, 24.5, 
+  21.9, 21.6, 22.4, 24.0, 24.1, 23.4, 21.2, 23.9, 20.5, 24.5,
   22.3, 23.6
 )
 datos4.7 <- tibble(
@@ -4548,7 +4614,7 @@ datos4.7 <- tibble(
     x = c("Mujer", "Hombre"), c(length(mujer), length(hombre))
   ),
   salario = c(mujer, hombre)
-) %>% 
+) %>%
   dplyr::mutate(
     racha = if_else(sexo == "Mujer", "M", "H")
   ) %>%
@@ -4567,7 +4633,8 @@ kableExtra::kbl(
   kable_styling(
     bootstrap_options = "striped",
     full_width = FALSE,
-    fixed_thead = TRUE
+    fixed_thead = TRUE,
+    position = "left"
   ) %>%
   kable_classic_2("hover") %>%
   scroll_box(width = "100%", height = "400px")
@@ -4576,7 +4643,10 @@ kableExtra::kbl(
 El siguiente código muestra el cálculo del estadístico y el $p_{valor}$ exacto de la prueba de las Rachas de Wald-Wolfowitz para contrastar la hipótesis de que la distribución del salario en la compañía es idéntica tanto en hombre como en mujeres, es decir que no existe una política de discriminación, en cuanto al sexo, en los salarios de los empleados.
 
 ```{r}
-rachas <- datos4.7 %>% dplyr::select(racha) %>% pull() %>% rle(.)
+rachas <- datos4.7 %>%
+  dplyr::select(racha) %>%
+  pull() %>%
+  rle(.)
 r1 <- length(rachas$lengths[rachas$value == "M"])
 r2 <- length(rachas$lengths[rachas$value == "H"])
 r <- r1 + r2
@@ -4590,26 +4660,30 @@ paste("El p.valor =", round(x = p.valor, digits = 5))
 El valor del estadístico y el p.valor exacto de la prueba de las Rachas de Wald-Wolfowitz para contrastar la hipótesis de que compañía lleva a cabo una política de discriminación, con respecto al sexo, en los salarios de sus empleados se puede mostrar con la función *runs.test* del paquete **randtests**, como se muestra en el siguiente código.
 
 ```{r}
-rachas <- datos4.7 %>% 
-  dplyr::select(sexo) %>% 
+rachas <- datos4.7 %>%
+  dplyr::select(sexo) %>%
   dplyr::mutate(
     rachas = if_else(
       sexo == "Mujer", 1, 0
     )
-  ) %>% 
-  dplyr::select(rachas) %>% 
+  ) %>%
+  dplyr::select(rachas) %>%
   pull(.)
-  randtests::runs.test(x = rachas, 
-                     alternative = "left.sided",
-                     threshold = 0.5, pvalue = "exact",
-                     plot = F) 
+randtests::runs.test(
+  x = rachas,
+  alternative = "left.sided",
+  threshold = 0.5, pvalue = "exact",
+  plot = F
+)
 ```
 <br/>
 Otra forma de ejecutar el procedimiento anterior es con la función `runs.test` del paquete `snpar`.
 
 ```{r}
-snpar::runs.test(x = rachas, exact = T, 
-                 alternative = "less")
+snpar::runs.test(
+  x = rachas, exact = T,
+  alternative = "less"
+)
 ```
 <br/>
 Por otro lado, el cálculo del p.valor aproximado, usando la convergencia asintótica del estadístico ***R*** de Wald-Wolfowitz a la distribución normal, se muestra con el siguiente código.
@@ -4619,22 +4693,26 @@ n1 <- length(mujer)
 n2 <- length(hombre)
 n <- n1 + n2
 ER <- 2 * n1 * n2 / n + 1
-VR <- 2 * n1 * n2 * (2 * n1 * n2 - n)/(n^2 * (n - 1))
-z <- (r - ER)/sqrt(VR)
+VR <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
+z <- (r - ER) / sqrt(VR)
 paste("El valor de z =", round(x = z, digits = 5))
 p.valor.aprox <- pnorm(q = z)
-paste("El valor del p.valor.aprox =", 
-      round(x = p.valor.aprox, digits = 4))
+paste(
+  "El valor del p.valor.aprox =",
+  round(x = p.valor.aprox, digits = 4)
+)
 ```
 <br/>
 El resultado anterior se puede  obtener con `runs.test` del paquete `randtests` estableciendo el parámetro `pvalue = "normal"`.
 
 ```{r}
 library(randtests)
-randtests::runs.test(x = rachas, 
-                     alternative = "left.sided",
-                     threshold = 0.5, pvalue = "normal",
-                     plot = F) 
+randtests::runs.test(
+  x = rachas,
+  alternative = "left.sided",
+  threshold = 0.5, pvalue = "normal",
+  plot = F
+)
 detach("package:randtests")
 ```
 <br/>
@@ -4681,7 +4759,3 @@ cleanbib()
 options("citation_format" = "pandoc")
 read.bibtex(file = "packages.bib")
 ```
-
-
-
-
